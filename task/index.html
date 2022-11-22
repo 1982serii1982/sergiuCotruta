@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX/PHP/CURL/JSON example</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AJAX/PHP/CURL/JSON example">
+    <meta name="author" content="Sergiu Cotruta">
+
+    <link rel="stylesheet" href="libs/css/style.css">
+</head>
+<body>
+    <h1>AJAX/PHP/CURL/JSON example</h1>
+    <div class="container d_flex">
+        <div class="title_box d_flex">
+            <div>API Name</div>
+            <div>API Description</div>
+            <div>Send request</div>
+        </div>
+        <div class="api_box d_flex">
+            <div>1.Address Geocoding</div>
+            <div class="f_column">
+                <p>
+                    In this API we can request longitude(lng) and latitude(lat) of specified location
+                    from list below
+                </p>
+                <div class="agw_container">
+                    <select id="agw_country">
+                        <option value="" selected>Select a Country</option>
+                    </select>
+                    <select id="agw_city">
+                        <option value="" selected>Select a City</option>
+                    </select>
+                    <select id="agw_street">
+                        <option value="" selected>Select a Street</option>
+                    </select>
+                    <select id="agw_number">
+                        <option value="" selected>Select a House Number</option>
+                        <option value="1">Number 1</option>
+                        <option value="2">Number 2</option>
+                        <option value="3">Number 3</option>
+                        <option value="4">Number 4</option>
+                        <option value="5">Number 5</option>
+                        <option value="6">Number 6</option>
+                        <option value="7">Number 7</option>
+                        <option value="8">Number 8</option>
+                        <option value="9">Number 9</option>
+                        <option value="10">Number 10</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button>Submit</button>
+            </div>
+        </div>
+        <div class="api_box d_flex">
+            <div>2.Weather Station</div>
+            <div class="f_column">
+                <p>
+                    With longitude and latitude received from section 1,
+                    can get weather observation around this coordinates.
+                </p>
+                <div class="lng_input">
+                    <label for="lng_weather">Longitude</label>
+                    <input type="text" id="lng_weather">
+                </div>
+                <div class="lat_input">
+                    <label for="lat_weather">Latitude</label>
+                    <input type="text" id="lat_weather">
+                </div>
+            </div>
+            <div>
+                <button>Submit</button>
+            </div>
+        </div>
+        <div class="api_box d_flex">
+            <div>3.Time zone</div>
+            <div class="f_column">
+                <p>
+                    This API return timezone information of zone with coordinates specified below.
+                </p>
+                <div class="lng_input">
+                    <label for="lng_time">Longitude</label>
+                    <input type="text" id="lng_time">
+                </div>
+                <div class="lat_input">
+                    <label for="lat_time">Latitude</label>
+                    <input type="text" id="lat_time">
+                </div>
+            </div>
+            <div>
+                <button>Submit</button>
+            </div>
+        </div>
+        <div class="result_box d_flex">
+            <div class="ag_result">
+                <h3>Address Geocoding Result</h3>
+                <p>Returned in <span class="ag_result_timeElapsed"></span></p>
+                <ul>
+                    <li>Region :<span class="ag_result_reg"></span></li>
+                    <li>Department :<span class="ag_result_dep"></span></li>
+                    <li>Longitude :<span class="ag_result_lng"></span></li>
+                    <li>Latitude :<span class="ag_result_lat"></span></li>
+                    <li>Country Code :<span class="ag_result_cc"></span></li>
+                    <li>Postal Code :<span class="ag_result_pc"></span></li>
+                </ul>
+            </div>
+            <div class="ws_result">
+                <h3>Weather Station Result</h3>
+                <p>Returned in <span class="ws_result_timeElapsed"></span></p>
+                <ul>
+                    <li>Clouds :<span class="ws_result_cloud"></span></li>
+                    <li>Humidity :<span class="ws_result_hum"></span></li>
+                    <li>Station Name :<span class="ws_result_station"></span></li>
+                    <li>Wind Direction :<span class="ws_result_wind"></span></li>
+                </ul>
+            </div>
+            <div class="tz_result">
+                <h3>Time Zone Result</h3>
+                <p>Returned in <span class="tz_result_timeElapsed"></span></p>
+                <ul>
+                    <li>Sunrise :<span class="tz_result_sunrise"></span></li>
+                    <li>Sunset :<span class="tz_result_sunset"></span></li>
+                    <li>Country Name :<span class="tz_result_country"></span></li>
+                    <li>Local Time :<span class="tz_result_local"></span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script type="application/javascript" src="libs/js/jquery-3.6.1.min.js"></script>
+	<script type="application/javascript" src="libs/js/script.js"></script>
+    
+</body>
+</html>
