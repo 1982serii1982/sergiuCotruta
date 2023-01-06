@@ -1,0 +1,239 @@
+/************************  GREEN MARKERS   *****************************/
+
+.mycluster_green {
+	background-color: #4e701b;
+	border-radius: 50%;
+	text-align: center;
+	font-size: 24px;
+	color: white;
+}
+
+.mycluster_green div{
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	background-color: #65ca00;
+	margin-left: 5px;
+	margin-top: 5px;
+	border-radius: 50%;
+	font-size: 20px;
+}
+
+.mycluster_green-medium {
+	background-color: #adff2f;
+	border-radius: 50%;
+	text-align: center;
+	font-size: 24px;
+	color: white;
+}
+
+.mycluster_green-medium div{
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	background-color: #0d801c;
+	margin-left: 5px;
+	margin-top: 5px;
+	border-radius: 50%;
+	font-size: 20px;
+}
+
+.mycluster_green-small{
+	border-radius: 50%;
+	background-color: #0d801c;
+	text-align: center;
+	font-size: 24px;
+	color: white;
+}
+
+.mycluster_green-small div{
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	background-color: #adff2f;
+	margin-left: 5px;
+	margin-top: 5px;
+	border-radius: 50%;
+	font-size: 20px;
+	color: black;
+}
+
+/************************  BLUE MARKERS   *****************************/
+
+.mycluster_blue {
+	background-color: #00CBFF;
+	border-radius: 50%;
+	text-align: center;
+	font-size: 24px;
+	color: white;
+}
+
+.mycluster_blue div{
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	background-color: #5C7CFA;
+	margin-left: 5px;
+	margin-top: 5px;
+	border-radius: 50%;
+	font-size: 20px;
+}
+
+.mycluster_blue-medium {
+	background-color: #5C7CFA;
+	border-radius: 50%;
+	text-align: center;
+	font-size: 24px;
+	color: white;
+}
+
+.mycluster_blue-medium div{
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	background-color: #00CBFF;
+	margin-left: 5px;
+	margin-top: 5px;
+	border-radius: 50%;
+	font-size: 20px;
+}
+
+.mycluster_blue-small{
+	border-radius: 50%;
+	background-color: #00CBFF;
+	text-align: center;
+	font-size: 24px;
+	color: white;
+}
+
+.mycluster_blue-small div{
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	background-color: #5C7CFA;
+	margin-left: 5px;
+	margin-top: 5px;
+	border-radius: 50%;
+	font-size: 20px;
+	color: white;
+}
+
+/************************  YELLOW MARKERS   *****************************/
+
+.mycluster_yellow {
+	background-color: #FAF85C;
+	border-radius: 50%;
+	text-align: center;
+	font-size: 24px;
+	color: rgb(0, 0, 0);
+}
+
+.mycluster_yellow div{
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	background-color: #FBBE04;
+	margin-left: 5px;
+	margin-top: 5px;
+	border-radius: 50%;
+	font-size: 20px;
+}
+
+.mycluster_yellow-medium {
+	background-color: #FBBE04;
+	border-radius: 50%;
+	text-align: center;
+	font-size: 24px;
+	color: rgb(0, 0, 0);
+}
+
+.mycluster_yellow-medium div{
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	background-color: #FAF85C;
+	margin-left: 5px;
+	margin-top: 5px;
+	border-radius: 50%;
+	font-size: 20px;
+}
+
+.mycluster_yellow-small{
+	border-radius: 50%;
+	background-color: #FAF85C;
+	text-align: center;
+	font-size: 24px;
+	color: white;
+}
+
+.mycluster_yellow-small div{
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	background-color: #FBBE04;
+	margin-left: 5px;
+	margin-top: 5px;
+	border-radius: 50%;
+	font-size: 20px;
+	color: black;
+}
+
+/************************  PURPLE MARKERS   *****************************/
+
+.mycluster_purple {
+	background-color: #db01f8;/**/
+	border-radius: 50%;
+	text-align: center;
+	font-size: 24px;
+	color: rgb(255, 255, 255);
+}
+
+.mycluster_purple div{
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	background-color: #9601b8;
+	margin-left: 5px;
+	margin-top: 5px;
+	border-radius: 50%;
+	font-size: 20px;
+}
+
+.mycluster_purple-medium {
+	background-color: #9601b8;
+	border-radius: 50%;
+	text-align: center;
+	font-size: 24px;
+	color: rgb(255, 255, 255);
+}
+
+.mycluster_purple-medium div{
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	background-color: #db01f8;/**/
+	margin-left: 5px;
+	margin-top: 5px;
+	border-radius: 50%;
+	font-size: 20px;
+}
+
+.mycluster_purple-small{
+	border-radius: 50%;
+	background-color: #db01f8;/**/
+	text-align: center;
+	font-size: 24px;
+	color: white;
+}
+
+.mycluster_purple-small div{
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	background-color: #9601b8;
+	margin-left: 5px;
+	margin-top: 5px;
+	border-radius: 50%;
+	font-size: 20px;
+	color: rgb(255, 255, 255);
+}

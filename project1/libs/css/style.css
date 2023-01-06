@@ -1,0 +1,1301 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+html, body, #map {
+    height: 100vh;
+    width: 100vw;
+}
+
+.main_header{
+    height: 10vh;
+	background-color: #f1f1f1;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	/* background-image: url('../img/earth_background.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover; */
+}
+
+.main_header_title{
+	font-family: 'Rubik Vinyl', cursive;
+	margin-bottom: 0;
+    margin-left: 5%;
+    color: #f77676;
+}
+
+.main_header_logo{
+	width: 80px;
+	height: auto;
+}
+
+.main_container{
+    background-color: #a9a9a9;
+    /* padding: 10px 0; */
+}
+
+#map {
+    margin: 0 auto;
+    height: 90vh;
+    /*width: 96%; */
+}
+
+/*************************    PRELOADER - START   ***********************/
+.wiki_loader_error, .weather_loader_error, .earthquake_loader_error, .news_loader_error, .airports_loader_error{
+	display: none;
+	font-size: 26px;
+    color: red;
+}
+
+.preloader{
+	width: 100%;
+    height: 100%;
+    background-color: #000000;
+    position: absolute;
+    z-index: 99999;
+    overflow: hidden;
+	display: none;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+	flex-direction: column;
+	opacity: 1;
+}
+
+.preloader_message{
+	color: gold;
+    margin-bottom: 49px;
+    font-size: 19px;
+}
+
+.loader {
+	color: #FFF;
+	display: inline-block;
+	position: relative;
+	font-size: 48px;
+	font-family: Arial, Helvetica, sans-serif;
+	box-sizing: border-box;
+  }
+  .loader::after {
+	content: '';  
+	width: 5px;
+	height: 5px;
+	background: currentColor;
+	position: absolute;
+	bottom: 10px;
+	right: -5px;
+	box-sizing: border-box;
+	animation: animloader 1s linear infinite;
+  }
+  
+  @keyframes animloader {
+	0% {
+	  box-shadow: 10px 0 rgba(255, 255, 255, 0), 20px 0 rgba(255, 255, 255, 0);
+	}
+	50% {
+	  box-shadow: 10px 0 white, 20px 0 rgba(255, 255, 255, 0);
+	}
+	100% {
+	  box-shadow: 10px 0 white, 20px 0 white;
+	}
+  }
+
+/*************************    PRELOADER - END   ***********************/
+
+/*************************    ACCORDEON - START   ***********************/
+.accordion-body{
+	position: relative;
+	height: 50vh;
+    overflow-y: scroll;
+}
+
+.accordion-checkbox{
+	margin-left: 8px;
+    margin-right: 8px;
+	width: 22px;
+}
+
+.accordion-header{
+	display: flex;
+}
+
+.accordion-button{
+	padding: 5px;
+	font-size: 14px;
+	animation: all .5s ease-in;
+}
+
+		.accordion-button:hover{
+			background-color: #c11b1b;
+			color: white;
+		}
+
+.accordion-button::after{
+	width: 14px;
+	height: 14px;
+	background-size: 14px;
+}
+
+.accordion-button:not(.collapsed){
+	background-color: #f77676;
+	color: #fff;
+}
+
+.accordion-button:focus{
+	border-color: none;
+	box-shadow: none;
+}
+
+.accordion-button:not(.collapsed)::after{
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+}
+
+
+/*************************    ACCORDEON - END   *************************/
+
+/*--------------------------------------------------------------------------------------------------------*/
+
+/*************************    LOADER - START   **************************/
+
+
+/*************************    LOADER - GENERAL   ************************/
+.search_loader_wrapper{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    position: absolute;
+    background-color: white;
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.weather_loader_wrapper, .airports_loader_wrapper, .earthquake_loader_wrapper, .news_loader_wrapper, .wiki_loader_wrapper{
+	z-index: 1;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    opacity: 1;
+
+}
+
+			.wiki_loader_wrapper.active, .news_loader_wrapper.active, .weather_loader_wrapper.active, .airports_loader_wrapper.active, .earthquake_loader_wrapper.active{
+				/* opacity: 0;
+				animation: opacity .2s ease-in; */
+			}
+
+
+/*************************    LOADER - CIRCLE  **************************/			
+
+.lds-default {
+	display: inline-block;
+	position: relative;
+	width: 80px;
+	height: 80px;
+}
+  .lds-default div {
+	position: absolute;
+	width: 6px;
+	height: 6px;
+	background: rgb(0, 21, 255);
+	border-radius: 50%;
+	animation: lds-default 1.2s linear infinite;
+}
+  .lds-default div:nth-child(1) {
+	animation-delay: 0s;
+	top: 37px;
+	left: 66px;
+}
+  .lds-default div:nth-child(2) {
+	animation-delay: -0.1s;
+	top: 22px;
+	left: 62px;
+}
+  .lds-default div:nth-child(3) {
+	animation-delay: -0.2s;
+	top: 11px;
+	left: 52px;
+}
+  .lds-default div:nth-child(4) {
+	animation-delay: -0.3s;
+	top: 7px;
+	left: 37px;
+}
+  .lds-default div:nth-child(5) {
+	animation-delay: -0.4s;
+	top: 11px;
+	left: 22px;
+}
+  .lds-default div:nth-child(6) {
+	animation-delay: -0.5s;
+	top: 22px;
+	left: 11px;
+}
+  .lds-default div:nth-child(7) {
+	animation-delay: -0.6s;
+	top: 37px;
+	left: 7px;
+}
+  .lds-default div:nth-child(8) {
+	animation-delay: -0.7s;
+	top: 52px;
+	left: 11px;
+}
+  .lds-default div:nth-child(9) {
+	animation-delay: -0.8s;
+	top: 62px;
+	left: 22px;
+}
+  .lds-default div:nth-child(10) {
+	animation-delay: -0.9s;
+	top: 66px;
+	left: 37px;
+}
+  .lds-default div:nth-child(11) {
+	animation-delay: -1s;
+	top: 62px;
+	left: 52px;
+}
+  .lds-default div:nth-child(12) {
+	animation-delay: -1.1s;
+	top: 52px;
+	left: 62px;
+}
+@keyframes lds-default {
+	0%, 20%, 80%, 100% {
+	  transform: scale(1);
+	}
+	50% {
+	  transform: scale(1.5);
+	}
+}
+
+
+/*************************    LOADER - ELIPS   **************************/
+.lds-ellipsis {
+	display: inline-block;
+	position: relative;
+	width: 80px;
+	height: 100%;
+	z-index: 1;
+  }
+  .lds-ellipsis div {
+	position: absolute;
+	top: 11px;
+	width: 13px;
+	height: 13px;
+	border-radius: 50%;
+	background: rgb(9, 1, 255);
+	animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  }
+  .lds-ellipsis div:nth-child(1) {
+	left: 8px;
+	animation: lds-ellipsis1 0.6s infinite;
+  }
+  .lds-ellipsis div:nth-child(2) {
+	left: 8px;
+	animation: lds-ellipsis2 0.6s infinite;
+  }
+  .lds-ellipsis div:nth-child(3) {
+	left: 32px;
+	animation: lds-ellipsis2 0.6s infinite;
+  }
+  .lds-ellipsis div:nth-child(4) {
+	left: 56px;
+	animation: lds-ellipsis3 0.6s infinite;
+  }
+  @keyframes lds-ellipsis1 {
+	0% {
+	  transform: scale(0);
+	}
+	100% {
+	  transform: scale(1);
+	}
+  }
+  @keyframes lds-ellipsis3 {
+	0% {
+	  transform: scale(1);
+	}
+	100% {
+	  transform: scale(0);
+	}
+  }
+  @keyframes lds-ellipsis2 {
+	0% {
+	  transform: translate(0, 0);
+	}
+	100% {
+	  transform: translate(24px, 0);
+	}
+  }
+
+/*************************    LOADER - END   **************************/
+
+/**********************************************************************/
+
+/*************************    INFO - START   **************************/
+.info_twin{
+	display: none;
+}
+
+.info, .info_twin{
+    width: 30%;
+    height: 50%;
+    position: absolute;
+    z-index: 9999;
+    left: 10px;
+    top: 10px;
+}
+
+.info_search{
+    width: 11rem;
+    height: 32px;
+    background-color: rgb(242, 242, 253);
+    border-radius: 10px;
+	position: relative;
+	z-index: 444;
+	margin-right: 6%;
+}
+
+.info_result{
+    width: 100%;
+    /* background-color: rgb(242, 242, 253);
+    margin-top: 50px;
+    border-radius: 10px;
+	padding-top: 5px; */
+}
+
+.info_result_checkbox{
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.info_result:hover{
+	cursor: auto;
+}
+
+
+.info_result_wrapper{
+	justify-content: space-around;
+	font-size: 15px;
+}
+
+.info_result_nav_tabs_wrapper{
+	margin: 0 6px;
+}
+
+.info_result_nav_tabs_wrapper li:first-child{
+	margin-left: 0;
+}
+
+.info_result_tab{
+	height: 100%;
+	margin-left: 7px;
+}
+
+.info_result_tab button{
+	padding: 5px 8px;
+	margin: 0;
+}
+
+		.info_result_tab button:hover{
+			background-color: #de2121;
+			color: #fff;
+		}
+
+.info_result_tab button.nav-link.active{
+	background-color: #f77676;
+	color: white;
+}
+
+.info_result_checkbox_wrapper{
+	display: flex;
+	justify-content: center;
+	font-size: 13px;
+	flex-wrap: wrap;
+}
+
+.info_result_checkbox_title{
+	font-size: 16px;
+    padding: 4px;
+    color: blue;
+}
+
+.info_result_content_wrapper{
+	width: 90%;
+	text-align: center;
+	margin: 0 auto;
+	padding: 10px 0;
+}
+
+.info_result_content_item div.info_result_content_detail:first-child{
+	padding: 8px 0;
+}
+
+.info_result_content_item div.info_result_content_detail:first-child img{
+	width: 6rem;
+}
+
+#collapseOne .accordion-body, #collapseOne1 .accordion-body{
+	height: 38vh;
+}
+
+.info_result_content_detail{
+	margin: 5px;
+	font-size: 15px;
+	background-color: #ffffff;
+	border-radius: 5px;
+}
+
+.info_result_content_detail span:first-child{
+	color: #003eff;
+}
+
+.info_result_content_detail span:last-child{
+	color: #c11b1b;
+}
+
+/*************************    INFO - END   **************************/
+
+/**********************************************************************/
+
+/*************************    SELECT START   **************************/
+
+
+.header_select{
+	display: none;
+}
+
+.select {
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
+.select__item {
+	position: relative;
+	height: 100%;
+}
+.select__title {
+	background-color: #ffd6d6;
+    box-shadow: 0 0 6px 2px #ff7c7c inset;
+	color: #000;
+	cursor: pointer;
+	border-radius: 5px;
+	height: 100%;
+}
+.select__value {
+	display: flex;
+	font-size: 16px;
+	height: 100%;
+	padding: 0px 20px;
+	align-items: center;
+	flex-direction: row-reverse;
+	justify-content: space-between;
+}
+.select__value span {
+	/* margin-right: 66px; */
+	height: 84%;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+}
+.select__value::before {
+	content: "";
+	display: inline-block;
+	transition: all 0.3s ease 0s;
+	width: 11px;
+	height: 7px;
+	background: url("../img/select.svg") center / 100% no-repeat;
+}
+.select__options {
+	color: #000;
+	display: none;
+	position: absolute;
+	top: 32px;
+	border-radius: 0 0 4px 4px;
+	min-width: 100%;
+	left: 0;
+	background-color: #fff;
+	font-size: 16px;
+    overflow-y: scroll;
+    height: 37vh;
+}
+
+.select__options::-webkit-scrollbar {
+    width: 1em;
+}
+ 
+.select__options::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+.select__options::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+
+.select__option {
+	cursor: pointer;
+	padding: 3px 20px;
+	margin: 0px 0px 0px 0px;
+	/* text-align: center; */
+}
+
+		.select__option:hover{
+			background-color: #f77676;
+			color: chartreuse;
+		}
+
+.select._active {
+	z-index: 5;
+}
+.select._active .select__value::before {
+	transform: rotate(-180deg);
+}
+.select._active.select__options {
+	display: block;
+}
+
+/*************************    SELECT - END   **************************/
+
+/**********************************************************************/
+
+/*************************    COUNTRY INFO SECTION START   ************/
+
+.countryInfo{
+	text-align: center;
+}
+
+.countryInfo div:first-child img{
+	width: 100px;
+}
+
+/*************************    COUNTRY INFO END   **********************/
+
+/*************************    WEATHER SECTION START   *****************/
+#weather{
+	position: relative;
+}
+
+.weather{
+	background-color: rgb(255, 255, 255);
+	/* position: absolute;
+    top: 0;
+    left: 0; */
+    width: 100%;
+    height: 100%;
+	/* padding: 1rem 1.25rem; */
+}
+
+.weather_tab{
+	padding-top: 10px;
+	background-color: bisque;
+    border-radius: 5px;
+}
+
+.weather p{
+	margin: 0px;
+}
+
+.weather_top{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.weather_top p{
+	margin-bottom: 8px;
+}
+
+.weather_top_city{
+	font-size: 30px;
+	line-height: 30px;
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+.weather_top_temp{
+	font-size: 67px;
+    font-weight: 500;
+	line-height: 57px;
+}
+
+.weather_top_clouds{
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 13px;
+}
+
+.weather_middle{
+	display: flex;
+	justify-content: space-around;
+	border-top: 1px solid black;
+	border-bottom: 1px solid #000;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	text-align: center;
+}
+
+.weather_middle_day{
+	font-size: 15px;
+	font-weight: 500;
+}
+
+.weather_middle_temp{
+	font-size: 15px;
+	font-weight: 500
+}
+
+.weather_middle_img{
+	height: 50px;
+	width: 50px;
+}
+
+.weather_bottom{
+	display: flex;
+	flex-direction: column;
+	padding-top: 8px;
+}
+
+.weather_bottom_img{
+	height: 50px;
+	width: 50px;
+}
+
+.weather_bottom_line{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.weather_bottom_day{
+	font-size: 15px;
+	font-weight: 500;
+}
+
+.weather_bottom_temp{
+	font-size: 15px;
+	font-weight: 500
+}
+
+/*************************    WEATHER SECTION END   **************************/
+
+/*---------------------------------------------------------------------------*/
+
+/*************************    EARTHQUAKE SECTION START   *********************/
+#earthquake{
+	position: relative;
+}
+
+.earthquake_item{
+	border: 1px solid red;
+    border-radius: 5px;
+    background-color: white;
+    font-size: 16px;
+    margin-bottom: 14px;
+	color: #003eff;
+	transition: all 0.15s ease-in;
+	text-align: center;
+}
+
+.earthquake_item span{
+	color: red;
+	transition: all 0.15s ease-in;
+}
+
+		.earthquake_item.active{
+			background-color: #c11b1b;
+			color: white;
+			border: 1px solid #003eff;
+   			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		.earthquake_item.active  span{
+			color: lime;
+		}
+
+		.earthquake_item.focus{
+			background-color: #f77676;
+			color: white;
+			border: 1px solid #003eff;
+    		border-radius: 5px;
+			cursor: pointer;
+		}
+
+		.earthquake_item.focus  span{
+			color: lime;
+		}
+
+/*************************    EARTHQUAKE SECTION END   ***********************/
+
+/*---------------------------------------------------------------------------*/
+
+/*************************    NEWS SECTION START   ***************************/
+
+.news_accordion_body{
+	height: 50vh;
+    overflow-y: scroll;
+    padding: 0;
+	padding-top: 7px;
+}
+
+.news_accordion_body.error{
+	background-image: url('../img/error_404.jpg');
+	background-size: contain;
+}
+
+.news_item{
+	border: 1px solid #8b8b8b;
+    border-radius: 5px;
+    margin-bottom: 10px;
+	padding: 13px;
+    box-shadow: 0px 0px 14px #fb4848 inset;
+}
+
+.news_item.active{
+	background-image: url("../img/error_404.jpg");
+	background-size: contain;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	color: #baf505;
+	font-size: 17px;
+}
+
+.news_title{
+	font-size: 24px;
+    font-weight: 600;
+	line-height: 24px;
+}
+
+.news_body{
+	display: flex;
+}
+
+.news_img{
+	width: 81px;
+    height: 81px;
+    margin-right: 16px;
+}
+
+.news_desc{
+	font-size: 15px;
+    text-align: left;
+}
+
+.news_desc a{
+	margin-left: 11px;
+    color: blue;
+    text-decoration: none;
+    font-style: normal;
+}
+
+.news_footer{
+	display: flex;
+	justify-content: space-between;
+    align-items: end;
+}
+
+.news_date{
+	font-size: 13px;
+    font-weight: 800;
+}
+
+.news_source{
+	font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    color: blue;
+}
+
+/*************************    NEWS SECTION END   *****************************/
+
+/*---------------------------------------------------------------------------*/
+
+/*************************    WIKI SECTION START   ***************************/
+
+#collapseFour, #collapseSix{
+	padding: 0 9px;
+}
+
+.wiki_accordion_body{
+	height: 50vh;
+    overflow-y: scroll;
+    padding: 0;
+	padding-top: 7px;
+}
+
+.wiki_item{
+	border: 1px solid #8b8b8b;
+    border-radius: 5px;
+    margin-bottom: 10px;
+	padding: 13px;
+    box-shadow: 0px 0px 14px #fb4848 inset;
+	cursor: pointer;
+	transition: all 0.15s ease-in;
+}
+
+		.wiki_item.active{
+			background-color: #f96060;
+		}
+
+		.wiki_item.focus{
+			background-color: #fda3a3;
+		}
+
+.wiki_title{
+	font-size: 24px;
+    font-weight: 600;
+	line-height: 24px;
+}
+
+.wiki_body{
+	display: flex;
+}
+
+.wiki_img{
+	width: 81px;
+    height: 81px;
+    margin-right: 16px;
+}
+
+.wiki_desc{
+	font-size: 15px;
+    text-align: left;
+}
+
+.wiki_desc a{
+	margin-left: 11px;
+    color: blue;
+    text-decoration: none;
+    font-style: normal;
+}
+
+/*************************    WIKI SECTION END   *****************************/
+
+/*****************************************************************************/
+
+/*************************    AIRPORTS SECTION START  ************************/
+
+
+
+.airports_item{
+	border: 1px solid red;
+    border-radius: 5px;
+    background-color: white;
+    font-size: 16px;
+    margin-bottom: 14px;
+	color: #003eff;
+	transition: all 0.15s ease-in;
+	text-align: center;
+}
+
+.airports_item span{
+	color: red;
+	transition: all 0.15s ease-in;
+}
+
+		.airports_item.active{
+			background-color: #c11b1b;
+			color: white;
+			border: 1px solid #003eff;
+   			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		.airports_item.active  span{
+			color: lime;
+		}
+
+		.airports_item.focus{
+			background-color: #f77676;
+			color: white;
+			border: 1px solid #003eff;
+    		border-radius: 5px;
+			cursor: pointer;
+		}
+
+		.airports_item.focus  span{
+			color: lime;
+		}
+
+/*************************    AIRPORTS SECTION END   *************************/
+
+/*****************************************************************************/
+
+/************************* MEDIA QUERIES *************************************/
+
+/*(992px to 1200px) Large*/
+@media screen and (max-width: 1200px){
+
+	.info{
+		width: 37%;
+	}
+	.main_header_logo{
+		width: 69px;
+		height: auto;
+	}
+
+	.wiki_desc, .news_desc{
+		font-size: 14px;
+		text-align: justify;
+	}
+
+	.wiki_img, .news_img{
+		width: 70px;
+		height: 70px;
+	}
+
+	.wiki_title, .news_title{
+		font-size: 21px;
+		line-height: 21px;
+	}
+
+	.earthquake_item, .airports_item{
+		font-size: 14px;
+	}
+}
+
+/*(768px to 992px) Medium*/
+@media screen and (max-width: 992px){
+	#collapseOne .accordion-body, #collapseOne1 .accordion-body{
+		height: 32vh;
+	}
+
+	.earthquake_item, .airports_item {
+		font-size: 11px;
+	}
+
+	.earthquake{
+		height: 24vh;
+	}
+
+	.weather_top_city{
+		font-size: 16px;
+		line-height: 12px;
+	}
+
+	.weather_top p{
+		margin-bottom: 4px;
+	}
+
+	.weather_top_temp{
+		font-size: 48px;
+		line-height: 39px;
+	}
+
+	.weather_top_data{
+		font-size: 10px;
+	}
+
+	.weather_middle_day{
+		font-size: 11px;
+	}
+
+	.weather_middle_img{
+		height: 32px;
+    	width: auto;
+	}
+
+	.weather_middle_temp{
+		font-size: 11px;
+	}
+
+	.weather_bottom_day{
+		font-size: 11px;
+	}
+
+	.weather_bottom_img{
+		height: 32px;
+		width: auto;
+	}
+
+	.weather_bottom_temp{
+		font-size: 11px;
+	}
+
+	.accordion-body{
+		overflow-y: scroll;
+		height: 33vh;
+	}
+
+	.countryInfo div:first-child img {
+		width: 80px;
+	}
+
+	.info_result_content_detail{
+		font-size: 12px;
+	}
+
+	.info{
+		width: 42%;
+	}
+
+	.info_search{
+		margin-right: 8%;
+	}
+
+	.news_body, .wiki_body{
+		flex-direction: column;
+	}
+
+	.news_title, .wiki_title{
+		font-size: 16px;
+		line-height: 18px;
+	}
+
+	.news_img, .wiki_img{
+		margin-bottom: 8px;
+	}
+
+	.news_desc, .wiki_desc{
+		font-size: 13px;
+		text-align: justify;
+	}
+
+	.news_footer{
+		justify-content: unset;
+		align-items: unset;
+		flex-direction: column;
+		margin-top: 15px;
+	}
+
+	.news_date{
+		font-size: 12px;
+	}
+
+	.news_source{
+		font-size: 13px;
+	}
+}
+
+/*(576px to 768px) Small*/
+@media screen and (max-width: 768px){
+	.main_header_logo{
+		width: 60px;
+    	height: auto;
+	}
+
+	.main_header_title{
+		/* margin-left: 0px; */
+		font-size: 28px;
+	}
+
+	.info_search{
+		margin-right: 11%;
+	}
+
+	.info_twin{
+		display: block;
+		width: 58%;
+		height: auto;
+		bottom: 10px;
+		top: inherit;
+	}
+
+	.info{
+		display: none;
+		width: 72%;
+		height: auto;
+		bottom: 10px;
+		top: inherit;
+	}
+}
+
+/*(320px to 576px)  X-Small*/
+@media screen and (max-width: 576px){
+	#collapseOne .accordion-body, #collapseOne1 .accordion-body{
+		height: 27vh;
+	}
+
+	.info_twin{
+		bottom: 25px;
+	}
+
+	.leaflet-top{
+		top: 99px;
+	}
+
+	.leaflet-bottom{
+		bottom: 7px;
+	}
+
+	.leaflet-right{
+		right: 9px;
+	}
+
+	#map{
+		height: 100vh;
+	}
+
+	.select__value{
+		font-size: 12px;
+	}
+
+	.select__options{
+		top: 23px;
+	}
+
+	.main_header_logo{
+		width: 43px;
+    	height: auto;
+	}
+
+	.main_header{
+		flex-wrap: wrap;
+		/* padding-bottom: 11px; */
+		height: 10vh;
+		position: absolute;
+		z-index: 1000;
+		width: 100%;
+	}
+
+	.main_header{
+		font-size: 26px;
+	}
+
+	.info_search{
+		margin: 0 auto;
+		height: 29%;
+	}
+	
+	.info_result_content_detail{
+		margin: 0px;
+		font-size: 12px;
+	}
+
+	.weather_top_temp{
+		font-size: 41px;
+		font-weight: 500;
+		line-height: 31px;
+	}
+
+	.weather_top_data{
+		font-size: 9px;
+	}
+
+	.weather_middle_day{
+		font-size: 9px;
+	}
+
+	.weather_middle_img{
+		height: 24px;
+    	width: auto;
+	}
+
+	.weather_middle_temp{
+		font-size: 11px;
+	}
+
+	.weather_bottom_day{
+		font-size: 11px;
+	}
+
+	.weather_bottom_img{
+		height: 29px;
+		width: auto;
+	}
+
+	.weather_bottom_temp{
+		font-size: 11px;
+	}
+
+	.earthquake_item, .airports_item{
+		font-size: 12px;
+		margin-bottom: 6px;
+	}
+
+	.news_accordion_body, .wiki_accordion_body{
+		height: 24vh;
+		padding: 7px 14px 0 14px;
+	}
+
+
+
+
+
+}
+
+@media screen and (orientation: landscape) and (max-width: 740px) and (max-height: 360px){
+	.info_twin{
+		width: 36%;
+	}
+
+	.info_result_content_detail{
+		font-size: 11px;
+	}
+
+	.accordion-body{
+		overflow-y: scroll;
+		height: 33vh;
+	}
+
+	.countryInfo div:first-child img{
+		width: 56px;
+		font-size: 11px;
+	}
+
+	.weather_top_city{
+		font-size: 16px;
+		line-height: 12px;
+	}
+
+	.weather_top p{
+		margin-bottom: 4px;
+	}
+
+	.weather_top_temp{
+		font-size: 48px;
+		line-height: 39px;
+	}
+
+	.weather_top_data{
+		font-size: 10px;
+	}
+
+	.weather_middle_day{
+		font-size: 11px;
+	}
+
+	.weather_middle_img{
+		height: 32px;
+    	width: auto;
+	}
+
+	.weather_middle_temp{
+		font-size: 11px;
+	}
+
+	.weather_bottom_day{
+		font-size: 11px;
+	}
+
+	.weather_bottom_img{
+		height: 32px;
+		width: auto;
+	}
+
+	.weather_bottom_temp{
+		font-size: 11px;
+	}
+
+	.earthquake_item, .airports_item {
+		font-size: 11px;
+	}
+
+	.earthquake{
+		height: 24vh;
+	}
+}

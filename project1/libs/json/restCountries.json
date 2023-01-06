@@ -1,0 +1,4518 @@
+{
+    "0": {
+      "name": "Afghanistan",
+      "topLevelDomain": {
+        "0": ".af"
+      },
+      "alpha2Code": "AF",
+      "alpha3Code": "AFG",
+      "callingCodes": {
+        "0": "93"
+      },
+      "capital": "Kabul",
+      "altSpellings": {
+        "0": "AF",
+        "1": "Afġānistān"
+      },
+      "region": "Asia"
+    },
+    "1": {
+      "name": "Åland Islands",
+      "topLevelDomain": {
+        "0": ".ax"
+      },
+      "alpha2Code": "AX",
+      "alpha3Code": "ALA",
+      "callingCodes": {
+        "0": "358"
+      },
+      "capital": "Mariehamn",
+      "altSpellings": {
+        "0": "AX",
+        "1": "Aaland",
+        "2": "Aland",
+        "3": "Ahvenanmaa"
+      },
+      "region": "Europe"
+    },
+    "2": {
+      "name": "Albania",
+      "topLevelDomain": {
+        "0": ".al"
+      },
+      "alpha2Code": "AL",
+      "alpha3Code": "ALB",
+      "callingCodes": {
+        "0": "355"
+      },
+      "capital": "Tirana",
+      "altSpellings": {
+        "0": "AL",
+        "1": "Shqipëri",
+        "2": "Shqipëria",
+        "3": "Shqipnia"
+      },
+      "region": "Europe"
+    },
+    "3": {
+      "name": "Algeria",
+      "topLevelDomain": {
+        "0": ".dz"
+      },
+      "alpha2Code": "DZ",
+      "alpha3Code": "DZA",
+      "callingCodes": {
+        "0": "213"
+      },
+      "capital": "Algiers",
+      "altSpellings": {
+        "0": "DZ",
+        "1": "Dzayer",
+        "2": "Algérie"
+      },
+      "region": "Africa"
+    },
+    "4": {
+      "name": "American Samoa",
+      "topLevelDomain": {
+        "0": ".as"
+      },
+      "alpha2Code": "AS",
+      "alpha3Code": "ASM",
+      "callingCodes": {
+        "0": "1"
+      },
+      "capital": "Pago Pago",
+      "altSpellings": {
+        "0": "AS",
+        "1": "Amerika Sāmoa",
+        "2": "Amelika Sāmoa",
+        "3": "Sāmoa Amelika"
+      },
+      "region": "Oceania"
+    },
+    "5": {
+      "name": "Andorra",
+      "topLevelDomain": {
+        "0": ".ad"
+      },
+      "alpha2Code": "AD",
+      "alpha3Code": "AND",
+      "callingCodes": {
+        "0": "376"
+      },
+      "capital": "Andorra la Vella",
+      "altSpellings": {
+        "0": "AD",
+        "1": "Principality of Andorra",
+        "2": "Principat d'Andorra"
+      },
+      "region": "Europe"
+    },
+    "6": {
+      "name": "Angola",
+      "topLevelDomain": {
+        "0": ".ao"
+      },
+      "alpha2Code": "AO",
+      "alpha3Code": "AGO",
+      "callingCodes": {
+        "0": "244"
+      },
+      "capital": "Luanda",
+      "altSpellings": {
+        "0": "AO",
+        "1": "República de Angola",
+        "2": "ʁɛpublika de an'ɡɔla"
+      },
+      "region": "Africa"
+    },
+    "7": {
+      "name": "Anguilla",
+      "topLevelDomain": {
+        "0": ".ai"
+      },
+      "alpha2Code": "AI",
+      "alpha3Code": "AIA",
+      "callingCodes": {
+        "0": "1"
+      },
+      "capital": "The Valley",
+      "altSpellings": {
+        "0": "AI"
+      },
+      "region": "Americas"
+    },
+    "8": {
+      "name": "Antarctica",
+      "topLevelDomain": {
+        "0": ".aq"
+      },
+      "alpha2Code": "AQ",
+      "alpha3Code": "ATA",
+      "callingCodes": {
+        "0": "672"
+      },
+      "capital": "",
+      "altSpellings": {},
+      "region": "Polar"
+    },
+    "9": {
+      "name": "Antigua and Barbuda",
+      "topLevelDomain": {
+        "0": ".ag"
+      },
+      "alpha2Code": "AG",
+      "alpha3Code": "ATG",
+      "callingCodes": {
+        "0": "1"
+      },
+      "capital": "Saint John's",
+      "altSpellings": {
+        "0": "AG"
+      },
+      "region": "Americas"
+    },
+    "10": {
+      "name": "Argentina",
+      "topLevelDomain": {
+        "0": ".ar"
+      },
+      "alpha2Code": "AR",
+      "alpha3Code": "ARG",
+      "callingCodes": {
+        "0": "54"
+      },
+      "capital": "Buenos Aires",
+      "altSpellings": {
+        "0": "AR",
+        "1": "Argentine Republic",
+        "2": "República Argentina"
+      },
+      "region": "Americas"
+    },
+    "11": {
+      "name": "Armenia",
+      "topLevelDomain": {
+        "0": ".am"
+      },
+      "alpha2Code": "AM",
+      "alpha3Code": "ARM",
+      "callingCodes": {
+        "0": "374"
+      },
+      "capital": "Yerevan",
+      "altSpellings": {
+        "0": "AM",
+        "1": "Hayastan",
+        "2": "Republic of Armenia",
+        "3": "Հայաստանի Հանրապետություն"
+      },
+      "region": "Asia"
+    },
+    "12": {
+      "name": "Aruba",
+      "topLevelDomain": {
+        "0": ".aw"
+      },
+      "alpha2Code": "AW",
+      "alpha3Code": "ABW",
+      "callingCodes": {
+        "0": "297"
+      },
+      "capital": "Oranjestad",
+      "altSpellings": {
+        "0": "AW"
+      },
+      "region": "Americas"
+    },
+    "13": {
+      "name": "Australia",
+      "topLevelDomain": {
+        "0": ".au"
+      },
+      "alpha2Code": "AU",
+      "alpha3Code": "AUS",
+      "callingCodes": {
+        "0": "61"
+      },
+      "capital": "Canberra",
+      "altSpellings": {
+        "0": "AU"
+      },
+      "region": "Oceania"
+    },
+    "14": {
+      "name": "Austria",
+      "topLevelDomain": {
+        "0": ".at"
+      },
+      "alpha2Code": "AT",
+      "alpha3Code": "AUT",
+      "callingCodes": {
+        "0": "43"
+      },
+      "capital": "Vienna",
+      "altSpellings": {
+        "0": "AT",
+        "1": "Österreich",
+        "2": "Osterreich",
+        "3": "Oesterreich"
+      },
+      "region": "Europe"
+    },
+    "15": {
+      "name": "Azerbaijan",
+      "topLevelDomain": {
+        "0": ".az"
+      },
+      "alpha2Code": "AZ",
+      "alpha3Code": "AZE",
+      "callingCodes": {
+        "0": "994"
+      },
+      "capital": "Baku",
+      "altSpellings": {
+        "0": "AZ",
+        "1": "Republic of Azerbaijan",
+        "2": "Azərbaycan Respublikası"
+      },
+      "region": "Asia"
+    },
+    "16": {
+      "name": "Bahamas",
+      "topLevelDomain": {
+        "0": ".bs"
+      },
+      "alpha2Code": "BS",
+      "alpha3Code": "BHS",
+      "callingCodes": {
+        "0": "1"
+      },
+      "capital": "Nassau",
+      "altSpellings": {
+        "0": "BS",
+        "1": "Commonwealth of the Bahamas"
+      },
+      "region": "Americas"
+    },
+    "17": {
+      "name": "Bahrain",
+      "topLevelDomain": {
+        "0": ".bh"
+      },
+      "alpha2Code": "BH",
+      "alpha3Code": "BHR",
+      "callingCodes": {
+        "0": "973"
+      },
+      "capital": "Manama",
+      "altSpellings": {
+        "0": "BH",
+        "1": "Kingdom of Bahrain",
+        "2": "Mamlakat al-Baḥrayn"
+      },
+      "region": "Asia"
+    },
+    "18": {
+      "name": "Bangladesh",
+      "topLevelDomain": {
+        "0": ".bd"
+      },
+      "alpha2Code": "BD",
+      "alpha3Code": "BGD",
+      "callingCodes": {
+        "0": "880"
+      },
+      "capital": "Dhaka",
+      "altSpellings": {
+        "0": "BD",
+        "1": "People's Republic of Bangladesh",
+        "2": "Gônôprôjatôntri Bangladesh"
+      },
+      "region": "Asia"
+    },
+    "19": {
+      "name": "Barbados",
+      "topLevelDomain": {
+        "0": ".bb"
+      },
+      "alpha2Code": "BB",
+      "alpha3Code": "BRB",
+      "callingCodes": {
+        "0": "1"
+      },
+      "capital": "Bridgetown",
+      "altSpellings": {
+        "0": "BB"
+      },
+      "region": "Americas"
+    },
+    "20": {
+      "name": "Belarus",
+      "topLevelDomain": {
+        "0": ".by"
+      },
+      "alpha2Code": "BY",
+      "alpha3Code": "BLR",
+      "callingCodes": {
+        "0": "375"
+      },
+      "capital": "Minsk",
+      "altSpellings": {
+        "0": "BY",
+        "1": "Bielaruś",
+        "2": "Republic of Belarus",
+        "3": "Белоруссия",
+        "4": "Республика Беларусь",
+        "5": "Belorussiya",
+        "6": "Respublika Belarus’"
+      },
+      "region": "Europe"
+    },
+    "21": {
+      "name": "Belgium",
+      "topLevelDomain": {
+        "0": ".be"
+      },
+      "alpha2Code": "BE",
+      "alpha3Code": "BEL",
+      "callingCodes": {
+        "0": "32"
+      },
+      "capital": "Brussels",
+      "altSpellings": {
+        "0": "BE",
+        "1": "België",
+        "2": "Belgie",
+        "3": "Belgien",
+        "4": "Belgique",
+        "5": "Kingdom of Belgium",
+        "6": "Koninkrijk België",
+        "7": "Royaume de Belgique",
+        "8": "Königreich Belgien"
+      },
+      "region": "Europe"
+    },
+    "22": {
+      "name": "Belize",
+      "topLevelDomain": {
+        "0": ".bz"
+      },
+      "alpha2Code": "BZ",
+      "alpha3Code": "BLZ",
+      "callingCodes": {
+        "0": "501"
+      },
+      "capital": "Belmopan",
+      "altSpellings": {
+        "0": "BZ"
+      },
+      "region": "Americas"
+    },
+    "23": {
+      "name": "Benin",
+      "topLevelDomain": {
+        "0": ".bj"
+      },
+      "alpha2Code": "BJ",
+      "alpha3Code": "BEN",
+      "callingCodes": {
+        "0": "229"
+      },
+      "capital": "Porto-Novo",
+      "altSpellings": {
+        "0": "BJ",
+        "1": "Republic of Benin",
+        "2": "République du Bénin"
+      },
+      "region": "Africa"
+    },
+    "24": {
+      "name": "Bermuda",
+      "topLevelDomain": {
+        "0": ".bm"
+      },
+      "alpha2Code": "BM",
+      "alpha3Code": "BMU",
+      "callingCodes": {
+        "0": "1"
+      },
+      "capital": "Hamilton",
+      "altSpellings": {
+        "0": "BM",
+        "1": "The Islands of Bermuda",
+        "2": "The Bermudas",
+        "3": "Somers Isles"
+      },
+      "region": "Americas"
+    },
+    "25": {
+      "name": "Bhutan",
+      "topLevelDomain": {
+        "0": ".bt"
+      },
+      "alpha2Code": "BT",
+      "alpha3Code": "BTN",
+      "callingCodes": {
+        "0": "975"
+      },
+      "capital": "Thimphu",
+      "altSpellings": {
+        "0": "BT",
+        "1": "Kingdom of Bhutan"
+      },
+      "region": "Asia"
+    },
+    "26": {
+      "name": "Bolivia (Plurinational State of},",
+      "topLevelDomain": {
+        "0": ".bo"
+      },
+      "alpha2Code": "BO",
+      "alpha3Code": "BOL",
+      "callingCodes": {
+        "0": "591"
+      },
+      "capital": "Sucre",
+      "altSpellings": {
+        "0": "BO",
+        "1": "Buliwya",
+        "2": "Wuliwya",
+        "3": "Plurinational State of Bolivia",
+        "4": "Estado Plurinacional de Bolivia",
+        "5": "Buliwya Mamallaqta",
+        "6": "Wuliwya Suyu",
+        "7": "Tetã Volívia"
+      },
+      "region": "Americas"
+    },
+    "27": {
+      "name": "Bonaire, Sint Eustatius and Saba",
+      "topLevelDomain": {
+        "0": ".an",
+        "1": ".nl"
+      },
+      "alpha2Code": "BQ",
+      "alpha3Code": "BES",
+      "callingCodes": {
+        "0": "599"
+      },
+      "capital": "Kralendijk",
+      "altSpellings": {
+        "0": "BQ",
+        "1": "Boneiru"
+      },
+      "region": "Americas"
+    },
+    "28": {
+      "name": "Bosnia and Herzegovina",
+      "topLevelDomain": {
+        "0": ".ba"
+      },
+      "alpha2Code": "BA",
+      "alpha3Code": "BIH",
+      "callingCodes": {
+        "0": "387"
+      },
+      "capital": "Sarajevo",
+      "altSpellings": {
+        "0": "BA",
+        "1": "Bosnia-Herzegovina",
+        "2": "Босна и Херцеговина"
+      },
+      "region": "Europe"
+    },
+    "29": {
+      "name": "Botswana",
+      "topLevelDomain": {
+        "0": ".bw"
+      },
+      "alpha2Code": "BW",
+      "alpha3Code": "BWA",
+      "callingCodes": {
+        "0": "267"
+      },
+      "capital": "Gaborone",
+      "altSpellings": {
+        "0": "BW",
+        "1": "Republic of Botswana",
+        "2": "Lefatshe la Botswana"
+      },
+      "region": "Africa"
+    },
+    "30": {
+      "name": "Bouvet Island",
+      "topLevelDomain": {
+        "0": ".bv"
+      },
+      "alpha2Code": "BV",
+      "alpha3Code": "BVT",
+      "callingCodes": {
+        "0": "47"
+      },
+      "capital": "",
+      "altSpellings": {
+        "0": "BV",
+        "1": "Bouvetøya",
+        "2": "Bouvet-øya"
+      },
+      "region": ""
+    },
+    "31": {
+      "name": "Brazil",
+      "topLevelDomain": {
+        "0": ".br"
+      },
+      "alpha2Code": "BR",
+      "alpha3Code": "BRA",
+      "callingCodes": {
+        "0": "55"
+      },
+      "capital": "Brasília",
+      "altSpellings": {
+        "0": "BR",
+        "1": "Brasil",
+        "2": "Federative Republic of Brazil",
+        "3": "República Federativa do Brasil"
+      },
+      "region": "Americas"
+    },
+    "32": {
+      "name": "British Indian Ocean Territory",
+      "topLevelDomain": {
+        "0": ".io"
+      },
+      "alpha2Code": "IO",
+      "alpha3Code": "IOT",
+      "callingCodes": {
+        "0": "246"
+      },
+      "capital": "Diego Garcia",
+      "altSpellings": {
+        "0": "IO"
+      },
+      "region": "Africa"
+    },
+    "33": {
+      "name": "United States Minor Outlying Islands",
+      "topLevelDomain": {
+        "0": ".us"
+      },
+      "alpha2Code": "UM",
+      "alpha3Code": "UMI",
+      "callingCodes": {
+        "0": "1"
+      },
+      "capital": "",
+      "altSpellings": {
+        "0": "UM"
+      },
+      "region": "Americas"
+    },
+    "34": {
+      "name": "Virgin Islands (British},",
+      "topLevelDomain": {
+        "0": ".vg"
+      },
+      "alpha2Code": "VG",
+      "alpha3Code": "VGB",
+      "callingCodes": {
+        "0": "1"
+      },
+      "capital": "Road Town",
+      "altSpellings": {
+        "0": "VG"
+      },
+      "region": "Americas"
+    },
+    "35": {
+      "name": "Virgin Islands (U.S.},",
+      "topLevelDomain": {
+        "0": ".vi"
+      },
+      "alpha2Code": "VI",
+      "alpha3Code": "VIR",
+      "callingCodes": {
+        "0": "1 340"
+      },
+      "capital": "Charlotte Amalie",
+      "altSpellings": {
+        "0": "VI",
+        "1": "USVI",
+        "2": "American Virgin Islands",
+        "3": "U.S. Virgin Islands"
+      },
+      "region": "Americas"
+    },
+    "36": {
+      "name": "Brunei Darussalam",
+      "topLevelDomain": {
+        "0": ".bn"
+      },
+      "alpha2Code": "BN",
+      "alpha3Code": "BRN",
+      "callingCodes": {
+        "0": "673"
+      },
+      "capital": "Bandar Seri Begawan",
+      "altSpellings": {
+        "0": "BN",
+        "1": "Nation of Brunei",
+        "2": "the Abode of Peace"
+      },
+      "region": "Asia"
+    },
+    "37": {
+      "name": "Bulgaria",
+      "topLevelDomain": {
+        "0": ".bg"
+      },
+      "alpha2Code": "BG",
+      "alpha3Code": "BGR",
+      "callingCodes": {
+        "0": "359"
+      },
+      "capital": "Sofia",
+      "altSpellings": {
+        "0": "BG",
+        "1": "Republic of Bulgaria",
+        "2": "Република България"
+      },
+      "region": "Europe"
+    },
+    "38": {
+      "name": "Burkina Faso",
+      "topLevelDomain": {
+        "0": ".bf"
+      },
+      "alpha2Code": "BF",
+      "alpha3Code": "BFA",
+      "callingCodes": {
+        "0": "226"
+      },
+      "capital": "Ouagadougou",
+      "altSpellings": {
+        "0": "BF"
+      },
+      "region": "Africa"
+    },
+    "39": {
+      "name": "Burundi",
+      "topLevelDomain": {
+        "0": ".bi"
+      },
+      "alpha2Code": "BI",
+      "alpha3Code": "BDI",
+      "callingCodes": {
+        "0": "257"
+      },
+      "capital": "Bujumbura",
+      "altSpellings": {
+        "0": "BI",
+        "1": "Republic of Burundi",
+        "2": "Republika y'Uburundi",
+        "3": "République du Burundi"
+      },
+      "region": "Africa"
+    },
+    "40": {
+      "name": "Cambodia",
+      "topLevelDomain": {
+        "0": ".kh"
+      },
+      "alpha2Code": "KH",
+      "alpha3Code": "KHM",
+      "callingCodes": {
+        "0": "855"
+      },
+      "capital": "Phnom Penh",
+      "altSpellings": {
+        "0": "KH",
+        "1": "Kingdom of Cambodia"
+      },
+      "region": "Asia"
+    },
+    "41": {
+      "name": "Cameroon",
+      "topLevelDomain": {
+        "0": ".cm"
+      },
+      "alpha2Code": "CM",
+      "alpha3Code": "CMR",
+      "callingCodes": {
+        "0": "237"
+      },
+      "capital": "Yaoundé",
+      "altSpellings": {
+        "0": "CM",
+        "1": "Republic of Cameroon",
+        "2": "République du Cameroun"
+      },
+      "region": "Africa"
+    },
+    "42": {
+      "name": "Canada",
+      "topLevelDomain": {
+        "0": ".ca"
+      },
+      "alpha2Code": "CA",
+      "alpha3Code": "CAN",
+      "callingCodes": {
+        "0": "1"
+      },
+      "capital": "Ottawa",
+      "altSpellings": {
+        "0": "CA"
+      },
+      "region": "Americas"
+    },
+    "43": {
+      "name": "Cabo Verde",
+      "topLevelDomain": {
+        "0": ".cv"
+      },
+      "alpha2Code": "CV",
+      "alpha3Code": "CPV",
+      "callingCodes": {
+        "0": "238"
+      },
+      "capital": "Praia",
+      "altSpellings": {
+        "0": "CV",
+        "1": "Republic of Cabo Verde",
+        "2": "República de Cabo Verde"
+      },
+      "region": "Africa"
+    },
+    "44": {
+      "name": "Cayman Islands",
+      "topLevelDomain": {
+        "0": ".ky"
+      },
+      "alpha2Code": "KY",
+      "alpha3Code": "CYM",
+      "callingCodes": {
+        "0": "1"
+      },
+      "capital": "George Town",
+      "altSpellings": {
+        "0": "KY"
+      },
+      "region": "Americas"
+    },
+    "45": {
+      "name": "Central African Republic",
+      "topLevelDomain": {
+        "0": ".cf"
+      },
+      "alpha2Code": "CF",
+      "alpha3Code": "CAF",
+      "callingCodes": {
+        "0": "236"
+      },
+      "capital": "Bangui",
+      "altSpellings": {
+        "0": "CF",
+        "1": "Central African Republic",
+        "2": "République centrafricaine"
+      },
+      "region": "Africa"
+    },
+    "46": {
+      "name": "Chad",
+      "topLevelDomain": {
+        "0": ".td"
+      },
+      "alpha2Code": "TD",
+      "alpha3Code": "TCD",
+      "callingCodes": {
+        "0": "235"
+      },
+      "capital": "N'Djamena",
+      "altSpellings": {
+        "0": "TD",
+        "1": "Tchad",
+        "2": "Republic of Chad",
+        "3": "République du Tchad"
+      },
+      "region": "Africa"
+    },
+    "47": {
+      "name": "Chile",
+      "topLevelDomain": {
+        "0": ".cl"
+      },
+      "alpha2Code": "CL",
+      "alpha3Code": "CHL",
+      "callingCodes": {
+        "0": "56"
+      },
+      "capital": "Santiago",
+      "altSpellings": {
+        "0": "CL",
+        "1": "Republic of Chile",
+        "2": "República de Chile"
+      },
+      "region": "Americas"
+    },
+    "48": {
+      "name": "China",
+      "topLevelDomain": {
+        "0": ".cn"
+      },
+      "alpha2Code": "CN",
+      "alpha3Code": "CHN",
+      "callingCodes": {
+        "0": "86"
+      },
+      "capital": "Beijing",
+      "altSpellings": {
+        "0": "CN",
+        "1": "Zhōngguó",
+        "2": "Zhongguo",
+        "3": "Zhonghua",
+        "4": "People's Republic of China",
+        "5": "中华人民共和国",
+        "6": "Zhōnghuá Rénmín Gònghéguó"
+      },
+      "region": "Asia"
+    },
+    "49": {
+      "name": "Christmas Island",
+      "topLevelDomain": {
+        "0": ".cx"
+      },
+      "alpha2Code": "CX",
+      "alpha3Code": "CXR",
+      "callingCodes": {
+        "0": "61"
+      },
+      "capital": "Flying Fish Cove",
+      "altSpellings": {
+        "0": "CX",
+        "1": "Territory of Christmas Island"
+      },
+      "region": "Oceania"
+    },
+    "50": {
+      "name": "Cocos (Keeling) Islands",
+      "topLevelDomain": {
+        "0": ".cc"
+      },
+      "alpha2Code": "CC",
+      "alpha3Code": "CCK",
+      "callingCodes": {
+        "0": "61"
+      },
+      "capital": "West Island",
+      "altSpellings": {
+        "0": "CC",
+        "1": "Territory of the Cocos (Keeling) Islands",
+        "2": "Keeling Islands"
+      },
+      "region": "Oceania"
+    },
+    "51": {
+      "name": "Colombia",
+      "topLevelDomain": {
+        "0": ".co"
+      },
+      "alpha2Code": "CO",
+      "alpha3Code": "COL",
+      "callingCodes": {
+        "0": "57"
+      },
+      "capital": "Bogotá",
+      "altSpellings": {
+        "0": "CO",
+        "1": "Republic of Colombia",
+        "2": "República de Colombia"
+      },
+      "region": "Americas"
+    },
+    "52": {
+      "name": "Comoros",
+      "topLevelDomain": {
+        "0": ".km"
+      },
+      "alpha2Code": "KM",
+      "alpha3Code": "COM",
+      "callingCodes": {
+        "0": "269"
+      },
+      "capital": "Moroni",
+      "altSpellings": {
+        "0": "KM",
+        "1": "Union of the Comoros",
+        "2": "Union des Comores",
+        "3": "Udzima wa Komori",
+        "4": "al-Ittiḥād al-Qumurī"
+      },
+      "region": "Africa"
+    },
+    "53": {
+      "name": "Congo",
+      "topLevelDomain": {
+        "0": ".cg"
+      },
+      "alpha2Code": "CG",
+      "alpha3Code": "COG",
+      "callingCodes": {
+        "0": "242"
+      },
+      "capital": "Brazzaville",
+      "altSpellings": {
+        "0": "CG",
+        "1": "Congo-Brazzaville"
+      },
+      "region": "Africa"
+    },
+    "54": {
+      "name": "Congo (Democratic Republic of the},",
+      "topLevelDomain": {
+        "0": ".cd"
+      },
+      "alpha2Code": "CD",
+      "alpha3Code": "COD",
+      "callingCodes": {
+        "0": "243"
+      },
+      "capital": "Kinshasa",
+      "altSpellings": {
+        "0": "CD",
+        "1": "DR Congo",
+        "2": "Congo-Kinshasa",
+        "3": "DRC"
+      },
+      "region": "Africa"
+    },
+    "55": {
+      "name": "Cook Islands",
+      "topLevelDomain": {
+        "0": ".ck"
+      },
+      "alpha2Code": "CK",
+      "alpha3Code": "COK",
+      "callingCodes": {
+        "0": "682"
+      },
+      "capital": "Avarua",
+      "altSpellings": {
+        "0": "CK",
+        "1": "Kūki 'Āirani"
+      },
+      "region": "Oceania"
+    },
+    "56": {
+      "name": "Costa Rica",
+      "topLevelDomain": {
+        "0": ".cr"
+      },
+      "alpha2Code": "CR",
+      "alpha3Code": "CRI",
+      "callingCodes": {
+        "0": "506"
+      },
+      "capital": "San José",
+      "altSpellings": {
+        "0": "CR",
+        "1": "Republic of Costa Rica",
+        "2": "República de Costa Rica"
+      },
+      "region": "Americas"
+    },
+    "57": {
+      "name": "Croatia",
+      "topLevelDomain": {
+        "0": ".hr"
+      },
+      "alpha2Code": "HR",
+      "alpha3Code": "HRV",
+      "callingCodes": {
+        "0": "385"
+      },
+      "capital": "Zagreb",
+      "altSpellings": {
+        "0": "HR",
+        "1": "Hrvatska",
+        "2": "Republic of Croatia",
+        "3": "Republika Hrvatska"
+      },
+      "region": "Europe"
+    },
+    "58": {
+      "name": "Cuba",
+      "topLevelDomain": {
+        "0": ".cu"
+      },
+      "alpha2Code": "CU",
+      "alpha3Code": "CUB",
+      "callingCodes": {
+        "0": "53"
+      },
+      "capital": "Havana",
+      "altSpellings": {
+        "0": "CU",
+        "1": "Republic of Cuba",
+        "2": "República de Cuba"
+      },
+      "region": "Americas"
+    },
+    "59": {
+      "name": "Curaçao",
+      "topLevelDomain": {
+        "0": ".cw"
+      },
+      "alpha2Code": "CW",
+      "alpha3Code": "CUW",
+      "callingCodes": {
+        "0": "599"
+      },
+      "capital": "Willemstad",
+      "altSpellings": {
+        "0": "CW",
+        "1": "Curacao",
+        "2": "Kòrsou",
+        "3": "Country of Curaçao",
+        "4": "Land Curaçao",
+        "5": "Pais Kòrsou"
+      },
+      "region": "Americas"
+    },
+    "60": {
+      "name": "Cyprus",
+      "topLevelDomain": {
+        "0": ".cy"
+      },
+      "alpha2Code": "CY",
+      "alpha3Code": "CYP",
+      "callingCodes": {
+        "0": "357"
+      },
+      "capital": "Nicosia",
+      "altSpellings": {
+        "0": "CY",
+        "1": "Kýpros",
+        "2": "Kıbrıs",
+        "3": "Republic of Cyprus",
+        "4": "Κυπριακή Δημοκρατία",
+        "5": "Kıbrıs Cumhuriyeti"
+      },
+      "region": "Europe"
+    },
+    "61": {
+      "name": "Czech Republic",
+      "topLevelDomain": {
+        "0": ".cz"
+      },
+      "alpha2Code": "CZ",
+      "alpha3Code": "CZE",
+      "callingCodes": {
+        "0": "420"
+      },
+      "capital": "Prague",
+      "altSpellings": {
+        "0": "CZ",
+        "1": "Česká republika",
+        "2": "Česko"
+      },
+      "region": "Europe"
+    },
+    "62": {
+      "name": "Denmark",
+      "topLevelDomain": {
+        "0": ".dk"
+      },
+      "alpha2Code": "DK",
+      "alpha3Code": "DNK",
+      "callingCodes": {
+        "0": "45"
+      },
+      "capital": "Copenhagen",
+      "altSpellings": {
+        "0": "DK",
+        "1": "Danmark",
+        "2": "Kingdom of Denmark",
+        "3": "Kongeriget Danmark"
+      },
+      "region": "Europe"
+    },
+    "63": {
+      "name": "Djibouti",
+      "topLevelDomain": {
+        "0": ".dj"
+      },
+      "alpha2Code": "DJ",
+      "alpha3Code": "DJI",
+      "callingCodes": {
+        "0": "253"
+      },
+      "capital": "Djibouti",
+      "altSpellings": {
+        "0": "DJ",
+        "1": "Jabuuti",
+        "2": "Gabuuti",
+        "3": "Republic of Djibouti",
+        "4": "République de Djibouti",
+        "5": "Gabuutih Ummuuno",
+        "6": "Jamhuuriyadda Jabuuti"
+      },
+      "region": "Africa"
+    },
+    "64": {
+      "name": "Dominica",
+      "topLevelDomain": {
+        "0": ".dm"
+      },
+      "alpha2Code": "DM",
+      "alpha3Code": "DMA",
+      "callingCodes": {
+        "0": "1"
+      },
+      "capital": "Roseau",
+      "altSpellings": {
+        "0": "DM",
+        "1": "Dominique",
+        "2": "Wai‘tu kubuli",
+        "3": "Commonwealth of Dominica"
+      },
+      "region": "Americas"
+    },
+    "65": {
+      "name": "Dominican Republic",
+      "topLevelDomain": {
+        "0": ".do"
+      },
+      "alpha2Code": "DO",
+      "alpha3Code": "DOM",
+      "callingCodes": {
+        "0": "1"
+      },
+      "capital": "Santo Domingo",
+      "altSpellings": {
+        "0": "DO"
+      },
+      "region": "Americas"
+    },
+    "66": {
+      "name": "Ecuador",
+      "topLevelDomain": {
+        "0": ".ec"
+      },
+      "alpha2Code": "EC",
+      "alpha3Code": "ECU",
+      "callingCodes": {
+        "0": "593"
+      },
+      "capital": "Quito",
+      "altSpellings": {
+        "0": "EC",
+        "1": "Republic of Ecuador",
+        "2": "República del Ecuador"
+      },
+      "region": "Americas"
+    },
+    "67": {
+      "name": "Egypt",
+      "topLevelDomain": {
+        "0": ".eg"
+      },
+      "alpha2Code": "EG",
+      "alpha3Code": "EGY",
+      "callingCodes": {
+        "0": "20"
+      },
+      "capital": "Cairo",
+      "altSpellings": {
+        "0": "EG",
+        "1": "Arab Republic of Egypt"
+      },
+      "region": "Africa"
+    },
+    "68": {
+      "name": "El Salvador",
+      "topLevelDomain": {
+        "0": ".sv"
+      },
+      "alpha2Code": "SV",
+      "alpha3Code": "SLV",
+      "callingCodes": {
+        "0": "503"
+      },
+      "capital": "San Salvador",
+      "altSpellings": {
+        "0": "SV",
+        "1": "Republic of El Salvador",
+        "2": "República de El Salvador"
+      },
+      "region": "Americas"
+    },
+    "69": {
+      "name": "Equatorial Guinea",
+      "topLevelDomain": {
+        "0": ".gq"
+      },
+      "alpha2Code": "GQ",
+      "alpha3Code": "GNQ",
+      "callingCodes": {
+        "0": "240"
+      },
+      "capital": "Malabo",
+      "altSpellings": {
+        "0": "GQ",
+        "1": "Republic of Equatorial Guinea",
+        "2": "República de Guinea Ecuatorial",
+        "3": "République de Guinée équatoriale",
+        "4": "República da Guiné Equatorial"
+      },
+      "region": "Africa"
+    },
+    "70": {
+      "name": "Eritrea",
+      "topLevelDomain": {
+        "0": ".er"
+      },
+      "alpha2Code": "ER",
+      "alpha3Code": "ERI",
+      "callingCodes": {
+        "0": "291"
+      },
+      "capital": "Asmara",
+      "altSpellings": {
+        "0": "ER",
+        "1": "State of Eritrea",
+        "2": "ሃገረ ኤርትራ",
+        "3": "Dawlat Iritriyá",
+        "4": "ʾErtrā",
+        "5": "Iritriyā",
+        "6": ""
+      },
+      "region": "Africa"
+    },
+    "71": {
+      "name": "Estonia",
+      "topLevelDomain": {
+        "0": ".ee"
+      },
+      "alpha2Code": "EE",
+      "alpha3Code": "EST",
+      "callingCodes": {
+        "0": "372"
+      },
+      "capital": "Tallinn",
+      "altSpellings": {
+        "0": "EE",
+        "1": "Eesti",
+        "2": "Republic of Estonia",
+        "3": "Eesti Vabariik"
+      },
+      "region": "Europe"
+    },
+    "72": {
+      "name": "Ethiopia",
+      "topLevelDomain": {
+        "0": ".et"
+      },
+      "alpha2Code": "ET",
+      "alpha3Code": "ETH",
+      "callingCodes": {
+        "0": "251"
+      },
+      "capital": "Addis Ababa",
+      "altSpellings": {
+        "0": "ET",
+        "1": "ʾĪtyōṗṗyā",
+        "2": "Federal Democratic Republic of Ethiopia",
+        "3": "የኢትዮጵያ ፌዴራላዊ ዲሞክራሲያዊ ሪፐብሊክ"
+      },
+      "region": "Africa"
+    },
+    "73": {
+      "name": "Falkland Islands (Malvinas},",
+      "topLevelDomain": {
+        "0": ".fk"
+      },
+      "alpha2Code": "FK",
+      "alpha3Code": "FLK",
+      "callingCodes": {
+        "0": "500"
+      },
+      "capital": "Stanley",
+      "altSpellings": {
+        "0": "FK",
+        "1": "Islas Malvinas"
+      },
+      "region": "Americas"
+    },
+    "74": {
+      "name": "Faroe Islands",
+      "topLevelDomain": {
+        "0": ".fo"
+      },
+      "alpha2Code": "FO",
+      "alpha3Code": "FRO",
+      "callingCodes": {
+        "0": "298"
+      },
+      "capital": "Tórshavn",
+      "altSpellings": {
+        "0": "FO",
+        "1": "Føroyar",
+        "2": "Færøerne"
+      },
+      "region": "Europe"
+    },
+    "75": {
+      "name": "Fiji",
+      "topLevelDomain": {
+        "0": ".fj"
+      },
+      "alpha2Code": "FJ",
+      "alpha3Code": "FJI",
+      "callingCodes": {
+        "0": "679"
+      },
+      "capital": "Suva",
+      "altSpellings": {
+        "0": "FJ",
+        "1": "Viti",
+        "2": "Republic of Fiji",
+        "3": "Matanitu ko Viti",
+        "4": "Fijī Gaṇarājya"
+      },
+      "region": "Oceania"
+    },
+    "76": {
+      "name": "Finland",
+      "topLevelDomain": {
+        "0": ".fi"
+      },
+      "alpha2Code": "FI",
+      "alpha3Code": "FIN",
+      "callingCodes": {
+        "0": "358"
+      },
+      "capital": "Helsinki",
+      "altSpellings": {
+        "0": "FI",
+        "1": "Suomi",
+        "2": "Republic of Finland",
+        "3": "Suomen tasavalta",
+        "4": "Republiken Finland"
+      },
+      "region": "Europe"
+    },
+    "77": {
+      "name": "France",
+      "topLevelDomain": {
+        "0": ".fr"
+      },
+      "alpha2Code": "FR",
+      "alpha3Code": "FRA",
+      "callingCodes": {
+        "0": "33"
+      },
+      "capital": "Paris",
+      "altSpellings": {
+        "0": "FR",
+        "1": "French Republic",
+        "2": "République française"
+      },
+      "region": "Europe"
+    },
+    "78": {
+      "name": "French Guiana",
+      "topLevelDomain": {
+        "0": ".gf"
+      },
+      "alpha2Code": "GF",
+      "alpha3Code": "GUF",
+      "callingCodes": {
+        "0": "594"
+      },
+      "capital": "Cayenne",
+      "altSpellings": {
+        "0": "GF",
+        "1": "Guiana",
+        "2": "Guyane"
+      },
+      "region": "Americas"
+    },
+    "79": {
+      "name": "French Polynesia",
+      "topLevelDomain": {
+        "0": ".pf"
+      },
+      "alpha2Code": "PF",
+      "alpha3Code": "PYF",
+      "callingCodes": {
+        "0": "689"
+      },
+      "capital": "Papeetē",
+      "altSpellings": {
+        "0": "PF",
+        "1": "Polynésie française",
+        "2": "French Polynesia",
+        "3": "Pōrīnetia Farāni"
+      },
+      "region": "Oceania"
+    },
+    "80": {
+      "name": "French Southern Territories",
+      "topLevelDomain": {
+        "0": ".tf"
+      },
+      "alpha2Code": "TF",
+      "alpha3Code": "ATF",
+      "callingCodes": {
+        "0": "262"
+      },
+      "capital": "Port-aux-Français",
+      "altSpellings": {
+        "0": "TF"
+      },
+      "region": "Africa"
+    },
+    "81": {
+      "name": "Gabon",
+      "topLevelDomain": {
+        "0": ".ga"
+      },
+      "alpha2Code": "GA",
+      "alpha3Code": "GAB",
+      "callingCodes": {
+        "0": "241"
+      },
+      "capital": "Libreville",
+      "altSpellings": {
+        "0": "GA",
+        "1": "Gabonese Republic",
+        "2": "République Gabonaise"
+      },
+      "region": "Africa"
+    },
+    "82": {
+      "name": "Gambia",
+      "topLevelDomain": {
+        "0": ".gm"
+      },
+      "alpha2Code": "GM",
+      "alpha3Code": "GMB",
+      "callingCodes": {
+        "0": "220"
+      },
+      "capital": "Banjul",
+      "altSpellings": {
+        "0": "GM",
+        "1": "Republic of the Gambia"
+      },
+      "region": "Africa"
+    },
+    "83": {
+      "name": "Georgia",
+      "topLevelDomain": {
+        "0": ".ge"
+      },
+      "alpha2Code": "GE",
+      "alpha3Code": "GEO",
+      "callingCodes": {
+        "0": "995"
+      },
+      "capital": "Tbilisi",
+      "altSpellings": {
+        "0": "GE",
+        "1": "Sakartvelo"
+      },
+      "region": "Asia"
+    },
+    "84": {
+      "name": "Germany",
+      "topLevelDomain": {
+        "0": ".de"
+      },
+      "alpha2Code": "DE",
+      "alpha3Code": "DEU",
+      "callingCodes": {
+        "0": "49"
+      },
+      "capital": "Berlin",
+      "altSpellings": {
+        "0": "DE",
+        "1": "Federal Republic of Germany",
+        "2": "Bundesrepublik Deutschland"
+      },
+      "region": "Europe"
+    },
+    "85": {
+      "name": "Ghana",
+      "topLevelDomain": {
+        "0": ".gh"
+      },
+      "alpha2Code": "GH",
+      "alpha3Code": "GHA",
+      "callingCodes": {
+        "0": "233"
+      },
+      "capital": "Accra",
+      "altSpellings": {
+        "0": "GH"
+      },
+      "region": "Africa"
+    },
+    "86": {
+      "name": "Gibraltar",
+      "topLevelDomain": {
+        "0": ".gi"
+      },
+      "alpha2Code": "GI",
+      "alpha3Code": "GIB",
+      "callingCodes": {
+        "0": "350"
+      },
+      "capital": "Gibraltar",
+      "altSpellings": {
+        "0": "GI"
+      },
+      "region": "Europe"
+    },
+    "87": {
+      "name": "Greece",
+      "topLevelDomain": {
+        "0": ".gr"
+      },
+      "alpha2Code": "GR",
+      "alpha3Code": "GRC",
+      "callingCodes": {
+        "0": "30"
+      },
+      "capital": "Athens",
+      "altSpellings": {
+        "0": "GR",
+        "1": "Elláda",
+        "2": "Hellenic Republic",
+        "3": "Ελληνική Δημοκρατία"
+      },
+      "region": "Europe"
+    },
+    "88": {
+      "name": "Greenland",
+      "topLevelDomain": {
+        "0": ".gl"
+      },
+      "alpha2Code": "GL",
+      "alpha3Code": "GRL",
+      "callingCodes": {
+        "0": "299"
+      },
+      "capital": "Nuuk",
+      "altSpellings": {
+        "0": "GL",
+        "1": "Grønland"
+      },
+      "region": "Americas"
+    },
+    "89": {
+      "name": "Grenada",
+      "topLevelDomain": {
+        "0": ".gd"
+      },
+      "alpha2Code": "GD",
+      "alpha3Code": "GRD",
+      "callingCodes": {
+        "0": "1"
+      },
+      "capital": "St. George's",
+      "altSpellings": {
+        "0": "GD"
+      },
+      "region": "Americas"
+    },
+    "90": {
+      "name": "Guadeloupe",
+      "topLevelDomain": {
+        "0": ".gp"
+      },
+      "alpha2Code": "GP",
+      "alpha3Code": "GLP",
+      "callingCodes": {
+        "0": "590"
+      },
+      "capital": "Basse-Terre",
+      "altSpellings": {
+        "0": "GP",
+        "1": "Gwadloup"
+      },
+      "region": "Americas"
+    },
+    "91": {
+      "name": "Guam",
+      "topLevelDomain": {
+        "0": ".gu"
+      },
+      "alpha2Code": "GU",
+      "alpha3Code": "GUM",
+      "callingCodes": {
+        "0": "1"
+      },
+      "capital": "Hagåtña",
+      "altSpellings": {
+        "0": "GU",
+        "1": "Guåhån"
+      },
+      "region": "Oceania"
+    },
+    "92": {
+      "name": "Guatemala",
+      "topLevelDomain": {
+        "0": ".gt"
+      },
+      "alpha2Code": "GT",
+      "alpha3Code": "GTM",
+      "callingCodes": {
+        "0": "502"
+      },
+      "capital": "Guatemala City",
+      "altSpellings": {
+        "0": "GT"
+      },
+      "region": "Americas"
+    },
+    "93": {
+      "name": "Guernsey",
+      "topLevelDomain": {
+        "0": ".gg"
+      },
+      "alpha2Code": "GG",
+      "alpha3Code": "GGY",
+      "callingCodes": {
+        "0": "44"
+      },
+      "capital": "St. Peter Port",
+      "altSpellings": {
+        "0": "GG",
+        "1": "Bailiwick of Guernsey",
+        "2": "Bailliage de Guernesey"
+      },
+      "region": "Europe"
+    },
+    "94": {
+      "name": "Guinea",
+      "topLevelDomain": {
+        "0": ".gn"
+      },
+      "alpha2Code": "GN",
+      "alpha3Code": "GIN",
+      "callingCodes": {
+        "0": "224"
+      },
+      "capital": "Conakry",
+      "altSpellings": {
+        "0": "GN",
+        "1": "Republic of Guinea",
+        "2": "République de Guinée"
+      },
+      "region": "Africa"
+    },
+    "95": {
+      "name": "Guinea-Bissau",
+      "topLevelDomain": {
+        "0": ".gw"
+      },
+      "alpha2Code": "GW",
+      "alpha3Code": "GNB",
+      "callingCodes": {
+        "0": "245"
+      },
+      "capital": "Bissau",
+      "altSpellings": {
+        "0": "GW",
+        "1": "Republic of Guinea-Bissau",
+        "2": "República da Guiné-Bissau"
+      },
+      "region": "Africa"
+    },
+    "96": {
+      "name": "Guyana",
+      "topLevelDomain": {
+        "0": ".gy"
+      },
+      "alpha2Code": "GY",
+      "alpha3Code": "GUY",
+      "callingCodes": {
+        "0": "592"
+      },
+      "capital": "Georgetown",
+      "altSpellings": {
+        "0": "GY",
+        "1": "Co-operative Republic of Guyana"
+      },
+      "region": "Americas"
+    },
+    "97": {
+      "name": "Haiti",
+      "topLevelDomain": {
+        "0": ".ht"
+      },
+      "alpha2Code": "HT",
+      "alpha3Code": "HTI",
+      "callingCodes": {
+        "0": "509"
+      },
+      "capital": "Port-au-Prince",
+      "altSpellings": {
+        "0": "HT",
+        "1": "Republic of Haiti",
+        "2": "République d'Haïti",
+        "3": "Repiblik Ayiti"
+      },
+      "region": "Americas"
+    },
+    "98": {
+      "name": "Heard Island and McDonald Islands",
+      "topLevelDomain": {
+        "0": ".hm",
+        "1": ".aq"
+      },
+      "alpha2Code": "HM",
+      "alpha3Code": "HMD",
+      "callingCodes": {
+        "0": "672"
+      },
+      "capital": "",
+      "altSpellings": {
+        "0": "HM"
+      },
+      "region": ""
+    },
+    "99": {
+      "name": "Holy See",
+      "topLevelDomain": {
+        "0": ".va"
+      },
+      "alpha2Code": "VA",
+      "alpha3Code": "VAT",
+      "callingCodes": {
+        "0": "379"
+      },
+      "capital": "Rome",
+      "altSpellings": {
+        "0": "Sancta Sedes",
+        "1": "Vatican",
+        "2": "The Vatican"
+      },
+      "region": "Europe"
+    },
+    "100": {
+      "name": "Honduras",
+      "topLevelDomain": {
+        "0": ".hn"
+      },
+      "alpha2Code": "HN",
+      "alpha3Code": "HND",
+      "callingCodes": {
+        "0": "504"
+      },
+      "capital": "Tegucigalpa",
+      "altSpellings": {
+        "0": "HN",
+        "1": "Republic of Honduras",
+        "2": "República de Honduras"
+      },
+      "region": "Americas"
+    },
+    "101": {
+      "name": "Hong Kong",
+      "topLevelDomain": {
+        "0": ".hk"
+      },
+      "alpha2Code": "HK",
+      "alpha3Code": "HKG",
+      "callingCodes": {
+        "0": "852"
+      },
+      "capital": "City of Victoria",
+      "altSpellings": {
+        "0": "HK",
+        "1": "香港"
+      },
+      "region": "Asia"
+    },
+    "102": {
+      "name": "Hungary",
+      "topLevelDomain": {
+        "0": ".hu"
+      },
+      "alpha2Code": "HU",
+      "alpha3Code": "HUN",
+      "callingCodes": {
+        "0": "36"
+      },
+      "capital": "Budapest",
+      "altSpellings": {
+        "0": "HU"
+      },
+      "region": "Europe"
+    },
+    "103": {
+      "name": "Iceland",
+      "topLevelDomain": {
+        "0": ".is"
+      },
+      "alpha2Code": "IS",
+      "alpha3Code": "ISL",
+      "callingCodes": {
+        "0": "354"
+      },
+      "capital": "Reykjavík",
+      "altSpellings": {
+        "0": "IS",
+        "1": "Island",
+        "2": "Republic of Iceland",
+        "3": "Lýðveldið Ísland"
+      },
+      "region": "Europe"
+    },
+    "104": {
+      "name": "India",
+      "topLevelDomain": {
+        "0": ".in"
+      },
+      "alpha2Code": "IN",
+      "alpha3Code": "IND",
+      "callingCodes": {
+        "0": "91"
+      },
+      "capital": "New Delhi",
+      "altSpellings": {
+        "0": "IN",
+        "1": "Bhārat",
+        "2": "Republic of India",
+        "3": "Bharat Ganrajya"
+      },
+      "region": "Asia"
+    },
+    "105": {
+      "name": "Indonesia",
+      "topLevelDomain": {
+        "0": ".id"
+      },
+      "alpha2Code": "ID",
+      "alpha3Code": "IDN",
+      "callingCodes": {
+        "0": "62"
+      },
+      "capital": "Jakarta",
+      "altSpellings": {
+        "0": "ID",
+        "1": "Republic of Indonesia",
+        "2": "Republik Indonesia"
+      },
+      "region": "Asia"
+    },
+    "106": {
+      "name": "Côte d'Ivoire",
+      "topLevelDomain": {
+        "0": ".ci"
+      },
+      "alpha2Code": "CI",
+      "alpha3Code": "CIV",
+      "callingCodes": {
+        "0": "225"
+      },
+      "capital": "Yamoussoukro",
+      "altSpellings": {
+        "0": "CI",
+        "1": "Ivory Coast",
+        "2": "Republic of Côte d'Ivoire",
+        "3": "République de Côte d'Ivoire"
+      },
+      "region": "Africa"
+    },
+    "107": {
+      "name": "Iran (Islamic Republic of},",
+      "topLevelDomain": {
+        "0": ".ir"
+      },
+      "alpha2Code": "IR",
+      "alpha3Code": "IRN",
+      "callingCodes": {
+        "0": "98"
+      },
+      "capital": "Tehran",
+      "altSpellings": {
+        "0": "IR",
+        "1": "Islamic Republic of Iran",
+        "2": "Jomhuri-ye Eslāmi-ye Irān"
+      },
+      "region": "Asia"
+    },
+    "108": {
+      "name": "Iraq",
+      "topLevelDomain": {
+        "0": ".iq"
+      },
+      "alpha2Code": "IQ",
+      "alpha3Code": "IRQ",
+      "callingCodes": {
+        "0": "964"
+      },
+      "capital": "Baghdad",
+      "altSpellings": {
+        "0": "IQ",
+        "1": "Republic of Iraq",
+        "2": "Jumhūriyyat al-‘Irāq"
+      },
+      "region": "Asia"
+    },
+    "109": {
+      "name": "Ireland",
+      "topLevelDomain": {
+        "0": ".ie"
+      },
+      "alpha2Code": "IE",
+      "alpha3Code": "IRL",
+      "callingCodes": {
+        "0": "353"
+      },
+      "capital": "Dublin",
+      "altSpellings": {
+        "0": "IE",
+        "1": "Éire",
+        "2": "Republic of Ireland",
+        "3": "Poblacht na hÉireann"
+      },
+      "region": "Europe"
+    },
+    "110": {
+      "name": "Isle of Man",
+      "topLevelDomain": {
+        "0": ".im"
+      },
+      "alpha2Code": "IM",
+      "alpha3Code": "IMN",
+      "callingCodes": {
+        "0": "44"
+      },
+      "capital": "Douglas",
+      "altSpellings": {
+        "0": "IM",
+        "1": "Ellan Vannin",
+        "2": "Mann",
+        "3": "Mannin"
+      },
+      "region": "Europe"
+    },
+    "111": {
+      "name": "Israel",
+      "topLevelDomain": {
+        "0": ".il"
+      },
+      "alpha2Code": "IL",
+      "alpha3Code": "ISR",
+      "callingCodes": {
+        "0": "972"
+      },
+      "capital": "Jerusalem",
+      "altSpellings": {
+        "0": "IL",
+        "1": "State of Israel",
+        "2": "Medīnat Yisrā'el"
+      },
+      "region": "Asia"
+    },
+    "112": {
+      "name": "Italy",
+      "topLevelDomain": {
+        "0": ".it"
+      },
+      "alpha2Code": "IT",
+      "alpha3Code": "ITA",
+      "callingCodes": {
+        "0": "39"
+      },
+      "capital": "Rome",
+      "altSpellings": {
+        "0": "IT",
+        "1": "Italian Republic",
+        "2": "Repubblica italiana"
+      },
+      "region": "Europe"
+    },
+    "113": {
+      "name": "Jamaica",
+      "topLevelDomain": {
+        "0": ".jm"
+      },
+      "alpha2Code": "JM",
+      "alpha3Code": "JAM",
+      "callingCodes": {
+        "0": "1"
+      },
+      "capital": "Kingston",
+      "altSpellings": {
+        "0": "JM"
+      },
+      "region": "Americas"
+    },
+    "114": {
+      "name": "Japan",
+      "topLevelDomain": {
+        "0": ".jp"
+      },
+      "alpha2Code": "JP",
+      "alpha3Code": "JPN",
+      "callingCodes": {
+        "0": "81"
+      },
+      "capital": "Tokyo",
+      "altSpellings": {
+        "0": "JP",
+        "1": "Nippon",
+        "2": "Nihon"
+      },
+      "region": "Asia"
+    },
+    "115": {
+      "name": "Jersey",
+      "topLevelDomain": {
+        "0": ".je"
+      },
+      "alpha2Code": "JE",
+      "alpha3Code": "JEY",
+      "callingCodes": {
+        "0": "44"
+      },
+      "capital": "Saint Helier",
+      "altSpellings": {
+        "0": "JE",
+        "1": "Bailiwick of Jersey",
+        "2": "Bailliage de Jersey",
+        "3": "Bailliage dé Jèrri"
+      },
+      "region": "Europe"
+    },
+    "116": {
+      "name": "Jordan",
+      "topLevelDomain": {
+        "0": ".jo"
+      },
+      "alpha2Code": "JO",
+      "alpha3Code": "JOR",
+      "callingCodes": {
+        "0": "962"
+      },
+      "capital": "Amman",
+      "altSpellings": {
+        "0": "JO",
+        "1": "Hashemite Kingdom of Jordan",
+        "2": "al-Mamlakah al-Urdunīyah al-Hāshimīyah"
+      },
+      "region": "Asia"
+    },
+    "117": {
+      "name": "Kazakhstan",
+      "topLevelDomain": {
+        "0": ".kz",
+        "1": ".қаз"
+      },
+      "alpha2Code": "KZ",
+      "alpha3Code": "KAZ",
+      "callingCodes": {
+        "0": "76",
+        "1": "77"
+      },
+      "capital": "Astana",
+      "altSpellings": {
+        "0": "KZ",
+        "1": "Qazaqstan",
+        "2": "Казахстан",
+        "3": "Republic of Kazakhstan",
+        "4": "Қазақстан Республикасы",
+        "5": "Qazaqstan Respublïkası",
+        "6": "Республика Казахстан",
+        "7": "Respublika Kazakhstan"
+      },
+      "region": "Asia"
+    },
+    "118": {
+      "name": "Kenya",
+      "topLevelDomain": {
+        "0": ".ke"
+      },
+      "alpha2Code": "KE",
+      "alpha3Code": "KEN",
+      "callingCodes": {
+        "0": "254"
+      },
+      "capital": "Nairobi",
+      "altSpellings": {
+        "0": "KE",
+        "1": "Republic of Kenya",
+        "2": "Jamhuri ya Kenya"
+      },
+      "region": "Africa"
+    },
+    "119": {
+      "name": "Kiribati",
+      "topLevelDomain": {
+        "0": ".ki"
+      },
+      "alpha2Code": "KI",
+      "alpha3Code": "KIR",
+      "callingCodes": {
+        "0": "686"
+      },
+      "capital": "South Tarawa",
+      "altSpellings": {
+        "0": "KI",
+        "1": "Republic of Kiribati",
+        "2": "Ribaberiki Kiribati"
+      },
+      "region": "Oceania"
+    },
+    "120": {
+      "name": "Kuwait",
+      "topLevelDomain": {
+        "0": ".kw"
+      },
+      "alpha2Code": "KW",
+      "alpha3Code": "KWT",
+      "callingCodes": {
+        "0": "965"
+      },
+      "capital": "Kuwait City",
+      "altSpellings": {
+        "0": "KW",
+        "1": "State of Kuwait",
+        "2": "Dawlat al-Kuwait"
+      },
+      "region": "Asia"
+    },
+    "121": {
+      "name": "Kyrgyzstan",
+      "topLevelDomain": {
+        "0": ".kg"
+      },
+      "alpha2Code": "KG",
+      "alpha3Code": "KGZ",
+      "callingCodes": {
+        "0": "996"
+      },
+      "capital": "Bishkek",
+      "altSpellings": {
+        "0": "KG",
+        "1": "Киргизия",
+        "2": "Kyrgyz Republic",
+        "3": "Кыргыз Республикасы",
+        "4": "Kyrgyz Respublikasy"
+      },
+      "region": "Asia"
+    },
+    "122": {
+      "name": "Lao People's Democratic Republic",
+      "topLevelDomain": {
+        "0": ".la"
+      },
+      "alpha2Code": "LA",
+      "alpha3Code": "LAO",
+      "callingCodes": {
+        "0": "856"
+      },
+      "capital": "Vientiane",
+      "altSpellings": {
+        "0": "LA",
+        "1": "Lao",
+        "2": "Laos",
+        "3": "Lao People's Democratic Republic",
+        "4": "Sathalanalat Paxathipatai Paxaxon Lao"
+      },
+      "region": "Asia"
+    },
+    "123": {
+      "name": "Latvia",
+      "topLevelDomain": {
+        "0": ".lv"
+      },
+      "alpha2Code": "LV",
+      "alpha3Code": "LVA",
+      "callingCodes": {
+        "0": "371"
+      },
+      "capital": "Riga",
+      "altSpellings": {
+        "0": "LV",
+        "1": "Republic of Latvia",
+        "2": "Latvijas Republika"
+      },
+      "region": "Europe"
+    },
+    "124": {
+      "name": "Lebanon",
+      "topLevelDomain": {
+        "0": ".lb"
+      },
+      "alpha2Code": "LB",
+      "alpha3Code": "LBN",
+      "callingCodes": {
+        "0": "961"
+      },
+      "capital": "Beirut",
+      "altSpellings": {
+        "0": "LB",
+        "1": "Lebanese Republic",
+        "2": "Al-Jumhūrīyah Al-Libnānīyah"
+      },
+      "region": "Asia"
+    },
+    "125": {
+      "name": "Lesotho",
+      "topLevelDomain": {
+        "0": ".ls"
+      },
+      "alpha2Code": "LS",
+      "alpha3Code": "LSO",
+      "callingCodes": {
+        "0": "266"
+      },
+      "capital": "Maseru",
+      "altSpellings": {
+        "0": "LS",
+        "1": "Kingdom of Lesotho",
+        "2": "Muso oa Lesotho"
+      },
+      "region": "Africa"
+    },
+    "126": {
+      "name": "Liberia",
+      "topLevelDomain": {
+        "0": ".lr"
+      },
+      "alpha2Code": "LR",
+      "alpha3Code": "LBR",
+      "callingCodes": {
+        "0": "231"
+      },
+      "capital": "Monrovia",
+      "altSpellings": {
+        "0": "LR",
+        "1": "Republic of Liberia"
+      },
+      "region": "Africa"
+    },
+    "127": {
+      "name": "Libya",
+      "topLevelDomain": {
+        "0": ".ly"
+      },
+      "alpha2Code": "LY",
+      "alpha3Code": "LBY",
+      "callingCodes": {
+        "0": "218"
+      },
+      "capital": "Tripoli",
+      "altSpellings": {
+        "0": "LY",
+        "1": "State of Libya",
+        "2": "Dawlat Libya"
+      },
+      "region": "Africa"
+    },
+    "128": {
+      "name": "Liechtenstein",
+      "topLevelDomain": {
+        "0": ".li"
+      },
+      "alpha2Code": "LI",
+      "alpha3Code": "LIE",
+      "callingCodes": {
+        "0": "423"
+      },
+      "capital": "Vaduz",
+      "altSpellings": {
+        "0": "LI",
+        "1": "Principality of Liechtenstein",
+        "2": "Fürstentum Liechtenstein"
+      },
+      "region": "Europe"
+    },
+    "129": {
+      "name": "Lithuania",
+      "topLevelDomain": {
+        "0": ".lt"
+      },
+      "alpha2Code": "LT",
+      "alpha3Code": "LTU",
+      "callingCodes": {
+        "0": "370"
+      },
+      "capital": "Vilnius",
+      "altSpellings": {
+        "0": "LT",
+        "1": "Republic of Lithuania",
+        "2": "Lietuvos Respublika"
+      },
+      "region": "Europe"
+    },
+    "130": {
+      "name": "Luxembourg",
+      "topLevelDomain": {
+        "0": ".lu"
+      },
+      "alpha2Code": "LU",
+      "alpha3Code": "LUX",
+      "callingCodes": {
+        "0": "352"
+      },
+      "capital": "Luxembourg",
+      "altSpellings": {
+        "0": "LU",
+        "1": "Grand Duchy of Luxembourg",
+        "2": "Grand-Duché de Luxembourg",
+        "3": "Großherzogtum Luxemburg",
+        "4": "Groussherzogtum Lëtzebuerg"
+      },
+      "region": "Europe"
+    },
+    "131": {
+      "name": "Macao",
+      "topLevelDomain": {
+        "0": ".mo"
+      },
+      "alpha2Code": "MO",
+      "alpha3Code": "MAC",
+      "callingCodes": {
+        "0": "853"
+      },
+      "capital": "",
+      "altSpellings": {
+        "0": "MO",
+        "1": "澳门",
+        "2": "Macao Special Administrative Region of the People's Republic of China",
+        "3": "中華人民共和國澳門特別行政區",
+        "4": "Região Administrativa Especial de Macau da República Popular da China"
+      },
+      "region": "Asia"
+    },
+    "132": {
+      "name": "Macedonia (the former Yugoslav Republic of},",
+      "topLevelDomain": {
+        "0": ".mk"
+      },
+      "alpha2Code": "MK",
+      "alpha3Code": "MKD",
+      "callingCodes": {
+        "0": "389"
+      },
+      "capital": "Skopje",
+      "altSpellings": {
+        "0": "MK",
+        "1": "Republic of Macedonia",
+        "2": "Република Македонија"
+      },
+      "region": "Europe"
+    },
+    "133": {
+      "name": "Madagascar",
+      "topLevelDomain": {
+        "0": ".mg"
+      },
+      "alpha2Code": "MG",
+      "alpha3Code": "MDG",
+      "callingCodes": {
+        "0": "261"
+      },
+      "capital": "Antananarivo",
+      "altSpellings": {
+        "0": "MG",
+        "1": "Republic of Madagascar",
+        "2": "Repoblikan'i Madagasikara",
+        "3": "République de Madagascar"
+      },
+      "region": "Africa"
+    },
+    "134": {
+      "name": "Malawi",
+      "topLevelDomain": {
+        "0": ".mw"
+      },
+      "alpha2Code": "MW",
+      "alpha3Code": "MWI",
+      "callingCodes": {
+        "0": "265"
+      },
+      "capital": "Lilongwe",
+      "altSpellings": {
+        "0": "MW",
+        "1": "Republic of Malawi"
+      },
+      "region": "Africa"
+    },
+    "135": {
+      "name": "Malaysia",
+      "topLevelDomain": {
+        "0": ".my"
+      },
+      "alpha2Code": "MY",
+      "alpha3Code": "MYS",
+      "callingCodes": {
+        "0": "60"
+      },
+      "capital": "Kuala Lumpur",
+      "altSpellings": {
+        "0": "MY"
+      },
+      "region": "Asia"
+    },
+    "136": {
+      "name": "Maldives",
+      "topLevelDomain": {
+        "0": ".mv"
+      },
+      "alpha2Code": "MV",
+      "alpha3Code": "MDV",
+      "callingCodes": {
+        "0": "960"
+      },
+      "capital": "Malé",
+      "altSpellings": {
+        "0": "MV",
+        "1": "Maldive Islands",
+        "2": "Republic of the Maldives",
+        "3": "Dhivehi Raajjeyge Jumhooriyya"
+      },
+      "region": "Asia"
+    },
+    "137": {
+      "name": "Mali",
+      "topLevelDomain": {
+        "0": ".ml"
+      },
+      "alpha2Code": "ML",
+      "alpha3Code": "MLI",
+      "callingCodes": {
+        "0": "223"
+      },
+      "capital": "Bamako",
+      "altSpellings": {
+        "0": "ML",
+        "1": "Republic of Mali",
+        "2": "République du Mali"
+      },
+      "region": "Africa"
+    },
+    "138": {
+      "name": "Malta",
+      "topLevelDomain": {
+        "0": ".mt"
+      },
+      "alpha2Code": "MT",
+      "alpha3Code": "MLT",
+      "callingCodes": {
+        "0": "356"
+      },
+      "capital": "Valletta",
+      "altSpellings": {
+        "0": "MT",
+        "1": "Republic of Malta",
+        "2": "Repubblika ta' Malta"
+      },
+      "region": "Europe"
+    },
+    "139": {
+      "name": "Marshall Islands",
+      "topLevelDomain": {
+        "0": ".mh"
+      },
+      "alpha2Code": "MH",
+      "alpha3Code": "MHL",
+      "callingCodes": {
+        "0": "692"
+      },
+      "capital": "Majuro",
+      "altSpellings": {
+        "0": "MH",
+        "1": "Republic of the Marshall Islands",
+        "2": "Aolepān Aorōkin M̧ajeļ"
+      },
+      "region": "Oceania"
+    },
+    "140": {
+      "name": "Martinique",
+      "topLevelDomain": {
+        "0": ".mq"
+      },
+      "alpha2Code": "MQ",
+      "alpha3Code": "MTQ",
+      "callingCodes": {
+        "0": "596"
+      },
+      "capital": "Fort-de-France",
+      "altSpellings": {
+        "0": "MQ"
+      },
+      "region": "Americas"
+    },
+    "141": {
+      "name": "Mauritania",
+      "topLevelDomain": {
+        "0": ".mr"
+      },
+      "alpha2Code": "MR",
+      "alpha3Code": "MRT",
+      "callingCodes": {
+        "0": "222"
+      },
+      "capital": "Nouakchott",
+      "altSpellings": {
+        "0": "MR",
+        "1": "Islamic Republic of Mauritania",
+        "2": "al-Jumhūriyyah al-ʾIslāmiyyah al-Mūrītāniyyah"
+      },
+      "region": "Africa"
+    },
+    "142": {
+      "name": "Mauritius",
+      "topLevelDomain": {
+        "0": ".mu"
+      },
+      "alpha2Code": "MU",
+      "alpha3Code": "MUS",
+      "callingCodes": {
+        "0": "230"
+      },
+      "capital": "Port Louis",
+      "altSpellings": {
+        "0": "MU",
+        "1": "Republic of Mauritius",
+        "2": "République de Maurice"
+      },
+      "region": "Africa"
+    },
+    "143": {
+      "name": "Mayotte",
+      "topLevelDomain": {
+        "0": ".yt"
+      },
+      "alpha2Code": "YT",
+      "alpha3Code": "MYT",
+      "callingCodes": {
+        "0": "262"
+      },
+      "capital": "Mamoudzou",
+      "altSpellings": {
+        "0": "YT",
+        "1": "Department of Mayotte",
+        "2": "Département de Mayotte"
+      },
+      "region": "Africa"
+    },
+    "144": {
+      "name": "Mexico",
+      "topLevelDomain": {
+        "0": ".mx"
+      },
+      "alpha2Code": "MX",
+      "alpha3Code": "MEX",
+      "callingCodes": {
+        "0": "52"
+      },
+      "capital": "Mexico City",
+      "altSpellings": {
+        "0": "MX",
+        "1": "Mexicanos",
+        "2": "United Mexican States",
+        "3": "Estados Unidos Mexicanos"
+      },
+      "region": "Americas"
+    },
+    "145": {
+      "name": "Micronesia (Federated States of},",
+      "topLevelDomain": {
+        "0": ".fm"
+      },
+      "alpha2Code": "FM",
+      "alpha3Code": "FSM",
+      "callingCodes": {
+        "0": "691"
+      },
+      "capital": "Palikir",
+      "altSpellings": {
+        "0": "FM",
+        "1": "Federated States of Micronesia"
+      },
+      "region": "Oceania"
+    },
+    "146": {
+      "name": "Moldova (Republic of},",
+      "topLevelDomain": {
+        "0": ".md"
+      },
+      "alpha2Code": "MD",
+      "alpha3Code": "MDA",
+      "callingCodes": {
+        "0": "373"
+      },
+      "capital": "Chișinău",
+      "altSpellings": {
+        "0": "MD",
+        "1": "Republic of Moldova",
+        "2": "Republica Moldova"
+      },
+      "region": "Europe"
+    },
+    "147": {
+      "name": "Monaco",
+      "topLevelDomain": {
+        "0": ".mc"
+      },
+      "alpha2Code": "MC",
+      "alpha3Code": "MCO",
+      "callingCodes": {
+        "0": "377"
+      },
+      "capital": "Monaco",
+      "altSpellings": {
+        "0": "MC",
+        "1": "Principality of Monaco",
+        "2": "Principauté de Monaco"
+      },
+      "region": "Europe"
+    },
+    "148": {
+      "name": "Mongolia",
+      "topLevelDomain": {
+        "0": ".mn"
+      },
+      "alpha2Code": "MN",
+      "alpha3Code": "MNG",
+      "callingCodes": {
+        "0": "976"
+      },
+      "capital": "Ulan Bator",
+      "altSpellings": {
+        "0": "MN"
+      },
+      "region": "Asia"
+    },
+    "149": {
+      "name": "Montenegro",
+      "topLevelDomain": {
+        "0": ".me"
+      },
+      "alpha2Code": "ME",
+      "alpha3Code": "MNE",
+      "callingCodes": {
+        "0": "382"
+      },
+      "capital": "Podgorica",
+      "altSpellings": {
+        "0": "ME",
+        "1": "Crna Gora"
+      },
+      "region": "Europe"
+    },
+    "150": {
+      "name": "Montserrat",
+      "topLevelDomain": {
+        "0": ".ms"
+      },
+      "alpha2Code": "MS",
+      "alpha3Code": "MSR",
+      "callingCodes": {
+        "0": "1"
+      },
+      "capital": "Plymouth",
+      "altSpellings": {
+        "0": "MS"
+      },
+      "region": "Americas"
+    },
+    "151": {
+      "name": "Morocco",
+      "topLevelDomain": {
+        "0": ".ma"
+      },
+      "alpha2Code": "MA",
+      "alpha3Code": "MAR",
+      "callingCodes": {
+        "0": "212"
+      },
+      "capital": "Rabat",
+      "altSpellings": {
+        "0": "MA",
+        "1": "Kingdom of Morocco",
+        "2": "Al-Mamlakah al-Maġribiyah"
+      },
+      "region": "Africa"
+    },
+    "152": {
+      "name": "Mozambique",
+      "topLevelDomain": {
+        "0": ".mz"
+      },
+      "alpha2Code": "MZ",
+      "alpha3Code": "MOZ",
+      "callingCodes": {
+        "0": "258"
+      },
+      "capital": "Maputo",
+      "altSpellings": {
+        "0": "MZ",
+        "1": "Republic of Mozambique",
+        "2": "República de Moçambique"
+      },
+      "region": "Africa"
+    },
+    "153": {
+      "name": "Myanmar",
+      "topLevelDomain": {
+        "0": ".mm"
+      },
+      "alpha2Code": "MM",
+      "alpha3Code": "MMR",
+      "callingCodes": {
+        "0": "95"
+      },
+      "capital": "Naypyidaw",
+      "altSpellings": {
+        "0": "MM",
+        "1": "Burma",
+        "2": "Republic of the Union of Myanmar",
+        "3": "Pyidaunzu Thanmăda Myăma Nainngandaw"
+      },
+      "region": "Asia"
+    },
+    "154": {
+      "name": "Namibia",
+      "topLevelDomain": {
+        "0": ".na"
+      },
+      "alpha2Code": "NA",
+      "alpha3Code": "NAM",
+      "callingCodes": {
+        "0": "264"
+      },
+      "capital": "Windhoek",
+      "altSpellings": {
+        "0": "NA",
+        "1": "Namibië",
+        "2": "Republic of Namibia"
+      },
+      "region": "Africa"
+    },
+    "155": {
+      "name": "Nauru",
+      "topLevelDomain": {
+        "0": ".nr"
+      },
+      "alpha2Code": "NR",
+      "alpha3Code": "NRU",
+      "callingCodes": {
+        "0": "674"
+      },
+      "capital": "Yaren",
+      "altSpellings": {
+        "0": "NR",
+        "1": "Naoero",
+        "2": "Pleasant Island",
+        "3": "Republic of Nauru",
+        "4": "Ripublik Naoero"
+      },
+      "region": "Oceania"
+    },
+    "156": {
+      "name": "Nepal",
+      "topLevelDomain": {
+        "0": ".np"
+      },
+      "alpha2Code": "NP",
+      "alpha3Code": "NPL",
+      "callingCodes": {
+        "0": "977"
+      },
+      "capital": "Kathmandu",
+      "altSpellings": {
+        "0": "NP",
+        "1": "Federal Democratic Republic of Nepal",
+        "2": "Loktāntrik Ganatantra Nepāl"
+      },
+      "region": "Asia"
+    },
+    "157": {
+      "name": "Netherlands",
+      "topLevelDomain": {
+        "0": ".nl"
+      },
+      "alpha2Code": "NL",
+      "alpha3Code": "NLD",
+      "callingCodes": {
+        "0": "31"
+      },
+      "capital": "Amsterdam",
+      "altSpellings": {
+        "0": "NL",
+        "1": "Holland",
+        "2": "Nederland"
+      },
+      "region": "Europe"
+    },
+    "158": {
+      "name": "New Caledonia",
+      "topLevelDomain": {
+        "0": ".nc"
+      },
+      "alpha2Code": "NC",
+      "alpha3Code": "NCL",
+      "callingCodes": {
+        "0": "687"
+      },
+      "capital": "Nouméa",
+      "altSpellings": {
+        "0": "NC"
+      },
+      "region": "Oceania"
+    },
+    "159": {
+      "name": "New Zealand",
+      "topLevelDomain": {
+        "0": ".nz"
+      },
+      "alpha2Code": "NZ",
+      "alpha3Code": "NZL",
+      "callingCodes": {
+        "0": "64"
+      },
+      "capital": "Wellington",
+      "altSpellings": {
+        "0": "NZ",
+        "1": "Aotearoa"
+      },
+      "region": "Oceania"
+    },
+    "160": {
+      "name": "Nicaragua",
+      "topLevelDomain": {
+        "0": ".ni"
+      },
+      "alpha2Code": "NI",
+      "alpha3Code": "NIC",
+      "callingCodes": {
+        "0": "505"
+      },
+      "capital": "Managua",
+      "altSpellings": {
+        "0": "NI",
+        "1": "Republic of Nicaragua",
+        "2": "República de Nicaragua"
+      },
+      "region": "Americas"
+    },
+    "161": {
+      "name": "Niger",
+      "topLevelDomain": {
+        "0": ".ne"
+      },
+      "alpha2Code": "NE",
+      "alpha3Code": "NER",
+      "callingCodes": {
+        "0": "227"
+      },
+      "capital": "Niamey",
+      "altSpellings": {
+        "0": "NE",
+        "1": "Nijar",
+        "2": "Republic of Niger",
+        "3": "République du Niger"
+      },
+      "region": "Africa"
+    },
+    "162": {
+      "name": "Nigeria",
+      "topLevelDomain": {
+        "0": ".ng"
+      },
+      "alpha2Code": "NG",
+      "alpha3Code": "NGA",
+      "callingCodes": {
+        "0": "234"
+      },
+      "capital": "Abuja",
+      "altSpellings": {
+        "0": "NG",
+        "1": "Nijeriya",
+        "2": "Naíjíríà",
+        "3": "Federal Republic of Nigeria"
+      },
+      "region": "Africa"
+    },
+    "163": {
+      "name": "Niue",
+      "topLevelDomain": {
+        "0": ".nu"
+      },
+      "alpha2Code": "NU",
+      "alpha3Code": "NIU",
+      "callingCodes": {
+        "0": "683"
+      },
+      "capital": "Alofi",
+      "altSpellings": {
+        "0": "NU"
+      },
+      "region": "Oceania"
+    },
+    "164": {
+      "name": "Norfolk Island",
+      "topLevelDomain": {
+        "0": ".nf"
+      },
+      "alpha2Code": "NF",
+      "alpha3Code": "NFK",
+      "callingCodes": {
+        "0": "672"
+      },
+      "capital": "Kingston",
+      "altSpellings": {
+        "0": "NF",
+        "1": "Territory of Norfolk Island",
+        "2": "Teratri of Norf'k Ailen"
+      },
+      "region": "Oceania"
+    },
+    "165": {
+      "name": "Korea (Democratic People's Republic of},",
+      "topLevelDomain": {
+        "0": ".kp"
+      },
+      "alpha2Code": "KP",
+      "alpha3Code": "PRK",
+      "callingCodes": {
+        "0": "850"
+      },
+      "capital": "Pyongyang",
+      "altSpellings": {
+        "0": "KP",
+        "1": "Democratic People's Republic of Korea",
+        "2": "조선민주주의인민공화국",
+        "3": "Chosŏn Minjujuŭi Inmin Konghwaguk"
+      },
+      "region": "Asia"
+    },
+    "166": {
+      "name": "Northern Mariana Islands",
+      "topLevelDomain": {
+        "0": ".mp"
+      },
+      "alpha2Code": "MP",
+      "alpha3Code": "MNP",
+      "callingCodes": {
+        "0": "1"
+      },
+      "capital": "Saipan",
+      "altSpellings": {
+        "0": "MP",
+        "1": "Commonwealth of the Northern Mariana Islands",
+        "2": "Sankattan Siha Na Islas Mariånas"
+      },
+      "region": "Oceania"
+    },
+    "167": {
+      "name": "Norway",
+      "topLevelDomain": {
+        "0": ".no"
+      },
+      "alpha2Code": "NO",
+      "alpha3Code": "NOR",
+      "callingCodes": {
+        "0": "47"
+      },
+      "capital": "Oslo",
+      "altSpellings": {
+        "0": "NO",
+        "1": "Norge",
+        "2": "Noreg",
+        "3": "Kingdom of Norway",
+        "4": "Kongeriket Norge",
+        "5": "Kongeriket Noreg"
+      },
+      "region": "Europe"
+    },
+    "168": {
+      "name": "Oman",
+      "topLevelDomain": {
+        "0": ".om"
+      },
+      "alpha2Code": "OM",
+      "alpha3Code": "OMN",
+      "callingCodes": {
+        "0": "968"
+      },
+      "capital": "Muscat",
+      "altSpellings": {
+        "0": "OM",
+        "1": "Sultanate of Oman",
+        "2": "Salṭanat ʻUmān"
+      },
+      "region": "Asia"
+    },
+    "169": {
+      "name": "Pakistan",
+      "topLevelDomain": {
+        "0": ".pk"
+      },
+      "alpha2Code": "PK",
+      "alpha3Code": "PAK",
+      "callingCodes": {
+        "0": "92"
+      },
+      "capital": "Islamabad",
+      "altSpellings": {
+        "0": "PK",
+        "1": "Pākistān",
+        "2": "Islamic Republic of Pakistan",
+        "3": "Islāmī Jumhūriya'eh Pākistān"
+      },
+      "region": "Asia"
+    },
+    "170": {
+      "name": "Palau",
+      "topLevelDomain": {
+        "0": ".pw"
+      },
+      "alpha2Code": "PW",
+      "alpha3Code": "PLW",
+      "callingCodes": {
+        "0": "680"
+      },
+      "capital": "Ngerulmud",
+      "altSpellings": {
+        "0": "PW",
+        "1": "Republic of Palau",
+        "2": "Beluu er a Belau"
+      },
+      "region": "Oceania"
+    },
+    "171": {
+      "name": "Palestine, State of",
+      "topLevelDomain": {
+        "0": ".ps"
+      },
+      "alpha2Code": "PS",
+      "alpha3Code": "PSE",
+      "callingCodes": {
+        "0": "970"
+      },
+      "capital": "Ramallah",
+      "altSpellings": {
+        "0": "PS",
+        "1": "State of Palestine",
+        "2": "Dawlat Filasṭin"
+      },
+      "region": "Asia"
+    },
+    "172": {
+      "name": "Panama",
+      "topLevelDomain": {
+        "0": ".pa"
+      },
+      "alpha2Code": "PA",
+      "alpha3Code": "PAN",
+      "callingCodes": {
+        "0": "507"
+      },
+      "capital": "Panama City",
+      "altSpellings": {
+        "0": "PA",
+        "1": "Republic of Panama",
+        "2": "República de Panamá"
+      },
+      "region": "Americas"
+    },
+    "173": {
+      "name": "Papua New Guinea",
+      "topLevelDomain": {
+        "0": ".pg"
+      },
+      "alpha2Code": "PG",
+      "alpha3Code": "PNG",
+      "callingCodes": {
+        "0": "675"
+      },
+      "capital": "Port Moresby",
+      "altSpellings": {
+        "0": "PG",
+        "1": "Independent State of Papua New Guinea",
+        "2": "Independen Stet bilong Papua Niugini"
+      },
+      "region": "Oceania"
+    },
+    "174": {
+      "name": "Paraguay",
+      "topLevelDomain": {
+        "0": ".py"
+      },
+      "alpha2Code": "PY",
+      "alpha3Code": "PRY",
+      "callingCodes": {
+        "0": "595"
+      },
+      "capital": "Asunción",
+      "altSpellings": {
+        "0": "PY",
+        "1": "Republic of Paraguay",
+        "2": "República del Paraguay",
+        "3": "Tetã Paraguái"
+      },
+      "region": "Americas"
+    },
+    "175": {
+      "name": "Peru",
+      "topLevelDomain": {
+        "0": ".pe"
+      },
+      "alpha2Code": "PE",
+      "alpha3Code": "PER",
+      "callingCodes": {
+        "0": "51"
+      },
+      "capital": "Lima",
+      "altSpellings": {
+        "0": "PE",
+        "1": "Republic of Peru",
+        "2": "República del Perú"
+      },
+      "region": "Americas"
+    },
+    "176": {
+      "name": "Philippines",
+      "topLevelDomain": {
+        "0": ".ph"
+      },
+      "alpha2Code": "PH",
+      "alpha3Code": "PHL",
+      "callingCodes": {
+        "0": "63"
+      },
+      "capital": "Manila",
+      "altSpellings": {
+        "0": "PH",
+        "1": "Republic of the Philippines",
+        "2": "Repúblika ng Pilipinas"
+      },
+      "region": "Asia"
+    },
+    "177": {
+      "name": "Pitcairn",
+      "topLevelDomain": {
+        "0": ".pn"
+      },
+      "alpha2Code": "PN",
+      "alpha3Code": "PCN",
+      "callingCodes": {
+        "0": "64"
+      },
+      "capital": "Adamstown",
+      "altSpellings": {
+        "0": "PN",
+        "1": "Pitcairn Henderson Ducie and Oeno Islands"
+      },
+      "region": "Oceania"
+    },
+    "178": {
+      "name": "Poland",
+      "topLevelDomain": {
+        "0": ".pl"
+      },
+      "alpha2Code": "PL",
+      "alpha3Code": "POL",
+      "callingCodes": {
+        "0": "48"
+      },
+      "capital": "Warsaw",
+      "altSpellings": {
+        "0": "PL",
+        "1": "Republic of Poland",
+        "2": "Rzeczpospolita Polska"
+      },
+      "region": "Europe"
+    },
+    "179": {
+      "name": "Portugal",
+      "topLevelDomain": {
+        "0": ".pt"
+      },
+      "alpha2Code": "PT",
+      "alpha3Code": "PRT",
+      "callingCodes": {
+        "0": "351"
+      },
+      "capital": "Lisbon",
+      "altSpellings": {
+        "0": "PT",
+        "1": "Portuguesa",
+        "2": "Portuguese Republic",
+        "3": "República Portuguesa"
+      },
+      "region": "Europe"
+    },
+    "180": {
+      "name": "Puerto Rico",
+      "topLevelDomain": {
+        "0": ".pr"
+      },
+      "alpha2Code": "PR",
+      "alpha3Code": "PRI",
+      "callingCodes": {
+        "0": "1"
+      },
+      "capital": "San Juan",
+      "altSpellings": {
+        "0": "PR",
+        "1": "Commonwealth of Puerto Rico",
+        "2": "Estado Libre Asociado de Puerto Rico"
+      },
+      "region": "Americas"
+    },
+    "181": {
+      "name": "Qatar",
+      "topLevelDomain": {
+        "0": ".qa"
+      },
+      "alpha2Code": "QA",
+      "alpha3Code": "QAT",
+      "callingCodes": {
+        "0": "974"
+      },
+      "capital": "Doha",
+      "altSpellings": {
+        "0": "QA",
+        "1": "State of Qatar",
+        "2": "Dawlat Qaṭar"
+      },
+      "region": "Asia"
+    },
+    "182": {
+      "name": "Republic of Kosovo",
+      "topLevelDomain": {
+        "0": ""
+      },
+      "alpha2Code": "XK",
+      "alpha3Code": "KOS",
+      "callingCodes": {
+        "0": "383"
+      },
+      "capital": "Pristina",
+      "altSpellings": {
+        "0": "XK",
+        "1": "Република Косово"
+      },
+      "region": "Europe"
+    },
+    "183": {
+      "name": "Réunion",
+      "topLevelDomain": {
+        "0": ".re"
+      },
+      "alpha2Code": "RE",
+      "alpha3Code": "REU",
+      "callingCodes": {
+        "0": "262"
+      },
+      "capital": "Saint-Denis",
+      "altSpellings": {
+        "0": "RE",
+        "1": "Reunion"
+      },
+      "region": "Africa"
+    },
+    "184": {
+      "name": "Romania",
+      "topLevelDomain": {
+        "0": ".ro"
+      },
+      "alpha2Code": "RO",
+      "alpha3Code": "ROU",
+      "callingCodes": {
+        "0": "40"
+      },
+      "capital": "Bucharest",
+      "altSpellings": {
+        "0": "RO",
+        "1": "Rumania",
+        "2": "Roumania",
+        "3": "România"
+      },
+      "region": "Europe"
+    },
+    "185": {
+      "name": "Russian Federation",
+      "topLevelDomain": {
+        "0": ".ru"
+      },
+      "alpha2Code": "RU",
+      "alpha3Code": "RUS",
+      "callingCodes": {
+        "0": "7"
+      },
+      "capital": "Moscow",
+      "altSpellings": {
+        "0": "RU",
+        "1": "Rossiya",
+        "2": "Russian Federation",
+        "3": "Российская Федерация",
+        "4": "Rossiyskaya Federatsiya"
+      },
+      "region": "Europe"
+    },
+    "186": {
+      "name": "Rwanda",
+      "topLevelDomain": {
+        "0": ".rw"
+      },
+      "alpha2Code": "RW",
+      "alpha3Code": "RWA",
+      "callingCodes": {
+        "0": "250"
+      },
+      "capital": "Kigali",
+      "altSpellings": {
+        "0": "RW",
+        "1": "Republic of Rwanda",
+        "2": "Repubulika y'u Rwanda",
+        "3": "République du Rwanda"
+      },
+      "region": "Africa"
+    },
+    "187": {
+      "name": "Saint Barthélemy",
+      "topLevelDomain": {
+        "0": ".bl"
+      },
+      "alpha2Code": "BL",
+      "alpha3Code": "BLM",
+      "callingCodes": {
+        "0": "590"
+      },
+      "capital": "Gustavia",
+      "altSpellings": {
+        "0": "BL",
+        "1": "St. Barthelemy",
+        "2": "Collectivity of Saint Barthélemy",
+        "3": "Collectivité de Saint-Barthélemy"
+      },
+      "region": "Americas"
+    },
+    "188": {
+      "name": "Saint Helena, Ascension and Tristan da Cunha",
+      "topLevelDomain": {
+        "0": ".sh"
+      },
+      "alpha2Code": "SH",
+      "alpha3Code": "SHN",
+      "callingCodes": {
+        "0": "290"
+      },
+      "capital": "Jamestown",
+      "altSpellings": {
+        "0": "SH"
+      },
+      "region": "Africa"
+    },
+    "189": {
+      "name": "Saint Kitts and Nevis",
+      "topLevelDomain": {
+        "0": ".kn"
+      },
+      "alpha2Code": "KN",
+      "alpha3Code": "KNA",
+      "callingCodes": {
+        "0": "1"
+      },
+      "capital": "Basseterre",
+      "altSpellings": {
+        "0": "KN",
+        "1": "Federation of Saint Christopher and Nevis"
+      },
+      "region": "Americas"
+    },
+    "190": {
+      "name": "Saint Lucia",
+      "topLevelDomain": {
+        "0": ".lc"
+      },
+      "alpha2Code": "LC",
+      "alpha3Code": "LCA",
+      "callingCodes": {
+        "0": "1"
+      },
+      "capital": "Castries",
+      "altSpellings": {
+        "0": "LC"
+      },
+      "region": "Americas"
+    },
+    "191": {
+      "name": "Saint Martin (French part},",
+      "topLevelDomain": {
+        "0": ".mf",
+        "1": ".fr",
+        "2": ".gp"
+      },
+      "alpha2Code": "MF",
+      "alpha3Code": "MAF",
+      "callingCodes": {
+        "0": "590"
+      },
+      "capital": "Marigot",
+      "altSpellings": {
+        "0": "MF",
+        "1": "Collectivity of Saint Martin",
+        "2": "Collectivité de Saint-Martin"
+      },
+      "region": "Americas"
+    },
+    "192": {
+      "name": "Saint Pierre and Miquelon",
+      "topLevelDomain": {
+        "0": ".pm"
+      },
+      "alpha2Code": "PM",
+      "alpha3Code": "SPM",
+      "callingCodes": {
+        "0": "508"
+      },
+      "capital": "Saint-Pierre",
+      "altSpellings": {
+        "0": "PM",
+        "1": "Collectivité territoriale de Saint-Pierre-et-Miquelon"
+      },
+      "region": "Americas"
+    },
+    "193": {
+      "name": "Saint Vincent and the Grenadines",
+      "topLevelDomain": {
+        "0": ".vc"
+      },
+      "alpha2Code": "VC",
+      "alpha3Code": "VCT",
+      "callingCodes": {
+        "0": "1"
+      },
+      "capital": "Kingstown",
+      "altSpellings": {
+        "0": "VC"
+      },
+      "region": "Americas"
+    },
+    "194": {
+      "name": "Samoa",
+      "topLevelDomain": {
+        "0": ".ws"
+      },
+      "alpha2Code": "WS",
+      "alpha3Code": "WSM",
+      "callingCodes": {
+        "0": "685"
+      },
+      "capital": "Apia",
+      "altSpellings": {
+        "0": "WS",
+        "1": "Independent State of Samoa",
+        "2": "Malo Saʻoloto Tutoʻatasi o Sāmoa"
+      },
+      "region": "Oceania"
+    },
+    "195": {
+      "name": "San Marino",
+      "topLevelDomain": {
+        "0": ".sm"
+      },
+      "alpha2Code": "SM",
+      "alpha3Code": "SMR",
+      "callingCodes": {
+        "0": "378"
+      },
+      "capital": "City of San Marino",
+      "altSpellings": {
+        "0": "SM",
+        "1": "Republic of San Marino",
+        "2": "Repubblica di San Marino"
+      },
+      "region": "Europe"
+    },
+    "196": {
+      "name": "Sao Tome and Principe",
+      "topLevelDomain": {
+        "0": ".st"
+      },
+      "alpha2Code": "ST",
+      "alpha3Code": "STP",
+      "callingCodes": {
+        "0": "239"
+      },
+      "capital": "São Tomé",
+      "altSpellings": {
+        "0": "ST",
+        "1": "Democratic Republic of São Tomé and Príncipe",
+        "2": "República Democrática de São Tomé e Príncipe"
+      },
+      "region": "Africa"
+    },
+    "197": {
+      "name": "Saudi Arabia",
+      "topLevelDomain": {
+        "0": ".sa"
+      },
+      "alpha2Code": "SA",
+      "alpha3Code": "SAU",
+      "callingCodes": {
+        "0": "966"
+      },
+      "capital": "Riyadh",
+      "altSpellings": {
+        "0": "SA",
+        "1": "Kingdom of Saudi Arabia",
+        "2": "Al-Mamlakah al-‘Arabiyyah as-Su‘ūdiyyah"
+      },
+      "region": "Asia"
+    },
+    "198": {
+      "name": "Senegal",
+      "topLevelDomain": {
+        "0": ".sn"
+      },
+      "alpha2Code": "SN",
+      "alpha3Code": "SEN",
+      "callingCodes": {
+        "0": "221"
+      },
+      "capital": "Dakar",
+      "altSpellings": {
+        "0": "SN",
+        "1": "Republic of Senegal",
+        "2": "République du Sénégal"
+      },
+      "region": "Africa"
+    },
+    "199": {
+      "name": "Serbia",
+      "topLevelDomain": {
+        "0": ".rs"
+      },
+      "alpha2Code": "RS",
+      "alpha3Code": "SRB",
+      "callingCodes": {
+        "0": "381"
+      },
+      "capital": "Belgrade",
+      "altSpellings": {
+        "0": "RS",
+        "1": "Srbija",
+        "2": "Republic of Serbia",
+        "3": "Република Србија",
+        "4": "Republika Srbija"
+      },
+      "region": "Europe"
+    },
+    "200": {
+      "name": "Seychelles",
+      "topLevelDomain": {
+        "0": ".sc"
+      },
+      "alpha2Code": "SC",
+      "alpha3Code": "SYC",
+      "callingCodes": {
+        "0": "248"
+      },
+      "capital": "Victoria",
+      "altSpellings": {
+        "0": "SC",
+        "1": "Republic of Seychelles",
+        "2": "Repiblik Sesel",
+        "3": "République des Seychelles"
+      },
+      "region": "Africa"
+    },
+    "201": {
+      "name": "Sierra Leone",
+      "topLevelDomain": {
+        "0": ".sl"
+      },
+      "alpha2Code": "SL",
+      "alpha3Code": "SLE",
+      "callingCodes": {
+        "0": "232"
+      },
+      "capital": "Freetown",
+      "altSpellings": {
+        "0": "SL",
+        "1": "Republic of Sierra Leone"
+      },
+      "region": "Africa"
+    },
+    "202": {
+      "name": "Singapore",
+      "topLevelDomain": {
+        "0": ".sg"
+      },
+      "alpha2Code": "SG",
+      "alpha3Code": "SGP",
+      "callingCodes": {
+        "0": "65"
+      },
+      "capital": "Singapore",
+      "altSpellings": {
+        "0": "SG",
+        "1": "Singapura",
+        "2": "Republik Singapura",
+        "3": "新加坡共和国"
+      },
+      "region": "Asia"
+    },
+    "203": {
+      "name": "Sint Maarten (Dutch part},",
+      "topLevelDomain": {
+        "0": ".sx"
+      },
+      "alpha2Code": "SX",
+      "alpha3Code": "SXM",
+      "callingCodes": {
+        "0": "1"
+      },
+      "capital": "Philipsburg",
+      "altSpellings": {
+        "0": "SX"
+      },
+      "region": "Americas"
+    },
+    "204": {
+      "name": "Slovakia",
+      "topLevelDomain": {
+        "0": ".sk"
+      },
+      "alpha2Code": "SK",
+      "alpha3Code": "SVK",
+      "callingCodes": {
+        "0": "421"
+      },
+      "capital": "Bratislava",
+      "altSpellings": {
+        "0": "SK",
+        "1": "Slovak Republic",
+        "2": "Slovenská republika"
+      },
+      "region": "Europe"
+    },
+    "205": {
+      "name": "Slovenia",
+      "topLevelDomain": {
+        "0": ".si"
+      },
+      "alpha2Code": "SI",
+      "alpha3Code": "SVN",
+      "callingCodes": {
+        "0": "386"
+      },
+      "capital": "Ljubljana",
+      "altSpellings": {
+        "0": "SI",
+        "1": "Republic of Slovenia",
+        "2": "Republika Slovenija"
+      },
+      "region": "Europe"
+    },
+    "206": {
+      "name": "Solomon Islands",
+      "topLevelDomain": {
+        "0": ".sb"
+      },
+      "alpha2Code": "SB",
+      "alpha3Code": "SLB",
+      "callingCodes": {
+        "0": "677"
+      },
+      "capital": "Honiara",
+      "altSpellings": {
+        "0": "SB"
+      },
+      "region": "Oceania"
+    },
+    "207": {
+      "name": "Somalia",
+      "topLevelDomain": {
+        "0": ".so"
+      },
+      "alpha2Code": "SO",
+      "alpha3Code": "SOM",
+      "callingCodes": {
+        "0": "252"
+      },
+      "capital": "Mogadishu",
+      "altSpellings": {
+        "0": "SO",
+        "1": "aṣ-Ṣūmāl",
+        "2": "Federal Republic of Somalia",
+        "3": "Jamhuuriyadda Federaalka Soomaaliya",
+        "4": "Jumhūriyyat aṣ-Ṣūmāl al-Fiderāliyya"
+      },
+      "region": "Africa"
+    },
+    "208": {
+      "name": "South Africa",
+      "topLevelDomain": {
+        "0": ".za"
+      },
+      "alpha2Code": "ZA",
+      "alpha3Code": "ZAF",
+      "callingCodes": {
+        "0": "27"
+      },
+      "capital": "Pretoria",
+      "altSpellings": {
+        "0": "ZA",
+        "1": "RSA",
+        "2": "Suid-Afrika",
+        "3": "Republic of South Africa"
+      },
+      "region": "Africa"
+    },
+    "209": {
+      "name": "South Georgia and the South Sandwich Islands",
+      "topLevelDomain": {
+        "0": ".gs"
+      },
+      "alpha2Code": "GS",
+      "alpha3Code": "SGS",
+      "callingCodes": {
+        "0": "500"
+      },
+      "capital": "King Edward Point",
+      "altSpellings": {
+        "0": "GS",
+        "1": "South Georgia and the South Sandwich Islands"
+      },
+      "region": "Americas"
+    },
+    "210": {
+      "name": "Korea (Republic of},",
+      "topLevelDomain": {
+        "0": ".kr"
+      },
+      "alpha2Code": "KR",
+      "alpha3Code": "KOR",
+      "callingCodes": {
+        "0": "82"
+      },
+      "capital": "Seoul",
+      "altSpellings": {
+        "0": "KR",
+        "1": "Republic of Korea"
+      },
+      "region": "Asia"
+    },
+    "211": {
+      "name": "South Sudan",
+      "topLevelDomain": {
+        "0": ".ss"
+      },
+      "alpha2Code": "SS",
+      "alpha3Code": "SSD",
+      "callingCodes": {
+        "0": "211"
+      },
+      "capital": "Juba",
+      "altSpellings": {
+        "0": "SS"
+      },
+      "region": "Africa"
+    },
+    "212": {
+      "name": "Spain",
+      "topLevelDomain": {
+        "0": ".es"
+      },
+      "alpha2Code": "ES",
+      "alpha3Code": "ESP",
+      "callingCodes": {
+        "0": "34"
+      },
+      "capital": "Madrid",
+      "altSpellings": {
+        "0": "ES",
+        "1": "Kingdom of Spain",
+        "2": "Reino de España"
+      },
+      "region": "Europe"
+    },
+    "213": {
+      "name": "Sri Lanka",
+      "topLevelDomain": {
+        "0": ".lk"
+      },
+      "alpha2Code": "LK",
+      "alpha3Code": "LKA",
+      "callingCodes": {
+        "0": "94"
+      },
+      "capital": "Colombo",
+      "altSpellings": {
+        "0": "LK",
+        "1": "ilaṅkai",
+        "2": "Democratic Socialist Republic of Sri Lanka"
+      },
+      "region": "Asia"
+    },
+    "214": {
+      "name": "Sudan",
+      "topLevelDomain": {
+        "0": ".sd"
+      },
+      "alpha2Code": "SD",
+      "alpha3Code": "SDN",
+      "callingCodes": {
+        "0": "249"
+      },
+      "capital": "Khartoum",
+      "altSpellings": {
+        "0": "SD",
+        "1": "Republic of the Sudan",
+        "2": "Jumhūrīyat as-Sūdān"
+      },
+      "region": "Africa"
+    },
+    "215": {
+      "name": "Suriname",
+      "topLevelDomain": {
+        "0": ".sr"
+      },
+      "alpha2Code": "SR",
+      "alpha3Code": "SUR",
+      "callingCodes": {
+        "0": "597"
+      },
+      "capital": "Paramaribo",
+      "altSpellings": {
+        "0": "SR",
+        "1": "Sarnam",
+        "2": "Sranangron",
+        "3": "Republic of Suriname",
+        "4": "Republiek Suriname"
+      },
+      "region": "Americas"
+    },
+    "216": {
+      "name": "Svalbard and Jan Mayen",
+      "topLevelDomain": {
+        "0": ".sj"
+      },
+      "alpha2Code": "SJ",
+      "alpha3Code": "SJM",
+      "callingCodes": {
+        "0": "47"
+      },
+      "capital": "Longyearbyen",
+      "altSpellings": {
+        "0": "SJ",
+        "1": "Svalbard and Jan Mayen Islands"
+      },
+      "region": "Europe"
+    },
+    "217": {
+      "name": "Swaziland",
+      "topLevelDomain": {
+        "0": ".sz"
+      },
+      "alpha2Code": "SZ",
+      "alpha3Code": "SWZ",
+      "callingCodes": {
+        "0": "268"
+      },
+      "capital": "Lobamba",
+      "altSpellings": {
+        "0": "SZ",
+        "1": "weSwatini",
+        "2": "Swatini",
+        "3": "Ngwane",
+        "4": "Kingdom of Swaziland",
+        "5": "Umbuso waseSwatini"
+      },
+      "region": "Africa"
+    },
+    "218": {
+      "name": "Sweden",
+      "topLevelDomain": {
+        "0": ".se"
+      },
+      "alpha2Code": "SE",
+      "alpha3Code": "SWE",
+      "callingCodes": {
+        "0": "46"
+      },
+      "capital": "Stockholm",
+      "altSpellings": {
+        "0": "SE",
+        "1": "Kingdom of Sweden",
+        "2": "Konungariket Sverige"
+      },
+      "region": "Europe"
+    },
+    "219": {
+      "name": "Switzerland",
+      "topLevelDomain": {
+        "0": ".ch"
+      },
+      "alpha2Code": "CH",
+      "alpha3Code": "CHE",
+      "callingCodes": {
+        "0": "41"
+      },
+      "capital": "Bern",
+      "altSpellings": {
+        "0": "CH",
+        "1": "Swiss Confederation",
+        "2": "Schweiz",
+        "3": "Suisse",
+        "4": "Svizzera",
+        "5": "Svizra"
+      },
+      "region": "Europe"
+    },
+    "220": {
+      "name": "Syrian Arab Republic",
+      "topLevelDomain": {
+        "0": ".sy"
+      },
+      "alpha2Code": "SY",
+      "alpha3Code": "SYR",
+      "callingCodes": {
+        "0": "963"
+      },
+      "capital": "Damascus",
+      "altSpellings": {
+        "0": "SY",
+        "1": "Syrian Arab Republic",
+        "2": "Al-Jumhūrīyah Al-ʻArabīyah As-Sūrīyah"
+      },
+      "region": "Asia"
+    },
+    "221": {
+      "name": "Taiwan",
+      "topLevelDomain": {
+        "0": ".tw"
+      },
+      "alpha2Code": "TW",
+      "alpha3Code": "TWN",
+      "callingCodes": {
+        "0": "886"
+      },
+      "capital": "Taipei",
+      "altSpellings": {
+        "0": "TW",
+        "1": "Táiwān",
+        "2": "Republic of China",
+        "3": "中華民國",
+        "4": "Zhōnghuá Mínguó"
+      },
+      "region": "Asia"
+    },
+    "222": {
+      "name": "Tajikistan",
+      "topLevelDomain": {
+        "0": ".tj"
+      },
+      "alpha2Code": "TJ",
+      "alpha3Code": "TJK",
+      "callingCodes": {
+        "0": "992"
+      },
+      "capital": "Dushanbe",
+      "altSpellings": {
+        "0": "TJ",
+        "1": "Toçikiston",
+        "2": "Republic of Tajikistan",
+        "3": "Ҷумҳурии Тоҷикистон",
+        "4": "Çumhuriyi Toçikiston"
+      },
+      "region": "Asia"
+    },
+    "223": {
+      "name": "Tanzania, United Republic of",
+      "topLevelDomain": {
+        "0": ".tz"
+      },
+      "alpha2Code": "TZ",
+      "alpha3Code": "TZA",
+      "callingCodes": {
+        "0": "255"
+      },
+      "capital": "Dodoma",
+      "altSpellings": {
+        "0": "TZ",
+        "1": "United Republic of Tanzania",
+        "2": "Jamhuri ya Muungano wa Tanzania"
+      },
+      "region": "Africa"
+    },
+    "224": {
+      "name": "Thailand",
+      "topLevelDomain": {
+        "0": ".th"
+      },
+      "alpha2Code": "TH",
+      "alpha3Code": "THA",
+      "callingCodes": {
+        "0": "66"
+      },
+      "capital": "Bangkok",
+      "altSpellings": {
+        "0": "TH",
+        "1": "Prathet",
+        "2": "Thai",
+        "3": "Kingdom of Thailand",
+        "4": "ราชอาณาจักรไทย",
+        "5": "Ratcha Anachak Thai"
+      },
+      "region": "Asia"
+    },
+    "225": {
+      "name": "Timor-Leste",
+      "topLevelDomain": {
+        "0": ".tl"
+      },
+      "alpha2Code": "TL",
+      "alpha3Code": "TLS",
+      "callingCodes": {
+        "0": "670"
+      },
+      "capital": "Dili",
+      "altSpellings": {
+        "0": "TL",
+        "1": "East Timor",
+        "2": "Democratic Republic of Timor-Leste",
+        "3": "República Democrática de Timor-Leste",
+        "4": "Repúblika Demokrátika Timór-Leste"
+      },
+      "region": "Asia"
+    },
+    "226": {
+      "name": "Togo",
+      "topLevelDomain": {
+        "0": ".tg"
+      },
+      "alpha2Code": "TG",
+      "alpha3Code": "TGO",
+      "callingCodes": {
+        "0": "228"
+      },
+      "capital": "Lomé",
+      "altSpellings": {
+        "0": "TG",
+        "1": "Togolese",
+        "2": "Togolese Republic",
+        "3": "République Togolaise"
+      },
+      "region": "Africa"
+    },
+    "227": {
+      "name": "Tokelau",
+      "topLevelDomain": {
+        "0": ".tk"
+      },
+      "alpha2Code": "TK",
+      "alpha3Code": "TKL",
+      "callingCodes": {
+        "0": "690"
+      },
+      "capital": "Fakaofo",
+      "altSpellings": {
+        "0": "TK"
+      },
+      "region": "Oceania"
+    },
+    "228": {
+      "name": "Tonga",
+      "topLevelDomain": {
+        "0": ".to"
+      },
+      "alpha2Code": "TO",
+      "alpha3Code": "TON",
+      "callingCodes": {
+        "0": "676"
+      },
+      "capital": "Nuku'alofa",
+      "altSpellings": {
+        "0": "TO"
+      },
+      "region": "Oceania"
+    },
+    "229": {
+      "name": "Trinidad and Tobago",
+      "topLevelDomain": {
+        "0": ".tt"
+      },
+      "alpha2Code": "TT",
+      "alpha3Code": "TTO",
+      "callingCodes": {
+        "0": "1"
+      },
+      "capital": "Port of Spain",
+      "altSpellings": {
+        "0": "TT",
+        "1": "Republic of Trinidad and Tobago"
+      },
+      "region": "Americas"
+    },
+    "230": {
+      "name": "Tunisia",
+      "topLevelDomain": {
+        "0": ".tn"
+      },
+      "alpha2Code": "TN",
+      "alpha3Code": "TUN",
+      "callingCodes": {
+        "0": "216"
+      },
+      "capital": "Tunis",
+      "altSpellings": {
+        "0": "TN",
+        "1": "Republic of Tunisia",
+        "2": "al-Jumhūriyyah at-Tūnisiyyah"
+      },
+      "region": "Africa"
+    },
+    "231": {
+      "name": "Turkey",
+      "topLevelDomain": {
+        "0": ".tr"
+      },
+      "alpha2Code": "TR",
+      "alpha3Code": "TUR",
+      "callingCodes": {
+        "0": "90"
+      },
+      "capital": "Ankara",
+      "altSpellings": {
+        "0": "TR",
+        "1": "Turkiye",
+        "2": "Republic of Turkey",
+        "3": "Türkiye Cumhuriyeti"
+      },
+      "region": "Asia"
+    },
+    "232": {
+      "name": "Turkmenistan",
+      "topLevelDomain": {
+        "0": ".tm"
+      },
+      "alpha2Code": "TM",
+      "alpha3Code": "TKM",
+      "callingCodes": {
+        "0": "993"
+      },
+      "capital": "Ashgabat",
+      "altSpellings": {
+        "0": "TM"
+      },
+      "region": "Asia"
+    },
+    "233": {
+      "name": "Turks and Caicos Islands",
+      "topLevelDomain": {
+        "0": ".tc"
+      },
+      "alpha2Code": "TC",
+      "alpha3Code": "TCA",
+      "callingCodes": {
+        "0": "1"
+      },
+      "capital": "Cockburn Town",
+      "altSpellings": {
+        "0": "TC"
+      },
+      "region": "Americas"
+    },
+    "234": {
+      "name": "Tuvalu",
+      "topLevelDomain": {
+        "0": ".tv"
+      },
+      "alpha2Code": "TV",
+      "alpha3Code": "TUV",
+      "callingCodes": {
+        "0": "688"
+      },
+      "capital": "Funafuti",
+      "altSpellings": {
+        "0": "TV"
+      },
+      "region": "Oceania"
+    },
+    "235": {
+      "name": "Uganda",
+      "topLevelDomain": {
+        "0": ".ug"
+      },
+      "alpha2Code": "UG",
+      "alpha3Code": "UGA",
+      "callingCodes": {
+        "0": "256"
+      },
+      "capital": "Kampala",
+      "altSpellings": {
+        "0": "UG",
+        "1": "Republic of Uganda",
+        "2": "Jamhuri ya Uganda"
+      },
+      "region": "Africa"
+    },
+    "236": {
+      "name": "Ukraine",
+      "topLevelDomain": {
+        "0": ".ua"
+      },
+      "alpha2Code": "UA",
+      "alpha3Code": "UKR",
+      "callingCodes": {
+        "0": "380"
+      },
+      "capital": "Kiev",
+      "altSpellings": {
+        "0": "UA",
+        "1": "Ukrayina"
+      },
+      "region": "Europe"
+    },
+    "237": {
+      "name": "United Arab Emirates",
+      "topLevelDomain": {
+        "0": ".ae"
+      },
+      "alpha2Code": "AE",
+      "alpha3Code": "ARE",
+      "callingCodes": {
+        "0": "971"
+      },
+      "capital": "Abu Dhabi",
+      "altSpellings": {
+        "0": "AE",
+        "1": "UAE"
+      },
+      "region": "Asia"
+    },
+    "238": {
+      "name": "United Kingdom of Great Britain and Northern Ireland",
+      "topLevelDomain": {
+        "0": ".uk"
+      },
+      "alpha2Code": "GB",
+      "alpha3Code": "GBR",
+      "callingCodes": {
+        "0": "44"
+      },
+      "capital": "London",
+      "altSpellings": {
+        "0": "GB",
+        "1": "UK",
+        "2": "Great Britain"
+      },
+      "region": "Europe"
+    },
+    "239": {
+      "name": "United States of America",
+      "topLevelDomain": {
+        "0": ".us"
+      },
+      "alpha2Code": "US",
+      "alpha3Code": "USA",
+      "callingCodes": {
+        "0": "1"
+      },
+      "capital": "Washington, D.C.",
+      "altSpellings": {
+        "0": "US",
+        "1": "USA",
+        "2": "United States of America"
+      },
+      "region": "Americas"
+    },
+    "240": {
+      "name": "Uruguay",
+      "topLevelDomain": {
+        "0": ".uy"
+      },
+      "alpha2Code": "UY",
+      "alpha3Code": "URY",
+      "callingCodes": {
+        "0": "598"
+      },
+      "capital": "Montevideo",
+      "altSpellings": {
+        "0": "UY",
+        "1": "Oriental Republic of Uruguay",
+        "2": "República Oriental del Uruguay"
+      },
+      "region": "Americas"
+    },
+    "241": {
+      "name": "Uzbekistan",
+      "topLevelDomain": {
+        "0": ".uz"
+      },
+      "alpha2Code": "UZ",
+      "alpha3Code": "UZB",
+      "callingCodes": {
+        "0": "998"
+      },
+      "capital": "Tashkent",
+      "altSpellings": {
+        "0": "UZ",
+        "1": "Republic of Uzbekistan",
+        "2": "O‘zbekiston Respublikasi",
+        "3": "Ўзбекистон Республикаси"
+      },
+      "region": "Asia"
+    },
+    "242": {
+      "name": "Vanuatu",
+      "topLevelDomain": {
+        "0": ".vu"
+      },
+      "alpha2Code": "VU",
+      "alpha3Code": "VUT",
+      "callingCodes": {
+        "0": "678"
+      },
+      "capital": "Port Vila",
+      "altSpellings": {
+        "0": "VU",
+        "1": "Republic of Vanuatu",
+        "2": "Ripablik blong Vanuatu",
+        "3": "République de Vanuatu"
+      },
+      "region": "Oceania"
+    },
+    "243": {
+      "name": "Venezuela (Bolivarian Republic of},",
+      "topLevelDomain": {
+        "0": ".ve"
+      },
+      "alpha2Code": "VE",
+      "alpha3Code": "VEN",
+      "callingCodes": {
+        "0": "58"
+      },
+      "capital": "Caracas",
+      "altSpellings": {
+        "0": "VE",
+        "1": "Bolivarian Republic of Venezuela",
+        "2": "República Bolivariana de Venezuela"
+      },
+      "region": "Americas"
+    },
+    "244": {
+      "name": "Viet Nam",
+      "topLevelDomain": {
+        "0": ".vn"
+      },
+      "alpha2Code": "VN",
+      "alpha3Code": "VNM",
+      "callingCodes": {
+        "0": "84"
+      },
+      "capital": "Hanoi",
+      "altSpellings": {
+        "0": "VN",
+        "1": "Socialist Republic of Vietnam",
+        "2": "Cộng hòa Xã hội chủ nghĩa Việt Nam"
+      },
+      "region": "Asia"
+    },
+    "245": {
+      "name": "Wallis and Futuna",
+      "topLevelDomain": {
+        "0": ".wf"
+      },
+      "alpha2Code": "WF",
+      "alpha3Code": "WLF",
+      "callingCodes": {
+        "0": "681"
+      },
+      "capital": "Mata-Utu",
+      "altSpellings": {
+        "0": "WF",
+        "1": "Territory of the Wallis and Futuna Islands",
+        "2": "Territoire des îles Wallis et Futuna"
+      },
+      "region": "Oceania"
+    },
+    "246": {
+      "name": "Western Sahara",
+      "topLevelDomain": {
+        "0": ".eh"
+      },
+      "alpha2Code": "EH",
+      "alpha3Code": "ESH",
+      "callingCodes": {
+        "0": "212"
+      },
+      "capital": "El Aaiún",
+      "altSpellings": {
+        "0": "EH",
+        "1": "Taneẓroft Tutrimt"
+      },
+      "region": "Africa"
+    },
+    "247": {
+      "name": "Yemen",
+      "topLevelDomain": {
+        "0": ".ye"
+      },
+      "alpha2Code": "YE",
+      "alpha3Code": "YEM",
+      "callingCodes": {
+        "0": "967"
+      },
+      "capital": "Sana'a",
+      "altSpellings": {
+        "0": "YE",
+        "1": "Yemeni Republic",
+        "2": "al-Jumhūriyyah al-Yamaniyyah"
+      },
+      "region": "Asia"
+    },
+    "248": {
+      "name": "Zambia",
+      "topLevelDomain": {
+        "0": ".zm"
+      },
+      "alpha2Code": "ZM",
+      "alpha3Code": "ZMB",
+      "callingCodes": {
+        "0": "260"
+      },
+      "capital": "Lusaka",
+      "altSpellings": {
+        "0": "ZM",
+        "1": "Republic of Zambia"
+      },
+      "region": "Africa"
+    },
+    "249": {
+      "name": "Zimbabwe",
+      "topLevelDomain": {
+        "0": ".zw"
+      },
+      "alpha2Code": "ZW",
+      "alpha3Code": "ZWE",
+      "callingCodes": {
+        "0": "263"
+      },
+      "capital": "Harare",
+      "altSpellings": {
+        "0": "ZW",
+        "1": "Republic of Zimbabwe"
+      },
+      "region": "Africa"
+    }
+  }
