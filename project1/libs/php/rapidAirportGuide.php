@@ -3,6 +3,7 @@
     include('helpFunctions/helperPHP.php');
     include('helpFunctions/config.php');
 
+
     $lat = !isset($_REQUEST['rawData']['lat']) ? '51.5007144': $_REQUEST['rawData']['lat'];
     $lng = !isset($_REQUEST['rawData']['lng']) ? '-0.1422878': $_REQUEST['rawData']['lng'];
     $airport_id = !isset($_REQUEST['rawData']['iata']) ? 'NWI': $_REQUEST['rawData']['iata'];
@@ -30,6 +31,7 @@
         curl_close($curl);
 
         $decoded_result = json_decode($result, true);
+
 
         json_return($decoded_result);
     }else{

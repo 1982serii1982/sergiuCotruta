@@ -3,6 +3,7 @@
     include('helpFunctions/helperPHP.php');
     include('helpFunctions/config.php');
 
+
     $north = urlencode($_REQUEST['rawData']['country']['north']);
     $south = urlencode($_REQUEST['rawData']['country']['south']);
     $east = urlencode($_REQUEST['rawData']['country']['east']);
@@ -14,6 +15,7 @@
     
     $result = curl_request($url);
     $decoded_result = json_decode($result, true);
+
 
     json_return($decoded_result);
 ?>

@@ -119,7 +119,7 @@
     L.Control.EasyButton = L.Control.extend({
     
       options: {
-        position:  'topright',       // part of leaflet's defaults
+        position:  'topleft',       // part of leaflet's defaults
     
         id:        null,            // an id to tag the button with
     
@@ -195,6 +195,11 @@
     
         if (this.options.tagName === 'button') {
             this.button.setAttribute('type', 'button');
+            if(this.options.set){
+              this.button.setAttribute('data-bs-toggle', this.options.data_bs_toggle);
+              this.button.setAttribute('data-bs-target', this.options.data_bs_target);
+            }
+            
         }
     
         if (this.options.id ){

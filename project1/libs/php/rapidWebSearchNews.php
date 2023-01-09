@@ -3,6 +3,7 @@
     include('helpFunctions/helperPHP.php');
     include('helpFunctions/config.php');
 
+
     $country_name = urlencode($_REQUEST['rawData']['country']);
 
     $curl = curl_init();
@@ -28,6 +29,7 @@
     curl_close($curl);
 
     $decoded_result = json_decode($result, true);
+
 
     json_return($decoded_result);
 
