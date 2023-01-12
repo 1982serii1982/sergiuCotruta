@@ -50,7 +50,7 @@ html, body, #map {
     position: absolute;
     z-index: 99999;
     overflow: hidden;
-	display: flex;
+	display: none;
     justify-content: center;
     align-items: center;
 	flex-direction: column;
@@ -613,43 +613,51 @@ html, body, #map {
 
 /*************************    EARTHQUAKE SECTION START   *********************/
 .earthquake_item{
-	border: 1px solid red;
-    border-radius: 5px;
-    background-color: white;
-    font-size: 16px;
-    margin-bottom: 14px;
-	color: #003eff;
-	transition: all 0.15s ease-in;
-	text-align: center;
+	display: flex;
+	flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    border: 1px solid #9b9b9b;
+    border-radius: 7px;
+	margin-bottom: 17px;
+	transition: all .2s ease-in;
+	color: black;
 }
 
-.earthquake_item span{
-	color: red;
-	transition: all 0.15s ease-in;
+.earthquake_item div{
+	display: flex;
+	justify-content: space-between;
+	padding: 2px 10px;
 }
+
+.earthquake_item div:nth-child(2n+1){
+	background-color: #c6c6c6;
+}
+
+.earthquake_item div:nth-child(2n){
+	background-color: #e6e6e6;
+}
+
+.earthquake_item_date{
+	border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+}
+
+.earthquake_item_lat{
+	border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+
 
 		.earthquake_item.active{
-			background-color: #c11b1b;
-			color: white;
-			border: 1px solid #003eff;
-   			border-radius: 5px;
+			box-shadow: 4px 4px 5px 0px #5a5a5a;
 			cursor: pointer;
-		}
-
-		.earthquake_item.active  span{
-			color: lime;
 		}
 
 		.earthquake_item.focus{
-			background-color: #f77676;
-			color: white;
-			border: 1px solid #003eff;
-    		border-radius: 5px;
+			box-shadow: 4px 4px 5px 0px #5a5a5a;
 			cursor: pointer;
-		}
-
-		.earthquake_item.focus  span{
-			color: lime;
 		}
 
 /*************************    EARTHQUAKE SECTION END   ***********************/
@@ -834,6 +842,34 @@ html, body, #map {
 /*************************    AIRPORTS SECTION END   *************************/
 
 /*****************************************************************************/
+
+/*************************    EASY BUTTON SECTION START   *************************/
+
+#countryInfoButton{
+	color: #000000;
+}
+
+#weatherButton{
+	color: #003eff;
+}
+
+#earthquakeButton{
+	color: #38a023;
+}
+
+#wikipediaButton{
+	color: #e0d613;
+}
+
+#airportsButton{
+	color: #9f0094;
+}
+
+#newsButton{
+	color: #00b9a9;
+}
+
+/*************************    EASY BUTTON SECTION END   *************************/
 
 /************************* MEDIA QUERIES *************************************/
 

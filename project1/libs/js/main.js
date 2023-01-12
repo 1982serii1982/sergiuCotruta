@@ -75,7 +75,7 @@ function resetMarkersIcon(iconObj){
 
         // serObj.capitalAirportsMarkerArray.forEach(function(v, i){
         //     v.setIcon(iconObj.purpleIcon);
-        // }); 
+        // });
     }
     
     if(!serObj.edge){
@@ -171,39 +171,6 @@ function populateSelect(){
     }
     
 };
-
-function addPolygon(geoJson, map, type = 'polyline') {
-    let latLngSwapped = swapLngLat(geoJson.geometry.coordinates);
-
-    if(type === 'polyline'){
-        let multiPolylineOptions = {color:'red'};
-
-        let multiPolyline = L.polyline(latLngSwapped, multiPolylineOptions);
-        multiPolyline.addTo(map);
-        //map.fitBounds(multiPolyline.getBounds());
-        map.flyToBounds(multiPolyline.getBounds());
-        
-        return multiPolyline;
-    }else{
-        let multiPolygonOptions = {color:'red'};
-
-        let multiPolygon = L.polygon(latLngSwapped , multiPolygonOptions);
-        multiPolygon.addTo(map);
-        //map.fitBounds(multiPolygon.getBounds());
-        map.flyToBounds(multiPolygon.getBounds());
-
-        return multiPolygon;
-    }
-
-
-    
-    
-    
-}
-
-function removePolygon(instance){
-    instance.remove();
-}
 
 function isInsidePolygon(latitude, longitude, polygon){
     if (typeof latitude !== 'number' || typeof longitude !== 'number') {
@@ -334,7 +301,7 @@ function markerCGCreator(setObj){
                 return L.divIcon({ html: html, className: setObj.normal, iconSize: L.point(40, 40)});
             } 
         },
-        spiderfyOnMaxZoom: false, showCoverageOnHover: false, zoomToBoundsOnClick: false
+        spiderfyOnMaxZoom: false, showCoverageOnHover: false, zoomToBoundsOnClick: true
     });
 }
 
@@ -613,17 +580,20 @@ function weatherMarkerSetting(weatherResult, countryData, weatherCGHandler, icon
 }
 
 function earthquakeTabCreator(classToAppend, dataObj){
-    let template = `
+    let template1 = `
     <div class="earthquake_item" data-check="${dataObj['lat']}${dataObj['lng']}" tabindex=0>
-        <div class="earthquake_item_date">Was on: <span>${dataObj['datetime']}</span></div>
-        <div class="earthquake_item_depth">Depth: <span>${dataObj['depth']}</span> km</div>
-        <div class="earthquake_item_magn">Magnitude: <span>${dataObj['magnitude']}</span></div>
-        <div class="earthquake_item_lng">Longitude: <span>${dataObj['lng']}</span></div>
-        <div class="earthquake_item_lat">Latitude: <span>${dataObj['lat']}</span></div>
+        <div class="earthquake_item_date"><span>Date</span><span>${dataObj['datetime']}</span></div>
+        <div class="earthquake_item_depth"><span>Depth</span><span>${dataObj['depth']}&nbsp;km</span></div>
+        <div class="earthquake_item_magn"><span>Magnitude</span><span>${dataObj['magnitude']}</span></div>
+        <div class="earthquake_item_lng"><span>Longitude</span><span>${dataObj['lng']}</span></div>
+        <div class="earthquake_item_lat"><span>Latitude</span><span>${dataObj['lat']}</span></div>
     </div>
     `;
 
-    $(`.${classToAppend}`).append(template);
+    
+
+    $(`.${classToAppend}`).append(template1);
+    return template1;
 }
 
 function earthquakeMarkerSetting(earthquakeResult, countryData, earthquakeCGHandler, iconObject){
@@ -635,10 +605,11 @@ function earthquakeMarkerSetting(earthquakeResult, countryData, earthquakeCGHand
     let earthquakeMarkerArray = [];
     for(let key of earthquakeResult.data.content.earthquakes){
         if(isInsideCountryPolygon(key.lat, key.lng, swapLngLat(countryData.coordinates), (countryData.type === "MultiPolygon") ? true : false)){
-            earthquakeTabCreator('earthquake', key);
+            let template = earthquakeTabCreator('earthquake', key);
             
             let homeCountryEarthquakesMarker = L.marker([key.lat, key.lng], {icon: iconObject.greenIcon});
-            homeCountryEarthquakesMarker.bindPopup(`This is earthquake marker.<br>Now you can press <span class="fa-solid fa-house-crack fa-beat"></span> button<br>on left hand side of the map.<br>To see more details find window<br>with <span style="color: #f77676;">LIGHTRED</span> background color`).closePopup();
+            homeCountryEarthquakesMarker.bindPopup(`This is earthquake marker.<br><div class="earthquake_marker">${template}</div>`).closePopup();
+            
             earthquakeMarkerArray.push(homeCountryEarthquakesMarker);
             homeCountryEarthquakesMarker.on('click', function(e){
                 let latLng = this.getLatLng();
@@ -919,29 +890,9 @@ function unboundEvents(){
     $('.airports_item').off('mousedown');
     $('.airports_item').off('mouseenter');
     $('.airports_item').off('mouseleave');
-
-    $("#countryInfoBox").off("click");
-    $("#countryInfoBox1").off("click");
-
-    $("#earthquakeBox").off("click");
-    $("#earthquakeBox1").off("click");
-
-    $("#weatherBox").off("click");
-    $("#weatherBox1").off("click");
-
-    $("#wikipediaBox").off("click");
-    $("#wikipediaBox1").off("click");
-    
-    $("#airportsBox").off("click");
-    $("#airportsBox1").off("click");
 }
 
 function homeCountryBoundEvents(){
-
-    // $('.earthquake_item').on('blur', function(){
-    //     $(this).removeClass('focus');
-    // });
-
     $('.earthquake_item').on('focus', function(e){
         let result = document.querySelectorAll('.earthquake_item');
         for(let item of result){
@@ -955,7 +906,6 @@ function homeCountryBoundEvents(){
         for(let item of serObj.earthquakeMarkerArray){
             if(`${item.getLatLng()['lat']}${item.getLatLng()['lng']}` === latLng){
                 item.setIcon(serObj.icon.currentIcon);
-                //serObj.map.flyTo([item.getLatLng()['lat'], item.getLatLng()['lng']], 10);
                 continue;
             }
             item.setIcon(serObj.icon.greenIcon);
@@ -1103,11 +1053,6 @@ function homeCountryBoundEvents(){
 }
 
 function countryBoundEvents(){
-
-    // $('.earthquake_item').on('blur', function(){
-    //     $(this).removeClass('focus');
-    // });
-
     $('.earthquake_item').on('focus', function(e){
         let result = document.querySelectorAll('.earthquake_item');
         for(let item of result){
@@ -1121,7 +1066,6 @@ function countryBoundEvents(){
         for(let item of serObj.countryEarthquakeMarkerArray){
             if(`${item.getLatLng()['lat']}${item.getLatLng()['lng']}` === latLng){
                 item.setIcon(serObj.icon.currentIcon);
-                //serObj.map.flyTo([item.getLatLng()['lat'], item.getLatLng()['lng']], 10);
                 continue;
             }
             item.setIcon(serObj.icon.greenIcon);
@@ -1281,7 +1225,6 @@ function selectChanger(){
             const select = selects[index];
             select_init(select);
         }
-        //select_callback();
         document.addEventListener('click', function (e) {
             selects_close(e);
         });
@@ -1701,29 +1644,23 @@ L.DomEvent.disableClickPropagation($('.preloader')[0]);
         position: 'bottomleft'
     }).addTo(map);
 
-    L.easyButton('fa-solid fa-location-crosshairs fa-beat', function(){
-        let customerLocationMarker = L.marker([serObj.homeLat, serObj.homeLon], {icon: serObj.icon.customerIcon});
-        customerLocationMarker.bindPopup(`<b>This is your current location</b><br>Latitude: ${serObj.homeLat}<br>Longitude: ${serObj.homeLon}<br>You are in <span style="color: red;">${homeCountryName}</span>`).closePopup();
-        customerLocationMarker.addTo(serObj.map);
-        serObj.map.setView([serObj.homeLat, serObj.homeLon], 10);
-    }).addTo(serObj.map);
 
-    L.easyButton('fa-solid fa-circle-info fa-beat', function(){
+    L.easyButton('fa-solid fa-circle-info', function(){
     }, 'Toggle info window', 'countryInfoButton', {set: 1, data_bs_toggle: 'modal', data_bs_target: '#countryInfo'}).addTo(serObj.map);
 
-    L.easyButton('fa-solid fa-sun-cloud fa-beat', function(){
+    L.easyButton('fa-solid fa-sun-cloud', function(){
     }, 'Toggle weather window', 'weatherButton', {set: 1, data_bs_toggle: 'modal', data_bs_target: '#weather'}).addTo(serObj.map);
 
-    L.easyButton('fa-solid fa-house-crack fa-beat', function(){
+    L.easyButton('fa-solid fa-house-crack', function(){
     }, 'Toggle earthquake Window', 'earthquakeButton', {set: 1, data_bs_toggle: 'modal', data_bs_target: '#earthquake'}).addTo(serObj.map);
 
-    L.easyButton('fa-solid fa-w fa-beat', function(){
+    L.easyButton('fa-solid fa-w', function(){
     }, 'Toggle wikipedia Window', 'wikipediaButton', {set: 1, data_bs_toggle: 'modal', data_bs_target: '#wikipedia'}).addTo(serObj.map);
 
-    L.easyButton('fa-solid fa-plane fa-beat', function(){
+    L.easyButton('fa-solid fa-plane', function(){
     }, 'Toggle airports Window', 'airportsButton', {set: 1, data_bs_toggle: 'modal', data_bs_target: '#airports'}).addTo(serObj.map);
 
-    L.easyButton('fa-solid fa-newspaper fa-beat', function(){
+    L.easyButton('fa-solid fa-newspaper', function(){
     }, 'Toggle news Window', 'newsButton', {set: 1, data_bs_toggle: 'modal', data_bs_target: '#news'}).addTo(serObj.map);
 
     serObj.layerControl = L.control.layers(baseMaps).addTo(map);
@@ -1735,16 +1672,12 @@ L.DomEvent.disableClickPropagation($('.preloader')[0]);
 
     let homeCountryMultiPolyline = L.polyline(swapLngLat(homeCountryData.coordinates.coordinates), {color:'red'});
 
-    let customerLocationMarker = L.marker([serObj.homeLat, serObj.homeLon], {icon: serObj.icon.customerIcon});
-    customerLocationMarker.bindPopup(`<b>This is your current location</b><br>Latitude: ${serObj.homeLat}<br>Longitude: ${serObj.homeLon}<br>You are in <span style="color: red;">${homeCountryName}</span>`).closePopup();
-    
     let homeCountryCapitalMarker = L.marker([homeCountryCapitalLat, homeCountryCapitalLng], {icon: serObj.icon.capitalIcon});
     homeCountryCapitalMarker.bindPopup(`This is ${homeCountryCapital} your country capital `).closePopup();
 
 
     serObj.homeCountryInfoFG = L.featureGroup();
     serObj.homeCountryInfoFG.addLayer(homeCountryMultiPolyline);
-    serObj.homeCountryInfoFG.addLayer(customerLocationMarker);
     serObj.homeCountryInfoFG.addLayer(homeCountryCapitalMarker);
     serObj.homeCountryInfoFG.addTo(serObj.map);
 
@@ -1862,36 +1795,36 @@ L.DomEvent.disableClickPropagation($('.preloader')[0]);
     /************************** AIRPORTS ************************************************************/
     
 
-    let homeCountryCapitalAirportsResult = await phpRequest('rapidAirportGuide', {lat: homeCountryCapitalLat, lng: homeCountryCapitalLng, second: 1});
+    // let homeCountryCapitalAirportsResult = await phpRequest('rapidAirportGuide', {lat: homeCountryCapitalLat, lng: homeCountryCapitalLng, second: 1});
     
-    let airportsToDelete = document.querySelectorAll('.airports_item');
-    for(let item of airportsToDelete){
-        $(item).remove();
-    }
+    // let airportsToDelete = document.querySelectorAll('.airports_item');
+    // for(let item of airportsToDelete){
+    //     $(item).remove();
+    // }
 
-    $('.airports_loader_wrapper').css('display', 'flex');
-    $('.lds-default').css('display', 'block');
-    $('.airports_loader_error').css('display', 'none');
-    if(homeCountryCapitalAirportsResult.data.content != null){
-        serObj.homeCountryCapitalAirportsMarkerCG = markerCGCreator({lowLimit: 10, highLimit: 100, small: 'mycluster_purple-small', medium: 'mycluster_purple-medium', normal: 'mycluster_purple'});
-        serObj.capitalAirportsMarkerArray = capitalAirportsMarkerSetting(homeCountryCapitalAirportsResult, homeCountryData.coordinates, serObj.homeCountryCapitalAirportsMarkerCG, serObj.icon);
-        serObj.map.addLayer(serObj.homeCountryCapitalAirportsMarkerCG);
-        serObj.layerControl.addOverlay(serObj.homeCountryCapitalAirportsMarkerCG, "<b>Airports</b>");
+    // $('.airports_loader_wrapper').css('display', 'flex');
+    // $('.lds-default').css('display', 'block');
+    // $('.airports_loader_error').css('display', 'none');
+    // if(homeCountryCapitalAirportsResult.data.content != null){
+    //     serObj.homeCountryCapitalAirportsMarkerCG = markerCGCreator({lowLimit: 10, highLimit: 100, small: 'mycluster_purple-small', medium: 'mycluster_purple-medium', normal: 'mycluster_purple'});
+    //     serObj.capitalAirportsMarkerArray = capitalAirportsMarkerSetting(homeCountryCapitalAirportsResult, homeCountryData.coordinates, serObj.homeCountryCapitalAirportsMarkerCG, serObj.icon);
+    //     serObj.map.addLayer(serObj.homeCountryCapitalAirportsMarkerCG);
+    //     serObj.layerControl.addOverlay(serObj.homeCountryCapitalAirportsMarkerCG, "<b>Airports</b>");
 
-        serObj.homeCountryCapitalAirportsResultError = 0;
+    //     serObj.homeCountryCapitalAirportsResultError = 0;
 
-        $('.airports_loader_wrapper').addClass('active');
-        setTimeout(function(){
-            $('.airports_loader_wrapper').css('display', 'none');
-        }, 1000);
-    }else{
-        $('.lds-default').css('display', 'none');
-        $('.airports_loader_error').css('display', 'block');
-    }
+    //     $('.airports_loader_wrapper').addClass('active');
+    //     setTimeout(function(){
+    //         $('.airports_loader_wrapper').css('display', 'none');
+    //     }, 1000);
+    // }else{
+    //     $('.lds-default').css('display', 'none');
+    //     $('.airports_loader_error').css('display', 'block');
+    // }
 
-    setTimeout(function(){
-        $('.preloader').css('display', 'none');
-    },3000);
+    // setTimeout(function(){
+    //     $('.preloader').css('display', 'none');
+    // },3000);
     
     /********************************** BOUND EVENTS ************************************************** */ 
     
@@ -2161,33 +2094,33 @@ $(document).ready(function () {
         /************************************* AIRPORTS ***************************************************/
         
         
-        let countryCapitalAirportsResult = await phpRequest('rapidAirportGuide', {lat: countryCapitalLat, lng: countryCapitalLng, second: 1});
+        // let countryCapitalAirportsResult = await phpRequest('rapidAirportGuide', {lat: countryCapitalLat, lng: countryCapitalLng, second: 1});
         
-        let airportsToDelete = document.querySelectorAll('.airports_item');
-        for(let item of airportsToDelete){
-            $(item).remove();
-        }
+        // let airportsToDelete = document.querySelectorAll('.airports_item');
+        // for(let item of airportsToDelete){
+        //     $(item).remove();
+        // }
         
-        $('.airports_loader_wrapper').css('display', 'flex');
-        $('.lds-default').css('display', 'block');
-        $('.airports_loader_error').css('display', 'none');
-        if(countryCapitalAirportsResult.data.content != null){
-            serObj.countryCapitalAirportsMarkerCG = markerCGCreator({lowLimit: 10, highLimit: 100, small: 'mycluster_purple-small', medium: 'mycluster_purple-medium', normal: 'mycluster_purple'});
-            serObj.countryCapitalAirportsMarkerArray = capitalAirportsMarkerSetting(countryCapitalAirportsResult, countryData.data.content[0].geometry, serObj.countryCapitalAirportsMarkerCG, serObj.icon);
-            serObj.map.addLayer(serObj.countryCapitalAirportsMarkerCG);
-            serObj.layerControl.addOverlay(serObj.countryCapitalAirportsMarkerCG, "<b>Airports</b>");
+        // $('.airports_loader_wrapper').css('display', 'flex');
+        // $('.lds-default').css('display', 'block');
+        // $('.airports_loader_error').css('display', 'none');
+        // if(countryCapitalAirportsResult.data.content != null){
+        //     serObj.countryCapitalAirportsMarkerCG = markerCGCreator({lowLimit: 10, highLimit: 100, small: 'mycluster_purple-small', medium: 'mycluster_purple-medium', normal: 'mycluster_purple'});
+        //     serObj.countryCapitalAirportsMarkerArray = capitalAirportsMarkerSetting(countryCapitalAirportsResult, countryData.data.content[0].geometry, serObj.countryCapitalAirportsMarkerCG, serObj.icon);
+        //     serObj.map.addLayer(serObj.countryCapitalAirportsMarkerCG);
+        //     serObj.layerControl.addOverlay(serObj.countryCapitalAirportsMarkerCG, "<b>Airports</b>");
 
-            serObj.countryCapitalAirportsResultError = 0;
+        //     serObj.countryCapitalAirportsResultError = 0;
 
-            $('.airports_loader_wrapper').addClass('active');
-            setTimeout(function(){
-                $('.airports_loader_wrapper').css('display', 'none');
-            }, 1000);
-        }else{
-            $('.lds-default').css('display', 'none');
-            $('.airports_loader_error').css('display', 'block');
-            serObj.countryCapitalAirportsResultError = 1;
-        }
+        //     $('.airports_loader_wrapper').addClass('active');
+        //     setTimeout(function(){
+        //         $('.airports_loader_wrapper').css('display', 'none');
+        //     }, 1000);
+        // }else{
+        //     $('.lds-default').css('display', 'none');
+        //     $('.airports_loader_error').css('display', 'block');
+        //     serObj.countryCapitalAirportsResultError = 1;
+        // }
         
         
         

@@ -19,8 +19,6 @@
 
         $output['status']['code'] = "200";
         $output['status']['name'] = "ok";
-        //$output['status']['description'] = $description;
-        //$output['status']['returnedIn'] = (microtime(true) - $execution_start_time) / 1000 . " ms";
         $output['data']['content'] = $json_object;
 
         header('Content-Type: application/json; charset=UTF-8');

@@ -22,7 +22,7 @@
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => [
                 "X-RapidAPI-Host: forteweb-airportguide-airport-basic-info-v1.p.rapidapi.com",
-                "X-RapidAPI-Key: beff1c35d6mshf85497309639726p1c67a8jsn75d71af83ba2"
+                "X-RapidAPI-Key: " . $X_RapidAPI_Key2
             ],
         ]);
 
@@ -48,7 +48,7 @@
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => [
                 "X-RapidAPI-Host: forteweb-airportguide-airport-basic-info-v1.p.rapidapi.com",
-                "X-RapidAPI-Key: beff1c35d6mshf85497309639726p1c67a8jsn75d71af83ba2"
+                "X-RapidAPI-Key: " . $X_RapidAPI_Key2
             ],
         ]);
 
