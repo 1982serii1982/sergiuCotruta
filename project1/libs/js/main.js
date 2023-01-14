@@ -73,9 +73,9 @@ function resetMarkersIcon(iconObj){
             v.setIcon(iconObj.yellowIcon);
         });
 
-        // serObj.capitalAirportsMarkerArray.forEach(function(v, i){
-        //     v.setIcon(iconObj.purpleIcon);
-        // });
+        serObj.capitalAirportsMarkerArray.forEach(function(v, i){
+            v.setIcon(iconObj.purpleIcon);
+        });
     }
     
     if(!serObj.edge){
@@ -103,11 +103,11 @@ function resetMarkersIcon(iconObj){
 
         
 
-        // if(!serObj.countryCapitalAirportsResultError){
-        //     serObj.countryCapitalAirportsMarkerArray.forEach(function(v, i){
-        //         v.setIcon(iconObj.purpleIcon);
-        //     });
-        // }
+        if(!serObj.countryCapitalAirportsResultError){
+            serObj.countryCapitalAirportsMarkerArray.forEach(function(v, i){
+                v.setIcon(iconObj.purpleIcon);
+            });
+        }
 
         
     }
@@ -776,7 +776,7 @@ function capitalAirportsMarkerSetting(capitalAirportsResult, countryData, capita
             let template = capitalAirportsTabCreator('airports', key);
             
             let homeCountryCapitalAirportsMarker = L.marker([lat, lng], {icon: iconObject.purpleIcon});
-            homeCountryCapitalAirportsMarker.bindPopup(`<b>Airport marker</b><br><div class="airports_marker">${template}</div>`, {minWidth: 300, className: 'airports_popup'}).closePopup();
+            homeCountryCapitalAirportsMarker.bindPopup(`<b>Airport marker</b><br><div class="airports_marker">${template}</div>`, {minWidth: 200, className: 'airports_popup'}).closePopup();
             capitalAirportsMarkerArray.push(homeCountryCapitalAirportsMarker);
             homeCountryCapitalAirportsMarker.on('click', function(e){
                 let latLng = this.getLatLng();
@@ -1818,36 +1818,36 @@ L.DomEvent.disableClickPropagation($('.preloader')[0]);
     /************************** AIRPORTS ************************************************************/
     
 
-    // let homeCountryCapitalAirportsResult = await phpRequest('rapidAirportGuide', {lat: homeCountryCapitalLat, lng: homeCountryCapitalLng, second: 1});
+    let homeCountryCapitalAirportsResult = await phpRequest('rapidAirportGuide', {lat: homeCountryCapitalLat, lng: homeCountryCapitalLng, second: 1});
     
-    // let airportsToDelete = document.querySelectorAll('.airports_item');
-    // for(let item of airportsToDelete){
-    //     $(item).remove();
-    // }
+    let airportsToDelete = document.querySelectorAll('.airports_item');
+    for(let item of airportsToDelete){
+        $(item).remove();
+    }
 
-    // $('.airports_loader_wrapper').css('display', 'flex');
-    // $('.lds-default').css('display', 'block');
-    // $('.airports_loader_error').css('display', 'none');
-    // if(homeCountryCapitalAirportsResult.data.content != null){
-    //     serObj.homeCountryCapitalAirportsMarkerCG = markerCGCreator({lowLimit: 10, highLimit: 100, small: 'mycluster_purple-small', medium: 'mycluster_purple-medium', normal: 'mycluster_purple'});
-    //     serObj.capitalAirportsMarkerArray = capitalAirportsMarkerSetting(homeCountryCapitalAirportsResult, homeCountryData.coordinates, serObj.homeCountryCapitalAirportsMarkerCG, serObj.icon);
-    //     serObj.map.addLayer(serObj.homeCountryCapitalAirportsMarkerCG);
-    //     serObj.layerControl.addOverlay(serObj.homeCountryCapitalAirportsMarkerCG, "<b>Airports</b>");
+    $('.airports_loader_wrapper').css('display', 'flex');
+    $('.lds-default').css('display', 'block');
+    $('.airports_loader_error').css('display', 'none');
+    if(homeCountryCapitalAirportsResult.data.content != null){
+        serObj.homeCountryCapitalAirportsMarkerCG = markerCGCreator({lowLimit: 10, highLimit: 100, small: 'mycluster_purple-small', medium: 'mycluster_purple-medium', normal: 'mycluster_purple'});
+        serObj.capitalAirportsMarkerArray = capitalAirportsMarkerSetting(homeCountryCapitalAirportsResult, homeCountryData.coordinates, serObj.homeCountryCapitalAirportsMarkerCG, serObj.icon);
+        serObj.map.addLayer(serObj.homeCountryCapitalAirportsMarkerCG);
+        serObj.layerControl.addOverlay(serObj.homeCountryCapitalAirportsMarkerCG, "<b>Airports</b>");
 
-    //     serObj.homeCountryCapitalAirportsResultError = 0;
+        serObj.homeCountryCapitalAirportsResultError = 0;
 
-    //     $('.airports_loader_wrapper').addClass('active');
-    //     setTimeout(function(){
-    //         $('.airports_loader_wrapper').css('display', 'none');
-    //     }, 1000);
-    // }else{
-    //     $('.lds-default').css('display', 'none');
-    //     $('.airports_loader_error').css('display', 'block');
-    // }
+        $('.airports_loader_wrapper').addClass('active');
+        setTimeout(function(){
+            $('.airports_loader_wrapper').css('display', 'none');
+        }, 1000);
+    }else{
+        $('.lds-default').css('display', 'none');
+        $('.airports_loader_error').css('display', 'block');
+    }
 
-    // setTimeout(function(){
-    //     $('.preloader').css('display', 'none');
-    // },3000);
+    setTimeout(function(){
+        $('.preloader').css('display', 'none');
+    },3000);
     
     /********************************** BOUND EVENTS ************************************************** */ 
     
@@ -2123,33 +2123,33 @@ $(document).ready(function () {
         /************************************* AIRPORTS ***************************************************/
         
         
-        // let countryCapitalAirportsResult = await phpRequest('rapidAirportGuide', {lat: countryCapitalLat, lng: countryCapitalLng, second: 1});
+        let countryCapitalAirportsResult = await phpRequest('rapidAirportGuide', {lat: countryCapitalLat, lng: countryCapitalLng, second: 1});
         
-        // let airportsToDelete = document.querySelectorAll('.airports_item');
-        // for(let item of airportsToDelete){
-        //     $(item).remove();
-        // }
+        let airportsToDelete = document.querySelectorAll('.airports_item');
+        for(let item of airportsToDelete){
+            $(item).remove();
+        }
         
-        // $('.airports_loader_wrapper').css('display', 'flex');
-        // $('.lds-default').css('display', 'block');
-        // $('.airports_loader_error').css('display', 'none');
-        // if(countryCapitalAirportsResult.data.content != null){
-        //     serObj.countryCapitalAirportsMarkerCG = markerCGCreator({lowLimit: 10, highLimit: 100, small: 'mycluster_purple-small', medium: 'mycluster_purple-medium', normal: 'mycluster_purple'});
-        //     serObj.countryCapitalAirportsMarkerArray = capitalAirportsMarkerSetting(countryCapitalAirportsResult, countryData.data.content[0].geometry, serObj.countryCapitalAirportsMarkerCG, serObj.icon);
-        //     serObj.map.addLayer(serObj.countryCapitalAirportsMarkerCG);
-        //     serObj.layerControl.addOverlay(serObj.countryCapitalAirportsMarkerCG, "<b>Airports</b>");
+        $('.airports_loader_wrapper').css('display', 'flex');
+        $('.lds-default').css('display', 'block');
+        $('.airports_loader_error').css('display', 'none');
+        if(countryCapitalAirportsResult.data.content != null){
+            serObj.countryCapitalAirportsMarkerCG = markerCGCreator({lowLimit: 10, highLimit: 100, small: 'mycluster_purple-small', medium: 'mycluster_purple-medium', normal: 'mycluster_purple'});
+            serObj.countryCapitalAirportsMarkerArray = capitalAirportsMarkerSetting(countryCapitalAirportsResult, countryData.data.content[0].geometry, serObj.countryCapitalAirportsMarkerCG, serObj.icon);
+            serObj.map.addLayer(serObj.countryCapitalAirportsMarkerCG);
+            serObj.layerControl.addOverlay(serObj.countryCapitalAirportsMarkerCG, "<b>Airports</b>");
 
-        //     serObj.countryCapitalAirportsResultError = 0;
+            serObj.countryCapitalAirportsResultError = 0;
 
-        //     $('.airports_loader_wrapper').addClass('active');
-        //     setTimeout(function(){
-        //         $('.airports_loader_wrapper').css('display', 'none');
-        //     }, 1000);
-        // }else{
-        //     $('.lds-default').css('display', 'none');
-        //     $('.airports_loader_error').css('display', 'block');
-        //     serObj.countryCapitalAirportsResultError = 1;
-        // }
+            $('.airports_loader_wrapper').addClass('active');
+            setTimeout(function(){
+                $('.airports_loader_wrapper').css('display', 'none');
+            }, 1000);
+        }else{
+            $('.lds-default').css('display', 'none');
+            $('.airports_loader_error').css('display', 'block');
+            serObj.countryCapitalAirportsResultError = 1;
+        }
         
         
         

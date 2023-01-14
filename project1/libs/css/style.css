@@ -41,7 +41,7 @@ html, body, #map {
     position: absolute;
     z-index: 99999;
     overflow: hidden;
-	display: none;
+	display: flex;
     justify-content: center;
     align-items: center;
 	flex-direction: column;
