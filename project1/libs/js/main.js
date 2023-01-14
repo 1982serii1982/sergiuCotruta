@@ -79,21 +79,37 @@ function resetMarkersIcon(iconObj){
     }
     
     if(!serObj.edge){
-        serObj.countryEarthquakeMarkerArray.forEach(function(v, i){
-            v.setIcon(iconObj.greenIcon);
-        });
 
-        serObj.countryWeatherMarkerArray.forEach(function(v, i){
-            v.setIcon(iconObj.blueIcon);
-        });
+        if(!serObj.countryEarthquakesResultError){
+            serObj.countryEarthquakeMarkerArray.forEach(function(v, i){
+                v.setIcon(iconObj.greenIcon);
+            });
+        }
+        
 
-        serObj.countryWikiMarkerArray.forEach(function(v, i){
-            v.setIcon(iconObj.yellowIcon);
-        });
+        if(!serObj.countryWeatherResultError){
+            serObj.countryWeatherMarkerArray.forEach(function(v, i){
+                v.setIcon(iconObj.blueIcon);
+            });
+        }
 
-        // serObj.countryCapitalAirportsMarkerArray.forEach(function(v, i){
-        //     v.setIcon(iconObj.purpleIcon);
-        // });
+        
+
+        if(!serObj.homeCountryWikiResultError){
+            serObj.countryWikiMarkerArray.forEach(function(v, i){
+                v.setIcon(iconObj.yellowIcon);
+            });
+        }
+
+        
+
+        // if(!serObj.countryCapitalAirportsResultError){
+        //     serObj.countryCapitalAirportsMarkerArray.forEach(function(v, i){
+        //         v.setIcon(iconObj.purpleIcon);
+        //     });
+        // }
+
+        
     }
     
 }
@@ -352,13 +368,13 @@ function weatherTabCreator(classToAppend, dataObj){
         if(intD >= 1 && intD <= 31 && intM !== 2 && intM !== 4 && intM !== 6 && intM !== 9 && intM !== 11){
 
             if((parseInt(dt.format('D')) === (((intD + 1) % 32) === 0 ? 1 : ((intD + 1) % 32))) && parseInt(dt.format('H')) === 12){
-                dataResult['tomorrowDate'] = dt.format('ddd DD/MMM/YY');
+                dataResult['tomorrowDate'] = dt.format('Do MMM YYYY');
                 dataResult['tomorrowIcon'] = (item['weather'][0]['main']).toLowerCase();
                 dataResult['tomorrowTemp'] = Math.round(item['main']['temp']);
             }
 
             if((parseInt(dt.format('D')) === (((intD + 2) % 32) === 0 ? 1 : (((intD + 2) % 32) === 1 ? 2 : ((intD + 2) % 32)))) && parseInt(dt.format('H')) === 12){
-                dataResult['afterTomorrowDate'] = dt.format('ddd DD/MMM/YY');
+                dataResult['afterTomorrowDate'] = dt.format('Do MMM YYYY');
                 dataResult['afterTomorrowIcon'] = (item['weather'][0]['main']).toLowerCase();
                 dataResult['afterTomorrowTemp'] = Math.round(item['main']['temp']);
             }
@@ -375,13 +391,13 @@ function weatherTabCreator(classToAppend, dataObj){
             intM !== 12){
             
                 if((parseInt(dt.format('D')) === (((intD + 1) % 31) === 0 ? 1 : ((intD + 1) % 31))) && parseInt(dt.format('H')) === 12){
-                    dataResult['tomorrowDate'] = dt.format('ddd DD/MMM/YY');
+                    dataResult['tomorrowDate'] = dt.format('Do MMM YYYY');
                     dataResult['tomorrowIcon'] = (item['weather'][0]['main']).toLowerCase();
                     dataResult['tomorrowTemp'] = Math.round(item['main']['temp']);
                 }
     
                 if((parseInt(dt.format('D')) === (((intD + 2) % 31) === 0 ? 1 : (((intD + 2) % 31) === 1 ? 2 : ((intD + 2) % 31)))) && parseInt(dt.format('H')) === 12){
-                    dataResult['afterTomorrowDate'] = dt.format('ddd DD/MMM/YY');
+                    dataResult['afterTomorrowDate'] = dt.format('Do MMM YYYY');
                     dataResult['afterTomorrowIcon'] = (item['weather'][0]['main']).toLowerCase();
                     dataResult['afterTomorrowTemp'] = Math.round(item['main']['temp']);
                 }
@@ -389,13 +405,13 @@ function weatherTabCreator(classToAppend, dataObj){
         }else if(intD >= 1 && intD <= 28 && intM === 2 && (intYY) % 4 !== 0){
 
             if((parseInt(dt.format('D')) === (((intD + 1) % 29) === 0 ? 1 : ((intD + 1) % 29))) && parseInt(dt.format('H')) === 12){
-                dataResult['tomorrowDate'] = dt.format('ddd DD/MMM/YY');
+                dataResult['tomorrowDate'] = dt.format('Do MMM YYYY');
                 dataResult['tomorrowIcon'] = (item['weather'][0]['main']).toLowerCase();
                 dataResult['tomorrowTemp'] = Math.round(item['main']['temp']);
             }
 
             if((parseInt(dt.format('D')) === (((intD + 2) % 29) === 0 ? 1 : (((intD + 2) % 29) === 1 ? 2 : ((intD + 2) % 29)))) && parseInt(dt.format('H')) === 12){
-                dataResult['afterTomorrowDate'] = dt.format('ddd DD/MMM/YY');
+                dataResult['afterTomorrowDate'] = dt.format('Do MMM YYYY');
                 dataResult['afterTomorrowIcon'] = (item['weather'][0]['main']).toLowerCase();
                 dataResult['afterTomorrowTemp'] = Math.round(item['main']['temp']);
             }
@@ -403,13 +419,13 @@ function weatherTabCreator(classToAppend, dataObj){
         }else if(intD >= 1 && intD <= 29 && intM === 2 && (intYY) % 4 === 0){
 
             if((parseInt(dt.format('D')) === (((intD + 1) % 30) === 0 ? 1 : ((intD + 1) % 30))) && parseInt(dt.format('H')) === 12){
-                dataResult['tomorrowDate'] = moment.unix(item['dt']).format('ddd DD/MMM/YY');
+                dataResult['tomorrowDate'] = moment.unix(item['dt']).format('Do MMM YYYY');
                 dataResult['tomorrowIcon'] = (item['weather'][0]['main']).toLowerCase();
                 dataResult['tomorrowTemp'] = Math.round(item['main']['temp']);
             }
 
             if((parseInt(dt.format('D')) === (((intD + 2) % 30) === 0 ? 1 : (((intD + 2) % 30) === 1 ? 2 : ((intD + 2) % 30)))) && parseInt(dt.format('H')) === 12){
-                dataResult['afterTomorrowDate'] = dt.format('ddd DD/MMM/YY');
+                dataResult['afterTomorrowDate'] = dt.format('Do MMM YYYY');
                 dataResult['afterTomorrowIcon'] = (item['weather'][0]['main']).toLowerCase();
                 dataResult['afterTomorrowTemp'] = Math.round(item['main']['temp']);
             }
@@ -423,7 +439,7 @@ function weatherTabCreator(classToAppend, dataObj){
                 dataResult['currentPressure'] = item['main']['pressure'];
                 dataResult['currentHumidity'] = item['main']['humidity'];
                 dataResult['currentIcon'] = (item['weather'][0]['main']).toLowerCase();
-                dataResult['currentDate'] = moment.unix(item['dt']).format('ddd DD/MMM/YY');
+                dataResult['currentDate'] = moment.unix(item['dt']).format('Do MMM YYYY');
                 break;
 
             case 1:
@@ -547,14 +563,20 @@ function weatherMarkerSetting(weatherResult, countryData, weatherCGHandler, icon
     for(let key of getWeatherStationData(weatherResult, countryData)['stations']){
         let homeCountryWeatherMarker = L.marker([key.lat, key.lng], {icon: iconObject.blueIcon});
         weatherMarkerArray.push(homeCountryWeatherMarker);
-        homeCountryWeatherMarker.bindPopup(`This is weather marker.<br>Now you can press <span class="fa-solid fa-sun-cloud fa-beat"></span> button<br>on left hand side of the map,<br>to see more details.`).closePopup();
+        homeCountryWeatherMarker.bindPopup(`<b>Weather marker</b><br><a href="#" class="weather_marker">Click for more details...</a>`, {className: 'weather_popup'}).closePopup();
         homeCountryWeatherMarker.on('click', async function(){
             // weatherMarkerArray.forEach(function(v, i){
             //     v.setIcon(icon.blueIcon);
             // });
+
             resetMarkersIcon(iconObject);
             this.setIcon(iconObject.currentIcon);
-            //$('#weather').modal('show');
+
+            $('.weather_marker').on('click', function(e){
+                $('#weather').modal('show');
+            });
+
+
             $('.weather_tab').remove();
             $('.weather_loader_wrapper').css('display', 'flex');
             $('.lds-default').css('display', 'block');
@@ -580,9 +602,10 @@ function weatherMarkerSetting(weatherResult, countryData, weatherCGHandler, icon
 }
 
 function earthquakeTabCreator(classToAppend, dataObj){
+    let formatedDate = Date.parse(dataObj['datetime']).toString("hh:mm dS MMM yyyy");
     let template1 = `
     <div class="earthquake_item" data-check="${dataObj['lat']}${dataObj['lng']}" tabindex=0>
-        <div class="earthquake_item_date"><span>Date</span><span>${dataObj['datetime']}</span></div>
+        <div class="earthquake_item_date"><span>Date</span><span>${formatedDate}</span></div>
         <div class="earthquake_item_depth"><span>Depth</span><span>${dataObj['depth']}&nbsp;km</span></div>
         <div class="earthquake_item_magn"><span>Magnitude</span><span>${dataObj['magnitude']}</span></div>
         <div class="earthquake_item_lng"><span>Longitude</span><span>${dataObj['lng']}</span></div>
@@ -608,27 +631,22 @@ function earthquakeMarkerSetting(earthquakeResult, countryData, earthquakeCGHand
             let template = earthquakeTabCreator('earthquake', key);
             
             let homeCountryEarthquakesMarker = L.marker([key.lat, key.lng], {icon: iconObject.greenIcon});
-            homeCountryEarthquakesMarker.bindPopup(`This is earthquake marker.<br><div class="earthquake_marker">${template}</div>`).closePopup();
+            homeCountryEarthquakesMarker.bindPopup(`<b>Earthquake Marker</b><br><div class="earthquake_marker">${template}</div>`, {minWidth: 200, className: 'earthquake_popup'}).closePopup();
             
             earthquakeMarkerArray.push(homeCountryEarthquakesMarker);
             homeCountryEarthquakesMarker.on('click', function(e){
                 let latLng = this.getLatLng();
                 let result = document.querySelectorAll('.earthquake_item');
 
-                   
-                // earthquakeMarkerArray.forEach(function(v, i){
-                //     v.setIcon(icon.greenIcon);
-                // });
+                
                 resetMarkersIcon(iconObject);
                 this.setIcon(iconObject.currentIcon);
-                //$('#earthquake').modal('show');
                 
 
                 for(let item of result){
                     
                     if(item.dataset.check === `${latLng.lat}${latLng.lng}`){
                         $(item).addClass('focus');
-                        //$(item).trigger('focus');
                         continue;
                     }
                     $(item).removeClass('focus');
@@ -681,6 +699,7 @@ function wikiTabCreator(classToAppend, wikiData){
     `;
 
     $(`.${classToAppend}`).append(template);
+    return template;
     
 }
 
@@ -693,9 +712,9 @@ function wikiMarkerSetting(wikiResult, countryData, wikiCGHandler, iconObject){
     let wikiMarkerArray = [];
     for(let key of wikiResult.data.content.geonames){
         if(isInsideCountryPolygon(key.lat, key.lng, swapLngLat(countryData.coordinates), (countryData.type === "MultiPolygon") ? true : false)){
-           wikiTabCreator('wiki', key);
+            let template = wikiTabCreator('wiki', key);
             let homeCountryWikiMarker = L.marker([key.lat, key.lng], {icon: iconObject.yellowIcon});
-            homeCountryWikiMarker.bindPopup(`This is wikipedia marker.<br>Now you can press <span class="fa-solid fa-w fa-beat"></span> button<br>on left hand side of the map.<br>To see more details find window<br>with <span style="color: #f77676;">LIGHTRED</span> background color`).closePopup();
+            homeCountryWikiMarker.bindPopup(`<b>Wikipedia marker</b><br><div class="wiki_marker">${template}</div>`, {minWidth: 200, className: 'wiki_popup'}).closePopup();
             wikiMarkerArray.push(homeCountryWikiMarker);
             
             homeCountryWikiMarker.on('click', function(e){
@@ -737,14 +756,15 @@ function capitalAirportsTabCreator(classToAppend, dataObj){
 
     let template = `
     <div class="airports_item" data-check="${lat}${lng}" tabindex=0>
-        <div class="airports_item_name">Airport name: <span>${dataObj['name']}</span></div>
-        <div class="airports_item_dist">Distance: <span>${dataObj['distance']}</span> miles</div>
-        <div class="airports_item_lat">Latitude: <span>${lat}</span></div>
-        <div class="airports_item_lng">Longitude: <span>${lng}</span></div>
+        <div class="airports_item_name"><span>Name</span><span>${dataObj['name']}</span></div>
+        <div class="airports_item_dist"><span>Distance</span><span>${dataObj['distance']} miles</span></div>
+        <div class="airports_item_lat"><span>Latitude</span><span>${lat}</span></div>
+        <div class="airports_item_lng"><span>Longitude</span><span>${lng}</span></div>
     </div>
     `;
 
     $(`.${classToAppend}`).append(template);
+    return template;
 }
 
 function capitalAirportsMarkerSetting(capitalAirportsResult, countryData, capitalAirportsCGHandler, iconObject){
@@ -753,19 +773,16 @@ function capitalAirportsMarkerSetting(capitalAirportsResult, countryData, capita
         let lat = ConvertDMSToDD(key['lat_format']);
         let lng = ConvertDMSToDD(key['lon_format']);
         if(isInsideCountryPolygon(lat, lng, swapLngLat(countryData.coordinates), (countryData.type === "MultiPolygon") ? true : false)){
-            capitalAirportsTabCreator('airports', key);
+            let template = capitalAirportsTabCreator('airports', key);
             
             let homeCountryCapitalAirportsMarker = L.marker([lat, lng], {icon: iconObject.purpleIcon});
-            homeCountryCapitalAirportsMarker.bindPopup(`This is airports marker.<br>Now you can press <span class="fa-solid fa-plane fa-beat"></span> button<br>on left hand side of the map.<br>To see more details find window<br>with <span style="color: #f77676;">LIGHTRED</span> background color`).closePopup();
+            homeCountryCapitalAirportsMarker.bindPopup(`<b>Airport marker</b><br><div class="airports_marker">${template}</div>`, {minWidth: 300, className: 'airports_popup'}).closePopup();
             capitalAirportsMarkerArray.push(homeCountryCapitalAirportsMarker);
             homeCountryCapitalAirportsMarker.on('click', function(e){
                 let latLng = this.getLatLng();
                 let result = document.querySelectorAll('.airports_item');
 
-                   
-                // capitalAirportsMarkerArray.forEach(function(v, i){
-                //     v.setIcon(icon.purpleIcon);
-                // });
+                
                 resetMarkersIcon(iconObject);
                 this.setIcon(iconObject.currentIcon);
                 
@@ -830,47 +847,53 @@ async function updateWorldinfoCountries(location, locationLat, locationLng, coun
 
 function iconGenerator(){
     return {
-        purpleIcon: L.icon({
-            iconUrl: './libs/img/purple.png',
-            iconSize:     [40, 40],
-            iconAnchor:   [20, 34],
-            popupAnchor:  [3, -37] 
+        greenIcon: L.ExtraMarkers.icon({
+            icon: 'fa-solid fa-house-crack',
+            markerColor: '#adff2f',
+            iconColor: '#0d801c',
+            shape: 'circle',
+            svg: true,
+            prefix: 'fa'
         }),
-        yellowIcon: L.icon({
-            iconUrl: './libs/img/yellow.png',
-            iconSize:     [40, 40],
-            iconAnchor:   [20, 34],
-            popupAnchor:  [3, -37] 
+        purpleIcon: L.ExtraMarkers.icon({
+            icon: 'fa-solid fa-plane',
+            markerColor: '#db01f8',
+            iconColor: '#9601b8',
+            shape: 'circle',
+            svg: true,
+            prefix: 'fa'
         }),
-        greenIcon: L.icon({
-            iconUrl: './libs/img/green.png',
-            iconSize:     [40, 40],
-            iconAnchor:   [20, 34],
-            popupAnchor:  [3, -37] 
+        yellowIcon: L.ExtraMarkers.icon({
+            icon: 'fa-solid fa-w',
+            markerColor: '#faf85c',
+            iconColor: '#000000',
+            shape: 'circle',
+            svg: true,
+            prefix: 'fa'
         }),
-        blueIcon: L.icon({
-            iconUrl: './libs/img/blue.png',
-            iconSize:     [40, 40],
-            iconAnchor:   [20, 34],
-            popupAnchor:  [3, -37] 
+        blueIcon: L.ExtraMarkers.icon({
+            icon: 'fa-solid fa-sun-cloud',
+            markerColor: '#5c7cfa',
+            iconColor: '#ffffff',
+            shape: 'circle',
+            svg: true,
+            prefix: 'fa'
         }),
-        customerIcon: L.icon({
-            iconUrl: './libs/img/customer.png',
-            iconSize:     [40, 40],
-            iconAnchor:   [20, 34],
-            popupAnchor:  [3, -37] 
+        capitalIcon: L.ExtraMarkers.icon({
+            icon: 'fa-solid fa-star-sharp',
+            markerColor: '#ff0000',
+            iconColor: '#ffffff',
+            shape: 'square',
+            svg: true,
+            prefix: 'fa'
         }),
-        capitalIcon: L.icon({
-            iconUrl: './libs/img/capital.png',
-            iconSize:     [40, 40],
-            iconAnchor:   [20, 34],
-            popupAnchor:  [3, -37] 
-        }),
-        currentIcon: L.icon({
-            iconUrl: './libs/img/current_marker.png',
-            iconSize:     [40, 40],
-            iconAnchor:   [20, 34],
-            popupAnchor:  [3, -37] 
+        currentIcon: L.ExtraMarkers.icon({
+            icon: 'fa-solid fa-circle',
+            markerColor: '#ff0000',
+            iconColor: '#ffffff',
+            shape: 'circle',
+            svg: true,
+            prefix: 'fa'
         })
     }
 }
@@ -1469,8 +1492,8 @@ L.DomEvent.disableClickPropagation($('.preloader')[0]);
 
     preloader.updatePreloaderMessage('Retrieve Current Date...');
 
-    const currentDate = moment().format('DD/MM/YYYY');
-    serObj.currentDate = currentDate;
+    
+    serObj.currentDate = Date.today().toString("dS MMM yyyy");
 
     serObj.edge = 1;
     serObj.homeCountryWikiResultError = 1;
@@ -1528,8 +1551,8 @@ L.DomEvent.disableClickPropagation($('.preloader')[0]);
     let callStr, domStr, homeCpt;
     for(let key of serObj.worldInfo.countryInfo.data.content){
         if(key['alpha3Code'] === serObj.geoJsonProperties.data.content[homeCountryData.countryIndex]['iso_a3']){
-            callStr = `<span>Country calling code:</span>&nbsp;<span>+${key['callingCodes'][0]}</span>`;
-            domStr = `<span>Country top domain level:</span>&nbsp;<span>${key['topLevelDomain'][0]}</span>`;
+            callStr = `<span>Country calling code</span><span>+${key['callingCodes'][0]}</span>`;
+            domStr = `<span>Country top domain level</span><span>${key['topLevelDomain'][0]}</span>`;
             homeCpt = key['capital'];
             break;
         }
@@ -1561,12 +1584,12 @@ L.DomEvent.disableClickPropagation($('.preloader')[0]);
 
     const countryInfoObj = {
         countryFlag: `<img src="./libs/img/flags/${countryFlag}.svg" alt="Country Flag">`,
-        countryString: `<span>Country:</span>&nbsp;<span>${homeCountryName}</span>`, 
-        capitalString: `<span>Capital:</span>&nbsp;<span>${homeCountryCapital}</span>`,
-        populationString: `<span>Population:</span>&nbsp;<span>${numberWithCommas(geonamesCountryInfoResult.data.content.geonames[0]['population'])}</span>`,
-        areaString: `<span>Area (sq. km.):</span>&nbsp;<span>${numberWithCommas(geonamesCountryInfoResult.data.content.geonames[0]['areaInSqKm'])}</span>`,
-        currencyString: `<span>1 ${currencyBase}=</span>&nbsp;<span>${numberWithCommas(currencyRate)} ${currencyCode}</span>`,
-        dateString: `<span>Today is:</span>&nbsp;<span>${currentDate}</span>`,
+        countryString: `<span>Country</span><span>${homeCountryName}</span>`, 
+        capitalString: `<span>Capital</span><span>${homeCountryCapital}</span>`,
+        populationString: `<span>Population</span><span>${numberWithCommas(geonamesCountryInfoResult.data.content.geonames[0]['population'])}</span>`,
+        areaString: `<span>Area (sq. km.)</span><span>${numberWithCommas(geonamesCountryInfoResult.data.content.geonames[0]['areaInSqKm'])}</span>`,
+        currencyString: `<span>1 ${currencyBase}</span><span>${numberWithCommas(currencyRate)} ${currencyCode}</span>`,
+        dateString: `<span>Today is</span><span>${serObj.currentDate}</span>`,
         callingCodeString: callStr,
         domainString: domStr
     }
@@ -1833,6 +1856,12 @@ L.DomEvent.disableClickPropagation($('.preloader')[0]);
 
 
     $(document).ready(function () {
+
+        let myModal = new bootstrap.Modal(document.getElementById('weather'))
+
+        // $('.weather_marker').on('click', function(e){
+        //     $('#weather').modal('show');
+        // });
         
 
         stringify('worldInfo', serObj.worldInfo);
