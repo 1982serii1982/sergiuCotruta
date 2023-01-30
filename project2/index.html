@@ -16,9 +16,101 @@
         <div class="loader">Loading</div>
     </div>
     <header>
-        <div class="header_wrapper"></div>
+        <div class="header_wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6 d-flex gap-4">
+                        <div class="search_box">
+                            <input class="header_search" id="search" type="search" placeholder="Search" data-searched-value="">
+                            <button class="search_box_button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                        <button class="refresh_button"><i class="fa-solid fa-arrows-rotate"></i></button>
+                    </div>
+                    <div class="col-6">
+                        <div class="sort_box">
+                            <div class="sort_box_label">Sort By</div>
+                            <select class="header_select" name="select" id="select" data-selected-value = "firstName">
+                            </select>
+                            <button class="sort_box_button" data-selected-value = "asc"><i class="fa-regular fa-arrow-down-a-z"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
-    <aside></aside>
+    <aside>
+        <div class="aside_wrapper">
+            <div class="filters">
+                <h4 class="filters_header">Filter</h4>
+                <div class="filters_body">
+                    <div class="filters_item">
+                        <div class="check_box">
+                            <label for="name_checkbox">Name</label>
+                            <input class="name_checkbox" type="checkbox" id="name_checkbox">
+                        </div>
+                        <div class="setdata">
+                            <input class="name_input" type="search" placeholder="Fill in..">
+                            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                    </div>
+                    <div class="filters_item">
+                        <div class="check_box">
+                            <label for="surname_checkbox">Surname</label>
+                            <input class="surname_checkbox" type="checkbox" id="surname_checkbox">
+                        </div>
+                        <div class="setdata">
+                            <input class="surname_input" type="search" placeholder="Fill in..">
+                            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                    </div>
+                    <div class="filters_item">
+                        <div class="check_box">
+                            <label for="email_checkbox">E-mail</label>
+                            <input class="email_checkbox" type="checkbox" id="email_checkbox">
+                        </div>
+                        <div class="setdata">
+                            <input class="email_input" type="search" placeholder="Fill in..">
+                            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                    </div>
+                    <div class="filters_item">
+                        <div class="check_box">
+                            <label for="department_checkbox">Department</label>
+                            <input class="department_checkbox" type="checkbox" id="department_checkbox">
+                        </div>
+                        <div class="setdata">
+                            <select class="department_select" name="department" id="department_select">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="filters_item">
+                        <div class="check_box">
+                            <label for="location_checkbox">Location</label>
+                            <input class="location_checkbox" type="checkbox" id="location_checkbox">
+                        </div>
+                        <div class="setdata">
+                            <select class="location_select" name="location" id="location_select">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="add">
+                <h4 class="add_header">Add</h4>
+                <div class="add_body">
+                    <button class="add_user_button">User</button>
+                    <button class="add_department_button">Department</button>
+                    <button class="add_location_button">Location</button>
+                </div>
+            </div>
+            <div class="history">
+                <h4 class="history_header">History</h4>
+                <div class="history_body">
+                    <button class="history_button">History</button>
+                </div>
+            </div>
+        </div>
+    </aside>
     <main>
         <div class="main_wrapper">
 
