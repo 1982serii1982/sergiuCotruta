@@ -7,7 +7,7 @@
 
     header('Content-Type: application/json; charset=UTF-8');
 
-    $file = 'getAllEmployeeResult.txt';
+    
 
     $order = $_REQUEST['order'];
     $orderBy = $_REQUEST['orderBy'];
@@ -30,8 +30,7 @@
     $pdo = null;
     $stmt = null;
 
-    file_put_contents($file, print_r($result, true));
-
+    
     
     
     $array =[];

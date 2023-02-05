@@ -445,6 +445,11 @@ header{
     border-bottom-right-radius: 5px;
 }
 
+.apply_button{
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+}
 
 /******************************  ADD  *********************************************************/
 

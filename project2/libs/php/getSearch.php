@@ -11,7 +11,11 @@
 
     $order = $_REQUEST['order'];
     $orderBy = $_REQUEST['orderBy'];
-    $searchString = $_REQUEST['searchString'];
+    $inputArray['firstName'] = $_REQUEST['searchString'];
+    $inputArray['department'] = $_REQUEST['searchString'];
+    $inputArray['lastName'] = $_REQUEST['searchString'];
+    $inputArray['email'] = $_REQUEST['searchString'];
+    $inputArray['location'] = $_REQUEST['searchString'];
 
     
 	
@@ -20,24 +24,24 @@
             FROM personnel p 
             LEFT JOIN department d ON (d.id = p.departmentID) 
             LEFT JOIN location l ON (l.id = d.locationID) 
-            WHERE p.firstName LIKE '$searchString%'
-            OR d.name LIKE '$searchString%'
-            OR p.firstName LIKE '$searchString%'
-            OR p.email LIKE '$searchString%'
-            OR l.name LIKE '$searchString%'
+            WHERE p.firstName LIKE CONCAT('%', :firstName, '%')
+            OR d.name LIKE CONCAT('%', :department, '%')
+            OR p.lastName LIKE CONCAT('%', :lastName, '%')
+            OR p.email LIKE CONCAT('%', :email, '%')
+            OR l.name LIKE CONCAT('%', :location, '%')
             ORDER BY $orderBy $order";
 
 
-
+    file_put_contents($file, print_r($sql, true));
     
     
 
     $stmt = $pdo->prepare($sql);
-    $stmt->execute();
+    $stmt->execute($inputArray);
 
     $result = $stmt->fetchAll();
 
-    file_put_contents($file, print_r($result, true));
+    
 
     $pdo = null;
     $stmt = null;

@@ -29,9 +29,9 @@
                     <div class="col-6">
                         <div class="sort_box">
                             <div class="sort_box_label">Sort By</div>
-                            <select class="header_select" name="select" id="select" data-selected-value = "firstName">
+                            <select class="header_select" name="select" id="select" data-selected-value = "firstName" data-source = "">
                             </select>
-                            <button class="sort_box_button" data-selected-value = "asc"><i class="fa-regular fa-arrow-down-a-z"></i></button>
+                            <button class="sort_box_button" data-selected-value = "asc" data-source = ""><i class="fa-regular fa-arrow-down-a-z"></i></button>
                         </div>
                     </div>
                 </div>
@@ -49,8 +49,8 @@
                             <input class="name_checkbox" type="checkbox" id="name_checkbox">
                         </div>
                         <div class="setdata">
-                            <input class="name_input" type="search" placeholder="Fill in..">
-                            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input class="name_input" type="search" placeholder="Fill in.." data-searched-value="">
+                            <button class="name_button"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                     </div>
                     <div class="filters_item">
@@ -59,8 +59,8 @@
                             <input class="surname_checkbox" type="checkbox" id="surname_checkbox">
                         </div>
                         <div class="setdata">
-                            <input class="surname_input" type="search" placeholder="Fill in..">
-                            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input class="surname_input" type="search" placeholder="Fill in.." data-searched-value="">
+                            <button class="surname_button"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                     </div>
                     <div class="filters_item">
@@ -69,8 +69,8 @@
                             <input class="email_checkbox" type="checkbox" id="email_checkbox">
                         </div>
                         <div class="setdata">
-                            <input class="email_input" type="search" placeholder="Fill in..">
-                            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input class="email_input" type="search" placeholder="Fill in.." data-searched-value="">
+                            <button class="email_button"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                     </div>
                     <div class="filters_item">
@@ -79,7 +79,7 @@
                             <input class="department_checkbox" type="checkbox" id="department_checkbox">
                         </div>
                         <div class="setdata">
-                            <select class="department_select" name="department" id="department_select">
+                            <select class="department_select" name="department" id="department_select" data-selected-value="">
                             </select>
                         </div>
                     </div>
@@ -89,14 +89,15 @@
                             <input class="location_checkbox" type="checkbox" id="location_checkbox">
                         </div>
                         <div class="setdata">
-                            <select class="location_select" name="location" id="location_select">
+                            <select class="location_select" name="location" id="location_select" data-selected-value="">
                             </select>
                         </div>
                     </div>
                 </div>
+                <button class="apply_button" disabled>Apply</button>
             </div>
             <div class="add">
-                <h4 class="add_header">Add</h4>
+                <h4 class="add_header">Add/Delete</h4>
                 <div class="add_body">
                     <button class="add_user_button">User</button>
                     <button class="add_department_button">Department</button>
