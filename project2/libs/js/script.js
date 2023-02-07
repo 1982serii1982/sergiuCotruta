@@ -55,9 +55,17 @@ function errorajx(jqXHR, exception) {
         console.log(msg);
 };
 
-function selectChanger(keepClicked){
-    //Select
-    let selects = document.getElementsByTagName('select');
+function selectChanger(keepClicked = true, selective = false, className = ''){
+
+    let selects;
+
+    if(selective){
+        selects = document.querySelectorAll(`.${className}`);
+    }else{
+        selects = document.getElementsByTagName('select');
+    }
+
+    
     if (selects.length > 0) {
         selects_init();
     }
@@ -220,44 +228,96 @@ function selectChanger(keepClicked){
     }
 }
 
-function populateSelect(inputData, className = ''){
+function populateSelect(inputData, className = '', category){
+    switch(category){
+        case 'department':
+            let dataObj = {}, string = '', indexes = [];
+            inputData.data.forEach(function(v, i, a){
+                if(string !== v.name){
+                    indexes = [v.id, v.locationID];
+                    dataObj[v.name] = [];
+                    dataObj[v.name].push(indexes);
+                }else{
+                    indexes = [v.id, v.locationID];
+                    dataObj[v.name].push(indexes);
+                }
+                string = v.name;
+            });
 
-    if(className.length === 0){
-        Object.keys(inputData[0]).forEach(function(v, i, a){
-            switch(v){
-                case 'lastName':
-                    $('.header_select').append(`<option value="${v}">Surname</option>`);
-                    break;
-                case 'firstName':
-                    $('.header_select').append(`<option value="${v}" selected>Name</option>`);
-                    break;
-                case 'email':
-                    $('.header_select').append(`<option value="${v}">E-mail</option>`);
-                    break;
-                case 'department':
-                    $('.header_select').append(`<option value="${v}">Department</option>`);
-                    break;
-                case 'location':
-                    $('.header_select').append(`<option value="${v}">Location</option>`);
-                    break;
-                default:
-                    console.log();
+
+
+            let j = 0;
+            for(let key in dataObj){
+                let str = '';
+                dataObj[key].forEach(function(v, i, a){
+                    str += `${v[0]} ${v[1]}:`;
+                });
+
+                str = str.slice(0, str.length-1);
+
+                // let string = '2 9';
+                // let arr = string.split(":");
+                // console.log(arr);
+
+                if(j == 0){
+                    $(`.${className}`).append(`<option value="${key.toLowerCase()}" data-bind="${str}" selected>${key}</option>`);
+                    $(`.${className}`).attr('data-selected-value', `${key.toLowerCase()}`);
+                }else{
+                    $(`.${className}`).append(`<option value="${key.toLowerCase()}"  data-bind="${str}">${key}</option>`);
+                }
+                j++;
             }
-            
-        });
-    }else{
-        inputData.forEach(function(v, i, a){
-            if(i == 0){
-                $(`.${className}`).append(`<option value="${v.name.toLowerCase()}" selected>${v.name}</option>`);
-                $(`.${className}`).attr('data-selected-value', `${v.name.toLowerCase()}`);
-            }else{
-                $(`.${className}`).append(`<option value="${v.name.toLowerCase()}">${v.name}</option>`);
-            }
-        });
+
+            break;
+
+        case 'location':
+            inputData.data.forEach(function(v, i, a){
+                if(i == 0){
+                    $(`.${className}`).append(`<option data-index="${v.id}" value="${v.name.toLowerCase()}" selected>${v.name}</option>`);
+                    $(`.${className}`).attr('data-selected-value', `${v.name.toLowerCase()}`);
+                    $(`.${className}`).attr('data-selected-index', `${v.id}`);
+                }else{
+                    $(`.${className}`).append(`<option data-index="${v.id}" value="${v.name.toLowerCase()}">${v.name}</option>`);
+                }
+            });
+
+            break;
+        case 'personnel':
+            Object.keys(inputData.data[0]).forEach(function(v, i, a){
+                switch(v){
+                    case 'lastName':
+                        $('.header_select').append(`<option value="${v}">Surname</option>`);
+                        break;
+                    case 'firstName':
+                        $('.header_select').append(`<option value="${v}" selected>Name</option>`);
+                        break;
+                    case 'email':
+                        $('.header_select').append(`<option value="${v}">E-mail</option>`);
+                        break;
+                    case 'department':
+                        $('.header_select').append(`<option value="${v}">Department</option>`);
+                        break;
+                    case 'location':
+                        $('.header_select').append(`<option value="${v}">Location</option>`);
+                        break;
+                    default:
+                        console.log();
+                }
+                
+            });
+
+            break;
+        default:
+            console.log();
     }
     
 }
 /***************************************************************************/
+async function insertUser(inputObj){
+    let res = await phpRequest("insertUser", inputObj);
+    return res;
+}
+
 async function getDepartments(){
     let res = await phpRequest("getAllDepartments");
     return res;
@@ -265,6 +325,11 @@ async function getDepartments(){
 
 async function getLocations(){
     let res = await phpRequest("getAllLocation");
+    return res;
+}
+
+async function getCustomLocations(inputObj){
+    let res = await phpRequest("getCustomLocation", inputObj);
     return res;
 }
 
@@ -288,7 +353,7 @@ async function defaultGetAllEmployee(order = 'asc', orderBy = 'firstName'){
 function tableBuilder(inputData, orderBy = 'firstName'){
     let char = '', mainTemplate, headerTemplate, template, result ='', bodyTemplate = '';
 
-    inputData.forEach(function(currentVal, index, array){
+    inputData.data.forEach(function(currentVal, index, array){
 
         if(currentVal[orderBy].charAt(0).toUpperCase() !== char){
             if(index !== 0){
@@ -359,7 +424,7 @@ function tableBuilder(inputData, orderBy = 'firstName'){
         }
     });
 
-    $('.main_wrapper').append(`<div class="result_total">${inputData.length} result(s) found</div>`);
+    $('.main_wrapper').append(`<div class="result_total">${inputData.data.length} result(s) found</div>`);
     $('.main_wrapper').append(result);
 }
 
@@ -374,10 +439,12 @@ function tableBuilder(inputData, orderBy = 'firstName'){
     let locations = await getLocations();
     tableBuilder(allEmployeeResult);
 
-    populateSelect(departments, 'department_select');
-    populateSelect(locations, 'location_select');
-    populateSelect(allEmployeeResult);
-    selectChanger(true);
+    populateSelect(departments, 'department_select', 'department');
+    populateSelect(locations, 'location_select', 'location');
+    populateSelect(allEmployeeResult, '', 'personnel');
+    selectChanger(true, true, 'header_select');
+    selectChanger(true, true, 'department_select');
+    selectChanger(true, true, 'location_select');
 
 })();
 
@@ -549,7 +616,10 @@ $(document).ready(function () {
         tableBuilder(result);
     });
 
-    /************************************************ FILTER BOX ***************************/
+
+    /***************************************************************************************/
+    /************************************ FILTER BOX ***************************************/
+    /***************************************************************************************/
     $('.filters_body :checkbox').on('change',function(){
 
         let i = 0;
@@ -946,6 +1016,166 @@ $(document).ready(function () {
         $('.main_wrapper').empty();
         tableBuilder(result, selectedValue);
     });
+
+
+    /*******************************************************************************************/
+    /************************************ ADD/DELETE BOX ***************************************/
+    /*******************************************************************************************/
+
+
+    /*************************************** USER *****************************************/
+
+    $('.add_user_button').on('click', async function(){
+        let dataToSend = [];
+        let parent = $(this).parent();
+        if(parent.find('.select_add_user_department_select').length > 0 || parent.find('.select_add_user_location_select').length > 0){
+            let select_department_parent = parent.find('.select_add_user_department_select').parent();
+            let select_location_parent = parent.find('.select_add_user_location_select').parent();
+            parent.find('.select_add_user_department_select').remove();
+            parent.find('.select_add_user_location_select').remove();
+            select_department_parent.append(`<select name="addUserDepartment" class="add_user_department_select" id="add_user_department_select"></select>`);
+            select_location_parent.append(`<select name="addUserLocation" class="add_user_location_select" id="add_user_location_select"></select>`);
+        }
+
+        $('#add_user_name_input').attr('data-value', '');
+        $('#add_user_name_input').val('');
+        $('#add_user_surname_input').attr('data-value', '');
+        $('#add_user_surname_input').val('');
+        $('#add_user_email_input').attr('data-value', '');
+        $('#add_user_email_input').val('');
+
+
+        
+        let departments = await getDepartments();
+        populateSelect(departments, 'add_user_department_select', 'department');
+        selectChanger(true, true, 'add_user_department_select');
+
+        let dataBind = $('.add_user_department_select').find(":selected").attr('data-bind');
+        $('.add_user_department_select').attr('data-selected-bind', dataBind);
+        let dataBindArray = dataBind.split(":");
+        dataBindArray.forEach(function(v, i, a){
+            let res = v.split(" ");
+            dataToSend.push(res[1]);
+        });
+
+
+
+        let locations = await getCustomLocations({data: dataToSend});
+        
+        populateSelect(locations, 'add_user_location_select', 'location');
+        
+        selectChanger(true, true, 'add_user_location_select');
+    });
+
+    $('#add_user_name_input').on('blur', function(){
+        $(this).attr('data-value', $(this).val());
+    });
+
+    $('#add_user_name_input').on('focus', function(){
+        $('#add_user_name_input').css('background-color', '#ffffff');
+    });
+
+
+
+    $('#add_user_surname_input').on('blur', function(){
+        $(this).attr('data-value', $(this).val());
+    });
+
+    $('#add_user_surname_input').on('focus', function(){
+        $('#add_user_surname_input').css('background-color', '#ffffff');
+    });
+
+
+
+    $('#add_user_email_input').on('blur', function(){
+        $(this).attr('data-value', $(this).val());
+    });
+
+    $('#add_user_email_input').on('focus', function(){
+        $('#add_user_email_input').css('background-color', '#ffffff');
+    });
+
+
+
+    $(document).on('change', '.add_user_department_select', async function(){
+        let dataToSend = [];
+        $(this).attr('data-selected-value', $(this).val());
+        let select_location_parent = $('.add_user_location_select').parents('.add_user_item');
+        select_location_parent.find('.select_add_user_location_select').remove();
+        select_location_parent.append(`<select name="addUserLocation" class="add_user_location_select" id="add_user_location_select"></select>`);
+        
+        let dataBind = $(this).find(":selected").attr('data-bind');
+        $('.add_user_department_select').attr('data-selected-bind', dataBind);
+        let dataBindArray = dataBind.split(":");
+        dataBindArray.forEach(function(v, i, a){
+            let res = v.split(" ");
+            dataToSend.push(res[1]);
+        });
+
+        let locations = await getCustomLocations({data: dataToSend});
+        
+        populateSelect(locations, 'add_user_location_select', 'location');
+        
+        selectChanger(true, true, 'add_user_location_select');
+    });
+
+
+
+    $(document).on('change', '.add_user_location_select', function(){
+        $(this).attr('data-selected-value', $(this).val());
+        $(this).attr('data-selected-index', $(this).find(':selected').attr('data-index'));
+    });
+
+
+
+    $('.add_user_save_button').on('click', async function(){
+        let dataObj = {}, k = 0;
+
+        if($('#add_user_name_input').attr('data-value') !== ''){
+            dataObj['firstName'] = $('#add_user_name_input').attr('data-value');
+        }else{
+            $('#add_user_name_input').css('background-color', '#ff8c8c');
+            k++;
+        }
+
+        if($('#add_user_surname_input').attr('data-value') !== ''){
+            dataObj['lastName'] = $('#add_user_surname_input').attr('data-value');
+        }else{
+            $('#add_user_surname_input').css('background-color', '#ff8c8c');
+            k++;
+        }
+
+        if($('#add_user_email_input').attr('data-value') !== ''){
+            dataObj['email'] = $('#add_user_email_input').attr('data-value');
+        }else{
+            $('#add_user_email_input').css('background-color', '#ff8c8c');
+            k++;
+        }
+
+        if(k !== 0){
+            return;
+        }
+
+        let locationID = $('.add_user_location_select').attr('data-selected-index');
+        let departmentBindValue = $('.add_user_department_select').attr('data-selected-bind');//in format with : splited
+
+        let departmentBindValueSplited = departmentBindValue.split(':');
+        departmentBindValueSplited.forEach(function(v, i, a){
+            let res = v.split(" ");
+            if(res[1] === locationID){
+                dataObj['departmentID'] = res[0];
+            }
+        });
+
+        console.log(dataObj);
+        let result = await insertUser(dataObj);
+        //$('.add_user_close_button').trigger('click');
+    });
+
+
+
+
+
 
 
 

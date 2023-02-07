@@ -99,9 +99,85 @@
             <div class="add">
                 <h4 class="add_header">Add/Delete</h4>
                 <div class="add_body">
-                    <button class="add_user_button">User</button>
-                    <button class="add_department_button">Department</button>
-                    <button class="add_location_button">Location</button>
+                    <div class="add_user">
+                        <button type="button" class="add_user_button" data-bs-toggle="modal" data-bs-target="#addUserModal">User</button>
+                        <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="addUserModalLabel">Add User</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="add_user_item">
+                                        <label for="add_user_name_input">Name</label>
+                                        <input type="text" id="add_user_name_input" placeholder="Fill in..." data-value="">
+                                    </div>
+                                    <div class="add_user_item">
+                                        <label for="add_user_surname_input">Surname</label>
+                                        <input type="text" id="add_user_surname_input" placeholder="Fill in..." data-value="">
+                                    </div>
+                                    <div class="add_user_item">
+                                        <label for="add_user_email_input">E-mail</label>
+                                        <input type="text" id="add_user_email_input" placeholder="Fill in..." data-value="">
+                                    </div>
+                                    <div class="add_user_item">
+                                        <label for="add_user_department_select">Department</label>
+                                        <select name="addUserDepartment" class="add_user_department_select" id="add_user_department_select"></select>
+                                    </div>
+                                    <div class="add_user_item">
+                                        <label for="add_user_location_select">Location</label>
+                                        <select name="addUserLocation" class="add_user_location_select" id="add_user_location_select"></select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary add_user_close_button" data-bs-dismiss="modal">Discard</button>
+                                  <button type="button" class="btn btn-primary add_user_save_button">Save</button>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="add_department">
+                        <button class="add_department_button">Department</button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  ...
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="add_location">
+                        <button class="add_location_button">Location</button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  ...
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
                 </div>
             </div>
             <div class="history">

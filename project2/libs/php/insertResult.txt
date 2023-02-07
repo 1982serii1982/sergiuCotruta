@@ -1,0 +1,7 @@
+Array
+(
+    [firstName] => sergiu
+    [lastName] => cotruta
+    [email] => serser
+    [departmentID] => 1
+)

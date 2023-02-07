@@ -7,22 +7,23 @@
 
     header('Content-Type: application/json; charset=UTF-8');
 
+    // $file = 'insertResult.txt';
+
+    // file_put_contents($file, print_r($_REQUEST, true));
+
+
+
+    $sql = "INSERT INTO personnel (firstName, lastName, email, departmentID) 
+            VALUES (:firstName, :lastName, :email, :departmentID)";
+
     
-
-    $order = $_REQUEST['order'];
-    $orderBy = $_REQUEST['orderBy'];
-
     
-	
-
-    $sql = "SELECT p.lastName AS lastName, p.firstName AS firstName, p.jobTitle AS jobTitle, p.id AS id, p.email AS email, d.name AS department, l.name AS location  
-            FROM personnel p 
-            LEFT JOIN department d ON (d.id = p.departmentID) 
-            LEFT JOIN location l ON (l.id = d.locationID) 
-            ORDER BY " . $orderBy . " " . $order;
-
 
     $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':firstName', ucfirst(strtolower($_REQUEST['firstName'])), PDO::PARAM_STR);
+    $stmt->bindValue(':lastName', ucfirst(strtolower($_REQUEST['lastName'])), PDO::PARAM_STR);
+    $stmt->bindValue(':email', $_REQUEST['email'], PDO::PARAM_STR);
+    $stmt->bindValue(':departmentID', intval($_REQUEST['departmentID']), PDO::PARAM_INT);
     $error = $stmt->execute();
 
     if($error === false){

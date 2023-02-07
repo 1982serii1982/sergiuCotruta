@@ -3,6 +3,8 @@
     ini_set('display_errors', 'On');
     error_reporting(E_ALL);
 
+    $executionStartTime = microtime(true);
+
     function var_dump_ret($mixed = null) {
         ob_start();
         var_dump($mixed);
@@ -29,7 +31,19 @@
     try {
         $pdo = new PDO($dsn, $user, $pass, $options);
     } catch (\PDOException $e) {
+        $output['status']['code'] = "300";
+		$output['status']['name'] = "failure";
+		$output['status']['description'] = "database unavailable";
+		$output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
+		$output['data'] = [];
+
+        $pdo = null;
+
+		echo json_encode($output);
+
         throw new \PDOException($e->getMessage(), (int)$e->getCode());
+
+        exit;
     }
 
     
