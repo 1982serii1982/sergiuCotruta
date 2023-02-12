@@ -1,7 +1,133 @@
 Array
 (
-    [firstName] => sergiu
-    [lastName] => cotruta
-    [email] => serser
-    [departmentID] => 1
+    [0] => Array
+        (
+            [id] => 16
+            [firstName] => Tracee
+            [lastName] => Gisbourn
+            [jobTitle] => 
+            [email] => tgisbournf@bloglines.com
+            [departmentID] => 10
+        )
+
+    [1] => Array
+        (
+            [id] => 17
+            [firstName] => Taylor
+            [lastName] => St. Quintin
+            [jobTitle] => 
+            [email] => tstquinting@chronoengine.com
+            [departmentID] => 10
+        )
+
+    [2] => Array
+        (
+            [id] => 18
+            [firstName] => Lin
+            [lastName] => Klassmann
+            [jobTitle] => 
+            [email] => lklassmannh@indiatimes.com
+            [departmentID] => 10
+        )
+
+    [3] => Array
+        (
+            [id] => 41
+            [firstName] => Harwell
+            [lastName] => Jefferys
+            [jobTitle] => 
+            [email] => hjefferys14@jimdo.com
+            [departmentID] => 10
+        )
+
+    [4] => Array
+        (
+            [id] => 49
+            [firstName] => Nevile
+            [lastName] => Schimaschke
+            [jobTitle] => 
+            [email] => nschimaschke1c@hexun.com
+            [departmentID] => 10
+        )
+
+    [5] => Array
+        (
+            [id] => 51
+            [firstName] => Emmery
+            [lastName] => Darben
+            [jobTitle] => 
+            [email] => edarben1e@mapquest.com
+            [departmentID] => 10
+        )
+
+    [6] => Array
+        (
+            [id] => 74
+            [firstName] => Heida
+            [lastName] => Gallone
+            [jobTitle] => 
+            [email] => hgallone21@hostgator.com
+            [departmentID] => 10
+        )
+
+    [7] => Array
+        (
+            [id] => 80
+            [firstName] => Brittney
+            [lastName] => Gaskal
+            [jobTitle] => 
+            [email] => bgaskal27@weather.com
+            [departmentID] => 10
+        )
+
+    [8] => Array
+        (
+            [id] => 89
+            [firstName] => Shell
+            [lastName] => Risebarer
+            [jobTitle] => 
+            [email] => srisebarer2g@patch.com
+            [departmentID] => 10
+        )
+
+    [9] => Array
+        (
+            [id] => 93
+            [firstName] => Ki
+            [lastName] => Tomasini
+            [jobTitle] => 
+            [email] => ktomasini2k@cnbc.com
+            [departmentID] => 10
+        )
+
+    [10] => Array
+        (
+            [id] => 94
+            [firstName] => Chadd
+            [lastName] => McGettrick
+            [jobTitle] => 
+            [email] => cmcgettrick2l@simplemachines.org
+            [departmentID] => 10
+        )
+
+    [11] => Array
+        (
+            [id] => 98
+            [firstName] => Cherye
+            [lastName] => de Cullip
+            [jobTitle] => 
+            [email] => cdecullip2p@loc.gov
+            [departmentID] => 10
+        )
+
+    [12] => Array
+        (
+            [id] => 100
+            [firstName] => Shae
+            [lastName] => Johncey
+            [jobTitle] => 
+            [email] => sjohncey2r@bluehost.com
+            [departmentID] => 10
+        )
+
 )

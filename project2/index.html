@@ -15,6 +15,13 @@
         <div class="preloader_message"></div>
         <div class="loader">Loading</div>
     </div>
+    <div class="toast hide align-items-center position-absolute p-1" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body">
+         </div>
+          <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
     <header>
         <div class="header_wrapper">
             <div class="container">
@@ -139,40 +146,111 @@
                         </div>
                     </div>
                     <div class="add_department">
-                        <button class="add_department_button">Department</button>
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <button type="button" class="add_department_button" data-bs-toggle="modal" data-bs-target="#addDepartmentModal">Department</button>
+                        <div class="modal fade" id="addDepartmentModal" tabindex="-1" aria-labelledby="addDepartmentModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                  <h5 class="modal-title" id="addDepartmentModalLabel">Add/Delete Department</h5>
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                  ...
+                                    <ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="pills-add-new-tab" data-bs-toggle="pill" data-bs-target="#pills-add-new" type="button" role="tab" aria-controls="pills-add-new" aria-selected="true">Add New</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="pills-add-existing-tab" data-bs-toggle="pill" data-bs-target="#pills-add-existing" type="button" role="tab" aria-controls="pills-add-existing" aria-selected="false">Add Existing</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="pills-delete-tab" data-bs-toggle="pill" data-bs-target="#pills-delete" type="button" role="tab" aria-controls="pills-delete" aria-selected="false">Delete</button>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content" id="pills-tabContent">
+                                        <div class="tab-pane fade show active" id="pills-add-new" role="tabpanel" aria-labelledby="pills-add-new-tab">
+                                            <div class="add_new_item">
+                                                <label for="add_new_department_input">Department</label>
+                                                <input type="text" id="add_new_department_input" data-value="" class="add_new_department_input" placeholder="Fill in ...">
+                                            </div>
+                                            <div class="add_new_item">
+                                                <label for="add_new_location_select">Location</label>
+                                                <select name="addNewLocationSelect" id="add_new_location_select" class="add_new_location_select"></select>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="pills-add-existing" role="tabpanel" aria-labelledby="pills-add-existing-tab">
+                                            <div class="add_existing_item">
+                                                <label for="add_existing_department_select">Department</label>
+                                                <select name="addExistingDepartmentSelect" id="add_existing_department_select" class="add_existing_department_select"></select>
+                                            </div>
+                                            <div class="add_existing_item">
+                                                <label for="add_existing_location_select">Location</label>
+                                                <select name="addExistingLocationSelect" id="add_existing_location_select" class="add_existing_location_select"></select>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="pills-delete" role="tabpanel" aria-labelledby="pills-delete-tab">
+                                            <div class="delete_item">
+                                                <label for="delete_department_select">Department</label>
+                                                <select name="deleteDepartmentSelect" id="delete_department_select" class="delete_department_select"></select>
+                                            </div>
+                                            <div class="delete_item">
+                                                <label for="delete_location_select">Location</label>
+                                                <select name="deleteLocationSelect" id="delete_location_select" class="delete_location_select"></select>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                  <button type="button" class="btn btn-primary">Save changes</button>
+                                  <button type="button" class="btn btn-secondary add_department_close_button" data-bs-dismiss="modal">Discard</button>
+                                  <button type="button" class="btn btn-primary add_department_save_button" data-source="add_new">Save</button>
                                 </div>
                               </div>
                             </div>
                           </div>
                     </div>
                     <div class="add_location">
-                        <button class="add_location_button">Location</button>
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <button type="button" class="add_location_button" data-bs-toggle="modal" data-bs-target="#addLocationModal">Location</button>
+                        <div class="modal fade" id="addLocationModal" tabindex="-1" aria-labelledby="addLocationModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                  <h5 class="modal-title" id="addLocationModalLabel">Add/Delete Location</h5>
                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                  ...
+                                    <ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="pills-add-new-location-tab" data-bs-toggle="pill" data-bs-target="#pills-add-new-location" type="button" role="tab" aria-controls="pills-add-new-location" aria-selected="true">Add New</button>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="pills-delete-location-tab" data-bs-toggle="pill" data-bs-target="#pills-delete-location" type="button" role="tab" aria-controls="pills-delete-location" aria-selected="false">Delete</button>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content" id="pills-tabContent">
+                                        <div class="tab-pane fade show active" id="pills-add-new" role="tabpanel" aria-labelledby="pills-add-new-tab">
+                                            <div class="add_new_item">
+                                                <label for="add_new_department_input">Department</label>
+                                                <input type="text" id="add_new_department_input" data-value="" class="add_new_department_input" placeholder="Fill in ...">
+                                            </div>
+                                            <div class="add_new_item">
+                                                <label for="add_new_location_select">Location</label>
+                                                <select name="addNewLocationSelect" id="add_new_location_select" class="add_new_location_select"></select>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="pills-delete" role="tabpanel" aria-labelledby="pills-delete-tab">
+                                            <div class="delete_item">
+                                                <label for="delete_department_select">Department</label>
+                                                <select name="deleteDepartmentSelect" id="delete_department_select" class="delete_department_select"></select>
+                                            </div>
+                                            <div class="delete_item">
+                                                <label for="delete_location_select">Location</label>
+                                                <select name="deleteLocationSelect" id="delete_location_select" class="delete_location_select"></select>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                  <button type="button" class="btn btn-primary">Save changes</button>
+                                  <button type="button" class="btn btn-secondary add_location_close_button" data-bs-dismiss="modal">Discard</button>
+                                  <button type="button" class="btn btn-primary add_location_save_button">Save</button>
                                 </div>
                               </div>
                             </div>

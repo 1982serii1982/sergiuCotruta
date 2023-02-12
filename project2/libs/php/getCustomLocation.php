@@ -7,27 +7,50 @@
 
     header('Content-Type: application/json; charset=UTF-8');
 
-    $file = 'getAllLocation.txt';
+    $file = 'get.txt';
 
     
 
     $inputArray = [];
 
-    $sql = "SELECT * FROM location WHERE id IN ( ";
+    if($_REQUEST['not']){
 
-    foreach ($_REQUEST['data'] as $key => $value){
-        if($key == 0){
-            $sql .= ":id" . $key;
-            $inputArray['id' . $key] = $value;
-        }else{
-            $sql .= ",:id" . $key;
-            $inputArray['id' . $key] = $value;
+        $sql = "SELECT * FROM location WHERE id NOT IN ( ";
+
+        foreach ($_REQUEST['data'] as $key => $value){
+            if($key == 0){
+                $sql .= ":id" . $key;
+                $inputArray['id' . $key] = $value;
+            }else{
+                $sql .= ",:id" . $key;
+                $inputArray['id' . $key] = $value;
+            }
+            
         }
-        
+
+
+        $sql .= ")";
+
+    }else{
+
+        $sql = "SELECT * FROM location WHERE id IN ( ";
+
+        foreach ($_REQUEST['data'] as $key => $value){
+            if($key == 0){
+                $sql .= ":id" . $key;
+                $inputArray['id' . $key] = $value;
+            }else{
+                $sql .= ",:id" . $key;
+                $inputArray['id' . $key] = $value;
+            }
+            
+        }
+
+
+        $sql .= ")";
     }
 
-
-    $sql .= ")";
+    
     
     
 
@@ -50,21 +73,33 @@
 
     $result = $stmt->fetchAll();
 
-    $output['status']['code'] = "200";
-	$output['status']['name'] = "ok";
-	$output['status']['description'] = "success";
-	$output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
-	$output['data'] = [];
-
-
     $pdo = null;
     $stmt = null;
 
-    file_put_contents($file, print_r($result, true));
-    
-    foreach($result as $row){
-        array_push($output['data'], $row);
+
+    if(count($result) > 0){
+        $output['status']['code'] = "200";
+        $output['status']['name'] = "ok";
+        $output['status']['description'] = "success";
+        $output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
+        $output['data'] = [];
+
+        foreach($result as $row){
+            array_push($output['data'], $row);
+        }
+    }else{
+        $output['status']['code'] = "204";
+        $output['status']['message'] = "No data to retrieve";
     }
+
+    
+
+
+    
+
+    //file_put_contents($file, print_r($result, true));
+    
+    
 
     
 

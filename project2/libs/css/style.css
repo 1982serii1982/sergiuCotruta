@@ -43,6 +43,13 @@ main{
     display: none;
 }
 
+.toast{
+    top: 6%;
+    left: 3%;
+    background-color: #279f13;
+    color: white;
+}
+
 .result_header{
     text-align: center;
     background-color: #f6a340;
@@ -465,6 +472,8 @@ header{
 
 /******************************  ADD  *********************************************************/
 
+/******************************  USER  *********************************************************/
+
 .add_header{
     border-bottom: 1px solid red;
     margin-bottom: 25px;
@@ -505,6 +514,31 @@ header{
 
 .select_add_user_location_select{
     width: 65%;
+}
+
+/******************************  DEPARTMENT  *********************************************************/
+
+.add_new_item,
+.add_existing_item,
+.delete_item{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    width: 65%;
+    justify-content: space-between;
+}
+
+.add_new_department_input,
+.select_add_new_location_select,
+.select_add_existing_department_select,
+.select_add_existing_location_select,
+.select_delete_department_select,
+.select_delete_location_select{
+    width: 63%;
+}
+
+.add_new_department_input{
+    border-radius: 6px;
 }
 
 /******************************  HISTORY  *********************************************************/

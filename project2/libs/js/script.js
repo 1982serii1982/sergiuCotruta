@@ -313,6 +313,17 @@ function populateSelect(inputData, className = '', category){
     
 }
 /***************************************************************************/
+
+async function deleteDepartment(inputObj){
+    let res = await phpRequest("deleteDepartment", inputObj);
+    return res;
+}
+
+async function insertDepartment(inputObj){
+    let res = await phpRequest("insertDepartment", inputObj);
+    return res;
+}
+
 async function insertUser(inputObj){
     let res = await phpRequest("insertUser", inputObj);
     return res;
@@ -434,10 +445,12 @@ function tableBuilder(inputData, orderBy = 'firstName'){
 (async function(){
 
     
+    
     let allEmployeeResult = await defaultGetAllEmployee();
     let departments = await getDepartments();
     let locations = await getLocations();
     tableBuilder(allEmployeeResult);
+
 
     populateSelect(departments, 'department_select', 'department');
     populateSelect(locations, 'location_select', 'location');
@@ -450,8 +463,14 @@ function tableBuilder(inputData, orderBy = 'firstName'){
 
 $(document).ready(function () {
 
+    let myToastEl = document.querySelector('.toast');
+    let myToast = new bootstrap.Toast(myToastEl, {autohide: false});
+
     
-    /************************************************ CHANGE BOX ***************************/
+
+/****************************************************************************************************/
+/************************************************* CHANGE BOX ***************************************/
+/****************************************************************************************************/
 
 
     $('.header_select').on('change', async function(e){
@@ -510,7 +529,9 @@ $(document).ready(function () {
         $('.header_select').attr('data-selected-value', $(this).children("option:selected").val());
     });
 
-    /************************************************ SORT BOX ***************************/
+/****************************************************************************************************/
+/************************************************* SORT BOX *****************************************/
+/****************************************************************************************************/
 
 
     $('.sort_box_button').on('click', async function(){
@@ -581,7 +602,9 @@ $(document).ready(function () {
         
     });
 
-    /************************************************ SEARCH BOX ***************************/
+/****************************************************************************************************/
+/************************************************* SEARCH BOX ***************************************/
+/****************************************************************************************************/
 
     $('.header_search').on('keypress', function(e){
         if(e.key === 'Enter'){
@@ -617,9 +640,9 @@ $(document).ready(function () {
     });
 
 
-    /***************************************************************************************/
-    /************************************ FILTER BOX ***************************************/
-    /***************************************************************************************/
+/****************************************************************************************************/
+/************************************************* FILTER BOX ***************************************/
+/****************************************************************************************************/
     $('.filters_body :checkbox').on('change',function(){
 
         let i = 0;
@@ -861,8 +884,6 @@ $(document).ready(function () {
     /*************************************** DEPARTMENT ROW *****************************************/
 
     
-
-
     $('#department_select').on('change', async function(e){
         let dataObj = {};
         let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
@@ -910,9 +931,6 @@ $(document).ready(function () {
     });
 
     /*************************************** LOCATION ROW *****************************************/
-
-
-    
 
 
     $('#location_select').on('change', async function(e){
@@ -1018,12 +1036,13 @@ $(document).ready(function () {
     });
 
 
-    /*******************************************************************************************/
-    /************************************ ADD/DELETE BOX ***************************************/
-    /*******************************************************************************************/
+/*===================================================================================================*/
+/*=================================== ADD/DELETE BOX ================================================*/
+/*===================================================================================================*/
 
-
-    /*************************************** USER *****************************************/
+/*--------------------------------------------------------------------------------------------------- */
+/*---------------------------------------------- USER ------------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------- */
 
     $('.add_user_button').on('click', async function(){
         let dataToSend = [];
@@ -1060,7 +1079,7 @@ $(document).ready(function () {
 
 
 
-        let locations = await getCustomLocations({data: dataToSend});
+        let locations = await getCustomLocations({data: dataToSend, not: 0});
         
         populateSelect(locations, 'add_user_location_select', 'location');
         
@@ -1112,7 +1131,7 @@ $(document).ready(function () {
             dataToSend.push(res[1]);
         });
 
-        let locations = await getCustomLocations({data: dataToSend});
+        let locations = await getCustomLocations({data: dataToSend, not: 0});
         
         populateSelect(locations, 'add_user_location_select', 'location');
         
@@ -1167,10 +1186,351 @@ $(document).ready(function () {
             }
         });
 
-        console.log(dataObj);
         let result = await insertUser(dataObj);
-        //$('.add_user_close_button').trigger('click');
+        $('.add_user_close_button').trigger('click');
     });
+
+/*--------------------------------------------------------------------------------------------------- */
+/*---------------------------------------------- DEPARTMENT ------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------- */
+
+    $('.add_department_button').on('click', async function(){
+        myToast.hide();
+        let addExistingDataToSend = [];
+        let deleteDataToSend = [];
+        let parent = $(this).parent();
+
+        /****************************************  ADD NEW ***************************************/
+
+        if(parent.find('.select_add_new_location_select').length > 0){
+            let select_parent = $('.select_add_new_location_select').parent();
+            $('.select_add_new_location_select').remove();
+            select_parent.append('<select name="addNewLocationSelect" id="add_new_location_select" class="add_new_location_select"></select>')
+        }
+
+        /****************************************  ADD EXISTING ***************************************/
+
+        if(parent.find('.select_add_existing_department_select').length > 0){
+            let select_parent = $('.select_add_existing_department_select').parent();
+            $('.select_add_existing_department_select').remove();
+            select_parent.append('<select name="addExistingDepartmentSelect" id="add_existing_department_select" class="add_existing_department_select"></select>')
+        }
+
+        if(parent.find('.select_add_existing_location_select').length > 0){
+            let select_parent = $('.select_add_existing_location_select').parent();
+            $('.select_add_existing_location_select').remove();
+            select_parent.append('<select name="addExistingLocationSelect" id="add_existing_location_select" class="add_existing_location_select"></select>')
+        }
+
+        /****************************************  DELETE ******************************************/
+
+        if(parent.find('.select_delete_department_select').length > 0){
+            let select_parent = $('.select_delete_department_select').parent();
+            $('.select_delete_department_select').remove();
+            select_parent.append('<select name="deleteDepartmentSelect" id="delete_department_select" class="delete_department_select"></select>')
+        }
+
+        if(parent.find('.select_delete_location_select').length > 0){
+            let select_parent = $('.select_delete_location_select').parent();
+            $('.select_delete_location_select').remove();
+            select_parent.append('<select name="deleteLocationSelect" id="delete_location_select" class="delete_location_select"></select>')
+        }
+/********************************************************************************************************* */
+        /****************************************  ADD NEW ***************************************/
+
+        let add_new_location = await getLocations();
+        populateSelect(add_new_location, 'add_new_location_select', 'location');
+        selectChanger(true, true, 'add_new_location_select');
+        $('.add_new_department_input').attr('data-value', '');
+        $('.add_new_department_input').val('');
+
+        /****************************************  ADD EXISTING ***************************************/
+
+        let add_existing_departments = await getDepartments();
+        populateSelect(add_existing_departments, 'add_existing_department_select', 'department');
+        selectChanger(true, true, 'add_existing_department_select');
+
+        let addExistingDataBind = $('.add_existing_department_select').find(":selected").attr('data-bind');
+        $('.add_existing_department_select').attr('data-selected-bind', addExistingDataBind);
+        let addExistingDataBindArray = addExistingDataBind.split(":");
+        addExistingDataBindArray.forEach(function(v, i, a){
+            let res = v.split(" ");
+            addExistingDataToSend.push(res[1]);
+        });
+
+        let add_existing_location = await getCustomLocations({data: addExistingDataToSend, not: 1});
+        if(add_existing_location.status.code === '200'){
+            populateSelect(add_existing_location, 'add_existing_location_select', 'location');
+            selectChanger(true, true, 'add_existing_location_select');
+        }else{
+            $('.add_existing_location_select').append(`<option>No location to add</option>`);
+            $('.add_existing_location_select').attr('data-selected-value', '');
+            $('.add_existing_location_select').attr('data-selected-index', '');
+            selectChanger(true, true, 'add_existing_location_select');
+        }
+        
+
+        /****************************************  DELETE ***************************************/
+
+        let delete_departments = await getDepartments();
+        populateSelect(delete_departments, 'delete_department_select', 'department');
+        selectChanger(true, true, 'delete_department_select');
+
+        let deleteDataBind = $('.delete_department_select').find(":selected").attr('data-bind');
+        $('.delete_department_select').attr('data-selected-bind', deleteDataBind);
+        let deleteDataBindArray = deleteDataBind.split(":");
+        deleteDataBindArray.forEach(function(v, i, a){
+            let res = v.split(" ");
+            deleteDataToSend.push(res[1]);
+        });
+
+        let delete_location = await getCustomLocations({data: deleteDataToSend, not: 0});
+        if(delete_location.status.code === '200'){
+            populateSelect(delete_location, 'delete_location_select', 'location');
+            selectChanger(true, true, 'delete_location_select');
+        }
+    });
+
+
+
+/******************************************************************************************************/
+/****************************************** DEPARTMENT TAB BUTTONS ************************************ */
+/******************************************************************************************************/
+
+    $('#pills-add-new-tab').on('click', function(){
+        $('.add_department_save_button').attr('data-source', 'add_new');
+        $('.add_department_save_button').html('Save');
+    });
+
+    $('#pills-add-existing-tab').on('click', function(){
+        $('.add_department_save_button').attr('data-source', 'add_existing');
+        $('.add_department_save_button').html('Save');
+    });
+
+    $('#pills-delete-tab').on('click', function(){
+        $('.add_department_save_button').attr('data-source', 'delete');
+        $('.add_department_save_button').html('Delete');
+    });
+
+/******************************************************************************************************/
+/******************************************************************************************************/
+/******************************************************************************************************/
+
+
+/******************************************************************************************************/
+/****************************************** DEPARTMENT ADD NEW SECTION ****************************** */
+/******************************************************************************************************/
+
+    $('.add_new_department_input').on('blur', function(){
+        $(this).attr('data-value', $(this).val());
+    });
+
+    $('.add_new_department_input').on('keyup', function(){
+        $('.add_new_department_input').css('box-shadow', 'none');
+        $('.add_new_department_input').css('border-color', 'black');
+    });
+
+    $(document).on('change', '.add_new_location_select', function(){
+        $(this).attr('data-selected-value', $(this).val());
+        $(this).attr('data-selected-index', $(this).find(':selected').attr('data-index'));
+    });
+
+/******************************************************************************************************/
+/******************************************************************************************************/
+/******************************************************************************************************/
+
+/******************************************************************************************************/
+/************************************* DEPARTMENT ADD EXISTING SECTION ****************************** */
+/******************************************************************************************************/
+
+    $(document).on('change', '.add_existing_department_select', async function(){
+        let dataToSend = [];
+        $(this).attr('data-selected-value', $(this).val());
+        let select_location_parent = $('.add_existing_location_select').parents('.add_existing_item');
+        select_location_parent.find('.select_add_existing_location_select').remove();
+        select_location_parent.append(`<select name="addExistingLocationSelect" id="add_existing_location_select" class="add_existing_location_select"></select>`);
+        
+        let dataBind = $(this).find(":selected").attr('data-bind');
+        $('.add_existing_department_select').attr('data-selected-bind', dataBind);
+        let dataBindArray = dataBind.split(":");
+        dataBindArray.forEach(function(v, i, a){
+            let res = v.split(" ");
+            dataToSend.push(res[1]);
+        });
+
+        let locations = await getCustomLocations({data: dataToSend, not: 1});
+
+        if(locations.status.code === '200'){
+           populateSelect(locations, 'add_existing_location_select', 'location');
+           selectChanger(true, true, 'add_existing_location_select');
+        }else{
+            $('.add_existing_location_select').append(`<option>No location to add</option>`);
+            $('.add_existing_location_select').attr('data-selected-value', '');
+            $('.add_existing_location_select').attr('data-selected-index', '');
+            selectChanger(true, true, 'add_existing_location_select');
+        }
+        
+        
+    });
+
+    $(document).on('change', '.add_existing_location_select', function(){
+        $(this).attr('data-selected-value', $(this).val());
+        $(this).attr('data-selected-index', $(this).find(':selected').attr('data-index'));
+    });
+
+/******************************************************************************************************/
+/******************************************************************************************************/
+/******************************************************************************************************/
+
+/******************************************************************************************************/
+/************************************* DEPARTMENT DELETE SECTION ************************************ */
+/******************************************************************************************************/
+
+    $(document).on('change', '.delete_department_select', async function(){
+        let dataToSend = [];
+        $(this).attr('data-selected-value', $(this).val());
+        let select_location_parent = $('.delete_location_select').parents('.delete_item');
+        select_location_parent.find('.select_delete_location_select').remove();
+        select_location_parent.append(`<select name="deleteLocationSelect" id="delete_location_select" class="delete_location_select"></select>`);
+        
+        let dataBind = $(this).find(":selected").attr('data-bind');
+        $('.delete_department_select').attr('data-selected-bind', dataBind);
+        let dataBindArray = dataBind.split(":");
+        dataBindArray.forEach(function(v, i, a){
+            let res = v.split(" ");
+            dataToSend.push(res[1]);
+        });
+
+        let locations = await getCustomLocations({data: dataToSend, not: 0});
+
+        if(locations.status.code === '200'){
+           populateSelect(locations, 'delete_location_select', 'location');
+           selectChanger(true, true, 'delete_location_select');
+        }
+        
+    });
+
+    $(document).on('change', '.delete_location_select', function(){
+        $(this).attr('data-selected-value', $(this).val());
+        $(this).attr('data-selected-index', $(this).find(':selected').attr('data-index'));
+    });
+
+/******************************************************************************************************/
+/******************************************************************************************************/
+/******************************************************************************************************/
+
+
+    $('.add_department_save_button').on('click', async function(){
+        
+        let dataObj = {};
+        switch($(this).attr('data-source')){
+            case 'add_new':
+                if($('.add_new_department_input').attr('data-value') !== ''){
+                    dataObj['department'] = $('.add_new_department_input').attr('data-value');
+                }else{
+                    $('.add_new_department_input').css('box-shadow', '0 0 6px 1px red');
+                    $('.add_new_department_input').css('border-color', 'red');
+                    break;
+                }
+
+                dataObj['locationID'] = $('.add_new_location_select').attr('data-selected-index');
+                dataObj['locationName'] = $('.add_new_location_select').attr('data-selected-value');
+                dataObj['ref'] = 'add_new';
+
+                let result1 = await insertDepartment(dataObj);
+                $('.btn-close').trigger('click');
+                if(result1.status.code === '302'){
+                    $('.toast-body').html(result1.status.message);
+                    $('.toast').css('background-color', '#ce1a1a');
+                }
+
+                if(result1.status.code === '200'){
+                    $('.toast-body').html(result1.status.message);
+                    $('.toast').css('background-color', '#279f13');
+                }
+                
+                myToast.show();
+                break;
+            case 'add_existing':
+                
+                if($('.add_existing_location_select').attr('data-selected-index') == ''){
+                    $('.btn-close').trigger('click');
+                    $('.toast-body').html('<span>There is no location available to add for this department.</br>Go to Location section to add new location</span>');
+                    $('.toast').css('background-color', '#ce1a1a');
+                    myToast.show();
+                    break;
+                }
+
+                dataObj['departmentName'] = $('.add_existing_department_select').attr('data-selected-value');
+                dataObj['locationName'] = $('.add_existing_location_select').attr('data-selected-value');
+                dataObj['locationID'] = $('.add_existing_location_select').attr('data-selected-index');
+                dataObj['ref'] = 'add_existing';
+
+                let result2 = await insertDepartment(dataObj);
+
+                $('.btn-close').trigger('click');
+                if(result2.status.code === '302'){
+                    $('.toast-body').html(result2.status.message);
+                    $('.toast').css('background-color', '#ce1a1a');
+                }
+
+                if(result2.status.code === '200'){
+                    $('.toast-body').html(result2.status.message);
+                    $('.toast').css('background-color', '#279f13');
+                }
+                
+                myToast.show();
+                break;
+            case 'delete':
+                dataObj['departmentName'] = $('.delete_department_select').attr('data-selected-value');
+                dataObj['locationName'] = $('.delete_location_select').attr('data-selected-value');
+                dataObj['locationID'] = $('.delete_location_select').attr('data-selected-index');
+                dataObj['ref'] = 'delete';
+
+
+                let locationID = $('.delete_location_select').attr('data-selected-index');
+                let departmentBindValue = $('.delete_department_select').attr('data-selected-bind');//in format with : splited
+
+                let departmentBindValueSplited = departmentBindValue.split(':');
+                departmentBindValueSplited.forEach(function(v, i, a){
+                    let res = v.split(" ");
+                    if(res[1] === locationID){
+                        dataObj['departmentID'] = res[0];
+                    }
+                });
+
+                let result3 = await deleteDepartment(dataObj);
+
+                $('.btn-close').trigger('click');
+                if(result3.status.code === '302'){
+                    $('.toast-body').html(result3.status.message);
+                    $('.toast').css('background-color', '#ce1a1a');
+                }
+
+                if(result3.status.code === '200'){
+                    $('.toast-body').html(result3.status.message);
+                    $('.toast').css('background-color', '#279f13');
+                }
+                
+                myToast.show();
+                break;
+            default:
+                console.log()
+        }
+    });
+
+/*--------------------------------------------------------------------------------------------------- */
+/*---------------------------------------------- LOCATION --------------------------------------------*/
+/*--------------------------------------------------------------------------------------------------- */
+
+
+    
+
+    
+
+    
+
+    
 
 
 
