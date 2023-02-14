@@ -7,7 +7,7 @@
 
     header('Content-Type: application/json; charset=UTF-8');
 
-    
+    //$file = 'get.txt';
 
     $sql = "SELECT * FROM location ORDER BY name";
 
@@ -30,20 +30,27 @@
 
     $result = $stmt->fetchAll();
 
-    $output['status']['code'] = "200";
-	$output['status']['name'] = "ok";
-	$output['status']['description'] = "success";
-	$output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
-	$output['data'] = [];
-
+    //file_put_contents($file, print_r($result, true));
 
     $pdo = null;
     $stmt = null;
-    
-    foreach($result as $row){
-        array_push($output['data'], $row);
+
+    if(count($result) > 0){
+        $output['status']['code'] = "200";
+        $output['status']['name'] = "ok";
+        $output['status']['description'] = "success";
+        $output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
+        $output['data'] = [];
+
+        foreach($result as $row){
+            array_push($output['data'], $row);
+        }
+    }else{
+        $output['status']['code'] = "204";
+        $output['status']['message'] = "No data to retrieve";
     }
 
+    
     
     echo json_encode($output);
 

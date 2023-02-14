@@ -370,7 +370,7 @@ header{
 
 /******************************  ASIDE - START  ***********************************************/
 
-/******************************  FILTERS  *****************************************************/
+/******************************  FILTERS SECTION  *********************************************/
 
 .filters_header{
     border-bottom: 1px solid red;
@@ -470,7 +470,7 @@ header{
     margin: 0 auto;
 }
 
-/******************************  ADD  *********************************************************/
+/******************************  ADD SECTION  **************************************************/
 
 /******************************  USER  *********************************************************/
 
@@ -541,6 +541,32 @@ header{
     border-radius: 6px;
 }
 
+
+/******************************  LOCATION *********************************************************/
+
+#pills-add-new-location,
+#pills-delete-location{
+    margin-top: 20px;
+}
+
+.location_add_new_location_item,
+.location_delete_location_item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 65%;
+}
+
+.location_add_new_location_input,
+.select_location_delete_location_select{
+    width: 63%;
+}
+
+.location_add_new_location_input{
+    border-radius: 6px;
+}
+
+
 /******************************  HISTORY  *********************************************************/
 
 .history_header{
@@ -563,3 +589,28 @@ header{
 
 /*-------------------------------------------------------------------------------------------*/
 /*-------------------------------------------------------------------------------------------*/
+
+/******************************  MAIN - START  ***********************************************/
+/************************************  EDIT USER  ********************************************/
+.result_edit_user_item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 65%;
+    margin-bottom: 15px;
+}
+
+#result_edit_user_name_input,
+#result_edit_user_surname_input,
+#result_edit_user_email_input{
+    border-radius: 6px;
+    width: 63%;
+}
+
+.select_result_edit_user_department_select,
+.select_result_edit_user_location_select{
+    width: 63%;
+}
+/************************************  DELETE USER *******************************************/
+
+/******************************  MAIN - END  *************************************************/

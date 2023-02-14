@@ -7,7 +7,7 @@
 
     header('Content-Type: application/json; charset=UTF-8');
 
-    $file = 'get.txt';
+    //$file = 'get.txt';
 
     
 
@@ -92,17 +92,9 @@
         $output['status']['message'] = "No data to retrieve";
     }
 
-    
-
-
-    
 
     //file_put_contents($file, print_r($result, true));
     
-    
-
-    
-
     
     echo json_encode($output);
 

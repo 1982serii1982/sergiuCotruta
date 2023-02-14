@@ -7,23 +7,41 @@
 
     header('Content-Type: application/json; charset=UTF-8');
 
+    // $file = 'insertResult.txt';
+
+    // file_put_contents($file, print_r($_REQUEST, true));
+    
+    //die();
+
     
 
     $order = $_REQUEST['order'];
     $orderBy = $_REQUEST['orderBy'];
 
     
-	
+	if($_REQUEST['single']){
+        $sql = "SELECT p.lastName AS lastName, p.firstName AS firstName, p.jobTitle AS jobTitle, p.id AS id, p.email AS email, d.name AS department, l.name AS location  
+            FROM personnel p 
+            LEFT JOIN department d ON (d.id = p.departmentID) 
+            LEFT JOIN location l ON (l.id = d.locationID)
+            WHERE p.id = :userID";
 
-    $sql = "SELECT p.lastName AS lastName, p.firstName AS firstName, p.jobTitle AS jobTitle, p.id AS id, p.email AS email, d.name AS department, l.name AS location  
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(':userID', intval($_REQUEST['userID']), PDO::PARAM_INT);
+        $error = $stmt->execute();
+    }else{
+        $sql = "SELECT p.lastName AS lastName, p.firstName AS firstName, p.jobTitle AS jobTitle, p.id AS id, p.email AS email, d.name AS department, l.name AS location  
             FROM personnel p 
             LEFT JOIN department d ON (d.id = p.departmentID) 
             LEFT JOIN location l ON (l.id = d.locationID) 
             ORDER BY " . $orderBy . " " . $order;
 
+        $stmt = $pdo->prepare($sql);
+        $error = $stmt->execute();
+    }
 
-    $stmt = $pdo->prepare($sql);
-    $error = $stmt->execute();
+    
+
 
     if($error === false){
         $output['status']['code'] = "400";
@@ -40,6 +58,8 @@
 
 
     $result = $stmt->fetchAll();
+
+    //file_put_contents($file, print_r($result, true));
 
     $output['status']['code'] = "200";
 	$output['status']['name'] = "ok";

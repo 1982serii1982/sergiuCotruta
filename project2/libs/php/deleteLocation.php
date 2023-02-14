@@ -16,12 +16,12 @@
 
 
 
-    $sql = "SELECT * FROM personnel WHERE departmentID = :departmentID";
+    $sql = "SELECT * FROM department WHERE locationID = :locationID";
 
 
 
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':departmentID', intval($_REQUEST['departmentID']), PDO::PARAM_INT);
+    $stmt->bindValue(':locationID', intval($_REQUEST['locationID']), PDO::PARAM_INT);
     $error = $stmt->execute();
 
     if(!$error){
@@ -44,7 +44,7 @@
 
     if(count($result) > 0){
         $output['status']['code'] = "302";
-        $output['status']['message'] = "Unable to delete " . formatData($_REQUEST['departmentName']) . " department for " . formatData($_REQUEST['locationName']) . " location. There is a reference to " . formatData($_REQUEST['departmentName']) . " department in main table.";
+        $output['status']['message'] = "Unable to delete " . formatData($_REQUEST['locationName']) . " location. There is a reference to " . formatData($_REQUEST['locationName']) . " location, in another table.";
         
         $pdo = null;
         $stmt = null;
@@ -55,11 +55,11 @@
     }
 
     
-    $sql = "DELETE FROM department WHERE id = :departmentID";
+    $sql = "DELETE FROM location WHERE id = :locationID";
 
     
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':departmentID', intval($_REQUEST['departmentID']), PDO::PARAM_INT);
+    $stmt->bindValue(':locationID', intval($_REQUEST['locationID']), PDO::PARAM_INT);
     $error = $stmt->execute();
 
     //file_put_contents($file, print_r($error, true));
@@ -83,7 +83,7 @@
 
 
     $output['status']['code'] = "200";
-	$output['status']['message'] = formatData($_REQUEST['departmentName']) . " department from " . formatData($_REQUEST['locationName']) . " location is successfully deleted.";
+	$output['status']['message'] = formatData($_REQUEST['locationName']) . " location is successfully deleted.";
 	$output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
 	$output['data'] = [];
 

@@ -226,31 +226,23 @@
                                         </li>
                                     </ul>
                                     <div class="tab-content" id="pills-tabContent">
-                                        <div class="tab-pane fade show active" id="pills-add-new" role="tabpanel" aria-labelledby="pills-add-new-tab">
-                                            <div class="add_new_item">
-                                                <label for="add_new_department_input">Department</label>
-                                                <input type="text" id="add_new_department_input" data-value="" class="add_new_department_input" placeholder="Fill in ...">
-                                            </div>
-                                            <div class="add_new_item">
-                                                <label for="add_new_location_select">Location</label>
-                                                <select name="addNewLocationSelect" id="add_new_location_select" class="add_new_location_select"></select>
+                                        <div class="tab-pane fade show active" id="pills-add-new-location" role="tabpanel" aria-labelledby="pills-add-new-location-tab">
+                                            <div class="location_add_new_location_item">
+                                                <label for="location_add_new_location_input">Location</label>
+                                                <input type="text" id="location_add_new_location_input" data-value="" class="location_add_new_location_input" placeholder="Fill in ...">
                                             </div>
                                         </div>
-                                        <div class="tab-pane fade" id="pills-delete" role="tabpanel" aria-labelledby="pills-delete-tab">
-                                            <div class="delete_item">
-                                                <label for="delete_department_select">Department</label>
-                                                <select name="deleteDepartmentSelect" id="delete_department_select" class="delete_department_select"></select>
-                                            </div>
-                                            <div class="delete_item">
-                                                <label for="delete_location_select">Location</label>
-                                                <select name="deleteLocationSelect" id="delete_location_select" class="delete_location_select"></select>
+                                        <div class="tab-pane fade" id="pills-delete-location" role="tabpanel" aria-labelledby="pills-delete-location-tab">
+                                            <div class="location_delete_location_item">
+                                                <label for="location_delete_location_select">Location</label>
+                                                <select name="locationDeleteLocationSelect" id="location_delete_location_select" class="location_delete_location_select"></select>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary add_location_close_button" data-bs-dismiss="modal">Discard</button>
-                                  <button type="button" class="btn btn-primary add_location_save_button">Save</button>
+                                  <button type="button" class="btn btn-primary add_location_save_button" data-source="add_new">Save</button>
                                 </div>
                               </div>
                             </div>
@@ -261,7 +253,22 @@
             <div class="history">
                 <h4 class="history_header">History</h4>
                 <div class="history_body">
-                    <button class="history_button">History</button>
+                    <button class="history_button" data-bs-toggle="modal" data-bs-target="#userHistoryModal">History</button>
+                    <div class="modal fade" id="userHistoryModal" tabindex="-1" aria-labelledby="userHistoryModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="userHistoryModalLabel">User Acitivity Log</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="history_wrapper"></div>
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                          </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -270,9 +277,69 @@
         <div class="main_wrapper">
 
         </div>
+        <div class="result_user_edit">
+            <div class="modal fade" id="resultEditUserModal" tabindex="-1" aria-labelledby="resultEditUserModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="resultEditUserModalLabel">Edit User</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="result_edit_user_item">
+                            <label for="result_edit_user_name_input">Name</label>
+                            <input type="text" id="result_edit_user_name_input" placeholder="Fill in..." data-value="">
+                        </div>
+                        <div class="result_edit_user_item">
+                            <label for="result_edit_user_surname_input">Surname</label>
+                            <input type="text" id="result_edit_user_surname_input" placeholder="Fill in..." data-value="">
+                        </div>
+                        <div class="result_edit_user_item">
+                            <label for="result_edit_user_email_input">E-mail</label>
+                            <input type="text" id="result_edit_user_email_input" placeholder="Fill in..." data-value="">
+                        </div>
+                        <div class="result_edit_user_item">
+                            <label for="result_edit_user_department_select">Department</label>
+                            <select name="resultEditUserDepartment" class="result_edit_user_department_select" id="result_edit_user_department_select"></select>
+                        </div>
+                        <div class="result_edit_user_item">
+                            <label for="result_edit_user_location_select">Location</label>
+                            <select name="resultEditUserLocation" class="result_edit_user_location_select" id="result_edit_user_location_select"></select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary result_edit_user_close_button" data-bs-dismiss="modal">Discard</button>
+                      <button type="button" class="btn btn-primary result_edit_user_save_button">Save</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="result_user_delete">
+            <div class="modal fade" id="resultDeleteUserModal" tabindex="-1" aria-labelledby="resultDeleteUserModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="resultDeleteUserModalLabel">Delete User</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="result_delete_user_item">
+                            
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary result_delete_user_close_button" data-bs-dismiss="modal">Discard</button>
+                      <button type="button" class="btn btn-primary result_delete_user_save_button">Delete</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
     </main>
     <script src="./libs/js/jquery-3.6.1.min.js"></script>
     <script src="./libs/ext_libs/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./libs/ext_libs/Date/date.js"></script>
     <script src="./libs/js/script.js"></script>
 </body>
 </html>

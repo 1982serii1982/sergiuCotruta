@@ -260,10 +260,10 @@ function populateSelect(inputData, className = '', category){
                 // console.log(arr);
 
                 if(j == 0){
-                    $(`.${className}`).append(`<option value="${key.toLowerCase()}" data-bind="${str}" selected>${key}</option>`);
+                    $(`.${className}`).append(`<option value="${key.toLowerCase()}" data-bind="${str}" data-index="${j}" selected>${key}</option>`);
                     $(`.${className}`).attr('data-selected-value', `${key.toLowerCase()}`);
                 }else{
-                    $(`.${className}`).append(`<option value="${key.toLowerCase()}"  data-bind="${str}">${key}</option>`);
+                    $(`.${className}`).append(`<option value="${key.toLowerCase()}" data-bind="${str}" data-index="${j}">${key}</option>`);
                 }
                 j++;
             }
@@ -312,7 +312,36 @@ function populateSelect(inputData, className = '', category){
     }
     
 }
+
+function historyMessage(text, destination, color = 'red'){
+    let timeStamp = new Date().toString("hh:mm:ss dS MMM yyyy");
+    let string = `<span style="color: ${color}">${text}</span> --> <span style="color: blue;">${timeStamp}</span>`;
+    $(`.${destination}`).append(`<p>${string}</p>`);
+}
+
+function capitalize(str){
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
 /***************************************************************************/
+async function deleteUser(inputObj){
+    let res = await phpRequest("deleteUser", inputObj);
+    return res;
+}
+
+async function updateUser(inputObj){
+    let res = await phpRequest("updateUser", inputObj);
+    return res;
+}
+
+async function deleteLocation(inputObj){
+    let res = await phpRequest("deleteLocation", inputObj);
+    return res;
+}
+
+async function insertLocation(inputObj){
+    let res = await phpRequest("insertLocation", inputObj);
+    return res;
+}
 
 async function deleteDepartment(inputObj){
     let res = await phpRequest("deleteDepartment", inputObj);
@@ -355,9 +384,9 @@ async function getFilterSearch(inputObj){
     return res;
 }
 
-async function defaultGetAllEmployee(order = 'asc', orderBy = 'firstName'){
+async function defaultGetAllEmployee(order = 'asc', orderBy = 'firstName', single = 0, userID = null){
     order = order.toUpperCase();
-    let res = await phpRequest("getAllEmployee", {order: order, orderBy: orderBy});
+    let res = await phpRequest("getAllEmployee", {order: order, orderBy: orderBy, single: single, userID: userID});
     return res;
 }
 
@@ -404,8 +433,8 @@ function tableBuilder(inputData, orderBy = 'firstName'){
                     <div class="result_department">${currentVal.department}</div>
                     <div class="result_location">${currentVal.location}</div>
                     <div class="result_action">
-                        <button class="result_edit" data-value="${currentVal.id}"><i class="fa-solid fa-pencil"></i></button>
-                        <button class="result_delete" data-value="${currentVal.id}"><i class="fa-solid fa-trash-can"></i></button>
+                        <button class="result_edit" data-value="${currentVal.id}" data-bs-toggle="modal" data-bs-target="#resultEditUserModal"><i class="fa-solid fa-pencil"></i></button>
+                        <button class="result_delete" data-value="${currentVal.id}" data-bs-toggle="modal" data-bs-target="#resultDeleteUserModal"><i class="fa-solid fa-trash-can"></i></button>
                     </div>
                 </div>
         `;
@@ -444,8 +473,7 @@ function tableBuilder(inputData, orderBy = 'firstName'){
 
 (async function(){
 
-    
-    
+
     let allEmployeeResult = await defaultGetAllEmployee();
     let departments = await getDepartments();
     let locations = await getLocations();
@@ -464,7 +492,7 @@ function tableBuilder(inputData, orderBy = 'firstName'){
 $(document).ready(function () {
 
     let myToastEl = document.querySelector('.toast');
-    let myToast = new bootstrap.Toast(myToastEl, {autohide: false});
+    let myToast = new bootstrap.Toast(myToastEl, {autohide: true, delay: 2000});
 
     
 
@@ -1523,14 +1551,468 @@ $(document).ready(function () {
 /*---------------------------------------------- LOCATION --------------------------------------------*/
 /*--------------------------------------------------------------------------------------------------- */
 
+    $('.add_location_button').on('click', async function(){
+
+        myToast.hide();
+        let addExistingDataToSend = [];
+        let deleteDataToSend = [];
+        let parent = $(this).parent();
+
+        if(parent.find('.select_location_delete_location_select').length > 0){
+            let select_parent = $('.select_location_delete_location_select').parent();
+            $('.select_location_delete_location_select').remove();
+            select_parent.append('<select name="locationDeleteLocationSelect" id="location_delete_location_select" class="location_delete_location_select"></select>')
+        }
+
+
+
+
+        $('.location_add_new_location_input').attr('data-value', '');
+        $('.location_add_new_location_input').val('');
+
+
+        let location_delete_location = await getLocations();
+        if(location_delete_location.status.code === '200'){
+            populateSelect(location_delete_location, 'location_delete_location_select', 'location');
+            selectChanger(true, true, 'location_delete_location_select');
+        }else{
+            $('.location_delete_location_select').append(`<option>No location to add</option>`);
+            $('.location_delete_location_select').attr('data-selected-value', '');
+            $('.location_delete_location_select').attr('data-selected-index', '');
+            selectChanger(true, true, 'location_delete_location_select');
+        }
+        
+        
+    });
+
+    $('.location_add_new_location_input').on('blur', function(){
+        $(this).attr('data-value', $(this).val());
+    });
+
+    $('.location_add_new_location_input').on('keyup', function(){
+        $('.location_add_new_location_input').css('box-shadow', 'none');
+        $('.location_add_new_location_input').css('border-color', 'black');
+    });
+
+/******************************************************************************************************/
+/****************************************** LOCATION TAB BUTTONS ************************************ */
+/******************************************************************************************************/
+
+    $('#pills-add-new-location-tab').on('click', function(){
+        $('.add_location_save_button').attr('data-source', 'add_new');
+        $('.add_location_save_button').html('Save');
+    });
+
+    $('#pills-delete-location-tab').on('click', function(){
+        $('.add_location_save_button').attr('data-source', 'delete');
+        $('.add_location_save_button').html('Delete');
+    });
+
+/******************************************************************************************************/
+/******************************************************************************************************/
+/******************************************************************************************************/
+
+/******************************************************************************************************/
+/************************************* LOCATION DELETE SECTION ************************************** */
+/******************************************************************************************************/
+
+    $(document).on('change', '.location_delete_location_select', function(){
+        $(this).attr('data-selected-value', $(this).val());
+        $(this).attr('data-selected-index', $(this).find(':selected').attr('data-index'));
+    });
+
+/******************************************************************************************************/
+/******************************************************************************************************/
+/******************************************************************************************************/  
 
     
+    $('.add_location_save_button').on('click', async function(){
+        let dataObj = {};
 
-    
+        switch($(this).attr('data-source')){
+            case 'add_new':
+                if($('.location_add_new_location_input').attr('data-value') !== ''){
+                    dataObj['locationName'] = $('.location_add_new_location_input').attr('data-value');
+                }else{
+                    $('.location_add_new_location_input').css('box-shadow', '0 0 6px 1px red');
+                    $('.location_add_new_location_input').css('border-color', 'red');
+                    historyMessage(`Failed to add new location with message: "<span style="color: black">Missing location name in input field<span>"`,'history_wrapper');
+                    break;
+                }
 
-    
+                let result1 = await insertLocation(dataObj);
 
-    
+                $('.btn-close').trigger('click');
+                if(result1.status.code === '302'){
+                    $('.toast-body').html(result1.status.message);
+                    $('.toast').css('background-color', '#ce1a1a');
+                    historyMessage(`Failed to add new location with message: "<span style="color: black">${result1.status.message}<span>"`,'history_wrapper');
+                    myToast.show();
+                    break;
+                }
+
+                if(result1.status.code === '200'){
+                    $('.toast-body').html(result1.status.message);
+                    $('.toast').css('background-color', '#279f13');
+                    historyMessage(`New ${capitalize(dataObj['locationName'])} location added`,'history_wrapper', 'green');
+                }
+
+                myToast.show();
+                break;
+            case 'delete':
+                if($('.location_delete_location_select').attr('data-selected-index') == ''){
+                    $('.btn-close').trigger('click');
+                    $('.toast-body').html('<span>There is no location available to delete.');
+                    $('.toast').css('background-color', '#ce1a1a');
+                    myToast.show();
+                    historyMessage(`Failed to delete location with message: "<span style="color: black">There is no location available to delete.</span>"`,'history_wrapper');
+                    break;
+                }
+
+                dataObj['locationID'] = $('.location_delete_location_select').attr('data-selected-index');
+                dataObj['locationName'] = $('.location_delete_location_select').attr('data-selected-value');
+
+                let result2 = await deleteLocation(dataObj);
+
+                $('.btn-close').trigger('click');
+                if(result2.status.code === '302'){
+                    $('.toast-body').html(result2.status.message);
+                    $('.toast').css('background-color', '#ce1a1a');
+                    historyMessage(`Failed to delete location with message: "<span style="color: black">${result2.status.message}</span>"`,'history_wrapper');
+                    myToast.show();
+                    break;
+                }
+
+                if(result2.status.code === '200'){
+                    $('.toast-body').html(result2.status.message);
+                    $('.toast').css('background-color', '#279f13');
+                    historyMessage(`Location ${capitalize(dataObj['locationName'])} deleted`,'history_wrapper', 'green');
+                }
+                
+                myToast.show();
+
+                break;
+            default:
+                console.log();
+        }
+    });
+
+/*===================================================================================================*/
+/*===================================================================================================*/
+/*===================================================================================================*/
+
+
+
+
+
+
+
+/*===================================================================================================*/
+/*=================================== HISTORY BOX START =============================================*/
+/*===================================================================================================*/
+
+
+/*===================================================================================================*/
+/*===================================== HISTORY BOX END =============================================*/
+/*===================================================================================================*/
+
+
+
+
+
+
+/*===================================================================================================*/
+/*=================================== RESULT ACTION START ===========================================*/
+/*===================================================================================================*/
+
+
+/******************************************************************************************************/
+/************************************* USER EDIT SECTION **********************************************/
+/******************************************************************************************************/
+
+    $(document).on('change', '.result_edit_user_department_select', async function(){
+        let dataToSend = [];
+        $(this).attr('data-selected-value', $(this).val());
+        let select_location_parent = $('.result_edit_user_location_select').parents('.result_edit_user_item');
+        select_location_parent.find('.select_result_edit_user_location_select').remove();
+        select_location_parent.append(`<select name="resultEditUserLocation" class="result_edit_user_location_select" id="result_edit_user_location_select"></select>`);
+
+        let dataBind = $(this).find(":selected").attr('data-bind');
+        $('.result_edit_user_department_select').attr('data-selected-bind', dataBind);
+
+
+        let dataBindArray = dataBind.split(":");
+        dataBindArray.forEach(function(v, i, a){
+            let res = v.split(" ");
+            dataToSend.push(res[1]);
+        });
+
+        let location = await getCustomLocations({data: dataToSend, not: 0});
+        populateSelect(location, 'result_edit_user_location_select', 'location');
+        selectChanger(true, true, 'result_edit_user_location_select');
+    });
+
+    $(document).on('change', '.result_edit_user_location_select', async function(){
+        $(this).attr('data-selected-value', $(this).val());
+        $(this).attr('data-selected-index', $(this).find(':selected').attr('data-index'));
+    });
+
+
+    $('#result_edit_user_name_input').on('blur', function(){
+        $(this).attr('data-value', $(this).val());
+    });
+
+    $('#result_edit_user_surname_input').on('blur', function(){
+        $(this).attr('data-value', $(this).val());
+    });
+
+    $('#result_edit_user_email_input').on('blur', function(){
+        $(this).attr('data-value', $(this).val());
+    });
+
+
+
+
+    $('#result_edit_user_name_input').on('keyup', function(){
+        $(this).css('box-shadow', 'none');
+        $(this).css('border-color', 'black');
+    });
+
+    $('#result_edit_user_surname_input').on('keyup', function(){
+        $(this).css('box-shadow', 'none');
+        $(this).css('border-color', 'black');
+    });
+
+    $('#result_edit_user_email_input').on('keyup', function(){
+        $(this).css('box-shadow', 'none');
+        $(this).css('border-color', 'black');
+    });
+
+
+
+
+
+    $(document).on('click', '.result_edit', async function(){
+        let dataToSend = [];
+        $('#result_edit_user_name_input').css('box-shadow', 'none');
+        $('#result_edit_user_name_input').css('border-color', 'black');
+        $('#result_edit_user_surname_input').css('box-shadow', 'none');
+        $('#result_edit_user_surname_input').css('border-color', 'black');
+        $('#result_edit_user_email_input').css('box-shadow', 'none');
+        $('#result_edit_user_email_input').css('border-color', 'black');
+
+        if($('.result_user_edit').find('.select_result_edit_user_department_select').length > 0){
+            let select_department_parent = $('.result_user_edit').find('.select_result_edit_user_department_select').parent();
+            $('.result_user_edit').find('.select_result_edit_user_department_select').remove();
+            select_department_parent.append(`<select name="resultEditUserDepartment" class="result_edit_user_department_select" id="result_edit_user_department_select"></select>`);
+        }
+
+        if($('.result_user_edit').find('.select_result_edit_user_location_select').length > 0){
+            let select_location_parent = $('.result_user_edit').find('.select_result_edit_user_location_select').parent();
+            $('.result_user_edit').find('.select_result_edit_user_location_select').remove();
+            select_location_parent.append(`<select name="resultEditUserLocation" class="result_edit_user_location_select" id="result_edit_user_location_select"></select>`);
+        }
+
+        let userID = $(this).attr('data-value');
+        let resultEmployee = await defaultGetAllEmployee('asc', 'firstName', 1, userID);
+
+        $('#result_edit_user_name_input').val(resultEmployee.data[0].firstName);
+        $('#result_edit_user_name_input').attr('data-value', resultEmployee.data[0].firstName);
+        $('#result_edit_user_surname_input').val(resultEmployee.data[0].lastName);
+        $('#result_edit_user_surname_input').attr('data-value', resultEmployee.data[0].lastName);
+        $('#result_edit_user_email_input').val(resultEmployee.data[0].email);
+        $('#result_edit_user_email_input').attr('data-value', resultEmployee.data[0].email);
+
+        let resultDepartment = await getDepartments();
+        populateSelect(resultDepartment, 'result_edit_user_department_select', 'department');
+        selectChanger(true, true, 'result_edit_user_department_select');
+
+        let department_fake_option = $('.select_result_edit_user_department_select').find('.select__option');
+        department_fake_option.each(function(i, elem) {
+            if($(elem).attr('data-value') === resultEmployee.data[0].department.toLowerCase()){
+                $('.select_result_edit_user_department_select').find('span').html($(elem).html());
+
+                let originalSelect = document.querySelector('.result_edit_user_department_select');
+                originalSelect.options[$(elem).attr('data-index')].selected = true;
+
+                $('.result_edit_user_department_select').attr('data-selected-value', originalSelect.options[$(elem).attr('data-index')].value);
+
+                let dataBindInside = $('.result_edit_user_department_select').find(":selected").attr('data-bind');
+                $('.result_edit_user_department_select').attr('data-selected-bind', dataBindInside);
+            }
+        });
+
+        let dataBind = $('.result_edit_user_department_select').attr('data-selected-bind');
+
+        let dataBindArray = dataBind.split(":");
+        dataBindArray.forEach(function(v, i, a){
+            let res = v.split(" ");
+            dataToSend.push(res[1]);
+        });
+
+        
+
+        let location = await getCustomLocations({data: dataToSend, not: 0});
+        populateSelect(location, 'result_edit_user_location_select', 'location');
+        selectChanger(true, true, 'result_edit_user_location_select');
+
+        let location_fake_option = $('.select_result_edit_user_location_select').find('.select__option');
+        location_fake_option.each(function(i, elem) {
+            if($(elem).attr('data-value') === resultEmployee.data[0].location.toLowerCase()){
+                $('.select_result_edit_user_location_select').find('span').html($(elem).html());
+
+                let originalSelect = document.querySelector('.result_edit_user_location_select');
+                originalSelect.options[$(elem).attr('data-index')].selected = true;
+
+                $('.result_edit_user_location_select').attr('data-selected-value', originalSelect.options[$(elem).attr('data-index')].value);
+                $('.result_edit_user_location_select').attr('data-selected-index', originalSelect.options[$(elem).attr('data-index')].dataset.index);
+            }
+        });
+
+        $('.result_edit_user_save_button').attr('data-value', $(this).attr('data-value'));
+            
+    });
+
+    $('.result_edit_user_save_button').on('click', async function(){
+        let dataObj = {};
+        let j = 0;
+
+        if($('#result_edit_user_name_input').attr('data-value') !== ''){
+            dataObj['firstName'] = $('#result_edit_user_name_input').attr('data-value');
+        }else{
+            $('#result_edit_user_name_input').css('box-shadow', '0 0 6px 1px red');
+            $('#result_edit_user_name_input').css('border-color', 'red');
+            j = j + 1;
+        }
+
+        if($('#result_edit_user_surname_input').attr('data-value') !== ''){
+            dataObj['lastName'] = $('#result_edit_user_surname_input').attr('data-value');
+        }else{
+            $('#result_edit_user_surname_input').css('box-shadow', '0 0 6px 1px red');
+            $('#result_edit_user_surname_input').css('border-color', 'red');
+            j = j + 2;
+        }
+
+        if($('#result_edit_user_email_input').attr('data-value') !== ''){
+            dataObj['email'] = $('#result_edit_user_email_input').attr('data-value');
+        }else{
+            $('#result_edit_user_email_input').css('box-shadow', '0 0 6px 1px red');
+            $('#result_edit_user_email_input').css('border-color', 'red');
+            j = j + 4;
+        }
+
+        if(j > 0){
+            switch(j){
+                case 1:
+                    historyMessage(`Failed to update user with message: "<span style="color: black">Missing  name in input field<span>"`,'history_wrapper');
+                    break;
+                case 2:
+                    historyMessage(`Failed to update user with message: "<span style="color: black">Missing  surname in input field<span>"`,'history_wrapper');
+                    break;
+                case 3:
+                    historyMessage(`Failed to update user with message: "<span style="color: black">Missing  name in input field<span>"`,'history_wrapper');
+                    historyMessage(`Failed to update user with message: "<span style="color: black">Missing  surname in input field<span>"`,'history_wrapper');
+                    break;
+                case 4:
+                    historyMessage(`Failed to update user with message: "<span style="color: black">Missing  email in input field<span>"`,'history_wrapper');
+                    break;
+                case 5:
+                    historyMessage(`Failed to update user with message: "<span style="color: black">Missing  name in input field<span>"`,'history_wrapper');
+                    historyMessage(`Failed to update user with message: "<span style="color: black">Missing  email in input field<span>"`,'history_wrapper');
+                    break;
+                case 6:
+                    historyMessage(`Failed to update user with message: "<span style="color: black">Missing  surname in input field<span>"`,'history_wrapper');
+                    historyMessage(`Failed to update user with message: "<span style="color: black">Missing  email in input field<span>"`,'history_wrapper');
+                    break;
+                case 7:
+                    historyMessage(`Failed to update user with message: "<span style="color: black">Missing  name in input field<span>"`,'history_wrapper');
+                    historyMessage(`Failed to update user with message: "<span style="color: black">Missing  surname in input field<span>"`,'history_wrapper');
+                    historyMessage(`Failed to update user with message: "<span style="color: black">Missing  email in input field<span>"`,'history_wrapper');
+                    break;
+                default:
+                    console.log();
+            }
+            return;
+        }
+
+        let dataBind = $('.result_edit_user_department_select').attr('data-selected-bind');
+        let locationID = $('.result_edit_user_location_select').attr('data-selected-index');
+        let splited = dataBind.split(':');
+        splited.forEach(function(v, i, a){
+            let res = v.split(" ");
+            if(res[1] === locationID){
+                dataObj['departmentID'] = res[0];
+            }
+        });
+
+        dataObj['id'] = $(this).attr('data-value');
+
+        let result = await updateUser(dataObj);
+
+
+        $('.btn-close').trigger('click');
+
+        if(result.status.code === '200'){
+            $('.toast-body').html(result.status.message);
+            $('.toast').css('background-color', '#279f13');
+            historyMessage(`${result.status.message}`,'history_wrapper', 'green');
+        }
+        
+        myToast.show();
+        $('.refresh_button').trigger('click');
+
+
+    });
+
+/******************************************************************************************************/
+/******************************************************************************************************/
+/******************************************************************************************************/
+
+/******************************************************************************************************/
+/************************************* USER DELETE SECTION **********************************************/
+/******************************************************************************************************/
+
+    $(document).on('click', '.result_delete', async function(){
+        $('.result_delete_user_save_button').attr('data-value', $(this).attr('data-value'));
+        let userID = $(this).attr('data-value');
+
+        let user = await defaultGetAllEmployee('asc','firstName',1 ,userID);
+
+        $('.result_delete_user_item').empty();
+        $('.result_delete_user_item').append(`You are about to delete user: `);
+        $('.result_delete_user_item').append(`${user.data[0].firstName} ${user.data[0].lastName}</br>`);
+        $('.result_delete_user_item').append(`Operation is not reversible!`);
+
+        $('.result_delete_user_save_button').attr('data-firstName', user.data[0].firstName);
+        $('.result_delete_user_save_button').attr('data-lastName', user.data[0].lastName);
+    });
+
+    $('.result_delete_user_save_button').on('click', async function(){
+        let dataObj = {};
+        dataObj['id'] = $('.result_delete_user_save_button').attr('data-value');
+        let result = await deleteUser(dataObj);
+
+        $('.btn-close').trigger('click');
+
+        if(result.status.code === '200'){
+            $('.toast-body').html(`${$(this).attr('data-firstName')} ${$(this).attr('data-lastName')} succesfully deleted`);
+            $('.toast').css('background-color', '#279f13');
+            historyMessage(`${$(this).attr('data-firstName')} ${$(this).attr('data-lastName')} succesfully deleted`,'history_wrapper', 'green');
+            myToast.show();
+        }
+
+        $('.refresh_button').trigger('click');
+
+
+    });
+
+/******************************************************************************************************/
+/******************************************************************************************************/
+/******************************************************************************************************/
+
+/*===================================================================================================*/
+/*=================================== RESULT ACTION END =============================================*/
+/*===================================================================================================*/
 
 
 
