@@ -498,7 +498,7 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 65%;
+    width: 84%;
     margin-bottom: 15px;
 }
 
@@ -506,6 +506,7 @@ header{
 #add_user_surname_input,
 #add_user_email_input{
     border-radius: 6px;
+    width: 65%;
 }
 
 .select_add_user_department_select{
@@ -524,7 +525,7 @@ header{
     margin-top: 20px;
     display: flex;
     align-items: center;
-    width: 65%;
+    width: 84%;
     justify-content: space-between;
 }
 
@@ -554,7 +555,7 @@ header{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 65%;
+    width: 84%;
 }
 
 .location_add_new_location_input,
@@ -596,7 +597,7 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 65%;
+    width: 84%;
     margin-bottom: 15px;
 }
 

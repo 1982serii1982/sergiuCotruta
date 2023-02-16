@@ -10,7 +10,7 @@
 
     
 
-    //$file = 'insertResult.txt';
+    $file = 'insertResult.txt';
 
     
     
@@ -41,6 +41,10 @@
 
 
     $result = $stmt->fetchAll();
+
+    // file_put_contents($file, print_r($result, true));
+
+    // die();
 
     if(count($result) > 0){
         $output['status']['code'] = "302";

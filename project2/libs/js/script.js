@@ -322,73 +322,6 @@ function historyMessage(text, destination, color = 'red'){
 function capitalize(str){
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
-/***************************************************************************/
-async function deleteUser(inputObj){
-    let res = await phpRequest("deleteUser", inputObj);
-    return res;
-}
-
-async function updateUser(inputObj){
-    let res = await phpRequest("updateUser", inputObj);
-    return res;
-}
-
-async function deleteLocation(inputObj){
-    let res = await phpRequest("deleteLocation", inputObj);
-    return res;
-}
-
-async function insertLocation(inputObj){
-    let res = await phpRequest("insertLocation", inputObj);
-    return res;
-}
-
-async function deleteDepartment(inputObj){
-    let res = await phpRequest("deleteDepartment", inputObj);
-    return res;
-}
-
-async function insertDepartment(inputObj){
-    let res = await phpRequest("insertDepartment", inputObj);
-    return res;
-}
-
-async function insertUser(inputObj){
-    let res = await phpRequest("insertUser", inputObj);
-    return res;
-}
-
-async function getDepartments(){
-    let res = await phpRequest("getAllDepartments");
-    return res;
-}
-
-async function getLocations(){
-    let res = await phpRequest("getAllLocation");
-    return res;
-}
-
-async function getCustomLocations(inputObj){
-    let res = await phpRequest("getCustomLocation", inputObj);
-    return res;
-}
-
-async function getSearch(order, orderBy, searchString){
-    order = order.toUpperCase();
-    let res = await phpRequest("getSearch", {order: order, orderBy: orderBy, searchString: searchString});
-    return res;
-}
-
-async function getFilterSearch(inputObj){
-    let res = await phpRequest("getFilterSearch", inputObj);
-    return res;
-}
-
-async function defaultGetAllEmployee(order = 'asc', orderBy = 'firstName', single = 0, userID = null){
-    order = order.toUpperCase();
-    let res = await phpRequest("getAllEmployee", {order: order, orderBy: orderBy, single: single, userID: userID});
-    return res;
-}
 
 function tableBuilder(inputData, orderBy = 'firstName'){
     let char = '', mainTemplate, headerTemplate, template, result ='', bodyTemplate = '';
@@ -467,6 +400,77 @@ function tableBuilder(inputData, orderBy = 'firstName'){
     $('.main_wrapper').append(`<div class="result_total">${inputData.data.length} result(s) found</div>`);
     $('.main_wrapper').append(result);
 }
+/***************************************************************************/
+
+
+async function deleteUser(inputObj){
+    let res = await phpRequest("deleteUser", inputObj);
+    return res;
+}
+
+async function updateUser(inputObj){
+    let res = await phpRequest("updateUser", inputObj);
+    return res;
+}
+
+async function deleteLocation(inputObj){
+    let res = await phpRequest("deleteLocation", inputObj);
+    return res;
+}
+
+async function insertLocation(inputObj){
+    let res = await phpRequest("insertLocation", inputObj);
+    return res;
+}
+
+async function deleteDepartment(inputObj){
+    let res = await phpRequest("deleteDepartment", inputObj);
+    return res;
+}
+
+async function insertDepartment(inputObj){
+    let res = await phpRequest("insertDepartment", inputObj);
+    return res;
+}
+
+async function insertUser(inputObj){
+    let res = await phpRequest("insertUser", inputObj);
+    return res;
+}
+
+async function getDepartments(){
+    let res = await phpRequest("getAllDepartments");
+    return res;
+}
+
+async function getLocations(){
+    let res = await phpRequest("getAllLocation");
+    return res;
+}
+
+async function getCustomLocations(inputObj){
+    let res = await phpRequest("getCustomLocation", inputObj);
+    return res;
+}
+
+async function getSearch(order, orderBy, searchString){
+    order = order.toUpperCase();
+    let res = await phpRequest("getSearch", {order: order, orderBy: orderBy, searchString: searchString});
+    return res;
+}
+
+async function getFilterSearch(inputObj){
+    let res = await phpRequest("getFilterSearch", inputObj);
+    return res;
+}
+
+async function defaultGetAllEmployee(order = 'asc', orderBy = 'firstName', single = 0, userID = null){
+    order = order.toUpperCase();
+    let res = await phpRequest("getAllEmployee", {order: order, orderBy: orderBy, single: single, userID: userID});
+    return res;
+}
+
+
 
 
 /*****************************************************************************/
@@ -486,7 +490,8 @@ function tableBuilder(inputData, orderBy = 'firstName'){
     selectChanger(true, true, 'header_select');
     selectChanger(true, true, 'department_select');
     selectChanger(true, true, 'location_select');
-
+    
+    historyMessage(`Web application succesfully opened`,'history_wrapper', 'green');
 })();
 
 $(document).ready(function () {
@@ -505,6 +510,7 @@ $(document).ready(function () {
         let result;
         let selectedValue = $(this).children("option:selected").val();
         let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
+        $(this).attr('data-selected-value', selectedValue);
 
         if($('.header_select').attr('data-source') === 'main_search'){
             result = await getSearch(ascendingButtonValue, selectedValue, $('.header_search').attr('data-searched-value'));
@@ -554,7 +560,7 @@ $(document).ready(function () {
         $('.main_wrapper').empty();
         tableBuilder(result, selectedValue);
 
-        $('.header_select').attr('data-selected-value', $(this).children("option:selected").val());
+        
     });
 
 /****************************************************************************************************/
@@ -650,6 +656,10 @@ $(document).ready(function () {
         $('.sort_box_button').attr('data-source', 'main_search');
         $('.header_select').attr('data-source', 'main_search');
 
+        if(searchString === ''){
+            return;
+        }
+
         let result = await getSearch(ascendingButtonValue, selectedValue, searchString);
 
         $('.main_wrapper').empty();
@@ -657,14 +667,16 @@ $(document).ready(function () {
     });
 
     $('.refresh_button').on('click', async function(e){
-        let result = await defaultGetAllEmployee();
+        let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
+        let selectedValue = $('.header_select').attr('data-selected-value');
+        let result = await defaultGetAllEmployee(ascendingButtonValue, selectedValue);
         $('.sort_box_button').attr('data-source', '');
         $('.header_select').attr('data-source', '');
 
         $('.header_search').attr('data-searched-value', '');
         $('.header_search').val('');
         $('.main_wrapper').empty();
-        tableBuilder(result);
+        tableBuilder(result,selectedValue);
     });
 
 
@@ -1086,10 +1098,18 @@ $(document).ready(function () {
 
         $('#add_user_name_input').attr('data-value', '');
         $('#add_user_name_input').val('');
+        $('#add_user_name_input').css('box-shadow', 'none');
+        $('#add_user_name_input').css('border-color', 'black');
+
         $('#add_user_surname_input').attr('data-value', '');
         $('#add_user_surname_input').val('');
+        $('#add_user_surname_input').css('box-shadow', 'none');
+        $('#add_user_surname_input').css('border-color', 'black');
+
         $('#add_user_email_input').attr('data-value', '');
         $('#add_user_email_input').val('');
+        $('#add_user_email_input').css('box-shadow', 'none');
+        $('#add_user_email_input').css('border-color', 'black');
 
 
         
@@ -1119,7 +1139,8 @@ $(document).ready(function () {
     });
 
     $('#add_user_name_input').on('focus', function(){
-        $('#add_user_name_input').css('background-color', '#ffffff');
+        $('#add_user_name_input').css('box-shadow', 'none');
+        $('#add_user_name_input').css('border-color', 'black');
     });
 
 
@@ -1129,7 +1150,8 @@ $(document).ready(function () {
     });
 
     $('#add_user_surname_input').on('focus', function(){
-        $('#add_user_surname_input').css('background-color', '#ffffff');
+        $('#add_user_surname_input').css('box-shadow', 'none');
+        $('#add_user_surname_input').css('border-color', 'black');
     });
 
 
@@ -1139,7 +1161,8 @@ $(document).ready(function () {
     });
 
     $('#add_user_email_input').on('focus', function(){
-        $('#add_user_email_input').css('background-color', '#ffffff');
+        $('#add_user_email_input').css('box-shadow', 'none');
+        $('#add_user_email_input').css('border-color', 'black');
     });
 
 
@@ -1181,27 +1204,33 @@ $(document).ready(function () {
         if($('#add_user_name_input').attr('data-value') !== ''){
             dataObj['firstName'] = $('#add_user_name_input').attr('data-value');
         }else{
-            $('#add_user_name_input').css('background-color', '#ff8c8c');
+            $('#add_user_name_input').css('box-shadow', '0 0 6px 1px red');
+            $('#add_user_name_input').css('border-color', 'red');
             k++;
         }
 
         if($('#add_user_surname_input').attr('data-value') !== ''){
             dataObj['lastName'] = $('#add_user_surname_input').attr('data-value');
         }else{
-            $('#add_user_surname_input').css('background-color', '#ff8c8c');
+            $('#add_user_surname_input').css('box-shadow', '0 0 6px 1px red');
+            $('#add_user_surname_input').css('border-color', 'red');
             k++;
         }
 
         if($('#add_user_email_input').attr('data-value') !== ''){
             dataObj['email'] = $('#add_user_email_input').attr('data-value');
         }else{
-            $('#add_user_email_input').css('background-color', '#ff8c8c');
+            $('#add_user_email_input').css('box-shadow', '0 0 6px 1px red');
+            $('#add_user_email_input').css('border-color', 'red');
             k++;
         }
 
         if(k !== 0){
             return;
         }
+
+        let departmentName = $('.add_user_department_select').parent().find('span').html();
+        let locationName = $('.add_user_location_select').parent().find('span').html();
 
         let locationID = $('.add_user_location_select').attr('data-selected-index');
         let departmentBindValue = $('.add_user_department_select').attr('data-selected-bind');//in format with : splited
@@ -1215,7 +1244,23 @@ $(document).ready(function () {
         });
 
         let result = await insertUser(dataObj);
+
         $('.add_user_close_button').trigger('click');
+
+        if(result.status.code === '200'){
+            $('.toast-body').html(`User ${dataObj['firstName']} ${dataObj['lastName']} succesfully created in ${departmentName} department with ${locationName} location.`);
+            $('.toast').css('background-color', '#279f13');
+            historyMessage(`User ${dataObj['firstName']} ${dataObj['lastName']} succesfully created in ${departmentName} department with ${locationName} location.`,'history_wrapper', 'green');
+            myToast.show();
+        }else{
+            $('.toast-body').html(`User ${dataObj['firstName']} ${dataObj['lastName']} failed to create.`);
+            $('.toast').css('background-color', 'ce1a1a');
+            historyMessage(`User ${dataObj['firstName']} ${dataObj['lastName']} failed to create.`,'history_wrapper');
+            myToast.show();
+            return;
+        }
+
+        $('.refresh_button').trigger('click');
     });
 
 /*--------------------------------------------------------------------------------------------------- */
@@ -1271,6 +1316,8 @@ $(document).ready(function () {
         selectChanger(true, true, 'add_new_location_select');
         $('.add_new_department_input').attr('data-value', '');
         $('.add_new_department_input').val('');
+        $('.add_new_department_input').css('box-shadow', 'none');
+        $('.add_new_department_input').css('border-color', 'black');
 
         /****************************************  ADD EXISTING ***************************************/
 
@@ -1454,7 +1501,7 @@ $(document).ready(function () {
         switch($(this).attr('data-source')){
             case 'add_new':
                 if($('.add_new_department_input').attr('data-value') !== ''){
-                    dataObj['department'] = $('.add_new_department_input').attr('data-value');
+                    dataObj['departmentName'] = $('.add_new_department_input').attr('data-value');
                 }else{
                     $('.add_new_department_input').css('box-shadow', '0 0 6px 1px red');
                     $('.add_new_department_input').css('border-color', 'red');
@@ -1470,11 +1517,13 @@ $(document).ready(function () {
                 if(result1.status.code === '302'){
                     $('.toast-body').html(result1.status.message);
                     $('.toast').css('background-color', '#ce1a1a');
+                    historyMessage(`Failed to add new department, with message: "<span style="color: black">${result1.status.message}</span>"`,'history_wrapper');
                 }
 
                 if(result1.status.code === '200'){
                     $('.toast-body').html(result1.status.message);
                     $('.toast').css('background-color', '#279f13');
+                    historyMessage(`Department added succesfull, with message: "<span style="color: black">${result1.status.message}</span>"`,'history_wrapper', 'green');
                 }
                 
                 myToast.show();
@@ -1485,6 +1534,7 @@ $(document).ready(function () {
                     $('.btn-close').trigger('click');
                     $('.toast-body').html('<span>There is no location available to add for this department.</br>Go to Location section to add new location</span>');
                     $('.toast').css('background-color', '#ce1a1a');
+                    historyMessage(`Failed to add new department, with message: "<span style="color: black">There is no location available to add for this department.</br>Go to Location section to add new location</span>"`,'history_wrapper');
                     myToast.show();
                     break;
                 }
@@ -1500,11 +1550,13 @@ $(document).ready(function () {
                 if(result2.status.code === '302'){
                     $('.toast-body').html(result2.status.message);
                     $('.toast').css('background-color', '#ce1a1a');
+                    historyMessage(`Failed to add new department, with message: "<span style="color: black">${result2.status.message}</span>"`,'history_wrapper');
                 }
 
                 if(result2.status.code === '200'){
                     $('.toast-body').html(result2.status.message);
                     $('.toast').css('background-color', '#279f13');
+                    historyMessage(`Department added succesfull, with message: "<span style="color: black">${result2.status.message}</span>"`,'history_wrapper', 'green');
                 }
                 
                 myToast.show();
@@ -1533,11 +1585,13 @@ $(document).ready(function () {
                 if(result3.status.code === '302'){
                     $('.toast-body').html(result3.status.message);
                     $('.toast').css('background-color', '#ce1a1a');
+                    historyMessage(`Failed to delete department, with message: "<span style="color: black">${result3.status.message}</span>"`,'history_wrapper');
                 }
 
                 if(result3.status.code === '200'){
                     $('.toast-body').html(result3.status.message);
                     $('.toast').css('background-color', '#279f13');
+                    historyMessage(`Department deleted succesfull, with message: "<span style="color: black">${result3.status.message}</span>"`,'history_wrapper', 'green');
                 }
                 
                 myToast.show();
@@ -1569,6 +1623,8 @@ $(document).ready(function () {
 
         $('.location_add_new_location_input').attr('data-value', '');
         $('.location_add_new_location_input').val('');
+        $('.location_add_new_location_input').css('box-shadow', 'none');
+        $('.location_add_new_location_input').css('border-color', 'black');
 
 
         let location_delete_location = await getLocations();
@@ -1665,7 +1721,7 @@ $(document).ready(function () {
                     $('.toast-body').html('<span>There is no location available to delete.');
                     $('.toast').css('background-color', '#ce1a1a');
                     myToast.show();
-                    historyMessage(`Failed to delete location with message: "<span style="color: black">There is no location available to delete.</span>"`,'history_wrapper');
+                    historyMessage(`Failed to delete location, with message: "<span style="color: black">There is no location available to delete.</span>"`,'history_wrapper');
                     break;
                 }
 
@@ -1678,7 +1734,7 @@ $(document).ready(function () {
                 if(result2.status.code === '302'){
                     $('.toast-body').html(result2.status.message);
                     $('.toast').css('background-color', '#ce1a1a');
-                    historyMessage(`Failed to delete location with message: "<span style="color: black">${result2.status.message}</span>"`,'history_wrapper');
+                    historyMessage(`Failed to delete location, with message: "<span style="color: black">${result2.status.message}</span>"`,'history_wrapper');
                     myToast.show();
                     break;
                 }
