@@ -324,7 +324,12 @@ function capitalize(str){
 }
 
 function tableBuilder(inputData, orderBy = 'firstName'){
-    let char = '', mainTemplate, headerTemplate, template, result ='', bodyTemplate = '';
+    let char = '',
+        mainTemplate, mainTemplateMobile,
+        headerTemplate,
+        template,templateMobile,
+        result = '',resultMobile = '',
+        bodyTemplate = '', bodyTemplateMobile = '';
 
     inputData.data.forEach(function(currentVal, index, array){
 
@@ -332,7 +337,7 @@ function tableBuilder(inputData, orderBy = 'firstName'){
             if(index !== 0){
                 mainTemplate = `
                     ${headerTemplate}
-                    <div class="container">
+                    <div class="container-fluid">
                         <div class="row">
                             <div class="col-12">
                                 <div class="result_header_wrapper">
@@ -348,8 +353,21 @@ function tableBuilder(inputData, orderBy = 'firstName'){
                         </div>
                     </div>
                 `;
+
+                mainTemplateMobile = `
+                    ${headerTemplate}
+                    <div class="container-fluid">
+                        <div class="row">
+                            ${bodyTemplateMobile}
+                        </div>
+                    </div>
+                `;
+
                 result = result.concat(mainTemplate);
                 bodyTemplate = '';
+
+                resultMobile = resultMobile.concat(mainTemplateMobile);
+                bodyTemplateMobile = '';
             }
 
             headerTemplate = `<div class="result_header">${currentVal[orderBy].charAt(0).toUpperCase()}</div>`;
@@ -374,10 +392,43 @@ function tableBuilder(inputData, orderBy = 'firstName'){
 
         bodyTemplate = bodyTemplate.concat(template);
 
+        templateMobile = `
+            <div class="col-12 col-lg-6 col-xxl-4">
+                <div class="result_box_wrapper">
+                    <div class="result_name_mobile_wrapper">
+                        <div class="header_name_mobile">Name</div>
+                        <div class="result_name_mobile">${currentVal.firstName}</div>
+                    </div>
+                    <div class="result_surname_mobile_wrapper">
+                        <div class="header_surname_mobile">Surname</div>
+                        <div class="result_surname_mobile">${currentVal.lastName}</div>
+                    </div>
+                    <div class="result_email_mobile_wrapper">
+                        <div class="header_email_mobile">E-mail</div>
+                        <div class="result_email_mobile">${currentVal.email}</div>
+                    </div>
+                    <div class="result_department_mobile_wrapper">
+                        <div class="header_department_mobile">Department</div>
+                        <div class="result_department_mobile">${currentVal.department}</div>
+                    </div>
+                    <div class="result_location_mobile_wrapper">
+                        <div class="header_location_mobile">Location</div>
+                        <div class="result_location_mobile">${currentVal.location}</div>
+                    </div>
+                    <div class="result_action_mobile">
+                        <button class="result_edit_mobile" data-value="${currentVal.id}" data-bs-toggle="modal" data-bs-target="#resultEditUserModal"><i class="fa-solid fa-pencil"></i></button>
+                        <button class="result_delete_mobile" data-value="${currentVal.id}" data-bs-toggle="modal" data-bs-target="#resultDeleteUserModal"><i class="fa-solid fa-trash-can"></i></button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        bodyTemplateMobile = bodyTemplateMobile.concat(templateMobile);
+
         if(index === array.length-1){
             mainTemplate = `
                 ${headerTemplate}
-                <div class="container">
+                <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
                             <div class="result_header_wrapper">
@@ -394,11 +445,24 @@ function tableBuilder(inputData, orderBy = 'firstName'){
                 </div>
             `;
             result = result.concat(mainTemplate);
+
+            mainTemplateMobile = `
+                ${headerTemplate}
+                <div class="container-fluid">
+                    <div class="row">
+                        ${bodyTemplateMobile}
+                    </div>
+                </div>
+            `;
+            resultMobile = resultMobile.concat(mainTemplateMobile);
         }
     });
 
     $('.main_wrapper').append(`<div class="result_total">${inputData.data.length} result(s) found</div>`);
     $('.main_wrapper').append(result);
+
+    $('.main_wrapper_mobile').append(`<div class="result_total">${inputData.data.length} result(s) found</div>`);
+    $('.main_wrapper_mobile').append(resultMobile);
 }
 /***************************************************************************/
 
@@ -477,6 +541,7 @@ async function defaultGetAllEmployee(order = 'asc', orderBy = 'firstName', singl
 
 (async function(){
 
+    $('.filter_button').addClass('hide');
 
     let allEmployeeResult = await defaultGetAllEmployee();
     let departments = await getDepartments();
@@ -485,11 +550,21 @@ async function defaultGetAllEmployee(order = 'asc', orderBy = 'firstName', singl
 
 
     populateSelect(departments, 'department_select', 'department');
+    populateSelect(departments, 'department_select_mobile', 'department');
+
     populateSelect(locations, 'location_select', 'location');
+    populateSelect(locations, 'location_select_mobile', 'location');
+
     populateSelect(allEmployeeResult, '', 'personnel');
     selectChanger(true, true, 'header_select');
+
     selectChanger(true, true, 'department_select');
+    selectChanger(true, true, 'department_select_mobile');
+
     selectChanger(true, true, 'location_select');
+    selectChanger(true, true, 'location_select_mobile');
+
+    
     
     historyMessage(`Web application succesfully opened`,'history_wrapper', 'green');
 })();
@@ -553,14 +628,51 @@ $(document).ready(function () {
             
             result = await getFilterSearch(dataObj);
 
+        }else if($('.header_select').attr('data-source') === 'filter_search_mobile'){
+            let dataObj = {};
+
+            dataObj['order'] = ascendingButtonValue;
+            dataObj['orderBy'] = selectedValue;
+
+            if($('#name_checkbox_mobile').is(":checked")){
+                if($('.name_input_mobile').attr('data-searched-value') !== ''){
+                    dataObj['firstName'] = $('.name_input_mobile').attr('data-searched-value');
+                }
+            }
+
+            if($('#surname_checkbox_mobile').is(":checked")){
+                if($('.surname_input_mobile').attr('data-searched-value') !== ''){
+                    dataObj['lastName'] = $('.surname_input_mobile').attr('data-searched-value');
+                }
+            }
+
+            if($('#email_checkbox_mobile').is(":checked")){
+                if($('.email_input_mobile').attr('data-searched-value') !== ''){
+                    dataObj['email'] = $('.email_input_mobile').attr('data-searched-value');
+                }
+            }
+
+            if($('#department_checkbox_mobile').is(":checked")){
+                if($('#department_select_mobile').attr('data-selected-value') !== ''){
+                    dataObj['department'] = $('#department_select_mobile').attr('data-selected-value');
+                }
+            }
+
+            if($('#location_checkbox_mobile').is(":checked")){
+                if($('#location_select_mobile').attr('data-selected-value') !== ''){
+                    dataObj['location'] = $('#location_select_mobile').attr('data-selected-value');
+                }
+            }
+
+            
+            result = await getFilterSearch(dataObj);
         }else{
             result = await defaultGetAllEmployee(ascendingButtonValue, selectedValue);
         }
 
         $('.main_wrapper').empty();
+        $('.main_wrapper_mobile').empty();
         tableBuilder(result, selectedValue);
-
-        
     });
 
 /****************************************************************************************************/
@@ -626,12 +738,51 @@ $(document).ready(function () {
             
             result = await getFilterSearch(dataObj);
 
+        }else if($('.sort_box_button').attr('data-source') === 'filter_search_mobile'){
+            let dataObj = {};
+            
+            dataObj['order'] = ascendingButtonValue;
+            dataObj['orderBy'] = selectedValue;
+
+            if($('#name_checkbox_mobile').is(":checked")){
+                if($('.name_input_mobile').attr('data-searched-value') !== ''){
+                    dataObj['firstName'] = $('.name_input_mobile').attr('data-searched-value');
+                }
+            }
+
+            if($('#surname_checkbox_mobile').is(":checked")){
+                if($('.surname_input_mobile').attr('data-searched-value') !== ''){
+                    dataObj['lastName'] = $('.surname_input_mobile').attr('data-searched-value');
+                }
+            }
+
+            if($('#email_checkbox_mobile').is(":checked")){
+                if($('.email_input_mobile').attr('data-searched-value') !== ''){
+                    dataObj['email'] = $('.email_input_mobile').attr('data-searched-value');
+                }
+            }
+
+            if($('#department_checkbox_mobile').is(":checked")){
+                if($('#department_select_mobile').attr('data-selected-value') !== ''){
+                    dataObj['department'] = $('#department_select_mobile').attr('data-selected-value');
+                }
+            }
+
+            if($('#location_checkbox_mobile').is(":checked")){
+                if($('#location_select_mobile').attr('data-selected-value') !== ''){
+                    dataObj['location'] = $('#location_select_mobile').attr('data-selected-value');
+                }
+            }
+
+            
+            result = await getFilterSearch(dataObj);
         }else{
             result = await defaultGetAllEmployee(ascendingButtonValue, selectedValue);
         }
 
         
         $('.main_wrapper').empty();
+        $('.main_wrapper_mobile').empty();
         tableBuilder(result, selectedValue);
         
     });
@@ -663,6 +814,7 @@ $(document).ready(function () {
         let result = await getSearch(ascendingButtonValue, selectedValue, searchString);
 
         $('.main_wrapper').empty();
+        $('.main_wrapper_mobile').empty();
         tableBuilder(result, selectedValue);
     });
 
@@ -676,13 +828,43 @@ $(document).ready(function () {
         $('.header_search').attr('data-searched-value', '');
         $('.header_search').val('');
         $('.main_wrapper').empty();
+        $('.main_wrapper_mobile').empty();
         tableBuilder(result,selectedValue);
+    });
+
+    $('.filter_button').on('click', function(){
+        
+    });
+
+    $('.history_button_mobile').on('click', function(){
+        $('.history_button').trigger('click');
+    });
+
+
+
+
+
+
+    $('.add_user_mobile').on('click', function(){
+        $('.add_user_button').trigger('click');
+    });
+
+    $('.add_department_mobile').on('click', function(){
+        $('.add_department_button').trigger('click');
+    });
+
+    $('.add_location_mobile').on('click', function(){
+        $('.add_location_button').trigger('click');
     });
 
 
 /****************************************************************************************************/
 /************************************************* FILTER BOX ***************************************/
 /****************************************************************************************************/
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/**************************************** DESKTOP VERSION ********************************************/
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
     $('.filters_body :checkbox').on('change',function(){
 
         let i = 0;
@@ -706,9 +888,43 @@ $(document).ready(function () {
         }
     });
 
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/**************************************** MOBILE VERSION ********************************************/
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+    $('.filters_body_mobile :checkbox').on('change',function(){
+
+        let i = 0;
+
+        for(const key in $('.filters_body_mobile :checkbox')){
+            if($('.filters_body_mobile :checkbox')[key].checked === true){
+                i++;
+            }
+        }
+
+        $('.filter_button').attr('data-after', i);
+
+        if(i == 0){
+            $('.apply_button_mobile').prop('disabled', true);
+            $('.filter_button').addClass('hide');
+        }else{
+            $('.apply_button_mobile').prop('disabled', false);
+            $('.filter_button').removeClass('hide');
+        }
+
+        if($(this)[0].checked === true){
+            $(this).parents('.filters_item_mobile').find('.setdata_mobile').css('display', 'block');
+        }else{
+            $(this).parents('.filters_item_mobile').find('.setdata_mobile').css('display', 'none');
+        }
+    });
+
 
     /*************************************** NAME ROW *****************************************/
 
+    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    /**************************************** DESKTOP VERSION *********************************/
+    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 
     $('.name_input').on('keypress', function(e){
@@ -769,10 +985,81 @@ $(document).ready(function () {
         let result = await getFilterSearch(dataObj);
 
         $('.main_wrapper').empty();
+        $('.main_wrapper_mobile').empty();
         tableBuilder(result, selectedValue);
     });
 
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    /**************************************** MOBILE VERSION *************************************/
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+
+    $('.name_input_mobile').on('keypress', function(e){
+        if(e.key === 'Enter'){
+            e.preventDefault();
+            $('.name_button_mobile').trigger('click');
+        }
+    });
+
+    $('.name_input_mobile').on('blur', function(e){
+        $('.name_input_mobile').attr('data-searched-value', $('.name_input_mobile').val());
+    });
+
+    $('#name_checkbox_mobile').on('change', function(){
+        $('.name_input_mobile').attr('data-searched-value', '');
+        $('.name_input_mobile').val('');
+    });
+
+    $('.name_button_mobile').on('click', async function(e){
+        let dataObj = {};
+        let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
+        let selectedValue = $('.header_select').attr('data-selected-value');
+        let searchString = $('.name_input_mobile').val();
+        $('.name_input_mobile').attr('data-searched-value', searchString);
+
+        $('.sort_box_button').attr('data-source', 'filter_search_mobile');
+        $('.header_select').attr('data-source', 'filter_search_mobile');
+
+        dataObj['firstName'] = searchString;
+        dataObj['order'] = ascendingButtonValue;
+        dataObj['orderBy'] = selectedValue;
+
+        if($('#surname_checkbox_mobile').is(":checked")){
+            if($('.surname_input_mobile').attr('data-searched-value') !== ''){
+                dataObj['lastName'] = $('.surname_input_mobile').attr('data-searched-value');
+            }
+        }
+
+        if($('#email_checkbox_mobile').is(":checked")){
+            if($('.email_input_mobile').attr('data-searched-value') !== ''){
+                dataObj['email'] = $('.email_input_mobile').attr('data-searched-value');
+            }
+        }
+
+        if($('#department_checkbox_mobile').is(":checked")){
+            if($('#department_select_mobile').attr('data-selected-value') !== ''){
+                dataObj['department'] = $('#department_select_mobile').attr('data-selected-value');
+            }
+        }
+
+        if($('#location_checkbox_mobile').is(":checked")){
+            if($('#location_select_mobile').attr('data-selected-value') !== ''){
+                dataObj['location'] = $('#location_select_mobile').attr('data-selected-value');
+            }
+        }
+
+        
+        let result = await getFilterSearch(dataObj);
+
+        $('.main_wrapper').empty();
+        $('.main_wrapper_mobile').empty();
+        tableBuilder(result, selectedValue);
+    });
     /*************************************** SURNAME ROW *****************************************/
+
+    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    /**************************************** DESKTOP VERSION *********************************/
+    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
     
     $('.surname_input').on('keypress', function(e){
@@ -837,16 +1124,87 @@ $(document).ready(function () {
             }
         }
 
-        console.log(dataObj);
 
         
         let result = await getFilterSearch(dataObj);
 
         $('.main_wrapper').empty();
+        $('.main_wrapper_mobile').empty();
+        tableBuilder(result, selectedValue);
+    });
+
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    /**************************************** MOBILE VERSION *************************************/
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+    $('.surname_input_mobile').on('keypress', function(e){
+        if(e.key === 'Enter'){
+            e.preventDefault();
+            $('.surname_button_mobile').trigger('click');
+        }
+    });
+
+    $('.surname_input_mobile').on('blur', function(e){
+        $('.surname_input_mobile').attr('data-searched-value', $('.surname_input_mobile').val());
+    });
+
+    $('#surname_checkbox_mobile').on('change', function(){
+        $('.surname_input_mobile').attr('data-searched-value', '');
+        $('.surname_input_mobile').val('');
+    });
+
+    $('.surname_button_mobile').on('click', async function(e){
+        let dataObj = {};
+        let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
+        let selectedValue = $('.header_select').attr('data-selected-value');
+        let searchString = $('.surname_input_mobile').val();
+        $('.surname_input_mobile').attr('data-searched-value', searchString);
+
+        $('.sort_box_button').attr('data-source', 'filter_search_mobile');
+        $('.header_select').attr('data-source', 'filter_search_mobile');
+
+        dataObj['lastName'] = searchString;
+        dataObj['order'] = ascendingButtonValue;
+        dataObj['orderBy'] = selectedValue;
+
+        if($('#name_checkbox_mobile').is(":checked")){
+            if($('.name_input_mobile').attr('data-searched-value') !== ''){
+                dataObj['firstName'] = $('.name_input_mobile').attr('data-searched-value');
+            } 
+        }
+
+        if($('#email_checkbox_mobile').is(":checked")){
+            if($('.email_input_mobile').attr('data-searched-value') !== ''){
+                dataObj['email'] = $('.email_input_mobile').attr('data-searched-value');
+            }
+        }
+
+        if($('#department_checkbox_mobile').is(":checked")){
+            if($('#department_select_mobile').attr('data-selected-value') !== ''){
+                dataObj['department'] = $('#department_select_mobile').attr('data-selected-value');
+            }
+        }
+
+        if($('#location_checkbox_mobile').is(":checked")){
+            if($('#location_select_mobile').attr('data-selected-value') !== ''){
+                dataObj['location'] = $('#location_select_mobile').attr('data-selected-value');
+            }
+        }
+
+
+        
+        let result = await getFilterSearch(dataObj);
+
+        $('.main_wrapper').empty();
+        $('.main_wrapper_mobile').empty();
         tableBuilder(result, selectedValue);
     });
 
     /*************************************** EMAIL ROW *****************************************/
+
+    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    /**************************************** DESKTOP VERSION *********************************/
+    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 
     $('.email_input').on('keypress', function(e){
@@ -911,17 +1269,88 @@ $(document).ready(function () {
             }
         }
 
-        console.log(dataObj);
 
         
         let result = await getFilterSearch(dataObj);
 
         $('.main_wrapper').empty();
+        $('.main_wrapper_mobile').empty();
+        tableBuilder(result, selectedValue);
+    });
+
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    /**************************************** MOBILE VERSION *************************************/
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+    $('.email_input_mobile').on('keypress', function(e){
+        if(e.key === 'Enter'){
+            e.preventDefault();
+            $('.email_button_mobile').trigger('click');
+        }
+    });
+
+    $('.email_input_mobile').on('blur', function(e){
+        $('.email_input_mobile').attr('data-searched-value', $('.email_input_mobile').val());
+    });
+
+    $('#email_checkbox_mobile').on('change', function(){
+        $('.email_input_mobile').attr('data-searched-value', '');
+        $('.email_input_mobile').val('');
+    });
+
+    $('.email_button_mobile').on('click', async function(e){
+        let dataObj = {};
+        let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
+        let selectedValue = $('.header_select').attr('data-selected-value');
+        let searchString = $('.email_input_mobile').val();
+        $('.email_input_mobile').attr('data-searched-value', searchString);
+
+        $('.sort_box_button').attr('data-source', 'filter_search_mobile');
+        $('.header_select').attr('data-source', 'filter_search_mobile');
+
+        dataObj['email'] = searchString;
+        dataObj['order'] = ascendingButtonValue;
+        dataObj['orderBy'] = selectedValue;
+
+        if($('#name_checkbox_mobile').is(":checked")){
+            if($('.name_input_mobile').attr('data-searched-value') !== ''){
+                dataObj['firstName'] = $('.name_input_mobile').attr('data-searched-value');
+            } 
+        }
+
+        if($('#surname_checkbox_mobile').is(":checked")){
+            if($('.surname_input_mobile').attr('data-searched-value') !== ''){
+                dataObj['lastName'] = $('.surname_input_mobile').attr('data-searched-value');
+            }
+        }
+
+        if($('#department_checkbox_mobile').is(":checked")){
+            if($('#department_select_mobile').attr('data-selected-value') !== ''){
+                dataObj['department'] = $('#department_select_mobile').attr('data-selected-value');
+            }
+        }
+
+        if($('#location_checkbox_mobile').is(":checked")){
+            if($('#location_select_mobile').attr('data-selected-value') !== ''){
+                dataObj['location'] = $('#location_select_mobile').attr('data-selected-value');
+            }
+        }
+
+
+        
+        let result = await getFilterSearch(dataObj);
+
+        $('.main_wrapper').empty();
+        $('.main_wrapper_mobile').empty();
         tableBuilder(result, selectedValue);
     });
 
 
     /*************************************** DEPARTMENT ROW *****************************************/
+
+    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    /**************************************** DESKTOP VERSION *********************************/
+    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
     
     $('#department_select').on('change', async function(e){
@@ -967,10 +1396,66 @@ $(document).ready(function () {
         let result = await getFilterSearch(dataObj);
 
         $('.main_wrapper').empty();
+        $('.main_wrapper_mobile').empty();
         tableBuilder(result, selectedValue);
     });
 
-    /*************************************** LOCATION ROW *****************************************/
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    /**************************************** MOBILE VERSION *************************************/
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+    $('#department_select_mobile').on('change', async function(e){
+        let dataObj = {};
+        let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
+        let selectedValue = $('.header_select').attr('data-selected-value');
+        let departmentValue = $(this).children("option:selected").val();
+        $(this).attr('data-selected-value', departmentValue);
+
+        $('.sort_box_button').attr('data-source', 'filter_search_mobile');
+        $('.header_select').attr('data-source', 'filter_search_mobile');
+
+        dataObj['department'] = departmentValue;
+        dataObj['order'] = ascendingButtonValue;
+        dataObj['orderBy'] = selectedValue;
+
+
+        if($('#name_checkbox_mobile').is(":checked")){
+            if($('.name_input_mobile').attr('data-searched-value') !== ''){
+                dataObj['firstName'] = $('.name_input_mobile').attr('data-searched-value');
+            } 
+        }
+
+        if($('#surname_checkbox_mobile').is(":checked")){
+            if($('.surname_input_mobile').attr('data-searched-value') !== ''){
+                dataObj['lastName'] = $('.surname_input_mobile').attr('data-searched-value');
+            }
+        }
+
+        if($('#email_checkbox_mobile').is(":checked")){
+            if($('.email_input_mobile').attr('data-searched-value') !== ''){
+                dataObj['email'] = $('.email_input_mobile').attr('data-searched-value');
+            }
+        }
+
+        if($('#location_checkbox_mobile').is(":checked")){
+            if($('#location_select_mobile').attr('data-selected-value') !== ''){
+                dataObj['location'] = $('#location_select_mobile').attr('data-selected-value');
+            }
+        }
+
+        
+        let result = await getFilterSearch(dataObj);
+
+        $('.main_wrapper').empty();
+        $('.main_wrapper_mobile').empty();
+        tableBuilder(result, selectedValue);
+    });
+
+    /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ LOCATION ROW @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+
+    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    /**************************************** DESKTOP VERSION *********************************/
+    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 
     $('#location_select').on('change', async function(e){
@@ -1017,11 +1502,67 @@ $(document).ready(function () {
         let result = await getFilterSearch(dataObj);
 
         $('.main_wrapper').empty();
+        $('.main_wrapper_mobile').empty();
         tableBuilder(result, selectedValue);
     });
 
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    /**************************************** MOBILE VERSION *************************************/
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-    /*************************************** APPLY BUTTON *****************************************/
+    $('#location_select_mobile').on('change', async function(e){
+        let dataObj = {};
+        let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
+        let selectedValue = $('.header_select').attr('data-selected-value');
+        let locationValue = $(this).children("option:selected").val();
+        $(this).attr('data-selected-value', locationValue);
+
+        $('.sort_box_button').attr('data-source', 'filter_search_mobile');
+        $('.header_select').attr('data-source', 'filter_search_mobile');
+
+        dataObj['location'] = locationValue;
+        dataObj['order'] = ascendingButtonValue;
+        dataObj['orderBy'] = selectedValue;
+
+
+        if($('#name_checkbox_mobile').is(":checked")){
+            if($('.name_input_mobile').attr('data-searched-value') !== ''){
+                dataObj['firstName'] = $('.name_input_mobile').attr('data-searched-value');
+            } 
+        }
+
+        if($('#surname_checkbox_mobile').is(":checked")){
+            if($('.surname_input_mobile').attr('data-searched-value') !== ''){
+                dataObj['lastName'] = $('.surname_input_mobile').attr('data-searched-value');
+            }
+        }
+
+        if($('#email_checkbox_mobile').is(":checked")){
+            if($('.email_input_mobile').attr('data-searched-value') !== ''){
+                dataObj['email'] = $('.email_input_mobile').attr('data-searched-value');
+            }
+        }
+
+        if($('#department_checkbox_mobile').is(":checked")){
+            if($('#department_select_mobile').attr('data-selected-value') !== ''){
+                dataObj['department'] = $('#department_select_mobile').attr('data-selected-value');
+            }
+        }
+
+
+        
+        let result = await getFilterSearch(dataObj);
+
+        $('.main_wrapper').empty();
+        $('.main_wrapper_mobile').empty();
+        tableBuilder(result, selectedValue);
+    });
+
+    /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ APPLY BUTTON @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
+
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    /**************************************** DESKTOP VERSION ************************************/
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 
     $('.apply_button').on('click', async function(){
@@ -1072,10 +1613,66 @@ $(document).ready(function () {
         let result = await getFilterSearch(dataObj);
 
         $('.main_wrapper').empty();
+        $('.main_wrapper_mobile').empty();
         tableBuilder(result, selectedValue);
     });
 
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    /**************************************** MOBILE VERSION *************************************/
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
+
+    $('.apply_button_mobile').on('click', async function(){
+        let dataObj = {};
+        let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
+        let selectedValue = $('.header_select').attr('data-selected-value');
+
+        $('.sort_box_button').attr('data-source', 'filter_search_mobile');
+        $('.header_select').attr('data-source', 'filter_search_mobile');
+
+        
+        dataObj['order'] = ascendingButtonValue;
+        dataObj['orderBy'] = selectedValue;
+
+
+        if($('#name_checkbox_mobile').is(":checked")){
+            if($('.name_input_mobile').attr('data-searched-value') !== ''){
+                dataObj['firstName'] = $('.name_input_mobile').attr('data-searched-value');
+            } 
+        }
+
+        if($('#surname_checkbox_mobile').is(":checked")){
+            if($('.surname_input_mobile').attr('data-searched-value') !== ''){
+                dataObj['lastName'] = $('.surname_input_mobile').attr('data-searched-value');
+            }
+        }
+
+        if($('#email_checkbox_mobile').is(":checked")){
+            if($('.email_input_mobile').attr('data-searched-value') !== ''){
+                dataObj['email'] = $('.email_input_mobile').attr('data-searched-value');
+            }
+        }
+
+        if($('#department_checkbox_mobile').is(":checked")){
+            if($('#department_select_mobile').attr('data-selected-value') !== ''){
+                dataObj['department'] = $('#department_select_mobile').attr('data-selected-value');
+            }
+        }
+
+        if($('#location_checkbox_mobile').is(":checked")){
+            if($('#location_select_mobile').attr('data-selected-value') !== ''){
+                dataObj['location'] = $('#location_select_mobile').attr('data-selected-value');
+            }
+        }
+
+
+        
+        let result = await getFilterSearch(dataObj);
+
+        $('.main_wrapper').empty();
+        $('.main_wrapper_mobile').empty();
+        tableBuilder(result, selectedValue);
+    });
 /*===================================================================================================*/
 /*=================================== ADD/DELETE BOX ================================================*/
 /*===================================================================================================*/
@@ -1086,7 +1683,8 @@ $(document).ready(function () {
 
     $('.add_user_button').on('click', async function(){
         let dataToSend = [];
-        let parent = $(this).parent();
+        //let parent = $(this).parent();
+        let parent = $('#addUserModal').parent();
         if(parent.find('.select_add_user_department_select').length > 0 || parent.find('.select_add_user_location_select').length > 0){
             let select_department_parent = parent.find('.select_add_user_department_select').parent();
             let select_location_parent = parent.find('.select_add_user_location_select').parent();
@@ -1271,7 +1869,7 @@ $(document).ready(function () {
         myToast.hide();
         let addExistingDataToSend = [];
         let deleteDataToSend = [];
-        let parent = $(this).parent();
+        let parent = $('#addDepartmentModal').parent();
 
         /****************************************  ADD NEW ***************************************/
 
@@ -1610,7 +2208,7 @@ $(document).ready(function () {
         myToast.hide();
         let addExistingDataToSend = [];
         let deleteDataToSend = [];
-        let parent = $(this).parent();
+        let parent = $('#addLocationModal').parent();
 
         if(parent.find('.select_location_delete_location_select').length > 0){
             let select_parent = $('.select_location_delete_location_select').parent();
@@ -1848,7 +2446,7 @@ $(document).ready(function () {
 
 
 
-    $(document).on('click', '.result_edit', async function(){
+    $(document).on('click', '.result_edit, .result_edit_mobile', async function(){
         let dataToSend = [];
         $('#result_edit_user_name_input').css('box-shadow', 'none');
         $('#result_edit_user_name_input').css('border-color', 'black');
@@ -2028,7 +2626,7 @@ $(document).ready(function () {
 /************************************* USER DELETE SECTION **********************************************/
 /******************************************************************************************************/
 
-    $(document).on('click', '.result_delete', async function(){
+    $(document).on('click', '.result_delete, .result_delete_mobile', async function(){
         $('.result_delete_user_save_button').attr('data-value', $(this).attr('data-value'));
         let userID = $(this).attr('data-value');
 

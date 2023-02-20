@@ -21,25 +21,270 @@
          </div>
           <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
-      </div>
+    </div>
+    <div class="modal_container">
+        <!-- Add/Delete User Modal -->
+        <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addUserModalLabel">Add User</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="add_user_item">
+                        <label for="add_user_name_input">Name</label>
+                        <input type="text" id="add_user_name_input" placeholder="Fill in..." data-value="">
+                    </div>
+                    <div class="add_user_item">
+                        <label for="add_user_surname_input">Surname</label>
+                        <input type="text" id="add_user_surname_input" placeholder="Fill in..." data-value="">
+                    </div>
+                    <div class="add_user_item">
+                        <label for="add_user_email_input">E-mail</label>
+                        <input type="text" id="add_user_email_input" placeholder="Fill in..." data-value="">
+                    </div>
+                    <div class="add_user_item">
+                        <label for="add_user_department_select">Department</label>
+                        <select name="addUserDepartment" class="add_user_department_select" id="add_user_department_select"></select>
+                    </div>
+                    <div class="add_user_item">
+                        <label for="add_user_location_select">Location</label>
+                        <select name="addUserLocation" class="add_user_location_select" id="add_user_location_select"></select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary add_user_close_button" data-bs-target="#addButtonModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Discard</button>
+                  <button type="button" class="btn btn-primary add_user_save_button">Save</button>
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- Add/Delete Department Modal -->
+        <div class="modal fade" id="addDepartmentModal" tabindex="-1" aria-labelledby="addDepartmentModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addDepartmentModalLabel">Add/Delete Department</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="pills-add-new-tab" data-bs-toggle="pill" data-bs-target="#pills-add-new" type="button" role="tab" aria-controls="pills-add-new" aria-selected="true">Add New</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-add-existing-tab" data-bs-toggle="pill" data-bs-target="#pills-add-existing" type="button" role="tab" aria-controls="pills-add-existing" aria-selected="false">Add Existing</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-delete-tab" data-bs-toggle="pill" data-bs-target="#pills-delete" type="button" role="tab" aria-controls="pills-delete" aria-selected="false">Delete</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-add-new" role="tabpanel" aria-labelledby="pills-add-new-tab">
+                            <div class="add_new_item">
+                                <label for="add_new_department_input">Department</label>
+                                <input type="text" id="add_new_department_input" data-value="" class="add_new_department_input" placeholder="Fill in ...">
+                            </div>
+                            <div class="add_new_item">
+                                <label for="add_new_location_select">Location</label>
+                                <select name="addNewLocationSelect" id="add_new_location_select" class="add_new_location_select"></select>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-add-existing" role="tabpanel" aria-labelledby="pills-add-existing-tab">
+                            <div class="add_existing_item">
+                                <label for="add_existing_department_select">Department</label>
+                                <select name="addExistingDepartmentSelect" id="add_existing_department_select" class="add_existing_department_select"></select>
+                            </div>
+                            <div class="add_existing_item">
+                                <label for="add_existing_location_select">Location</label>
+                                <select name="addExistingLocationSelect" id="add_existing_location_select" class="add_existing_location_select"></select>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-delete" role="tabpanel" aria-labelledby="pills-delete-tab">
+                            <div class="delete_item">
+                                <label for="delete_department_select">Department</label>
+                                <select name="deleteDepartmentSelect" id="delete_department_select" class="delete_department_select"></select>
+                            </div>
+                            <div class="delete_item">
+                                <label for="delete_location_select">Location</label>
+                                <select name="deleteLocationSelect" id="delete_location_select" class="delete_location_select"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary add_department_close_button" data-bs-target="#addButtonModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Discard</button>
+                  <button type="button" class="btn btn-primary add_department_save_button" data-source="add_new">Save</button>
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- Add/Delete Location Modal -->
+        <div class="modal fade" id="addLocationModal" tabindex="-1" aria-labelledby="addLocationModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addLocationModalLabel">Add/Delete Location</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="pills-add-new-location-tab" data-bs-toggle="pill" data-bs-target="#pills-add-new-location" type="button" role="tab" aria-controls="pills-add-new-location" aria-selected="true">Add New</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-delete-location-tab" data-bs-toggle="pill" data-bs-target="#pills-delete-location" type="button" role="tab" aria-controls="pills-delete-location" aria-selected="false">Delete</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-add-new-location" role="tabpanel" aria-labelledby="pills-add-new-location-tab">
+                            <div class="location_add_new_location_item">
+                                <label for="location_add_new_location_input">Location</label>
+                                <input type="text" id="location_add_new_location_input" data-value="" class="location_add_new_location_input" placeholder="Fill in ...">
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-delete-location" role="tabpanel" aria-labelledby="pills-delete-location-tab">
+                            <div class="location_delete_location_item">
+                                <label for="location_delete_location_select">Location</label>
+                                <select name="locationDeleteLocationSelect" id="location_delete_location_select" class="location_delete_location_select"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary add_location_close_button" data-bs-target="#addButtonModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Discard</button>
+                  <button type="button" class="btn btn-primary add_location_save_button" data-source="add_new">Save</button>
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- Add/Delete Mobile Modal -->
+        <div class="modal fade" id="addButtonModalToggle" aria-hidden="true" aria-labelledby="addButtonModalToggleLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addButtonModalToggleLabel">Add/Delete</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="add_delete_button_wrapper">
+                        <button type="button" class="btn btn-primary add_user_mobile" data-bs-dismiss="modal">User</button>
+                        <button type="button" class="btn btn-primary add_department_mobile" data-bs-dismiss="modal">Department</button>
+                        <button type="button" class="btn btn-primary add_location_mobile" data-bs-dismiss="modal">Location</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard</button>
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- Filter Mobile Modal -->
+        <div class="modal fade" id="filterButtonModal" aria-hidden="true" aria-labelledby="filterButtonModalLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="filterButtonModalLabel">Filters</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="filters_body_mobile">
+                        <div class="filters_item_mobile">
+                            <div class="check_box_mobile">
+                                <label for="name_checkbox_mobile">Name</label>
+                                <input class="name_checkbox_mobile" type="checkbox" id="name_checkbox_mobile">
+                            </div>
+                            <div class="setdata_mobile">
+                                <input class="name_input_mobile" type="search" placeholder="Fill in.." data-searched-value="">
+                                <button class="name_button_mobile"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </div>
+                        </div>
+                        <div class="filters_item_mobile">
+                            <div class="check_box_mobile">
+                                <label for="surname_checkbox_mobile">Surname</label>
+                                <input class="surname_checkbox_mobile" type="checkbox" id="surname_checkbox_mobile">
+                            </div>
+                            <div class="setdata_mobile">
+                                <input class="surname_input_mobile" type="search" placeholder="Fill in.." data-searched-value="">
+                                <button class="surname_button_mobile"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </div>
+                        </div>
+                        <div class="filters_item_mobile">
+                            <div class="check_box_mobile">
+                                <label for="email_checkbox_mobile">E-mail</label>
+                                <input class="email_checkbox_mobile" type="checkbox" id="email_checkbox_mobile">
+                            </div>
+                            <div class="setdata_mobile">
+                                <input class="email_input_mobile" type="search" placeholder="Fill in.." data-searched-value="">
+                                <button class="email_button_mobile"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </div>
+                        </div>
+                        <div class="filters_item_mobile">
+                            <div class="check_box_mobile">
+                                <label for="department_checkbox_mobile">Department</label>
+                                <input class="department_checkbox_mobile" type="checkbox" id="department_checkbox_mobile">
+                            </div>
+                            <div class="setdata_mobile">
+                                <select class="department_select_mobile" name="department" id="department_select_mobile" data-selected-value="">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="filters_item_mobile">
+                            <div class="check_box_mobile">
+                                <label for="location_checkbox_mobile">Location</label>
+                                <input class="location_checkbox_mobile" type="checkbox" id="location_checkbox_mobile">
+                            </div>
+                            <div class="setdata_mobile">
+                                <select class="location_select_mobile" name="location" id="location_select_mobile" data-selected-value="">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard</button>
+                    <button class="btn btn-primary apply_button_mobile" data-bs-dismiss="modal" disabled>Apply</button>
+                </div>
+              </div>
+            </div>
+        </div>
+        <!-- History Modal -->
+        <div class="modal fade" id="userHistoryModal" tabindex="-1" aria-labelledby="userHistoryModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="userHistoryModalLabel">User Acitivity Log</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="history_wrapper"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
     <header>
         <div class="header_wrapper">
-            <div class="container">
-                <div class="row">
-                    <div class="col-6 d-flex gap-4">
+            <div class="container-fluid">
+                <div class="row gy-3 gy-xl-0">
+                    <div class="col-12 col-xl-6 d-flex gap-4 justify-content-center justify-content-xl-start">
                         <div class="search_box">
                             <input class="header_search" id="search" type="search" placeholder="Search" data-searched-value="">
                             <button class="search_box_button"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
                         <button class="refresh_button"><i class="fa-solid fa-arrows-rotate"></i></button>
+                        <button class="add_button" data-bs-toggle="modal" data-bs-target="#addButtonModalToggle"><i class="fa-solid fa-plus"></i></button>
+                        <button class="filter_button" data-bs-toggle="modal" data-bs-target="#filterButtonModal"><i class="fa-solid fa-filter-list"></i></button>
+                        <button class="history_button_mobile"><i class="fa-solid fa-clock-rotate-left"></i></button>
                     </div>
-                    <div class="col-6">
-                        <div class="sort_box">
-                            <div class="sort_box_label">Sort By</div>
-                            <select class="header_select" name="select" id="select" data-selected-value = "firstName" data-source = "">
-                            </select>
-                            <button class="sort_box_button" data-selected-value = "asc" data-source = ""><i class="fa-regular fa-arrow-down-a-z"></i></button>
-                        </div>
+                    <div class="col-12 col-xl-6 d-flex gap-4 justify-content-center justify-content-xl-end">
+                        <div class="sort_box_label">Sort By</div>
+                        <select class="header_select" name="select" id="select" data-selected-value = "firstName" data-source = "">
+                        </select>
+                        <button class="sort_box_button" data-selected-value = "asc" data-source = ""><i class="fa-regular fa-arrow-down-a-z"></i></button>
                     </div>
                 </div>
             </div>
@@ -48,7 +293,7 @@
     <aside>
         <div class="aside_wrapper">
             <div class="filters">
-                <h4 class="filters_header">Filter</h4>
+                <h4 class="filters_header">Filters</h4>
                 <div class="filters_body">
                     <div class="filters_item">
                         <div class="check_box">
@@ -108,145 +353,15 @@
                 <div class="add_body">
                     <div class="add_user">
                         <button type="button" class="add_user_button" data-bs-toggle="modal" data-bs-target="#addUserModal">User</button>
-                        <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="addUserModalLabel">Add User</h5>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="add_user_item">
-                                        <label for="add_user_name_input">Name</label>
-                                        <input type="text" id="add_user_name_input" placeholder="Fill in..." data-value="">
-                                    </div>
-                                    <div class="add_user_item">
-                                        <label for="add_user_surname_input">Surname</label>
-                                        <input type="text" id="add_user_surname_input" placeholder="Fill in..." data-value="">
-                                    </div>
-                                    <div class="add_user_item">
-                                        <label for="add_user_email_input">E-mail</label>
-                                        <input type="text" id="add_user_email_input" placeholder="Fill in..." data-value="">
-                                    </div>
-                                    <div class="add_user_item">
-                                        <label for="add_user_department_select">Department</label>
-                                        <select name="addUserDepartment" class="add_user_department_select" id="add_user_department_select"></select>
-                                    </div>
-                                    <div class="add_user_item">
-                                        <label for="add_user_location_select">Location</label>
-                                        <select name="addUserLocation" class="add_user_location_select" id="add_user_location_select"></select>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary add_user_close_button" data-bs-dismiss="modal">Discard</button>
-                                  <button type="button" class="btn btn-primary add_user_save_button">Save</button>
-                                </div>
-                              </div>
-                            </div>
-                        </div>
+                        <!--  -->
                     </div>
                     <div class="add_department">
                         <button type="button" class="add_department_button" data-bs-toggle="modal" data-bs-target="#addDepartmentModal">Department</button>
-                        <div class="modal fade" id="addDepartmentModal" tabindex="-1" aria-labelledby="addDepartmentModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="addDepartmentModalLabel">Add/Delete Department</h5>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link active" id="pills-add-new-tab" data-bs-toggle="pill" data-bs-target="#pills-add-new" type="button" role="tab" aria-controls="pills-add-new" aria-selected="true">Add New</button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="pills-add-existing-tab" data-bs-toggle="pill" data-bs-target="#pills-add-existing" type="button" role="tab" aria-controls="pills-add-existing" aria-selected="false">Add Existing</button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="pills-delete-tab" data-bs-toggle="pill" data-bs-target="#pills-delete" type="button" role="tab" aria-controls="pills-delete" aria-selected="false">Delete</button>
-                                        </li>
-                                    </ul>
-                                    <div class="tab-content" id="pills-tabContent">
-                                        <div class="tab-pane fade show active" id="pills-add-new" role="tabpanel" aria-labelledby="pills-add-new-tab">
-                                            <div class="add_new_item">
-                                                <label for="add_new_department_input">Department</label>
-                                                <input type="text" id="add_new_department_input" data-value="" class="add_new_department_input" placeholder="Fill in ...">
-                                            </div>
-                                            <div class="add_new_item">
-                                                <label for="add_new_location_select">Location</label>
-                                                <select name="addNewLocationSelect" id="add_new_location_select" class="add_new_location_select"></select>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="pills-add-existing" role="tabpanel" aria-labelledby="pills-add-existing-tab">
-                                            <div class="add_existing_item">
-                                                <label for="add_existing_department_select">Department</label>
-                                                <select name="addExistingDepartmentSelect" id="add_existing_department_select" class="add_existing_department_select"></select>
-                                            </div>
-                                            <div class="add_existing_item">
-                                                <label for="add_existing_location_select">Location</label>
-                                                <select name="addExistingLocationSelect" id="add_existing_location_select" class="add_existing_location_select"></select>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="pills-delete" role="tabpanel" aria-labelledby="pills-delete-tab">
-                                            <div class="delete_item">
-                                                <label for="delete_department_select">Department</label>
-                                                <select name="deleteDepartmentSelect" id="delete_department_select" class="delete_department_select"></select>
-                                            </div>
-                                            <div class="delete_item">
-                                                <label for="delete_location_select">Location</label>
-                                                <select name="deleteLocationSelect" id="delete_location_select" class="delete_location_select"></select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary add_department_close_button" data-bs-dismiss="modal">Discard</button>
-                                  <button type="button" class="btn btn-primary add_department_save_button" data-source="add_new">Save</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                        <!--  -->
                     </div>
                     <div class="add_location">
                         <button type="button" class="add_location_button" data-bs-toggle="modal" data-bs-target="#addLocationModal">Location</button>
-                        <div class="modal fade" id="addLocationModal" tabindex="-1" aria-labelledby="addLocationModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <h5 class="modal-title" id="addLocationModalLabel">Add/Delete Location</h5>
-                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link active" id="pills-add-new-location-tab" data-bs-toggle="pill" data-bs-target="#pills-add-new-location" type="button" role="tab" aria-controls="pills-add-new-location" aria-selected="true">Add New</button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="pills-delete-location-tab" data-bs-toggle="pill" data-bs-target="#pills-delete-location" type="button" role="tab" aria-controls="pills-delete-location" aria-selected="false">Delete</button>
-                                        </li>
-                                    </ul>
-                                    <div class="tab-content" id="pills-tabContent">
-                                        <div class="tab-pane fade show active" id="pills-add-new-location" role="tabpanel" aria-labelledby="pills-add-new-location-tab">
-                                            <div class="location_add_new_location_item">
-                                                <label for="location_add_new_location_input">Location</label>
-                                                <input type="text" id="location_add_new_location_input" data-value="" class="location_add_new_location_input" placeholder="Fill in ...">
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="pills-delete-location" role="tabpanel" aria-labelledby="pills-delete-location-tab">
-                                            <div class="location_delete_location_item">
-                                                <label for="location_delete_location_select">Location</label>
-                                                <select name="locationDeleteLocationSelect" id="location_delete_location_select" class="location_delete_location_select"></select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary add_location_close_button" data-bs-dismiss="modal">Discard</button>
-                                  <button type="button" class="btn btn-primary add_location_save_button" data-source="add_new">Save</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                        <!--  -->
                     </div>
                 </div>
             </div>
@@ -254,27 +369,16 @@
                 <h4 class="history_header">History</h4>
                 <div class="history_body">
                     <button class="history_button" data-bs-toggle="modal" data-bs-target="#userHistoryModal">History</button>
-                    <div class="modal fade" id="userHistoryModal" tabindex="-1" aria-labelledby="userHistoryModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="userHistoryModalLabel">User Acitivity Log</h5>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="history_wrapper"></div>
-                            </div>
-                            <div class="modal-footer">
-                            </div>
-                          </div>
-                        </div>
-                    </div>
+                    <!--  -->
                 </div>
             </div>
         </div>
     </aside>
     <main>
         <div class="main_wrapper">
+
+        </div>
+        <div class="main_wrapper_mobile">
 
         </div>
         <div class="result_user_edit">

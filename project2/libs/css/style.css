@@ -1,32 +1,20 @@
+
+/******************************  MOBILE - VERSION START  ***********************************************/
+/*******************************************************************************************************/
+/*******************************************************************************************************/
+/*******************************************************************************************************/
 body{
     display: grid;
     height: 100vh;
-    grid-template-columns: 20% 2fr 2fr 2fr;
+    grid-template-columns: 2fr 2fr 2fr;
     grid-template-rows: 12% 5fr;
     grid-template-areas: 
-        "aside header header header"
-        "aside main main main";
+        "header header header"
+        "main main main";
 }
-
-
 
 aside{
-    width: 100%;
-    background-color: #c8c8c8;
-    grid-area: aside;
-    display: flex;
-    align-items: end;
-    padding-bottom: 10px;
-}
-
-.aside_wrapper{
-    background-color: burlywood;
-    width: 90%;
-    margin: 0 auto;
-    height: 82%;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;  
+    display: none;
 }
 
 main{
@@ -35,8 +23,9 @@ main{
     overflow-y: auto;
 }
 
-.main_wrapper .result_header:first-child{
-    margin-top: 0;
+.main_wrapper{
+    display: none;
+    background-color: #e0e0e0;
 }
 
 .preloader{
@@ -48,6 +37,7 @@ main{
     left: 3%;
     background-color: #279f13;
     color: white;
+    z-index: 2;
 }
 
 .result_header{
@@ -66,49 +56,224 @@ main{
     color: red;
 }
 
-.result_row_wrapper, .result_header_wrapper{
-    display: grid;
-    grid-template-columns: minmax(15%, 1fr) minmax(15%, 1fr) minmax(25%, 2fr) minmax(20%, 1fr) minmax(15%, 1fr) minmax(10%, 1fr);
-    font-size: 14px;
+.main_wrapper_mobile{
+    display: block;
+    background-color: #e0e0e0;
 }
 
-.result_row_wrapper div, .result_header_wrapper div{
+.result_box_wrapper{
+    margin-bottom: 20px;
+}
+
+.result_name_mobile_wrapper,
+.result_email_mobile_wrapper,
+.result_location_mobile_wrapper{
+    background-color: #b3b1ff;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 3px;
-    background-color: aqua;
-    border: 1px solid red;
-    border-right: none;
 }
 
-.result_header_wrapper div{
-    background-color: red;
+.result_surname_mobile_wrapper,
+.result_department_mobile_wrapper{
+    background-color: #cfcdff;
+    display: flex;
+}
+
+.header_name_mobile,
+.header_email_mobile,
+.header_location_mobile{
+    width: 25%;
+    background-color: #8a2be2;
     color: white;
-    border: 1px solid white;
+    text-align: center;
 }
 
-.result_row_wrapper div:last-child, .result_header_wrapper div:last-child{
-    border-right: 1px solid red;
+
+.header_surname_mobile,
+.header_department_mobile{
+    width: 25%;
+    background-color: #b369f6;
+    color: white;
+    text-align: center;
 }
 
-.result_row_wrapper .result_action{
-    justify-content: space-evenly;
+.result_name_mobile,
+.result_surname_mobile,
+.result_email_mobile,
+.result_department_mobile,
+.result_location_mobile{
+    font-size: 16px;
+    text-align: end;
+    padding: 0 6px;
+    font-weight: 700;
 }
 
-.result_edit{
+.result_action_mobile{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 15px;
+    background-color: #5555ff;
+    padding: 6px 10px;
+}
+
+.result_edit_mobile{
     border: 1px solid green;
     background-color: #09c609;
     color: white;
     border-radius: 5px;
 }
 
-.result_delete{
+.result_delete_mobile{
     border: 1px solid #bf0000;
     color: white;
     background-color: red;
     border-radius: 5px;
 }
+
+.add_delete_button_wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    justify-content: center;
+    align-items: center;
+}
+
+.add_delete_button_wrapper button{
+    width: 65%;
+}
+
+.filter_button{
+    position: relative;
+}
+
+.filter_button::after{
+    content: attr(data-after);
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    width: 20px;
+    height: 20px;
+    background-color: #f6a340;
+    border-radius: 10px;
+    line-height: 20px;
+    font-weight: 700;
+    opacity: 1;
+}
+
+.filter_button.hide::after{
+    content: attr(data-after);
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    width: 20px;
+    height: 20px;
+    background-color: #f6a340;
+    border-radius: 10px;
+    line-height: 20px;
+    font-weight: 700;
+    opacity: 0;
+}
+
+/******************************  FILTERS SECTION  *********************************************/
+
+#filterButtonModal .modal-body{
+    background-color: burlywood;
+}
+
+
+.filters_item_mobile{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    height: 1.56rem;
+}
+
+.check_box_mobile{
+    display: flex;
+    width: 42%;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+}
+
+.check_box_mobile label{
+    order: 1;
+    display: flex;
+}
+
+.setdata_mobile{
+    width: 49%;
+    height: 100%;
+    display: none;
+}
+
+.setdata_mobile input{
+    width: 100%;
+    height: 100%;
+}
+
+.select_department_select{
+    height: 100%;
+    font-size: 12px;
+}
+
+.select_location_select{
+    height: 100%;
+    font-size: 12px;
+}
+
+.filters_item_mobile:nth-child(1) .setdata_mobile,
+.filters_item_mobile:nth-child(2) .setdata_mobile,
+.filters_item_mobile:nth-child(3) .setdata_mobile{
+    position: relative;
+}
+
+.filters_item_mobile:nth-child(1) input,
+.filters_item_mobile:nth-child(2) input,
+.filters_item_mobile:nth-child(3) input{
+    padding-right: 21px;
+    border: none;
+    border-radius: 5px;
+}
+
+.filters_item_mobile:nth-child(1) input:active,
+.filters_item_mobile:nth-child(2) input:active,
+.filters_item_mobile:nth-child(3) input:active{
+    border: none;
+    outline: none;
+}
+
+.filters_item_mobile:nth-child(1) input:focus,
+.filters_item_mobile:nth-child(2) input:focus,
+.filters_item_mobile:nth-child(3) input:focus{
+    border: none;
+    outline: none;
+    box-shadow: 0px 0px 3px 1px #5555ff inset;
+}
+
+.filters_item_mobile:nth-child(1) button,
+.filters_item_mobile:nth-child(2) button,
+.filters_item_mobile:nth-child(3) button{
+    position: absolute;
+    border: none;
+    right: 0;
+    top: 0;
+    font-size: 12px;
+    height: 100%;
+    line-height: 12px;
+    text-align: center;
+    color: white;
+    background-color: #5555ff;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+/******************************  MOBILE - VERSION END  *************************************************/
+/*******************************************************************************************************/
+/*******************************************************************************************************/
+/*******************************************************************************************************/
+
+
+
 
 /******************************  HEADER - START  ***********************************************/
 header{
@@ -178,7 +343,10 @@ header{
     box-shadow: 0px 0px 9px 0px blue inset;
 }
 
-.refresh_button{
+.refresh_button,
+.add_button,
+.filter_button,
+.history_button_mobile{
     font-size: 15px;
     height: 2rem;
     border: none;
@@ -189,11 +357,17 @@ header{
     width: 2rem;
 }
 
-.refresh_button:hover{
+.refresh_button:hover,
+.add_button:hover,
+.filter_button:hover,
+.history_button_mobile:hover{
     background-color: #d3d3d3;
 }
 
-.refresh_button:active{
+.refresh_button:active,
+.add_button:active,
+.filter_button:active,
+.history_button_mobile:active{
     box-shadow: 0 0 3px 1px blue inset;
     border: 1px solid blue;
 }
@@ -211,7 +385,6 @@ header{
 
 .sort_box_label{
     color: white;
-    margin-right: 10px;
     font-size: 20px;
     font-weight: 700;
 }
@@ -238,10 +411,8 @@ header{
     border: 1px solid blue;
 }
 
-.sort_box .select_header_select{
-    height: 100%;
-    margin-right: 36px;
-    width: 25%;
+.select_header_select{
+    width: 40%;
 }
 
 /****************************************  CUSTOM SELECT **********************************/
@@ -615,3 +786,129 @@ header{
 /************************************  DELETE USER *******************************************/
 
 /******************************  MAIN - END  *************************************************/
+
+/******************************  MEDIA QUERY - START  ****************************************/
+
+/*Small devices (landscape phones, 576px and up)*/
+@media screen and  (min-width: 576px) {
+    
+}
+
+/*Medium devices (tablets, 768px and up)*/
+@media screen and  (min-width: 768px) {
+    .select_header_select{
+        width: 36%;
+    }
+}
+
+/*Large devices (desktops, 992px and up)*/
+@media screen and  (min-width: 992px) {
+    .main_wrapper{
+        display: block;
+        background-color: #e0e0e0;
+    }
+
+    .main_wrapper_mobile{
+        display: none;
+        background-color: #e0e0e0;
+    }
+
+    .result_row_wrapper, .result_header_wrapper{
+        display: grid;
+        grid-template-columns: minmax(15%, 1fr) minmax(15%, 1fr) minmax(25%, 2fr) minmax(20%, 1fr) minmax(15%, 1fr) minmax(10%, 1fr);
+        font-size: 14px;
+    }
+    
+    .result_row_wrapper div, .result_header_wrapper div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 3px;
+    }
+    
+    .result_header_wrapper div{
+        color: white;
+        border: none;
+    }
+    
+    .result_row_wrapper:nth-child(2n){
+        background-color: #cfcdff;
+    }
+    
+    .result_row_wrapper:nth-child(2n+1){
+        background-color: #b3b1ff;
+    }
+    
+    .result_header_wrapper div:nth-child(2n){
+        background-color: #b369f6;
+    }
+    
+    .result_header_wrapper div:nth-child(2n+1){
+        background-color: #8a2be2;
+    }
+    
+    .result_row_wrapper .result_action{
+        justify-content: space-evenly;
+    }
+    
+    .result_edit{
+        border: 1px solid green;
+        background-color: #09c609;
+        color: white;
+        border-radius: 5px;
+    }
+    
+    .result_delete{
+        border: 1px solid #bf0000;
+        color: white;
+        background-color: red;
+        border-radius: 5px;
+    }
+}
+
+/*X-Large devices (large desktops, 1200px and up)*/
+@media screen and  (min-width: 1200px) {
+    .select_header_select{
+        width: 45%;
+    } 
+}
+
+/*XX-Large devices (larger desktops, 1400px and up)*/
+@media screen and  (min-width: 1400px) {
+    body{
+        display: grid;
+        height: 100vh;
+        grid-template-columns: 20% 2fr 2fr 2fr;
+        grid-template-rows: 12% 5fr;
+        grid-template-areas: 
+            "aside header header header"
+            "aside main main main";
+    }
+
+    aside{
+        width: 100%;
+        background-color: #c8c8c8;
+        grid-area: aside;
+        display: flex;
+        align-items: end;
+        padding-bottom: 10px;
+    }
+
+    .aside_wrapper{
+        background-color: burlywood;
+        width: 90%;
+        margin: 0 auto;
+        height: 82%;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;  
+    }
+
+    .add_button,
+    .filter_button,
+    .history_button_mobile{
+        display: none;
+    }
+}
+
+/******************************  MEDIA QUERY - END  ******************************************/
