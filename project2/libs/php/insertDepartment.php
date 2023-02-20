@@ -8,14 +8,7 @@
 
     header('Content-Type: application/json; charset=UTF-8');
 
-    
-
-    $file = 'insertResult.txt';
-
-    
-    
-
-
+   
 
     $sql = "SELECT * FROM department WHERE name = :name AND locationID = :location ORDER BY name";
 
@@ -42,9 +35,7 @@
 
     $result = $stmt->fetchAll();
 
-    // file_put_contents($file, print_r($result, true));
-
-    // die();
+ 
 
     if(count($result) > 0){
         $output['status']['code'] = "302";
@@ -90,9 +81,6 @@
 
     $pdo = null;
     $stmt = null;
-
-    //file_put_contents($file, print_r($output, true));
-
 
     echo json_encode($output);
 

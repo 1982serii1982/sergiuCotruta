@@ -7,11 +7,7 @@
 
     header('Content-Type: application/json; charset=UTF-8');
 
-    // $file = 'insertResult.txt';
-
-    // file_put_contents($file, print_r($_REQUEST, true));
-
-
+   
 
     $sql = "INSERT INTO personnel (firstName, lastName, email, departmentID) 
             VALUES (:firstName, :lastName, :email, :departmentID)";

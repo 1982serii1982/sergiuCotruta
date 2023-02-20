@@ -7,10 +7,7 @@
 
     header('Content-Type: application/json; charset=UTF-8');
 
-    // $file = 'insertResult.txt';
-
-    // file_put_contents($file, print_r($_REQUEST, true));
-
+ 
 
 
     $sql = "UPDATE personnel

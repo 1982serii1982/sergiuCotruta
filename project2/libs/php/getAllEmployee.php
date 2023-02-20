@@ -7,13 +7,7 @@
 
     header('Content-Type: application/json; charset=UTF-8');
 
-    // $file = 'insertResult.txt';
-
-    // file_put_contents($file, print_r($_REQUEST, true));
-    
-    //die();
-
-    
+   
 
     $order = $_REQUEST['order'];
     $orderBy = $_REQUEST['orderBy'];
@@ -59,7 +53,7 @@
 
     $result = $stmt->fetchAll();
 
-    //file_put_contents($file, print_r($result, true));
+    
 
     $output['status']['code'] = "200";
 	$output['status']['name'] = "ok";

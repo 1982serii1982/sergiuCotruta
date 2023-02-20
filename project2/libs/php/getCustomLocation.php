@@ -7,9 +7,7 @@
 
     header('Content-Type: application/json; charset=UTF-8');
 
-    //$file = 'get.txt';
-
-    
+ 
 
     $inputArray = [];
 
@@ -93,8 +91,7 @@
     }
 
 
-    //file_put_contents($file, print_r($result, true));
-    
+  
     
     echo json_encode($output);
 

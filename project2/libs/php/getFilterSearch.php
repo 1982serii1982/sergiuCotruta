@@ -14,11 +14,6 @@
 
     header('Content-Type: application/json; charset=UTF-8');
 
-    //$file = 'getSerchResult.txt';
-
-    //file_put_contents($file, print_r($_REQUEST, true));
-
-    
 
     $order = isset($_REQUEST['order']) ? $_REQUEST['order'] : '';
     $orderBy = isset($_REQUEST['orderBy']) ? $_REQUEST['orderBy'] : '';
@@ -35,7 +30,6 @@
 
 
     $keyArray = array_values(array_filter(array_keys($_REQUEST), "filter"));
-    //file_put_contents($file, print_r($keyArray, true));
     
 
     

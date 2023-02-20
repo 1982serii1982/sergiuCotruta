@@ -7,7 +7,7 @@
 
     header('Content-Type: application/json; charset=UTF-8');
 
-    //$file = 'get.txt';
+    
 
     $sql = "SELECT * FROM location ORDER BY name";
 
@@ -30,7 +30,7 @@
 
     $result = $stmt->fetchAll();
 
-    //file_put_contents($file, print_r($result, true));
+   
 
     $pdo = null;
     $stmt = null;

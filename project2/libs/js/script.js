@@ -1843,7 +1843,7 @@ $(document).ready(function () {
 
         let result = await insertUser(dataObj);
 
-        $('.add_user_close_button').trigger('click');
+        $('.btn-close').trigger('click');
 
         if(result.status.code === '200'){
             $('.toast-body').html(`User ${dataObj['firstName']} ${dataObj['lastName']} succesfully created in ${departmentName} department with ${locationName} location.`);

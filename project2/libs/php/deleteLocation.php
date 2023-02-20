@@ -10,12 +10,6 @@
 
     
 
-    $file = 'insertResult.txt';
-
-    
-
-
-
     $sql = "SELECT * FROM department WHERE locationID = :locationID";
 
 
@@ -61,10 +55,6 @@
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':locationID', intval($_REQUEST['locationID']), PDO::PARAM_INT);
     $error = $stmt->execute();
-
-    //file_put_contents($file, print_r($error, true));
-    
-    // die();
 
     if(!$error){
         $output['status']['code'] = "400";

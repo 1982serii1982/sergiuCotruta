@@ -46,12 +46,4 @@
         exit;
     }
 
-    
-    
-    
-    // $servername = "localhost";
-    // $username = "root";xenia
-    // $password = "";7pA>290$;DF|
-    // $dbname = "companydirectory";
-
 ?>

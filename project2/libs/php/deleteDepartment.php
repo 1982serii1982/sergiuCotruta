@@ -9,13 +9,6 @@
     header('Content-Type: application/json; charset=UTF-8');
 
     
-
-    $file = 'insertResult.txt';
-
-    
-
-
-
     $sql = "SELECT * FROM personnel WHERE departmentID = :departmentID";
 
 
@@ -61,10 +54,6 @@
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':departmentID', intval($_REQUEST['departmentID']), PDO::PARAM_INT);
     $error = $stmt->execute();
-
-    //file_put_contents($file, print_r($error, true));
-    
-    // die();
 
     if(!$error){
         $output['status']['code'] = "400";

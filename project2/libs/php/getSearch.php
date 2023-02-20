@@ -7,7 +7,7 @@
 
     header('Content-Type: application/json; charset=UTF-8');
 
-    //$file = 'getSerchResult.txt';
+   
 
     $order = $_REQUEST['order'];
     $orderBy = $_REQUEST['orderBy'];
@@ -32,9 +32,7 @@
             ORDER BY $orderBy $order";
 
 
-    //file_put_contents($file, print_r($sql, true));
-    
-    
+
 
     $stmt = $pdo->prepare($sql);
     $error = $stmt->execute($inputArray);

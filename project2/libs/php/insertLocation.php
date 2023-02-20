@@ -8,15 +8,7 @@
 
     header('Content-Type: application/json; charset=UTF-8');
 
-    
-
-    //$file = 'insertResult.txt';
-
-    
-    
-
-
-
+ 
     $sql = "SELECT * FROM location WHERE name = :name";
 
 
@@ -85,9 +77,7 @@
     $pdo = null;
     $stmt = null;
 
-    //file_put_contents($file, print_r($output, true));
-
-
+   
     echo json_encode($output);
 
 ?>

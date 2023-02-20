@@ -14,6 +14,12 @@
 
     $X_RapidAPI_Key2 = "07ee9f883cmshb2acd2d731e91f5p122063jsnf5df9bf1332e";
 
+    $host = 'localhost';
+    $db   = 'u377948549_companydirecto';
+    $user = 'u377948549_xenia';
+    $pass = '7pA>290$;DF|';
+    $charset = 'utf8mb4';
+
 
 
 ?>

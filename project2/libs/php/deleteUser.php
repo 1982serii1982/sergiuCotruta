@@ -8,12 +8,7 @@
 
     header('Content-Type: application/json; charset=UTF-8');
 
-    
-
-    $file = 'insertResult.txt';
-
-    
-    
+   
     $sql = "DELETE FROM personnel WHERE id = :id";
 
     
@@ -21,9 +16,7 @@
     $stmt->bindValue(':id', intval($_REQUEST['id']), PDO::PARAM_INT);
     $error = $stmt->execute();
 
-    //file_put_contents($file, print_r($error, true));
-    
-    // die();
+   
 
     if(!$error){
         $output['status']['code'] = "400";

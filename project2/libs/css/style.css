@@ -887,7 +887,7 @@ header{
 
     aside{
         width: 100%;
-        background-color: #c8c8c8;
+        background-color: burlywood;
         grid-area: aside;
         display: flex;
         align-items: end;
@@ -895,7 +895,6 @@ header{
     }
 
     .aside_wrapper{
-        background-color: burlywood;
         width: 90%;
         margin: 0 auto;
         height: 82%;
