@@ -8,10 +8,15 @@
     header('Content-Type: application/json; charset=UTF-8');
 
     
-	
-
-    $sql = "SELECT *  
-            FROM department ORDER BY name";
+	if($_REQUEST['join']){
+        $sql = "SELECT d.name AS departmentName, l.name AS locationName  
+        FROM department d
+        LEFT JOIN location l ON (l.id = d.locationID) 
+        ORDER BY departmentName " . $_REQUEST['order'];
+    }else{
+        $sql = "SELECT *  
+            FROM department ORDER BY name " . $_REQUEST['order'];
+    }
 
 
     $stmt = $pdo->prepare($sql);

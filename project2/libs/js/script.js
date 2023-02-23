@@ -464,6 +464,64 @@ function tableBuilder(inputData, orderBy = 'firstName'){
     $('.main_wrapper_mobile').append(`<div class="result_total">${inputData.data.length} result(s) found</div>`);
     $('.main_wrapper_mobile').append(resultMobile);
 }
+
+function departmentTableBuilder(inputData, orderBy = 'name'){
+    let char = '',
+        mainTemplate, mainTemplateMobile,
+        headerTemplate,
+        template,templateMobile,
+        result = '',resultMobile = '',
+        bodyTemplate = '', bodyTemplateMobile = '';
+
+        inputData.data.forEach(function(currentVal, index, array){
+
+            if(currentVal[orderBy].charAt(0).toUpperCase() !== char){
+                if(index !== 0){
+                    mainTemplate = `
+                        ${headerTemplate}
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="result_header_wrapper">
+                                        <div class="header_name">Name</div>
+                                        <div class="header_surname">Surname</div>
+                                        <div class="header_email">E-mail</div>
+                                        <div class="header_department">Department</div>
+                                        <div class="header_location">Location</div>
+                                        <div class="header_action">Action</div>
+                                    </div>
+                                    ${bodyTemplate}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+    
+                    mainTemplateMobile = `
+                        ${headerTemplate}
+                        <div class="container-fluid">
+                            <div class="row">
+                                ${bodyTemplateMobile}
+                            </div>
+                        </div>
+                    `;
+    
+                    result = result.concat(mainTemplate);
+                    bodyTemplate = '';
+    
+                    resultMobile = resultMobile.concat(mainTemplateMobile);
+                    bodyTemplateMobile = '';
+                }
+    
+                headerTemplate = `<div class="result_header">${currentVal[orderBy].charAt(0).toUpperCase()}</div>`;
+                char = currentVal[orderBy].charAt(0).toUpperCase();
+            }
+
+        });
+}
+
+function locationTableBuilder(inputData){
+
+}
 /***************************************************************************/
 
 
@@ -502,8 +560,8 @@ async function insertUser(inputObj){
     return res;
 }
 
-async function getDepartments(){
-    let res = await phpRequest("getAllDepartments");
+async function getDepartments(join = 0, order = 'asc'){
+    let res = await phpRequest("getAllDepartments", {join: join, order: order});
     return res;
 }
 
@@ -683,6 +741,7 @@ $(document).ready(function () {
     $('.sort_box_button').on('click', async function(){
 
         let result;
+        let dataObj = {};
 
         if($(this).children('i').hasClass("fa-arrow-up-a-z")){
             $(this).attr('data-selected-value', 'asc');
@@ -697,88 +756,175 @@ $(document).ready(function () {
         let selectedValue = $('.header_select').attr('data-selected-value');
         let ascendingButtonValue = $(this).attr('data-selected-value');
 
-        if($('.sort_box_button').attr('data-source') === 'main_search'){
-            result = await getSearch(ascendingButtonValue, selectedValue, $('.header_search').attr('data-searched-value'));
-        }else if($('.sort_box_button').attr('data-source') === 'filter_search'){
-            let dataObj = {};
+        switch($('.sort_box_button').attr('data-source')){
+            case 'main_search':
+                result = await getSearch(ascendingButtonValue, selectedValue, $('.header_search').attr('data-searched-value'));
+                break;
+            case 'filter_search':
             
-            dataObj['order'] = ascendingButtonValue;
-            dataObj['orderBy'] = selectedValue;
+                dataObj['order'] = ascendingButtonValue;
+                dataObj['orderBy'] = selectedValue;
 
-            if($('#name_checkbox').is(":checked")){
-                if($('.name_input').attr('data-searched-value') !== ''){
-                    dataObj['firstName'] = $('.name_input').attr('data-searched-value');
+                if($('#name_checkbox').is(":checked")){
+                    if($('.name_input').attr('data-searched-value') !== ''){
+                        dataObj['firstName'] = $('.name_input').attr('data-searched-value');
+                    }
                 }
-            }
 
-            if($('#surname_checkbox').is(":checked")){
-                if($('.surname_input').attr('data-searched-value') !== ''){
-                    dataObj['lastName'] = $('.surname_input').attr('data-searched-value');
+                if($('#surname_checkbox').is(":checked")){
+                    if($('.surname_input').attr('data-searched-value') !== ''){
+                        dataObj['lastName'] = $('.surname_input').attr('data-searched-value');
+                    }
                 }
-            }
 
-            if($('#email_checkbox').is(":checked")){
-                if($('.email_input').attr('data-searched-value') !== ''){
-                    dataObj['email'] = $('.email_input').attr('data-searched-value');
+                if($('#email_checkbox').is(":checked")){
+                    if($('.email_input').attr('data-searched-value') !== ''){
+                        dataObj['email'] = $('.email_input').attr('data-searched-value');
+                    }
                 }
-            }
 
-            if($('#department_checkbox').is(":checked")){
-                if($('#department_select').attr('data-selected-value') !== ''){
-                    dataObj['department'] = $('#department_select').attr('data-selected-value');
+                if($('#department_checkbox').is(":checked")){
+                    if($('#department_select').attr('data-selected-value') !== ''){
+                        dataObj['department'] = $('#department_select').attr('data-selected-value');
+                    }
                 }
-            }
 
-            if($('#location_checkbox').is(":checked")){
-                if($('#location_select').attr('data-selected-value') !== ''){
-                    dataObj['location'] = $('#location_select').attr('data-selected-value');
+                if($('#location_checkbox').is(":checked")){
+                    if($('#location_select').attr('data-selected-value') !== ''){
+                        dataObj['location'] = $('#location_select').attr('data-selected-value');
+                    }
                 }
-            }
 
+                
+                result = await getFilterSearch(dataObj);
+                break;
+            case 'filter_search_mobile':
             
-            result = await getFilterSearch(dataObj);
+                dataObj['order'] = ascendingButtonValue;
+                dataObj['orderBy'] = selectedValue;
 
-        }else if($('.sort_box_button').attr('data-source') === 'filter_search_mobile'){
-            let dataObj = {};
-            
-            dataObj['order'] = ascendingButtonValue;
-            dataObj['orderBy'] = selectedValue;
-
-            if($('#name_checkbox_mobile').is(":checked")){
-                if($('.name_input_mobile').attr('data-searched-value') !== ''){
-                    dataObj['firstName'] = $('.name_input_mobile').attr('data-searched-value');
+                if($('#name_checkbox_mobile').is(":checked")){
+                    if($('.name_input_mobile').attr('data-searched-value') !== ''){
+                        dataObj['firstName'] = $('.name_input_mobile').attr('data-searched-value');
+                    }
                 }
-            }
 
-            if($('#surname_checkbox_mobile').is(":checked")){
-                if($('.surname_input_mobile').attr('data-searched-value') !== ''){
-                    dataObj['lastName'] = $('.surname_input_mobile').attr('data-searched-value');
+                if($('#surname_checkbox_mobile').is(":checked")){
+                    if($('.surname_input_mobile').attr('data-searched-value') !== ''){
+                        dataObj['lastName'] = $('.surname_input_mobile').attr('data-searched-value');
+                    }
                 }
-            }
 
-            if($('#email_checkbox_mobile').is(":checked")){
-                if($('.email_input_mobile').attr('data-searched-value') !== ''){
-                    dataObj['email'] = $('.email_input_mobile').attr('data-searched-value');
+                if($('#email_checkbox_mobile').is(":checked")){
+                    if($('.email_input_mobile').attr('data-searched-value') !== ''){
+                        dataObj['email'] = $('.email_input_mobile').attr('data-searched-value');
+                    }
                 }
-            }
 
-            if($('#department_checkbox_mobile').is(":checked")){
-                if($('#department_select_mobile').attr('data-selected-value') !== ''){
-                    dataObj['department'] = $('#department_select_mobile').attr('data-selected-value');
+                if($('#department_checkbox_mobile').is(":checked")){
+                    if($('#department_select_mobile').attr('data-selected-value') !== ''){
+                        dataObj['department'] = $('#department_select_mobile').attr('data-selected-value');
+                    }
                 }
-            }
 
-            if($('#location_checkbox_mobile').is(":checked")){
-                if($('#location_select_mobile').attr('data-selected-value') !== ''){
-                    dataObj['location'] = $('#location_select_mobile').attr('data-selected-value');
+                if($('#location_checkbox_mobile').is(":checked")){
+                    if($('#location_select_mobile').attr('data-selected-value') !== ''){
+                        dataObj['location'] = $('#location_select_mobile').attr('data-selected-value');
+                    }
                 }
-            }
 
-            
-            result = await getFilterSearch(dataObj);
-        }else{
-            result = await defaultGetAllEmployee(ascendingButtonValue, selectedValue);
+                result = await getFilterSearch(dataObj);
+                break;
+            case 'get_department_button':
+                result = await getDepartments(1, ascendingButtonValue);
+                console.log(result);
+                break;
+            default:
+                result = await defaultGetAllEmployee(ascendingButtonValue, selectedValue);
         }
+
+        // if($('.sort_box_button').attr('data-source') === 'main_search'){
+        //     result = await getSearch(ascendingButtonValue, selectedValue, $('.header_search').attr('data-searched-value'));
+        // }else if($('.sort_box_button').attr('data-source') === 'filter_search'){
+        //     let dataObj = {};
+            
+        //     dataObj['order'] = ascendingButtonValue;
+        //     dataObj['orderBy'] = selectedValue;
+
+        //     if($('#name_checkbox').is(":checked")){
+        //         if($('.name_input').attr('data-searched-value') !== ''){
+        //             dataObj['firstName'] = $('.name_input').attr('data-searched-value');
+        //         }
+        //     }
+
+        //     if($('#surname_checkbox').is(":checked")){
+        //         if($('.surname_input').attr('data-searched-value') !== ''){
+        //             dataObj['lastName'] = $('.surname_input').attr('data-searched-value');
+        //         }
+        //     }
+
+        //     if($('#email_checkbox').is(":checked")){
+        //         if($('.email_input').attr('data-searched-value') !== ''){
+        //             dataObj['email'] = $('.email_input').attr('data-searched-value');
+        //         }
+        //     }
+
+        //     if($('#department_checkbox').is(":checked")){
+        //         if($('#department_select').attr('data-selected-value') !== ''){
+        //             dataObj['department'] = $('#department_select').attr('data-selected-value');
+        //         }
+        //     }
+
+        //     if($('#location_checkbox').is(":checked")){
+        //         if($('#location_select').attr('data-selected-value') !== ''){
+        //             dataObj['location'] = $('#location_select').attr('data-selected-value');
+        //         }
+        //     }
+
+            
+        //     result = await getFilterSearch(dataObj);
+
+        // }else if($('.sort_box_button').attr('data-source') === 'filter_search_mobile'){
+        //     let dataObj = {};
+            
+        //     dataObj['order'] = ascendingButtonValue;
+        //     dataObj['orderBy'] = selectedValue;
+
+        //     if($('#name_checkbox_mobile').is(":checked")){
+        //         if($('.name_input_mobile').attr('data-searched-value') !== ''){
+        //             dataObj['firstName'] = $('.name_input_mobile').attr('data-searched-value');
+        //         }
+        //     }
+
+        //     if($('#surname_checkbox_mobile').is(":checked")){
+        //         if($('.surname_input_mobile').attr('data-searched-value') !== ''){
+        //             dataObj['lastName'] = $('.surname_input_mobile').attr('data-searched-value');
+        //         }
+        //     }
+
+        //     if($('#email_checkbox_mobile').is(":checked")){
+        //         if($('.email_input_mobile').attr('data-searched-value') !== ''){
+        //             dataObj['email'] = $('.email_input_mobile').attr('data-searched-value');
+        //         }
+        //     }
+
+        //     if($('#department_checkbox_mobile').is(":checked")){
+        //         if($('#department_select_mobile').attr('data-selected-value') !== ''){
+        //             dataObj['department'] = $('#department_select_mobile').attr('data-selected-value');
+        //         }
+        //     }
+
+        //     if($('#location_checkbox_mobile').is(":checked")){
+        //         if($('#location_select_mobile').attr('data-selected-value') !== ''){
+        //             dataObj['location'] = $('#location_select_mobile').attr('data-selected-value');
+        //         }
+        //     }
+
+            
+        //     result = await getFilterSearch(dataObj);
+        // }else{
+        //     result = await defaultGetAllEmployee(ascendingButtonValue, selectedValue);
+        // }
 
         
         $('.main_wrapper').empty();
@@ -857,10 +1003,11 @@ $(document).ready(function () {
         $('.add_location_button').trigger('click');
     });
 
-
+/****************************************************************************************************/
+/****************************************************************************************************/
 /****************************************************************************************************/
 /************************************************* FILTER BOX ***************************************/
-/****************************************************************************************************/
+
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 /**************************************** DESKTOP VERSION ********************************************/
@@ -1732,6 +1879,22 @@ $(document).ready(function () {
         selectChanger(true, true, 'add_user_location_select');
     });
 
+    $('.get_user_button').on('click', async function(){
+        let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
+        let selectedValue = $('.header_select').attr('data-selected-value');
+        let result = await defaultGetAllEmployee(ascendingButtonValue, selectedValue);
+
+        $('.sort_box_button').attr('data-source', '');
+        $('.header_select').attr('data-source', '');
+
+        $('.header_search').attr('data-searched-value', '');
+        $('.header_search').val('');
+
+        $('.main_wrapper').empty();
+        $('.main_wrapper_mobile').empty();
+        tableBuilder(result,selectedValue);
+    });
+
     $('#add_user_name_input').on('blur', function(){
         $(this).attr('data-value', $(this).val());
     });
@@ -1964,7 +2127,12 @@ $(document).ready(function () {
         }
     });
 
-
+    $('.get_department_button').on('click', async function(){
+        let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
+        $('.sort_box_button').attr('data-source', 'get_department_button');
+        let result = await getDepartments(1, ascendingButtonValue);
+        console.log(result);
+    });
 
 /******************************************************************************************************/
 /****************************************** DEPARTMENT TAB BUTTONS ************************************ */
