@@ -1,18 +1,15 @@
 <?php
 
-    ini_set('display_errors', 'On');
-    error_reporting(E_ALL);
-
     require('db.php');
     require('help.php');
 
     header('Content-Type: application/json; charset=UTF-8');
 
-    $sql = "SELECT * FROM department WHERE name = :name AND locationID = :locationID";
+    $sql = "SELECT COUNT(id) AS totalID FROM department WHERE name = :name AND locationID = :locationID";
 
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':name', strtolower($_REQUEST['departmentName']), PDO::PARAM_STR);
-    $stmt->bindValue(':locationID', intval($_REQUEST['locationID']), PDO::PARAM_INT);
+    $stmt->bindValue(':name', strtolower($_POST['departmentName']), PDO::PARAM_STR);
+    $stmt->bindValue(':locationID', intval($_POST['locationID']), PDO::PARAM_INT);
     $error = $stmt->execute();
 
     if($error === false){
@@ -30,9 +27,9 @@
 
     $result = $stmt->fetchAll();
 
-    if(count($result) > 0){
+    if($result[0]['totalID'] > 0){
         $output['status']['code'] = "302";
-        $output['status']['message'] = "Can not update " . formatData($_REQUEST['departmentName']) . " department, because it already exists in " . formatData($_REQUEST['locationName']) . " location";
+        $output['status']['message'] = "Can not update " . formatData($_POST['departmentName']) . " department, because it already exists in " . formatData($_POST['locationName']) . " location";
 
         $pdo = null;
         $stmt = null;
@@ -51,9 +48,9 @@
     
 
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':name', formatData($_REQUEST['departmentName']), PDO::PARAM_STR);
-    $stmt->bindValue(':locationID', intval($_REQUEST['locationID']), PDO::PARAM_INT);
-    $stmt->bindValue(':id', intval($_REQUEST['departmentID']), PDO::PARAM_INT);
+    $stmt->bindValue(':name', formatData($_POST['departmentName']), PDO::PARAM_STR);
+    $stmt->bindValue(':locationID', intval($_POST['locationID']), PDO::PARAM_INT);
+    $stmt->bindValue(':id', intval($_POST['departmentID']), PDO::PARAM_INT);
     $error = $stmt->execute();
 
     if($error === false){
@@ -72,7 +69,7 @@
 
 
     $output['status']['code'] = "200";
-    $output['status']['message'] = "Department " . formatData($_REQUEST['departmentName']) . " succesfully updated.";
+    $output['status']['message'] = "Department " . formatData($_POST['departmentName']) . " succesfully updated.";
 	$output['status']['name'] = "ok";
 	$output['status']['description'] = "success";
 	$output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";

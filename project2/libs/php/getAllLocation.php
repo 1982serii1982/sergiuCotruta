@@ -1,20 +1,17 @@
 <?php
 
-    ini_set('display_errors', 'On');
-    error_reporting(E_ALL);
-
     require('db.php');
 
     header('Content-Type: application/json; charset=UTF-8');
 
-    if($_REQUEST['single']){
+    if($_POST['single']){
         $sql = "SELECT * FROM location WHERE id = :locationID";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->bindValue(':locationID', intval($_REQUEST['locationID']), PDO::PARAM_INT);
+        $stmt->bindValue(':locationID', intval($_POST['locationID']), PDO::PARAM_INT);
         $error = $stmt->execute();
     }else{
-        $sql = "SELECT * FROM location ORDER BY name " . $_REQUEST['order'];
+        $sql = "SELECT * FROM location ORDER BY name " . $_POST['order'];
         
         $stmt = $pdo->prepare($sql);
         $error = $stmt->execute();

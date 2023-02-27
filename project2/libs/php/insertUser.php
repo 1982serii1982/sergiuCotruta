@@ -1,8 +1,5 @@
 <?php
 
-    ini_set('display_errors', 'On');
-    error_reporting(E_ALL);
-
     require('db.php');
 
     header('Content-Type: application/json; charset=UTF-8');
@@ -16,10 +13,10 @@
     
 
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':firstName', ucfirst(strtolower($_REQUEST['firstName'])), PDO::PARAM_STR);
-    $stmt->bindValue(':lastName', ucfirst(strtolower($_REQUEST['lastName'])), PDO::PARAM_STR);
-    $stmt->bindValue(':email', $_REQUEST['email'], PDO::PARAM_STR);
-    $stmt->bindValue(':departmentID', intval($_REQUEST['departmentID']), PDO::PARAM_INT);
+    $stmt->bindValue(':firstName', ucfirst(strtolower($_POST['firstName'])), PDO::PARAM_STR);
+    $stmt->bindValue(':lastName', ucfirst(strtolower($_POST['lastName'])), PDO::PARAM_STR);
+    $stmt->bindValue(':email', $_POST['email'], PDO::PARAM_STR);
+    $stmt->bindValue(':departmentID', intval($_POST['departmentID']), PDO::PARAM_INT);
     $error = $stmt->execute();
 
     if($error === false){

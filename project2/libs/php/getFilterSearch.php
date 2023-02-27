@@ -1,8 +1,5 @@
 <?php
 
-    ini_set('display_errors', 'On');
-    error_reporting(E_ALL);
-
     function filter($var){
         if($var === 'order' || $var === 'orderBy'){
             return false;
@@ -15,8 +12,8 @@
     header('Content-Type: application/json; charset=UTF-8');
 
 
-    $order = isset($_REQUEST['order']) ? $_REQUEST['order'] : '';
-    $orderBy = isset($_REQUEST['orderBy']) ? $_REQUEST['orderBy'] : '';
+    $order = isset($_POST['order']) ? $_POST['order'] : '';
+    $orderBy = isset($_POST['orderBy']) ? $_POST['orderBy'] : '';
 
     $inputArray = [];
 
@@ -29,7 +26,7 @@
             LEFT JOIN location l ON (l.id = d.locationID) ";
 
 
-    $keyArray = array_values(array_filter(array_keys($_REQUEST), "filter"));
+    $keyArray = array_values(array_filter(array_keys($_POST), "filter"));
     
 
     
@@ -42,7 +39,7 @@
                 }else{
                     $sql .= " AND p.firstName LIKE CONCAT( '%', :firstName, '%')";
                 }
-                $inputArray['firstName'] = $_REQUEST[$value];
+                $inputArray['firstName'] = $_POST[$value];
                 break;
             case 'lastName':
                 if($key === 0){
@@ -50,7 +47,7 @@
                 }else{
                     $sql .= " AND p.lastName LIKE CONCAT( '%', :lastName, '%')";
                 }
-                $inputArray['lastName'] = $_REQUEST[$value];
+                $inputArray['lastName'] = $_POST[$value];
                 break;
             case 'email':
                 if($key === 0){
@@ -58,7 +55,7 @@
                 }else{
                     $sql .= " AND p.email LIKE CONCAT( '%', :email, '%')";
                 }
-                $inputArray['email'] = $_REQUEST[$value];
+                $inputArray['email'] = $_POST[$value];
                 break;
             case 'department':
                 if($key === 0){
@@ -66,7 +63,7 @@
                 }else{
                     $sql .= " AND d.name LIKE CONCAT( '%', :department, '%')";
                 }
-                $inputArray['department'] = $_REQUEST[$value];
+                $inputArray['department'] = $_POST[$value];
                 break;
             case 'location':
                 if($key === 0){
@@ -74,7 +71,7 @@
                 }else{
                     $sql .= " AND l.name LIKE CONCAT( '%', :location, '%')";
                 }
-                $inputArray['location'] = $_REQUEST[$value];
+                $inputArray['location'] = $_POST[$value];
                 break;
         }
     }

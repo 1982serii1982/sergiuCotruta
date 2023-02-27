@@ -1,8 +1,5 @@
 <?php
 
-    ini_set('display_errors', 'On');
-    error_reporting(E_ALL);
-
     require('db.php');
     require('help.php');
 
@@ -10,12 +7,12 @@
 
     
 
-    $sql = "SELECT * FROM department WHERE locationID = :locationID";
+    $sql = "SELECT COUNT(id) AS totalID FROM department WHERE locationID = :locationID";
 
 
 
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':locationID', intval($_REQUEST['locationID']), PDO::PARAM_INT);
+    $stmt->bindValue(':locationID', intval($_POST['locationID']), PDO::PARAM_INT);
     $error = $stmt->execute();
 
     if(!$error){
@@ -34,11 +31,9 @@
 
     $result = $stmt->fetchAll();
 
-    
-
-    if(count($result) > 0){
+    if($result[0]['totalID'] > 0){
         $output['status']['code'] = "302";
-        $output['status']['message'] = "Unable to delete " . formatData($_REQUEST['locationName']) . " location. There is a reference to " . formatData($_REQUEST['locationName']) . " location, in another table.";
+        $output['status']['message'] = "Unable to delete " . formatData($_POST['locationName']) . " location. There is a reference to " . formatData($_POST['locationName']) . " location, in another table.";
         
         $pdo = null;
         $stmt = null;
@@ -53,7 +48,7 @@
 
     
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':locationID', intval($_REQUEST['locationID']), PDO::PARAM_INT);
+    $stmt->bindValue(':locationID', intval($_POST['locationID']), PDO::PARAM_INT);
     $error = $stmt->execute();
 
     if(!$error){
@@ -73,7 +68,7 @@
 
 
     $output['status']['code'] = "200";
-	$output['status']['message'] = formatData($_REQUEST['locationName']) . " location is successfully deleted.";
+	$output['status']['message'] = formatData($_POST['locationName']) . " location is successfully deleted.";
 	$output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
 	$output['data'] = [];
 

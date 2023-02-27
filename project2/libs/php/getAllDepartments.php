@@ -1,33 +1,30 @@
 <?php
 
-    ini_set('display_errors', 'On');
-    error_reporting(E_ALL);
-
     require('db.php');
 
     header('Content-Type: application/json; charset=UTF-8');
 
-    if($_REQUEST['single']){
+    if($_POST['single']){
         $sql = "SELECT d.id AS departmentID, d.name AS departmentName, d.locationID AS locationID, l.name AS locationName  
         FROM department d
         LEFT JOIN location l ON (l.id = d.locationID)
         WHERE d.id = :departmentID
-        ORDER BY departmentName " . $_REQUEST['order'];
+        ORDER BY departmentName " . $_POST['order'];
 
         $stmt = $pdo->prepare($sql);
-        $stmt->bindValue(':departmentID', intval($_REQUEST['departmentID']), PDO::PARAM_INT);
+        $stmt->bindValue(':departmentID', intval($_POST['departmentID']), PDO::PARAM_INT);
         $error = $stmt->execute();
-    }elseif($_REQUEST['join']){
+    }elseif($_POST['join']){
         $sql = "SELECT d.id AS departmentID, d.name AS departmentName, l.name AS locationName  
         FROM department d
         LEFT JOIN location l ON (l.id = d.locationID) 
-        ORDER BY departmentName " . $_REQUEST['order'];
+        ORDER BY departmentName " . $_POST['order'];
 
         $stmt = $pdo->prepare($sql);
         $error = $stmt->execute();
     }else{
         $sql = "SELECT *  
-        FROM department ORDER BY name " . $_REQUEST['order'];
+        FROM department ORDER BY name " . $_POST['order'];
 
         $stmt = $pdo->prepare($sql);
         $error = $stmt->execute();

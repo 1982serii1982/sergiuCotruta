@@ -1,20 +1,17 @@
 <?php
-
-    ini_set('display_errors', 'On');
-    error_reporting(E_ALL);
-
     require('db.php');
     require('help.php');
 
     header('Content-Type: application/json; charset=UTF-8');
 
     
-    $sql = "SELECT * FROM personnel WHERE departmentID = :departmentID";
+
+    $sql = "SELECT COUNT(id) AS totalID FROM personnel WHERE departmentID = :departmentID";
 
 
 
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':departmentID', intval($_REQUEST['departmentID']), PDO::PARAM_INT);
+    $stmt->bindValue(':departmentID', intval($_POST['departmentID']), PDO::PARAM_INT);
     $error = $stmt->execute();
 
     if(!$error){
@@ -35,9 +32,9 @@
 
     
 
-    if(count($result) > 0){
+    if($result[0]['totalID'] > 0){
         $output['status']['code'] = "302";
-        $output['status']['message'] = "Unable to delete " . formatData($_REQUEST['departmentName']) . " department for " . formatData($_REQUEST['locationName']) . " location. There is a reference to " . formatData($_REQUEST['departmentName']) . " department in main table.";
+        $output['status']['message'] = "Unable to delete " . formatData($_POST['departmentName']) . " department for " . formatData($_POST['locationName']) . " location. There is a reference to " . formatData($_POST['departmentName']) . " department in main table.";
         
         $pdo = null;
         $stmt = null;
@@ -52,7 +49,7 @@
 
     
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':departmentID', intval($_REQUEST['departmentID']), PDO::PARAM_INT);
+    $stmt->bindValue(':departmentID', intval($_POST['departmentID']), PDO::PARAM_INT);
     $error = $stmt->execute();
 
     if(!$error){
@@ -72,7 +69,7 @@
 
 
     $output['status']['code'] = "200";
-	$output['status']['message'] = formatData($_REQUEST['departmentName']) . " department from " . formatData($_REQUEST['locationName']) . " location is successfully deleted.";
+	$output['status']['message'] = formatData($_POST['departmentName']) . " department from " . formatData($_POST['locationName']) . " location is successfully deleted.";
 	$output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
 	$output['data'] = [];
 

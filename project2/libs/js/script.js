@@ -2686,6 +2686,8 @@ $(document).ready(function () {
             default:
                 console.log()
         }
+
+        $('.get_department_button').trigger('click');
     });
 
 /*--------------------------------------------------------------------------------------------------- */
@@ -2858,6 +2860,8 @@ $(document).ready(function () {
             default:
                 console.log();
         }
+
+        $('.get_location_button').trigger('click');
     });
 
 /*===================================================================================================*/

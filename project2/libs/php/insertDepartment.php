@@ -1,8 +1,5 @@
 <?php
 
-    ini_set('display_errors', 'On');
-    error_reporting(E_ALL);
-
     require('db.php');
     require('help.php');
 
@@ -10,13 +7,13 @@
 
    
 
-    $sql = "SELECT * FROM department WHERE name = :name AND locationID = :location ORDER BY name";
+    $sql = "SELECT COUNT(id) AS totalID FROM department WHERE name = :name AND locationID = :location";
 
 
 
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':name', formatData($_REQUEST['departmentName']), PDO::PARAM_STR);
-    $stmt->bindValue(':location', intval($_REQUEST['locationID']), PDO::PARAM_INT);
+    $stmt->bindValue(':name', formatData($_POST['departmentName']), PDO::PARAM_STR);
+    $stmt->bindValue(':location', intval($_POST['locationID']), PDO::PARAM_INT);
     $error = $stmt->execute();
 
     if($error === false){
@@ -37,9 +34,9 @@
 
  
 
-    if(count($result) > 0){
+    if($result[0]['totalID'] > 0){
         $output['status']['code'] = "302";
-        $output['status']['message'] = formatData($_REQUEST['departmentName']) . " department already exists in " . formatData($_REQUEST['locationName']) . " location";
+        $output['status']['message'] = formatData($_POST['departmentName']) . " department already exists in " . formatData($_POST['locationName']) . " location";
 
         $pdo = null;
         $stmt = null;
@@ -54,8 +51,8 @@
 
     
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':name', formatData($_REQUEST['departmentName']), PDO::PARAM_STR);
-    $stmt->bindValue(':location', intval($_REQUEST['locationID']), PDO::PARAM_INT);
+    $stmt->bindValue(':name', formatData($_POST['departmentName']), PDO::PARAM_STR);
+    $stmt->bindValue(':location', intval($_POST['locationID']), PDO::PARAM_INT);
     $error = $stmt->execute();
 
     if($error === false){
@@ -74,7 +71,7 @@
 
 
     $output['status']['code'] = "200";
-	$output['status']['message'] = formatData($_REQUEST['departmentName']) . " department is successfully added to " . formatData($_REQUEST['locationName']) . " location";
+	$output['status']['message'] = formatData($_POST['departmentName']) . " department is successfully added to " . formatData($_POST['locationName']) . " location";
 	$output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
 	$output['data'] = [];
 

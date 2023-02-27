@@ -1,19 +1,16 @@
 <?php
 
-    ini_set('display_errors', 'On');
-    error_reporting(E_ALL);
-
     require('db.php');
 
     header('Content-Type: application/json; charset=UTF-8');
 
    
 
-    $order = $_REQUEST['order'];
-    $orderBy = $_REQUEST['orderBy'];
+    $order = $_POST['order'];
+    $orderBy = $_POST['orderBy'];
 
     
-	if($_REQUEST['single']){
+	if($_POST['single']){
         $sql = "SELECT p.lastName AS lastName, p.firstName AS firstName, p.jobTitle AS jobTitle, p.id AS id, p.email AS email, d.name AS department, l.name AS location  
             FROM personnel p 
             LEFT JOIN department d ON (d.id = p.departmentID) 
@@ -21,7 +18,7 @@
             WHERE p.id = :userID";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->bindValue(':userID', intval($_REQUEST['userID']), PDO::PARAM_INT);
+        $stmt->bindValue(':userID', intval($_POST['userID']), PDO::PARAM_INT);
         $error = $stmt->execute();
     }else{
         $sql = "SELECT p.lastName AS lastName, p.firstName AS firstName, p.jobTitle AS jobTitle, p.id AS id, p.email AS email, d.name AS department, l.name AS location  

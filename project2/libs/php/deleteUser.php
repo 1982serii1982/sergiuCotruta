@@ -1,8 +1,5 @@
 <?php
 
-    ini_set('display_errors', 'On');
-    error_reporting(E_ALL);
-
     require('db.php');
     require('help.php');
 
@@ -13,7 +10,7 @@
 
     
     $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':id', intval($_REQUEST['id']), PDO::PARAM_INT);
+    $stmt->bindValue(':id', intval($_POST['id']), PDO::PARAM_INT);
     $error = $stmt->execute();
 
    

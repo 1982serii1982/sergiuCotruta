@@ -1,21 +1,18 @@
 <?php
 
-    ini_set('display_errors', 'On');
-    error_reporting(E_ALL);
-
     require('db.php');
 
     header('Content-Type: application/json; charset=UTF-8');
 
    
 
-    $order = $_REQUEST['order'];
-    $orderBy = $_REQUEST['orderBy'];
-    $inputArray['firstName'] = $_REQUEST['searchString'];
-    $inputArray['department'] = $_REQUEST['searchString'];
-    $inputArray['lastName'] = $_REQUEST['searchString'];
-    $inputArray['email'] = $_REQUEST['searchString'];
-    $inputArray['location'] = $_REQUEST['searchString'];
+    $order = $_POST['order'];
+    $orderBy = $_POST['orderBy'];
+    $inputArray['firstName'] = $_POST['searchString'];
+    $inputArray['department'] = $_POST['searchString'];
+    $inputArray['lastName'] = $_POST['searchString'];
+    $inputArray['email'] = $_POST['searchString'];
+    $inputArray['location'] = $_POST['searchString'];
 
     
 	

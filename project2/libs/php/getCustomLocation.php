@@ -1,8 +1,5 @@
 <?php
 
-    ini_set('display_errors', 'On');
-    error_reporting(E_ALL);
-
     require('db.php');
 
     header('Content-Type: application/json; charset=UTF-8');
@@ -11,11 +8,11 @@
 
     $inputArray = [];
 
-    if($_REQUEST['not']){
+    if($_POST['not']){
 
         $sql = "SELECT * FROM location WHERE id NOT IN ( ";
 
-        foreach ($_REQUEST['data'] as $key => $value){
+        foreach ($_POST['data'] as $key => $value){
             if($key == 0){
                 $sql .= ":id" . $key;
                 $inputArray['id' . $key] = $value;
@@ -33,7 +30,7 @@
 
         $sql = "SELECT * FROM location WHERE id IN ( ";
 
-        foreach ($_REQUEST['data'] as $key => $value){
+        foreach ($_POST['data'] as $key => $value){
             if($key == 0){
                 $sql .= ":id" . $key;
                 $inputArray['id' . $key] = $value;
