@@ -7,13 +7,20 @@
 
     header('Content-Type: application/json; charset=UTF-8');
 
+    if($_REQUEST['single']){
+        $sql = "SELECT * FROM location WHERE id = :locationID";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(':locationID', intval($_REQUEST['locationID']), PDO::PARAM_INT);
+        $error = $stmt->execute();
+    }else{
+        $sql = "SELECT * FROM location ORDER BY name " . $_REQUEST['order'];
+        
+        $stmt = $pdo->prepare($sql);
+        $error = $stmt->execute();
+    }
+
     
-
-    $sql = "SELECT * FROM location ORDER BY name";
-
-
-    $stmt = $pdo->prepare($sql);
-    $error = $stmt->execute();
 
     if($error === false){
         $output['status']['code'] = "400";

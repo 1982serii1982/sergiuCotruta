@@ -7,20 +7,34 @@
 
     header('Content-Type: application/json; charset=UTF-8');
 
-    
-	if($_REQUEST['join']){
-        $sql = "SELECT d.name AS departmentName, l.name AS locationName  
+    if($_REQUEST['single']){
+        $sql = "SELECT d.id AS departmentID, d.name AS departmentName, d.locationID AS locationID, l.name AS locationName  
+        FROM department d
+        LEFT JOIN location l ON (l.id = d.locationID)
+        WHERE d.id = :departmentID
+        ORDER BY departmentName " . $_REQUEST['order'];
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindValue(':departmentID', intval($_REQUEST['departmentID']), PDO::PARAM_INT);
+        $error = $stmt->execute();
+    }elseif($_REQUEST['join']){
+        $sql = "SELECT d.id AS departmentID, d.name AS departmentName, l.name AS locationName  
         FROM department d
         LEFT JOIN location l ON (l.id = d.locationID) 
         ORDER BY departmentName " . $_REQUEST['order'];
+
+        $stmt = $pdo->prepare($sql);
+        $error = $stmt->execute();
     }else{
         $sql = "SELECT *  
-            FROM department ORDER BY name " . $_REQUEST['order'];
+        FROM department ORDER BY name " . $_REQUEST['order'];
+
+        $stmt = $pdo->prepare($sql);
+        $error = $stmt->execute();
     }
+    
 
-
-    $stmt = $pdo->prepare($sql);
-    $error = $stmt->execute();
+    
 
     if($error === false){
         $output['status']['code'] = "400";

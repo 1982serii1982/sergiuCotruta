@@ -116,18 +116,29 @@ main{
     padding: 6px 10px;
 }
 
-.result_edit_mobile{
+.result_edit_mobile,
+.result_edit_department_mobile,
+.result_edit_location_mobile{
     border: 1px solid green;
     background-color: #09c609;
     color: white;
     border-radius: 5px;
 }
 
-.result_delete_mobile{
+.result_delete_mobile,
+.result_delete_department_mobile,
+.result_delete_location_mobile{
     border: 1px solid #bf0000;
     color: white;
     background-color: red;
     border-radius: 5px;
+}
+
+.add_delete_button_item{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .add_delete_button_wrapper{
@@ -139,7 +150,7 @@ main{
 }
 
 .add_delete_button_wrapper button{
-    width: 65%;
+    width: 40%;
 }
 
 .filter_button{
@@ -788,7 +799,9 @@ header{
 
 /******************************  MAIN - START  ***********************************************/
 /************************************  EDIT USER  ********************************************/
-.result_edit_user_item{
+.result_edit_user_item,
+.result_edit_department_item,
+.result_edit_location_item{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -798,13 +811,16 @@ header{
 
 #result_edit_user_name_input,
 #result_edit_user_surname_input,
-#result_edit_user_email_input{
+#result_edit_user_email_input,
+#result_edit_department_department_input,
+#result_edit_location_location_input{
     border-radius: 6px;
     width: 63%;
 }
 
 .select_result_edit_user_department_select,
-.select_result_edit_user_location_select{
+.select_result_edit_user_location_select,
+.select_result_edit_department_location_select{
     width: 63%;
 }
 /************************************  DELETE USER *******************************************/
@@ -837,52 +853,92 @@ header{
         background-color: #e0e0e0;
     }
 
-    .result_row_wrapper, .result_header_wrapper{
+
+
+    .result_row_wrapper,
+    .result_header_wrapper{
         display: grid;
         grid-template-columns: minmax(15%, 1fr) minmax(15%, 1fr) minmax(25%, 2fr) minmax(20%, 1fr) minmax(15%, 1fr) minmax(10%, 1fr);
         font-size: 14px;
     }
+
+    .result_row_wrapper_department,
+    .result_header_wrapper_department{
+        display: grid;
+        grid-template-columns: minmax(35%, 2fr) minmax(35%, 2fr) minmax(30%, 1fr);
+        font-size: 14px;
+    }
+
+    .result_row_wrapper_location,
+    .result_header_wrapper_location{
+        display: grid;
+        grid-template-columns: minmax(35%, 4fr) minmax(15%, 1fr);
+        font-size: 14px;
+    }
+
+
     
-    .result_row_wrapper div, .result_header_wrapper div{
+    .result_row_wrapper div,
+    .result_header_wrapper div,
+    .result_row_wrapper_department div,
+    .result_header_wrapper_department div,
+    .result_row_wrapper_location div,
+    .result_header_wrapper_location div{
         display: flex;
         justify-content: center;
         align-items: center;
         padding: 3px;
     }
     
-    .result_header_wrapper div{
+    .result_header_wrapper div,
+    .result_header_wrapper_department div,
+    .result_header_wrapper_location div{
         color: white;
         border: none;
     }
     
-    .result_row_wrapper:nth-child(2n){
+    .result_row_wrapper:nth-child(2n),
+    .result_row_wrapper_department:nth-child(2n),
+    .result_row_wrapper_location:nth-child(2n){
         background-color: #cfcdff;
     }
     
-    .result_row_wrapper:nth-child(2n+1){
+    .result_row_wrapper:nth-child(2n+1),
+    .result_row_wrapper_department:nth-child(2n+1),
+    .result_row_wrapper_location:nth-child(2n+1){
         background-color: #b3b1ff;
     }
     
-    .result_header_wrapper div:nth-child(2n){
+    .result_header_wrapper div:nth-child(2n),
+    .result_header_wrapper_department div:nth-child(2n),
+    .result_header_wrapper_location div:nth-child(2n){
         background-color: #b369f6;
     }
     
-    .result_header_wrapper div:nth-child(2n+1){
+    .result_header_wrapper div:nth-child(2n+1),
+    .result_header_wrapper_department div:nth-child(2n+1),
+    .result_header_wrapper_location div:nth-child(2n+1){
         background-color: #8a2be2;
     }
     
-    .result_row_wrapper .result_action{
+    .result_row_wrapper .result_action,
+    .result_row_wrapper_department .result_action,
+    .result_row_wrapper_location .result_action{
         justify-content: space-evenly;
     }
     
-    .result_edit{
+    .result_edit,
+    .result_edit_department,
+    .result_edit_location{
         border: 1px solid green;
         background-color: #09c609;
         color: white;
         border-radius: 5px;
     }
     
-    .result_delete{
+    .result_delete,
+    .result_delete_department,
+    .result_delete_location{
         border: 1px solid #bf0000;
         color: white;
         background-color: red;

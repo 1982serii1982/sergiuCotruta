@@ -30,7 +30,7 @@
         </div>
     </div>
     <div class="modal_container">
-        <!-- Add/Delete User Modal -->
+        <!-- Actions User Modal -->
         <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
@@ -67,7 +67,7 @@
               </div>
             </div>
         </div>
-        <!-- Add/Delete Department Modal -->
+        <!-- Actions Department Modal -->
         <div class="modal fade" id="addDepartmentModal" tabindex="-1" aria-labelledby="addDepartmentModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
@@ -127,7 +127,7 @@
               </div>
             </div>
         </div>
-        <!-- Add/Delete Location Modal -->
+        <!-- Actions Location Modal -->
         <div class="modal fade" id="addLocationModal" tabindex="-1" aria-labelledby="addLocationModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
@@ -166,19 +166,28 @@
               </div>
             </div>
         </div>
-        <!-- Add/Delete Mobile Modal -->
+        <!-- Actions Mobile Modal -->
         <div class="modal fade" id="addButtonModalToggle" aria-hidden="true" aria-labelledby="addButtonModalToggleLabel" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="addButtonModalToggleLabel">Add/Delete</h5>
+                  <h5 class="modal-title" id="addButtonModalToggleLabel">Actions</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="add_delete_button_wrapper">
-                        <button type="button" class="btn btn-primary add_user_mobile" data-bs-dismiss="modal">User</button>
-                        <button type="button" class="btn btn-primary add_department_mobile" data-bs-dismiss="modal">Department</button>
-                        <button type="button" class="btn btn-primary add_location_mobile" data-bs-dismiss="modal">Location</button>
+                        <div class="add_delete_button_item">
+                            <button type="button" class="btn btn-primary add_user_mobile" data-bs-dismiss="modal">Add User</button>
+                            <button type="button" class="btn btn-primary get_user_mobile" data-bs-dismiss="modal">Get Users</button>
+                        </div>
+                        <div class="add_delete_button_item">
+                            <button type="button" class="btn btn-primary add_department_mobile" data-bs-dismiss="modal">Add Department</button>
+                            <button type="button" class="btn btn-primary get_department_mobile" data-bs-dismiss="modal">Get Departments</button>
+                        </div>
+                        <div class="add_delete_button_item">
+                            <button type="button" class="btn btn-primary add_location_mobile" data-bs-dismiss="modal">Add Location</button>
+                            <button type="button" class="btn btn-primary get_location_mobile" data-bs-dismiss="modal">Get Locations</button>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -270,6 +279,161 @@
                 <div class="modal-footer">
                 </div>
               </div>
+            </div>
+        </div>
+        <!-- Result Edit User Modal -->
+        <div class="result_user_edit">
+            <div class="modal fade" id="resultEditUserModal" tabindex="-1" aria-labelledby="resultEditUserModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="resultEditUserModalLabel">Edit User</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="result_edit_user_item">
+                            <label for="result_edit_user_name_input">Name</label>
+                            <input type="text" id="result_edit_user_name_input" placeholder="Fill in..." data-value="">
+                        </div>
+                        <div class="result_edit_user_item">
+                            <label for="result_edit_user_surname_input">Surname</label>
+                            <input type="text" id="result_edit_user_surname_input" placeholder="Fill in..." data-value="">
+                        </div>
+                        <div class="result_edit_user_item">
+                            <label for="result_edit_user_email_input">E-mail</label>
+                            <input type="text" id="result_edit_user_email_input" placeholder="Fill in..." data-value="">
+                        </div>
+                        <div class="result_edit_user_item">
+                            <label for="result_edit_user_department_select">Department</label>
+                            <select name="resultEditUserDepartment" class="result_edit_user_department_select" id="result_edit_user_department_select"></select>
+                        </div>
+                        <div class="result_edit_user_item">
+                            <label for="result_edit_user_location_select">Location</label>
+                            <select name="resultEditUserLocation" class="result_edit_user_location_select" id="result_edit_user_location_select"></select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary result_edit_user_close_button" data-bs-dismiss="modal">Discard</button>
+                      <button type="button" class="btn btn-primary result_edit_user_save_button">Update</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <!-- Result Delete User Modal -->
+        <div class="result_user_delete">
+            <div class="modal fade" id="resultDeleteUserModal" tabindex="-1" aria-labelledby="resultDeleteUserModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="resultDeleteUserModalLabel">Delete User</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="result_delete_user_item">
+                            
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary result_delete_user_close_button" data-bs-dismiss="modal">Discard</button>
+                      <button type="button" class="btn btn-primary result_delete_user_save_button">Delete</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <!-- Result Edit Department Modal -->
+        <div class="result_department_edit">
+            <div class="modal fade" id="resultEditDepartmentModal" tabindex="-1" aria-labelledby="resultEditDepartmentModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="resultEditDepartmentModalLabel">Edit Department</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="result_edit_department_item">
+                            <label for="result_edit_department_department_input">Department</label>
+                            <input type="text" id="result_edit_department_department_input" placeholder="Fill in..." data-value="">
+                        </div>
+                        <div class="result_edit_department_item">
+                            <label for="result_edit_department_location_select">Location</label>
+                            <select name="resultEditDepartmentLocation" class="result_edit_department_location_select" id="result_edit_department_location_select"></select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary result_edit_department_close_button" data-bs-dismiss="modal">Discard</button>
+                      <button type="button" class="btn btn-primary result_edit_department_save_button">Update</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <!-- Result Delete Department Modal -->
+        <div class="result_department_delete">
+            <div class="modal fade" id="resultDeleteDepartmentModal" tabindex="-1" aria-labelledby="resultDeleteDepartmentModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="resultDeleteDepartmentModalLabel">Delete Department</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="result_delete_department_item">
+                            
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary result_delete_department_close_button" data-bs-dismiss="modal">Discard</button>
+                      <button type="button" class="btn btn-primary result_delete_department_save_button">Delete</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <!-- Result Edit Location Modal -->
+        <div class="result_location_edit">
+            <div class="modal fade" id="resultEditLocationModal" tabindex="-1" aria-labelledby="resultEditLocationModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="resultEditLocationModalLabel">Edit Location</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="result_edit_location_item">
+                            <label for="result_edit_location_location_input">Location</label>
+                            <input type="text" id="result_edit_location_location_input" placeholder="Fill in..." data-value="">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary result_edit_location_close_button" data-bs-dismiss="modal">Discard</button>
+                      <button type="button" class="btn btn-primary result_edit_location_save_button">Update</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <!-- Result Delete Location Modal -->
+        <div class="result_location_delete">
+            <div class="modal fade" id="resultDeleteLocationModal" tabindex="-1" aria-labelledby="resultDeleteLocationModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="resultDeleteLocationModalLabel">Delete Location</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="result_delete_location_item">
+                            
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary result_delete_location_close_button" data-bs-dismiss="modal">Discard</button>
+                      <button type="button" class="btn btn-primary result_delete_location_save_button">Delete</button>
+                    </div>
+                  </div>
+                </div>
             </div>
         </div>
     </div>
@@ -387,65 +551,6 @@
         </div>
         <div class="main_wrapper_mobile">
 
-        </div>
-        <div class="result_user_edit">
-            <div class="modal fade" id="resultEditUserModal" tabindex="-1" aria-labelledby="resultEditUserModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="resultEditUserModalLabel">Edit User</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="result_edit_user_item">
-                            <label for="result_edit_user_name_input">Name</label>
-                            <input type="text" id="result_edit_user_name_input" placeholder="Fill in..." data-value="">
-                        </div>
-                        <div class="result_edit_user_item">
-                            <label for="result_edit_user_surname_input">Surname</label>
-                            <input type="text" id="result_edit_user_surname_input" placeholder="Fill in..." data-value="">
-                        </div>
-                        <div class="result_edit_user_item">
-                            <label for="result_edit_user_email_input">E-mail</label>
-                            <input type="text" id="result_edit_user_email_input" placeholder="Fill in..." data-value="">
-                        </div>
-                        <div class="result_edit_user_item">
-                            <label for="result_edit_user_department_select">Department</label>
-                            <select name="resultEditUserDepartment" class="result_edit_user_department_select" id="result_edit_user_department_select"></select>
-                        </div>
-                        <div class="result_edit_user_item">
-                            <label for="result_edit_user_location_select">Location</label>
-                            <select name="resultEditUserLocation" class="result_edit_user_location_select" id="result_edit_user_location_select"></select>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary result_edit_user_close_button" data-bs-dismiss="modal">Discard</button>
-                      <button type="button" class="btn btn-primary result_edit_user_save_button">Save</button>
-                    </div>
-                  </div>
-                </div>
-            </div>
-        </div>
-        <div class="result_user_delete">
-            <div class="modal fade" id="resultDeleteUserModal" tabindex="-1" aria-labelledby="resultDeleteUserModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="resultDeleteUserModalLabel">Delete User</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="result_delete_user_item">
-                            
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary result_delete_user_close_button" data-bs-dismiss="modal">Discard</button>
-                      <button type="button" class="btn btn-primary result_delete_user_save_button">Delete</button>
-                    </div>
-                  </div>
-                </div>
-            </div>
         </div>
     </main>
     <script src="./libs/js/jquery-3.6.1.min.js"></script>
