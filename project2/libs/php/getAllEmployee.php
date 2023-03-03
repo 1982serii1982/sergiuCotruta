@@ -11,7 +11,7 @@
 
     
 	if($_POST['single']){
-        $sql = "SELECT p.lastName AS lastName, p.firstName AS firstName, p.jobTitle AS jobTitle, p.id AS id, p.email AS email, d.name AS department, l.name AS location  
+        $sql = "SELECT p.lastName AS lastName, p.firstName AS firstName, p.jobTitle AS jobTitle, p.id AS id, p.email AS email, d.name AS department, d.id AS departmentID, l.name AS location  
             FROM personnel p 
             LEFT JOIN department d ON (d.id = p.departmentID) 
             LEFT JOIN location l ON (l.id = d.locationID)

@@ -7,13 +7,12 @@
 
    
 
-    $sql = "SELECT COUNT(id) AS totalID FROM department WHERE name = :name AND locationID = :location";
+    $sql = "SELECT COUNT(id) AS totalID FROM department WHERE name = :name";
 
 
 
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':name', formatData($_POST['departmentName']), PDO::PARAM_STR);
-    $stmt->bindValue(':location', intval($_POST['locationID']), PDO::PARAM_INT);
     $error = $stmt->execute();
 
     if($error === false){

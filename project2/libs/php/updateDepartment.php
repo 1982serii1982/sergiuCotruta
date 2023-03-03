@@ -5,11 +5,10 @@
 
     header('Content-Type: application/json; charset=UTF-8');
 
-    $sql = "SELECT COUNT(id) AS totalID FROM department WHERE name = :name AND locationID = :locationID";
+    $sql = "SELECT COUNT(id) AS totalID FROM department WHERE name = :name";
 
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':name', strtolower($_POST['departmentName']), PDO::PARAM_STR);
-    $stmt->bindValue(':locationID', intval($_POST['locationID']), PDO::PARAM_INT);
     $error = $stmt->execute();
 
     if($error === false){
@@ -29,7 +28,7 @@
 
     if($result[0]['totalID'] > 0){
         $output['status']['code'] = "302";
-        $output['status']['message'] = "Can not update " . formatData($_POST['departmentName']) . " department, because it already exists in " . formatData($_POST['locationName']) . " location";
+        $output['status']['message'] = "Can not update " . formatData($_POST['departmentName']) . " department, because it already exists in departments table";
 
         $pdo = null;
         $stmt = null;
@@ -41,7 +40,7 @@
 
 
     $sql = "UPDATE department
-            SET name = :name, locationID = :locationID
+            SET name = :name
             WHERE id = :id";
 
     
@@ -49,7 +48,6 @@
 
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':name', formatData($_POST['departmentName']), PDO::PARAM_STR);
-    $stmt->bindValue(':locationID', intval($_POST['locationID']), PDO::PARAM_INT);
     $stmt->bindValue(':id', intval($_POST['departmentID']), PDO::PARAM_INT);
     $error = $stmt->execute();
 

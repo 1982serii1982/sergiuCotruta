@@ -34,27 +34,6 @@ function isset(data){
     return false
 }
 
-function errorajx(jqXHR, exception) {
-
-    let msg = '';
-        if (jqXHR.status === 0) {
-            msg = 'Not connect.\n Verify Network.';
-        } else if (jqXHR.status == 404) {
-            msg = 'Requested page not found. [404]';
-        } else if (jqXHR.status == 500) {
-            msg = 'Internal Server Error [500].';
-        } else if (exception === 'parsererror') {
-            msg = 'Requested JSON parse failed.';
-        } else if (exception === 'timeout') {
-            msg = 'Time out error.';
-        } else if (exception === 'abort') {
-            msg = 'Ajax request aborted.';
-        } else {
-            msg = 'Uncaught Error.\n' + jqXHR.responseText;
-        }
-        console.log(msg);
-};
-
 function selectChanger(keepClicked = true, selective = false, className = ''){
 
     let selects;
@@ -231,53 +210,27 @@ function selectChanger(keepClicked = true, selective = false, className = ''){
 function populateSelect(inputData, className = '', category){
     switch(category){
         case 'department':
-            let dataObj = {}, string = '', indexes = [];
+            $(`.${className}`).empty();
             inputData.data.forEach(function(v, i, a){
-                if(string !== v.name){
-                    indexes = [v.id, v.locationID];
-                    dataObj[v.name] = [];
-                    dataObj[v.name].push(indexes);
+                if(i == 0){
+                    $(`.${className}`).append(`<option value="${v.name.toLowerCase()}" data-index="${i}" data-id="${v.id}" selected>${v.name}</option>`);
+                    $(`.${className}`).attr('data-selected-value', `${v.name.toLowerCase()}`);
+                    $(`.${className}`).attr('data-selected-id', `${v.id}`);
                 }else{
-                    indexes = [v.id, v.locationID];
-                    dataObj[v.name].push(indexes);
+                    $(`.${className}`).append(`<option value="${v.name.toLowerCase()}" data-index="${i}" data-id="${v.id}">${v.name}</option>`);
                 }
-                string = v.name;
             });
-
-
-
-            let j = 0;
-            for(let key in dataObj){
-                let str = '';
-                dataObj[key].forEach(function(v, i, a){
-                    str += `${v[0]} ${v[1]}:`;
-                });
-
-                str = str.slice(0, str.length-1);
-
-                // let string = '2 9';
-                // let arr = string.split(":");
-                // console.log(arr);
-
-                if(j == 0){
-                    $(`.${className}`).append(`<option value="${key.toLowerCase()}" data-bind="${str}" data-index="${j}" selected>${key}</option>`);
-                    $(`.${className}`).attr('data-selected-value', `${key.toLowerCase()}`);
-                }else{
-                    $(`.${className}`).append(`<option value="${key.toLowerCase()}" data-bind="${str}" data-index="${j}">${key}</option>`);
-                }
-                j++;
-            }
-
             break;
 
         case 'location':
+            $(`.${className}`).empty();
             inputData.data.forEach(function(v, i, a){
                 if(i == 0){
-                    $(`.${className}`).append(`<option data-index="${v.id}" value="${v.name.toLowerCase()}" selected>${v.name}</option>`);
+                    $(`.${className}`).append(`<option data-index="${i}" data-id="${v.id}" value="${v.name.toLowerCase()}" selected>${v.name}</option>`);
                     $(`.${className}`).attr('data-selected-value', `${v.name.toLowerCase()}`);
-                    $(`.${className}`).attr('data-selected-index', `${v.id}`);
+                    $(`.${className}`).attr('data-selected-id', `${v.id}`);
                 }else{
-                    $(`.${className}`).append(`<option data-index="${v.id}" value="${v.name.toLowerCase()}">${v.name}</option>`);
+                    $(`.${className}`).append(`<option data-index="${i}" data-id="${v.id}" value="${v.name.toLowerCase()}">${v.name}</option>`);
                 }
             });
 
@@ -323,71 +276,27 @@ function capitalize(str){
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-function tableBuilder(inputData, orderBy = 'firstName'){
-    let char = '',
-        mainTemplate, mainTemplateMobile,
-        headerTemplate,
-        template,templateMobile,
-        result = '',resultMobile = '',
-        bodyTemplate = '', bodyTemplateMobile = '';
+function userTableBuilder(inputData){
+    let mainTemplate, mainTemplateMobile,
+        bodyTemplate = '', bodyTemplateMobile = '',
+        template = '', templateMobile = '';
+
+
 
     inputData.data.forEach(function(currentVal, index, array){
 
-        if(currentVal[orderBy].charAt(0).toUpperCase() !== char){
-            if(index !== 0){
-                mainTemplate = `
-                    ${headerTemplate}
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="result_header_wrapper">
-                                    <div class="header_name">Name</div>
-                                    <div class="header_surname">Surname</div>
-                                    <div class="header_email">E-mail</div>
-                                    <div class="header_department">Department</div>
-                                    <div class="header_location">Location</div>
-                                    <div class="header_action">Action</div>
-                                </div>
-                                ${bodyTemplate}
-                            </div>
-                        </div>
-                    </div>
-                `;
-
-                mainTemplateMobile = `
-                    ${headerTemplate}
-                    <div class="container-fluid">
-                        <div class="row">
-                            ${bodyTemplateMobile}
-                        </div>
-                    </div>
-                `;
-
-                result = result.concat(mainTemplate);
-                bodyTemplate = '';
-
-                resultMobile = resultMobile.concat(mainTemplateMobile);
-                bodyTemplateMobile = '';
-            }
-
-            headerTemplate = `<div class="result_header">${currentVal[orderBy].charAt(0).toUpperCase()}</div>`;
-            char = currentVal[orderBy].charAt(0).toUpperCase();
-        }
-
-
-
         template = `
-                <div class="result_row_wrapper">
-                    <div class="result_name">${currentVal.firstName}</div>
-                    <div class="result_surname">${currentVal.lastName}</div>
-                    <div class="result_email">${currentVal.email}</div>
-                    <div class="result_department">${currentVal.department}</div>
-                    <div class="result_location">${currentVal.location}</div>
-                    <div class="result_action">
-                        <button class="result_edit" data-value="${currentVal.id}" data-bs-toggle="modal" data-bs-target="#resultEditUserModal"><i class="fa-solid fa-pencil"></i></button>
-                        <button class="result_delete" data-value="${currentVal.id}" data-bs-toggle="modal" data-bs-target="#resultDeleteUserModal"><i class="fa-solid fa-trash-can"></i></button>
-                    </div>
+            <div class="result_row_wrapper">
+                <div class="result_name">${currentVal.firstName}</div>
+                <div class="result_surname">${currentVal.lastName}</div>
+                <div class="result_email">${currentVal.email}</div>
+                <div class="result_department">${currentVal.department}</div>
+                <div class="result_location">${currentVal.location}</div>
+                <div class="result_action">
+                    <button class="result_edit" data-value="${currentVal.id}" data-bs-toggle="modal" data-bs-target="#resultEditUserModal"><i class="fa-solid fa-pencil"></i></button>
+                    <button class="result_delete" data-value="${currentVal.id}" data-bs-toggle="modal" data-bs-target="#resultDeleteUserModal"><i class="fa-solid fa-trash-can"></i></button>
                 </div>
+            </div>
         `;
 
         bodyTemplate = bodyTemplate.concat(template);
@@ -425,277 +334,190 @@ function tableBuilder(inputData, orderBy = 'firstName'){
 
         bodyTemplateMobile = bodyTemplateMobile.concat(templateMobile);
 
-        if(index === array.length-1){
-            mainTemplate = `
-                ${headerTemplate}
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="result_header_wrapper">
-                                <div class="header_name">Name</div>
-                                <div class="header_surname">Surname</div>
-                                <div class="header_email">E-mail</div>
-                                <div class="header_department">Department</div>
-                                <div class="header_location">Location</div>
-                                <div class="header_action">Action</div>
-                            </div>
-                            ${bodyTemplate}
-                        </div>
-                    </div>
-                </div>
-            `;
-            result = result.concat(mainTemplate);
-
-            mainTemplateMobile = `
-                ${headerTemplate}
-                <div class="container-fluid">
-                    <div class="row">
-                        ${bodyTemplateMobile}
-                    </div>
-                </div>
-            `;
-            resultMobile = resultMobile.concat(mainTemplateMobile);
-        }
     });
 
-    $('.main_wrapper').append(`<div class="result_total">${inputData.data.length} result(s) found</div>`);
-    $('.main_wrapper').append(result);
+    mainTemplate = `
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="result_total">${inputData.data.length} result(s) found</div>
+                    <div class="result_header_wrapper">
+                        <div class="header_name">Name</div>
+                        <div class="header_surname">Surname</div>
+                        <div class="header_email">E-mail</div>
+                        <div class="header_department">Department</div>
+                        <div class="header_location">Location</div>
+                        <div class="header_action">Action</div>
+                    </div>
+                    ${bodyTemplate}
+                </div>
+            </div>
+        </div>
+    `;
 
-    $('.main_wrapper_mobile').append(`<div class="result_total">${inputData.data.length} result(s) found</div>`);
-    $('.main_wrapper_mobile').append(resultMobile);
+    mainTemplateMobile = `
+        <div class="container-fluid">
+            <div class="row">
+                <div class="result_total">${inputData.data.length} result(s) found</div>
+                ${bodyTemplateMobile}
+            </div>
+        </div>
+    `;
+
+    
+    $('.main_user_wrapper').append(mainTemplate);
+
+    
+    $('.main_user_wrapper_mobile').append(mainTemplateMobile);
 }
 
-function departmentTableBuilder(inputData, orderBy = 'departmentName'){
-    let char = '',
-        mainTemplate, mainTemplateMobile,
-        headerTemplate,
-        template,templateMobile,
-        result = '',resultMobile = '',
-        bodyTemplate = '', bodyTemplateMobile = '';
+function departmentTableBuilder(inputData){
+    let mainTemplate, mainTemplateMobile,
+        bodyTemplate = '', bodyTemplateMobile = '',
+        template = '', templateMobile = '';
 
-        inputData.data.forEach(function(currentVal, index, array){
 
-            if(currentVal[orderBy].charAt(0).toUpperCase() !== char){
-                if(index !== 0){
-                    mainTemplate = `
-                        ${headerTemplate}
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="result_header_wrapper_department">
-                                        <div class="header_department">Department</div>
-                                        <div class="header_location">Location</div>
-                                        <div class="header_action">Action</div>
-                                    </div>
-                                    ${bodyTemplate}
-                                </div>
-                            </div>
-                        </div>
-                    `;
-    
-                    mainTemplateMobile = `
-                        ${headerTemplate}
-                        <div class="container-fluid">
-                            <div class="row">
-                                ${bodyTemplateMobile}
-                            </div>
-                        </div>
-                    `;
-    
-                    result = result.concat(mainTemplate);
-                    bodyTemplate = '';
-    
-                    resultMobile = resultMobile.concat(mainTemplateMobile);
-                    bodyTemplateMobile = '';
-                }
-    
-                headerTemplate = `<div class="result_header">${currentVal[orderBy].charAt(0).toUpperCase()}</div>`;
-                char = currentVal[orderBy].charAt(0).toUpperCase();
-            }
 
-            template = `
-                <div class="result_row_wrapper_department">
-                    <div class="result_department">${currentVal.departmentName}</div>
-                    <div class="result_location">${currentVal.locationName}</div>
-                    <div class="result_action">
-                        <button class="result_edit_department" data-value="${currentVal.departmentID}" data-bs-toggle="modal" data-bs-target="#resultEditDepartmentModal"><i class="fa-solid fa-pencil"></i></button>
-                        <button class="result_delete_department" data-value="${currentVal.departmentID}" data-bs-toggle="modal" data-bs-target="#resultDeleteDepartmentModal"><i class="fa-solid fa-trash-can"></i></button>
+    inputData.data.forEach(function(currentVal, index, array){
+
+        template = `
+            <div class="result_row_wrapper_department">
+                <div class="result_department">${currentVal.departmentName}</div>
+                <div class="result_location">${currentVal.locationName}</div>
+                <div class="result_action">
+                    <button class="result_edit_department" data-value="${currentVal.departmentID}" data-bs-toggle="modal" data-bs-target="#resultEditDepartmentModal"><i class="fa-solid fa-pencil"></i></button>
+                    <button class="result_delete_department" data-value="${currentVal.departmentID}" data-bs-toggle="modal" data-bs-target="#resultDeleteDepartmentModal"><i class="fa-solid fa-trash-can"></i></button>
+                </div>
+            </div>
+        `;
+
+        bodyTemplate = bodyTemplate.concat(template);
+
+        templateMobile = `
+            <div class="col-12 col-lg-6 col-xxl-4">
+                <div class="result_box_wrapper">
+                    <div class="result_department_mobile_wrapper">
+                        <div class="header_department_mobile">Department</div>
+                        <div class="result_department_mobile">${currentVal.departmentName}</div>
+                    </div>
+                    <div class="result_location_mobile_wrapper">
+                        <div class="header_location_mobile">Location</div>
+                        <div class="result_location_mobile">${currentVal.locationName}</div>
+                    </div>
+                    <div class="result_action_mobile">
+                        <button class="result_edit_department_mobile" data-value="${currentVal.departmentID}" data-bs-toggle="modal" data-bs-target="#resultEditDepartmentModal"><i class="fa-solid fa-pencil"></i></button>
+                        <button class="result_delete_department_mobile" data-value="${currentVal.departmentID}" data-bs-toggle="modal" data-bs-target="#resultDeleteDepartmentModal"><i class="fa-solid fa-trash-can"></i></button>
                     </div>
                 </div>
-            `;
+            </div>
+        `;
 
-            bodyTemplate = bodyTemplate.concat(template);
+        bodyTemplateMobile = bodyTemplateMobile.concat(templateMobile);
 
-            templateMobile = `
-                <div class="col-12 col-lg-6 col-xxl-4">
-                    <div class="result_box_wrapper">
-                        <div class="result_department_mobile_wrapper">
-                            <div class="header_department_mobile">Department</div>
-                            <div class="result_department_mobile">${currentVal.departmentName}</div>
-                        </div>
-                        <div class="result_location_mobile_wrapper">
-                            <div class="header_location_mobile">Location</div>
-                            <div class="result_location_mobile">${currentVal.locationName}</div>
-                        </div>
-                        <div class="result_action_mobile">
-                            <button class="result_edit_department_mobile" data-value="${currentVal.departmentID}" data-bs-toggle="modal" data-bs-target="#resultEditDepartmentModal"><i class="fa-solid fa-pencil"></i></button>
-                            <button class="result_delete_department_mobile" data-value="${currentVal.departmentID}" data-bs-toggle="modal" data-bs-target="#resultDeleteDepartmentModal"><i class="fa-solid fa-trash-can"></i></button>
-                        </div>
+    });
+
+    mainTemplate = `
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="result_total">${inputData.data.length} result(s) found</div>
+                    <div class="result_header_wrapper_department">
+                        <div class="header_department">Department</div>
+                        <div class="header_location">Location</div>
+                        <div class="header_action">Action</div>
                     </div>
+                    ${bodyTemplate}
                 </div>
-            `;
+            </div>
+        </div>
+    `;
 
-            bodyTemplateMobile = bodyTemplateMobile.concat(templateMobile);
+    mainTemplateMobile = `
+        <div class="container-fluid">
+            <div class="row">
+                <div class="result_total">${inputData.data.length} result(s) found</div>
+                ${bodyTemplateMobile}
+            </div>
+        </div>
+    `;
 
-            if(index === array.length-1){
-                mainTemplate = `
-                    ${headerTemplate}
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="result_header_wrapper_department">
-                                    <div class="header_department">Department</div>
-                                    <div class="header_location">Location</div>
-                                    <div class="header_action">Action</div>
-                                </div>
-                                ${bodyTemplate}
-                            </div>
-                        </div>
-                    </div>
-                `;
-                result = result.concat(mainTemplate);
     
-                mainTemplateMobile = `
-                    ${headerTemplate}
-                    <div class="container-fluid">
-                        <div class="row">
-                            ${bodyTemplateMobile}
-                        </div>
-                    </div>
-                `;
-                resultMobile = resultMobile.concat(mainTemplateMobile);
-            }
+    $('.main_departments_wrapper').append(mainTemplate);
 
-        });
-
-        $('.main_wrapper').append(`<div class="result_total">${inputData.data.length} result(s) found</div>`);
-        $('.main_wrapper').append(result);
-
-        $('.main_wrapper_mobile').append(`<div class="result_total">${inputData.data.length} result(s) found</div>`);
-        $('.main_wrapper_mobile').append(resultMobile);
+    
+    $('.main_departments_wrapper_mobile').append(mainTemplateMobile);
 }
 
 function locationTableBuilder(inputData, orderBy = 'name'){
-    let char = '',
-        mainTemplate, mainTemplateMobile,
-        headerTemplate,
-        template,templateMobile,
-        result = '',resultMobile = '',
-        bodyTemplate = '', bodyTemplateMobile = '';
 
-        inputData.data.forEach(function(currentVal, index, array){
+    let mainTemplate, mainTemplateMobile,
+        bodyTemplate = '', bodyTemplateMobile = '',
+        template = '', templateMobile = '';
 
-            if(currentVal[orderBy].charAt(0).toUpperCase() !== char){
-                if(index !== 0){
-                    mainTemplate = `
-                        ${headerTemplate}
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="result_header_wrapper_location">
-                                        <div class="header_location">Location</div>
-                                        <div class="header_action">Action</div>
-                                    </div>
-                                    ${bodyTemplate}
-                                </div>
-                            </div>
-                        </div>
-                    `;
-    
-                    mainTemplateMobile = `
-                        ${headerTemplate}
-                        <div class="container-fluid">
-                            <div class="row">
-                                ${bodyTemplateMobile}
-                            </div>
-                        </div>
-                    `;
-    
-                    result = result.concat(mainTemplate);
-                    bodyTemplate = '';
-    
-                    resultMobile = resultMobile.concat(mainTemplateMobile);
-                    bodyTemplateMobile = '';
-                }
-    
-                headerTemplate = `<div class="result_header">${currentVal[orderBy].charAt(0).toUpperCase()}</div>`;
-                char = currentVal[orderBy].charAt(0).toUpperCase();
-            }
 
-            template = `
-                <div class="result_row_wrapper_location">
-                    <div class="result_location">${currentVal.name}</div>
-                    <div class="result_action">
-                        <button class="result_edit_location" data-value="${currentVal.id}" data-bs-toggle="modal" data-bs-target="#resultEditLocationModal"><i class="fa-solid fa-pencil"></i></button>
-                        <button class="result_delete_location" data-value="${currentVal.id}" data-bs-toggle="modal" data-bs-target="#resultDeleteLocationModal"><i class="fa-solid fa-trash-can"></i></button>
+
+    inputData.data.forEach(function(currentVal, index, array){
+
+        template = `
+            <div class="result_row_wrapper_location">
+                <div class="result_location">${currentVal.name}</div>
+                <div class="result_action">
+                    <button class="result_edit_location" data-value="${currentVal.id}" data-bs-toggle="modal" data-bs-target="#resultEditLocationModal"><i class="fa-solid fa-pencil"></i></button>
+                    <button class="result_delete_location" data-value="${currentVal.id}" data-bs-toggle="modal" data-bs-target="#resultDeleteLocationModal"><i class="fa-solid fa-trash-can"></i></button>
+                </div>
+            </div>
+        `;
+
+        bodyTemplate = bodyTemplate.concat(template);
+
+        templateMobile = `
+            <div class="col-12 col-lg-6 col-xxl-4">
+                <div class="result_box_wrapper">
+                    <div class="result_location_mobile_wrapper">
+                        <div class="header_location_mobile">Location</div>
+                        <div class="result_location_mobile">${currentVal.name}</div>
+                    </div>
+                    <div class="result_action_mobile">
+                        <button class="result_edit_location_mobile" data-value="${currentVal.id}" data-bs-toggle="modal" data-bs-target="#resultEditLocationModal"><i class="fa-solid fa-pencil"></i></button>
+                        <button class="result_delete_location_mobile" data-value="${currentVal.id}" data-bs-toggle="modal" data-bs-target="#resultDeleteLocationModal"><i class="fa-solid fa-trash-can"></i></button>
                     </div>
                 </div>
-            `;
+            </div>
+        `;
 
-            bodyTemplate = bodyTemplate.concat(template);
+        bodyTemplateMobile = bodyTemplateMobile.concat(templateMobile);
 
-            templateMobile = `
-                <div class="col-12 col-lg-6 col-xxl-4">
-                    <div class="result_box_wrapper">
-                        <div class="result_location_mobile_wrapper">
-                            <div class="header_location_mobile">Location</div>
-                            <div class="result_location_mobile">${currentVal.name}</div>
-                        </div>
-                        <div class="result_action_mobile">
-                            <button class="result_edit_location_mobile" data-value="${currentVal.id}" data-bs-toggle="modal" data-bs-target="#resultEditLocationModal"><i class="fa-solid fa-pencil"></i></button>
-                            <button class="result_delete_location_mobile" data-value="${currentVal.id}" data-bs-toggle="modal" data-bs-target="#resultDeleteLocationModal"><i class="fa-solid fa-trash-can"></i></button>
-                        </div>
+    });
+
+    mainTemplate = `
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="result_total">${inputData.data.length} result(s) found</div>
+                    <div class="result_header_wrapper_location">
+                        <div class="header_location">Location</div>
+                        <div class="header_action">Action</div>
                     </div>
+                    ${bodyTemplate}
                 </div>
-            `;
+            </div>
+        </div>
+    `;
 
-            bodyTemplateMobile = bodyTemplateMobile.concat(templateMobile);
+    mainTemplateMobile = `
+        <div class="container-fluid">
+            <div class="row">
+                <div class="result_total">${inputData.data.length} result(s) found</div>
+                ${bodyTemplateMobile}
+            </div>
+        </div>
+    `;
 
-            if(index === array.length-1){
-                mainTemplate = `
-                    ${headerTemplate}
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="result_header_wrapper_location">
-                                    <div class="header_location">Location</div>
-                                    <div class="header_action">Action</div>
-                                </div>
-                                ${bodyTemplate}
-                            </div>
-                        </div>
-                    </div>
-                `;
-                result = result.concat(mainTemplate);
     
-                mainTemplateMobile = `
-                    ${headerTemplate}
-                    <div class="container-fluid">
-                        <div class="row">
-                            ${bodyTemplateMobile}
-                        </div>
-                    </div>
-                `;
-                resultMobile = resultMobile.concat(mainTemplateMobile);
-            }
+    $('.main_locations_wrapper').append(mainTemplate);
 
-        });
-
-        $('.main_wrapper').append(`<div class="result_total">${inputData.data.length} result(s) found</div>`);
-        $('.main_wrapper').append(result);
-
-        $('.main_wrapper_mobile').append(`<div class="result_total">${inputData.data.length} result(s) found</div>`);
-        $('.main_wrapper_mobile').append(resultMobile);
+    
+    $('.main_locations_wrapper_mobile').append(mainTemplateMobile);
 }
 /***************************************************************************/
 
@@ -777,17 +599,6 @@ async function defaultGetAllEmployee(order = 'asc', orderBy = 'firstName', singl
     return res;
 }
 
-async function hashMessage(message) {
-    const msgUint8 = new TextEncoder().encode(message);                           // encode as (utf-8) Uint8Array
-    const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);           // hash the message
-    const hashArray = Array.from(new Uint8Array(hashBuffer));                     // convert buffer to byte array
-    const hashHex = hashArray.map((b) => b.toString(16).padStart(2, '0')).join(''); // convert bytes to hex string
-    return hashHex;
-}
-
-
-
-
 /*****************************************************************************/
 
 (async function(){
@@ -797,25 +608,14 @@ async function hashMessage(message) {
     let allEmployeeResult = await defaultGetAllEmployee();
     let departments = await getDepartments();
     let locations = await getLocations();
-    tableBuilder(allEmployeeResult);
+
+    userTableBuilder(allEmployeeResult);
 
 
-    populateSelect(departments, 'department_select', 'department');
     populateSelect(departments, 'department_select_mobile', 'department');
-
-    populateSelect(locations, 'location_select', 'location');
     populateSelect(locations, 'location_select_mobile', 'location');
 
     populateSelect(allEmployeeResult, '', 'personnel');
-    selectChanger(true, true, 'header_select');
-
-    selectChanger(true, true, 'department_select');
-    selectChanger(true, true, 'department_select_mobile');
-
-    selectChanger(true, true, 'location_select');
-    selectChanger(true, true, 'location_select_mobile');
-
-    
     
     historyMessage(`Web application succesfully opened`,'history_wrapper', 'green');
 })();
@@ -824,6 +624,15 @@ $(document).ready(function () {
 
     let myToastEl = document.querySelector('.toast');
     let myToast = new bootstrap.Toast(myToastEl, {autohide: true, delay: 2000});
+
+    let userButton = document.querySelector('.pills_users');
+    let userTab = new bootstrap.Tab(userButton);
+
+    let departmentButton = document.querySelector('.pills_departments');
+    let departmentTab = new bootstrap.Tab(departmentButton);
+
+    let locationButton = document.querySelector('.pills_locations');
+    let locationTab = new bootstrap.Tab(locationButton);
 
     
 
@@ -841,9 +650,10 @@ $(document).ready(function () {
         switch($('.header_select').attr('data-source')){
             case 'main_search':
                 result = await getSearch(ascendingButtonValue, selectedValue, $('.header_search').attr('data-searched-value'));
-                $('.main_wrapper').empty();
-                $('.main_wrapper_mobile').empty();
-                tableBuilder(result, selectedValue);
+                $('.main_user_wrapper').empty();
+                $('.main_user_wrapper_mobile').empty();
+                userTableBuilder(result);
+                userTab.show();
                 break;
             case 'filter_search':
 
@@ -882,9 +692,10 @@ $(document).ready(function () {
 
                 
                 result = await getFilterSearch(dataObj);
-                $('.main_wrapper').empty();
-                $('.main_wrapper_mobile').empty();
-                tableBuilder(result, selectedValue);
+                $('.main_user_wrapper').empty();
+                $('.main_user_wrapper_mobile').empty();
+                userTableBuilder(result);
+                userTab.show();
                 break;
             case 'filter_search_mobile':
 
@@ -923,9 +734,10 @@ $(document).ready(function () {
 
                 
                 result = await getFilterSearch(dataObj);
-                $('.main_wrapper').empty();
-                $('.main_wrapper_mobile').empty();
-                tableBuilder(result, selectedValue);
+                $('.main_user_wrapper').empty();
+                $('.main_user_wrapper_mobile').empty();
+                userTableBuilder(result);
+                userTab.show();
                 break;
             case 'get_department_button':
                 break;
@@ -933,99 +745,11 @@ $(document).ready(function () {
                 break;
             default:
                 result = await defaultGetAllEmployee(ascendingButtonValue, selectedValue);
-                $('.main_wrapper').empty();
-                $('.main_wrapper_mobile').empty();
-                tableBuilder(result, selectedValue);
+                $('.main_user_wrapper').empty();
+                $('.main_user_wrapper_mobile').empty();
+                userTableBuilder(result);
+                userTab.show();
         }
-
-
-
-        // if($('.header_select').attr('data-source') === 'main_search'){
-        //     result = await getSearch(ascendingButtonValue, selectedValue, $('.header_search').attr('data-searched-value'));
-        // }else if($('.header_select').attr('data-source') === 'filter_search'){
-        //     let dataObj = {};
-
-        //     dataObj['order'] = ascendingButtonValue;
-        //     dataObj['orderBy'] = selectedValue;
-
-        //     if($('#name_checkbox').is(":checked")){
-        //         if($('.name_input').attr('data-searched-value') !== ''){
-        //             dataObj['firstName'] = $('.name_input').attr('data-searched-value');
-        //         }
-        //     }
-
-        //     if($('#surname_checkbox').is(":checked")){
-        //         if($('.surname_input').attr('data-searched-value') !== ''){
-        //             dataObj['lastName'] = $('.surname_input').attr('data-searched-value');
-        //         }
-        //     }
-
-        //     if($('#email_checkbox').is(":checked")){
-        //         if($('.email_input').attr('data-searched-value') !== ''){
-        //             dataObj['email'] = $('.email_input').attr('data-searched-value');
-        //         }
-        //     }
-
-        //     if($('#department_checkbox').is(":checked")){
-        //         if($('#department_select').attr('data-selected-value') !== ''){
-        //             dataObj['department'] = $('#department_select').attr('data-selected-value');
-        //         }
-        //     }
-
-        //     if($('#location_checkbox').is(":checked")){
-        //         if($('#location_select').attr('data-selected-value') !== ''){
-        //             dataObj['location'] = $('#location_select').attr('data-selected-value');
-        //         }
-        //     }
-
-            
-        //     result = await getFilterSearch(dataObj);
-
-        // }else if($('.header_select').attr('data-source') === 'filter_search_mobile'){
-        //     let dataObj = {};
-
-        //     dataObj['order'] = ascendingButtonValue;
-        //     dataObj['orderBy'] = selectedValue;
-
-        //     if($('#name_checkbox_mobile').is(":checked")){
-        //         if($('.name_input_mobile').attr('data-searched-value') !== ''){
-        //             dataObj['firstName'] = $('.name_input_mobile').attr('data-searched-value');
-        //         }
-        //     }
-
-        //     if($('#surname_checkbox_mobile').is(":checked")){
-        //         if($('.surname_input_mobile').attr('data-searched-value') !== ''){
-        //             dataObj['lastName'] = $('.surname_input_mobile').attr('data-searched-value');
-        //         }
-        //     }
-
-        //     if($('#email_checkbox_mobile').is(":checked")){
-        //         if($('.email_input_mobile').attr('data-searched-value') !== ''){
-        //             dataObj['email'] = $('.email_input_mobile').attr('data-searched-value');
-        //         }
-        //     }
-
-        //     if($('#department_checkbox_mobile').is(":checked")){
-        //         if($('#department_select_mobile').attr('data-selected-value') !== ''){
-        //             dataObj['department'] = $('#department_select_mobile').attr('data-selected-value');
-        //         }
-        //     }
-
-        //     if($('#location_checkbox_mobile').is(":checked")){
-        //         if($('#location_select_mobile').attr('data-selected-value') !== ''){
-        //             dataObj['location'] = $('#location_select_mobile').attr('data-selected-value');
-        //         }
-        //     }
-
-            
-        //     result = await getFilterSearch(dataObj);
-        // }else{
-        //     result = await defaultGetAllEmployee(ascendingButtonValue, selectedValue);
-        // }
-
-        // $('.main_wrapper').empty();
-        // $('.main_wrapper_mobile').empty();
-        // tableBuilder(result, selectedValue);
     });
 
 /****************************************************************************************************/
@@ -1054,9 +778,10 @@ $(document).ready(function () {
         switch($('.sort_box_button').attr('data-source')){
             case 'main_search':
                 result = await getSearch(ascendingButtonValue, selectedValue, $('.header_search').attr('data-searched-value'));
-                $('.main_wrapper').empty();
-                $('.main_wrapper_mobile').empty();
-                tableBuilder(result, selectedValue);
+                $('.main_user_wrapper').empty();
+                $('.main_user_wrapper_mobile').empty();
+                userTableBuilder(result);
+                userTab.show();
                 break;
             case 'filter_search':
             
@@ -1095,9 +820,10 @@ $(document).ready(function () {
 
                 
                 result = await getFilterSearch(dataObj);
-                $('.main_wrapper').empty();
-                $('.main_wrapper_mobile').empty();
-                tableBuilder(result, selectedValue);
+                $('.main_user_wrapper').empty();
+                $('.main_user_wrapper_mobile').empty();
+                userTableBuilder(result);
+                userTab.show();
                 break;
             case 'filter_search_mobile':
             
@@ -1135,117 +861,30 @@ $(document).ready(function () {
                 }
 
                 result = await getFilterSearch(dataObj);
-                $('.main_wrapper').empty();
-                $('.main_wrapper_mobile').empty();
-                tableBuilder(result, selectedValue);
+                $('.main_user_wrapper').empty();
+                $('.main_user_wrapper_mobile').empty();
+                userTableBuilder(result);
+                userTab.show();
                 break;
             case 'get_department_button':
                 result = await getDepartments(1, ascendingButtonValue);
-                $('.main_wrapper').empty();
-                $('.main_wrapper_mobile').empty();
+                $('.main_departments_wrapper').empty();
+                $('.main_departments_wrapper_mobile').empty();
                 departmentTableBuilder(result);
                 break;
             case 'get_location_button':
                 result = await getLocations(ascendingButtonValue);
-                console.log(result);
-                $('.main_wrapper').empty();
-                $('.main_wrapper_mobile').empty();
+                $('.main_locations_wrapper').empty();
+                $('.main_locations_wrapper_mobile').empty();
                 locationTableBuilder(result);
                 break;
             default:
                 result = await defaultGetAllEmployee(ascendingButtonValue, selectedValue);
-                $('.main_wrapper').empty();
-                $('.main_wrapper_mobile').empty();
-                tableBuilder(result, selectedValue);
+                $('.main_user_wrapper').empty();
+                $('.main_user_wrapper_mobile').empty();
+                userTableBuilder(result);
+                userTab.show();
         }
-
-        // if($('.sort_box_button').attr('data-source') === 'main_search'){
-        //     result = await getSearch(ascendingButtonValue, selectedValue, $('.header_search').attr('data-searched-value'));
-        // }else if($('.sort_box_button').attr('data-source') === 'filter_search'){
-        //     let dataObj = {};
-            
-        //     dataObj['order'] = ascendingButtonValue;
-        //     dataObj['orderBy'] = selectedValue;
-
-        //     if($('#name_checkbox').is(":checked")){
-        //         if($('.name_input').attr('data-searched-value') !== ''){
-        //             dataObj['firstName'] = $('.name_input').attr('data-searched-value');
-        //         }
-        //     }
-
-        //     if($('#surname_checkbox').is(":checked")){
-        //         if($('.surname_input').attr('data-searched-value') !== ''){
-        //             dataObj['lastName'] = $('.surname_input').attr('data-searched-value');
-        //         }
-        //     }
-
-        //     if($('#email_checkbox').is(":checked")){
-        //         if($('.email_input').attr('data-searched-value') !== ''){
-        //             dataObj['email'] = $('.email_input').attr('data-searched-value');
-        //         }
-        //     }
-
-        //     if($('#department_checkbox').is(":checked")){
-        //         if($('#department_select').attr('data-selected-value') !== ''){
-        //             dataObj['department'] = $('#department_select').attr('data-selected-value');
-        //         }
-        //     }
-
-        //     if($('#location_checkbox').is(":checked")){
-        //         if($('#location_select').attr('data-selected-value') !== ''){
-        //             dataObj['location'] = $('#location_select').attr('data-selected-value');
-        //         }
-        //     }
-
-            
-        //     result = await getFilterSearch(dataObj);
-
-        // }else if($('.sort_box_button').attr('data-source') === 'filter_search_mobile'){
-        //     let dataObj = {};
-            
-        //     dataObj['order'] = ascendingButtonValue;
-        //     dataObj['orderBy'] = selectedValue;
-
-        //     if($('#name_checkbox_mobile').is(":checked")){
-        //         if($('.name_input_mobile').attr('data-searched-value') !== ''){
-        //             dataObj['firstName'] = $('.name_input_mobile').attr('data-searched-value');
-        //         }
-        //     }
-
-        //     if($('#surname_checkbox_mobile').is(":checked")){
-        //         if($('.surname_input_mobile').attr('data-searched-value') !== ''){
-        //             dataObj['lastName'] = $('.surname_input_mobile').attr('data-searched-value');
-        //         }
-        //     }
-
-        //     if($('#email_checkbox_mobile').is(":checked")){
-        //         if($('.email_input_mobile').attr('data-searched-value') !== ''){
-        //             dataObj['email'] = $('.email_input_mobile').attr('data-searched-value');
-        //         }
-        //     }
-
-        //     if($('#department_checkbox_mobile').is(":checked")){
-        //         if($('#department_select_mobile').attr('data-selected-value') !== ''){
-        //             dataObj['department'] = $('#department_select_mobile').attr('data-selected-value');
-        //         }
-        //     }
-
-        //     if($('#location_checkbox_mobile').is(":checked")){
-        //         if($('#location_select_mobile').attr('data-selected-value') !== ''){
-        //             dataObj['location'] = $('#location_select_mobile').attr('data-selected-value');
-        //         }
-        //     }
-
-            
-        //     result = await getFilterSearch(dataObj);
-        // }else{
-        //     result = await defaultGetAllEmployee(ascendingButtonValue, selectedValue);
-        // }
-
-        
-        // $('.main_wrapper').empty();
-        // $('.main_wrapper_mobile').empty();
-        // tableBuilder(result, selectedValue);
         
     });
 
@@ -1275,9 +914,10 @@ $(document).ready(function () {
 
         let result = await getSearch(ascendingButtonValue, selectedValue, searchString);
 
-        $('.main_wrapper').empty();
-        $('.main_wrapper_mobile').empty();
-        tableBuilder(result, selectedValue);
+        $('.main_user_wrapper').empty();
+        $('.main_user_wrapper_mobile').empty();
+        userTableBuilder(result);
+        userTab.show();
     });
 
     $('.refresh_button').on('click', async function(e){
@@ -1289,17 +929,10 @@ $(document).ready(function () {
 
         $('.header_search').attr('data-searched-value', '');
         $('.header_search').val('');
-        $('.main_wrapper').empty();
-        $('.main_wrapper_mobile').empty();
-        tableBuilder(result,selectedValue);
-    });
-
-    $('.filter_button').on('click', function(){
-        
-    });
-
-    $('.history_button_mobile').on('click', function(){
-        $('.history_button').trigger('click');
+        $('.main_user_wrapper').empty();
+        $('.main_user_wrapper_mobile').empty();
+        userTableBuilder(result);
+        userTab.show();
     });
 
 
@@ -1308,37 +941,6 @@ $(document).ready(function () {
 /****************************************************************************************************/
 /****************************************************************************************************/
 /************************************************* FILTER BOX ***************************************/
-
-
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-/**************************************** DESKTOP VERSION ********************************************/
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-    $('.filters_body :checkbox').on('change',function(){
-
-        let i = 0;
-
-        for(const key in $('.filters_body :checkbox')){
-            if($('.filters_body :checkbox')[key].checked === true){
-                i++;
-            }
-        }
-
-        if(i == 0){
-            $('.apply_button').prop('disabled', true);
-        }else{
-            $('.apply_button').prop('disabled', false);
-        }
-
-        if($(this)[0].checked === true){
-            $(this).parents('.filters_item').find('.setdata').css('display', 'block');
-        }else{
-            $(this).parents('.filters_item').find('.setdata').css('display', 'none');
-        }
-    });
-
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-/**************************************** MOBILE VERSION ********************************************/
-/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
     $('.filters_body_mobile :checkbox').on('change',function(){
 
@@ -1369,77 +971,6 @@ $(document).ready(function () {
 
 
     /*************************************** NAME ROW *****************************************/
-
-    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-    /**************************************** DESKTOP VERSION *********************************/
-    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-
-    $('.name_input').on('keypress', function(e){
-        if(e.key === 'Enter'){
-            e.preventDefault();
-            $('.name_button').trigger('click');
-        }
-    });
-
-    $('.name_input').on('blur', function(e){
-        $('.name_input').attr('data-searched-value', $('.name_input').val());
-    });
-
-    $('#name_checkbox').on('change', function(){
-        $('.name_input').attr('data-searched-value', '');
-        $('.name_input').val('');
-    });
-
-    $('.name_button').on('click', async function(e){
-        let dataObj = {};
-        let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
-        let selectedValue = $('.header_select').attr('data-selected-value');
-        let searchString = $('.name_input').val();
-        $('.name_input').attr('data-searched-value', searchString);
-
-        $('.sort_box_button').attr('data-source', 'filter_search');
-        $('.header_select').attr('data-source', 'filter_search');
-
-        dataObj['firstName'] = searchString;
-        dataObj['order'] = ascendingButtonValue;
-        dataObj['orderBy'] = selectedValue;
-
-        if($('#surname_checkbox').is(":checked")){
-            if($('.surname_input').attr('data-searched-value') !== ''){
-                dataObj['lastName'] = $('.surname_input').attr('data-searched-value');
-            }
-        }
-
-        if($('#email_checkbox').is(":checked")){
-            if($('.email_input').attr('data-searched-value') !== ''){
-                dataObj['email'] = $('.email_input').attr('data-searched-value');
-            }
-        }
-
-        if($('#department_checkbox').is(":checked")){
-            if($('#department_select').attr('data-selected-value') !== ''){
-                dataObj['department'] = $('#department_select').attr('data-selected-value');
-            }
-        }
-
-        if($('#location_checkbox').is(":checked")){
-            if($('#location_select').attr('data-selected-value') !== ''){
-                dataObj['location'] = $('#location_select').attr('data-selected-value');
-            }
-        }
-
-        
-        let result = await getFilterSearch(dataObj);
-
-        $('.main_wrapper').empty();
-        $('.main_wrapper_mobile').empty();
-        tableBuilder(result, selectedValue);
-    });
-
-    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-    /**************************************** MOBILE VERSION *************************************/
-    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 
     $('.name_input_mobile').on('keypress', function(e){
@@ -1499,91 +1030,12 @@ $(document).ready(function () {
         
         let result = await getFilterSearch(dataObj);
 
-        $('.main_wrapper').empty();
-        $('.main_wrapper_mobile').empty();
-        tableBuilder(result, selectedValue);
+        $('.main_user_wrapper').empty();
+        $('.main_user_wrapper_mobile').empty();
+        userTableBuilder(result);
+        userTab.show();
     });
     /*************************************** SURNAME ROW *****************************************/
-
-    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-    /**************************************** DESKTOP VERSION *********************************/
-    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-    
-    $('.surname_input').on('keypress', function(e){
-        if(e.key === 'Enter'){
-            e.preventDefault();
-            $('.surname_button').trigger('click');
-        }
-    });
-
-    $('.surname_input').on('blur', function(e){
-        $('.surname_input').attr('data-searched-value', $('.surname_input').val());
-    });
-
-    $('#surname_checkbox').on('change', function(){
-        $('.surname_input').attr('data-searched-value', '');
-        $('.surname_input').val('');
-    });
-
-    $('.surname_button').on('click', async function(e){
-        let dataObj = {};
-        let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
-        let selectedValue = $('.header_select').attr('data-selected-value');
-        let searchString = $('.surname_input').val();
-        $('.surname_input').attr('data-searched-value', searchString);
-
-        $('.sort_box_button').attr('data-source', 'filter_search');
-        $('.header_select').attr('data-source', 'filter_search');
-
-        dataObj['lastName'] = searchString;
-        dataObj['order'] = ascendingButtonValue;
-        dataObj['orderBy'] = selectedValue;
-
-        if($('#name_checkbox').is(":checked")){
-            //console.log('name is checked');
-            if($('.name_input').attr('data-searched-value') !== ''){
-                //console.log($('.name_input').attr('data-searched-value'));
-                dataObj['firstName'] = $('.name_input').attr('data-searched-value');
-            } 
-        }
-
-        if($('#email_checkbox').is(":checked")){
-            //console.log('email is checked');
-            if($('.email_input').attr('data-searched-value') !== ''){
-                //console.log($('.email_input').attr('data-searched-value'));
-                dataObj['email'] = $('.email_input').attr('data-searched-value');
-            }
-        }
-
-        if($('#department_checkbox').is(":checked")){
-            //console.log('department is checked');
-            if($('#department_select').attr('data-selected-value') !== ''){
-                //console.log($('#department_select').attr('data-selected-value'));
-                dataObj['department'] = $('#department_select').attr('data-selected-value');
-            }
-        }
-
-        if($('#location_checkbox').is(":checked")){
-            //console.log('location is checked');
-            if($('#location_select').attr('data-selected-value') !== ''){
-                //console.log($('#location_select').attr('data-selected-value'));
-                dataObj['location'] = $('#location_select').attr('data-selected-value');
-            }
-        }
-
-
-        
-        let result = await getFilterSearch(dataObj);
-
-        $('.main_wrapper').empty();
-        $('.main_wrapper_mobile').empty();
-        tableBuilder(result, selectedValue);
-    });
-
-    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-    /**************************************** MOBILE VERSION *************************************/
-    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
     $('.surname_input_mobile').on('keypress', function(e){
         if(e.key === 'Enter'){
@@ -1643,92 +1095,13 @@ $(document).ready(function () {
         
         let result = await getFilterSearch(dataObj);
 
-        $('.main_wrapper').empty();
-        $('.main_wrapper_mobile').empty();
-        tableBuilder(result, selectedValue);
+        $('.main_user_wrapper').empty();
+        $('.main_user_wrapper_mobile').empty();
+        userTableBuilder(result);
+        userTab.show();
     });
 
     /*************************************** EMAIL ROW *****************************************/
-
-    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-    /**************************************** DESKTOP VERSION *********************************/
-    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-
-    $('.email_input').on('keypress', function(e){
-        if(e.key === 'Enter'){
-            e.preventDefault();
-            $('.email_button').trigger('click');
-        }
-    });
-
-    $('.email_input').on('blur', function(e){
-        $('.email_input').attr('data-searched-value', $('.email_input').val());
-    });
-
-    $('#email_checkbox').on('change', function(){
-        $('.email_input').attr('data-searched-value', '');
-        $('.email_input').val('');
-    });
-
-    $('.email_button').on('click', async function(e){
-        let dataObj = {};
-        let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
-        let selectedValue = $('.header_select').attr('data-selected-value');
-        let searchString = $('.email_input').val();
-        $('.email_input').attr('data-searched-value', searchString);
-
-        $('.sort_box_button').attr('data-source', 'filter_search');
-        $('.header_select').attr('data-source', 'filter_search');
-
-        dataObj['email'] = searchString;
-        dataObj['order'] = ascendingButtonValue;
-        dataObj['orderBy'] = selectedValue;
-
-        if($('#name_checkbox').is(":checked")){
-            //console.log('name is checked');
-            if($('.name_input').attr('data-searched-value') !== ''){
-                //console.log($('.name_input').attr('data-searched-value'));
-                dataObj['firstName'] = $('.name_input').attr('data-searched-value');
-            } 
-        }
-
-        if($('#surname_checkbox').is(":checked")){
-            //console.log('surname is checked');
-            if($('.surname_input').attr('data-searched-value') !== ''){
-                //console.log($('.surname_input').attr('data-searched-value'));
-                dataObj['lastName'] = $('.surname_input').attr('data-searched-value');
-            }
-        }
-
-        if($('#department_checkbox').is(":checked")){
-            //console.log('department is checked');
-            if($('#department_select').attr('data-selected-value') !== ''){
-                //console.log($('#department_select').attr('data-selected-value'));
-                dataObj['department'] = $('#department_select').attr('data-selected-value');
-            }
-        }
-
-        if($('#location_checkbox').is(":checked")){
-            //console.log('location is checked');
-            if($('#location_select').attr('data-selected-value') !== ''){
-                //console.log($('#location_select').attr('data-selected-value'));
-                dataObj['location'] = $('#location_select').attr('data-selected-value');
-            }
-        }
-
-
-        
-        let result = await getFilterSearch(dataObj);
-
-        $('.main_wrapper').empty();
-        $('.main_wrapper_mobile').empty();
-        tableBuilder(result, selectedValue);
-    });
-
-    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-    /**************************************** MOBILE VERSION *************************************/
-    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
     $('.email_input_mobile').on('keypress', function(e){
         if(e.key === 'Enter'){
@@ -1788,69 +1161,14 @@ $(document).ready(function () {
         
         let result = await getFilterSearch(dataObj);
 
-        $('.main_wrapper').empty();
-        $('.main_wrapper_mobile').empty();
-        tableBuilder(result, selectedValue);
+        $('.main_user_wrapper').empty();
+        $('.main_user_wrapper_mobile').empty();
+        userTableBuilder(result);
+        userTab.show();
     });
 
 
     /*************************************** DEPARTMENT ROW *****************************************/
-
-    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-    /**************************************** DESKTOP VERSION *********************************/
-    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-    
-    $('#department_select').on('change', async function(e){
-        let dataObj = {};
-        let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
-        let selectedValue = $('.header_select').attr('data-selected-value');
-        let departmentValue = $(this).children("option:selected").val();
-        $(this).attr('data-selected-value', departmentValue);
-
-        $('.sort_box_button').attr('data-source', 'filter_search');
-        $('.header_select').attr('data-source', 'filter_search');
-
-        dataObj['department'] = departmentValue;
-        dataObj['order'] = ascendingButtonValue;
-        dataObj['orderBy'] = selectedValue;
-
-
-        if($('#name_checkbox').is(":checked")){
-            if($('.name_input').attr('data-searched-value') !== ''){
-                dataObj['firstName'] = $('.name_input').attr('data-searched-value');
-            } 
-        }
-
-        if($('#surname_checkbox').is(":checked")){
-            if($('.surname_input').attr('data-searched-value') !== ''){
-                dataObj['lastName'] = $('.surname_input').attr('data-searched-value');
-            }
-        }
-
-        if($('#email_checkbox').is(":checked")){
-            if($('.email_input').attr('data-searched-value') !== ''){
-                dataObj['email'] = $('.email_input').attr('data-searched-value');
-            }
-        }
-
-        if($('#location_checkbox').is(":checked")){
-            if($('#location_select').attr('data-selected-value') !== ''){
-                dataObj['location'] = $('#location_select').attr('data-selected-value');
-            }
-        }
-
-        
-        let result = await getFilterSearch(dataObj);
-
-        $('.main_wrapper').empty();
-        $('.main_wrapper_mobile').empty();
-        tableBuilder(result, selectedValue);
-    });
-
-    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-    /**************************************** MOBILE VERSION *************************************/
-    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
     $('#department_select_mobile').on('change', async function(e){
         let dataObj = {};
@@ -1894,69 +1212,13 @@ $(document).ready(function () {
         
         let result = await getFilterSearch(dataObj);
 
-        $('.main_wrapper').empty();
-        $('.main_wrapper_mobile').empty();
-        tableBuilder(result, selectedValue);
+        $('.main_user_wrapper').empty();
+        $('.main_user_wrapper_mobile').empty();
+        userTableBuilder(result);
+        userTab.show();
     });
 
     /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ LOCATION ROW @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
-
-    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-    /**************************************** DESKTOP VERSION *********************************/
-    /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-
-    $('#location_select').on('change', async function(e){
-        let dataObj = {};
-        let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
-        let selectedValue = $('.header_select').attr('data-selected-value');
-        let locationValue = $(this).children("option:selected").val();
-        $(this).attr('data-selected-value', locationValue);
-
-        $('.sort_box_button').attr('data-source', 'filter_search');
-        $('.header_select').attr('data-source', 'filter_search');
-
-        dataObj['location'] = locationValue;
-        dataObj['order'] = ascendingButtonValue;
-        dataObj['orderBy'] = selectedValue;
-
-
-        if($('#name_checkbox').is(":checked")){
-            if($('.name_input').attr('data-searched-value') !== ''){
-                dataObj['firstName'] = $('.name_input').attr('data-searched-value');
-            } 
-        }
-
-        if($('#surname_checkbox').is(":checked")){
-            if($('.surname_input').attr('data-searched-value') !== ''){
-                dataObj['lastName'] = $('.surname_input').attr('data-searched-value');
-            }
-        }
-
-        if($('#email_checkbox').is(":checked")){
-            if($('.email_input').attr('data-searched-value') !== ''){
-                dataObj['email'] = $('.email_input').attr('data-searched-value');
-            }
-        }
-
-        if($('#department_checkbox').is(":checked")){
-            if($('#department_select').attr('data-selected-value') !== ''){
-                dataObj['department'] = $('#department_select').attr('data-selected-value');
-            }
-        }
-
-
-        
-        let result = await getFilterSearch(dataObj);
-
-        $('.main_wrapper').empty();
-        $('.main_wrapper_mobile').empty();
-        tableBuilder(result, selectedValue);
-    });
-
-    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-    /**************************************** MOBILE VERSION *************************************/
-    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
     $('#location_select_mobile').on('change', async function(e){
         let dataObj = {};
@@ -2001,73 +1263,13 @@ $(document).ready(function () {
         
         let result = await getFilterSearch(dataObj);
 
-        $('.main_wrapper').empty();
-        $('.main_wrapper_mobile').empty();
-        tableBuilder(result, selectedValue);
+        $('.main_user_wrapper').empty();
+        $('.main_user_wrapper_mobile').empty();
+        userTableBuilder(result);
+        userTab.show();
     });
 
     /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ APPLY BUTTON @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
-
-    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-    /**************************************** DESKTOP VERSION ************************************/
-    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-
-    $('.apply_button').on('click', async function(){
-        let dataObj = {};
-        let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
-        let selectedValue = $('.header_select').attr('data-selected-value');
-
-        $('.sort_box_button').attr('data-source', 'filter_search');
-        $('.header_select').attr('data-source', 'filter_search');
-
-        
-        dataObj['order'] = ascendingButtonValue;
-        dataObj['orderBy'] = selectedValue;
-
-
-        if($('#name_checkbox').is(":checked")){
-            if($('.name_input').attr('data-searched-value') !== ''){
-                dataObj['firstName'] = $('.name_input').attr('data-searched-value');
-            } 
-        }
-
-        if($('#surname_checkbox').is(":checked")){
-            if($('.surname_input').attr('data-searched-value') !== ''){
-                dataObj['lastName'] = $('.surname_input').attr('data-searched-value');
-            }
-        }
-
-        if($('#email_checkbox').is(":checked")){
-            if($('.email_input').attr('data-searched-value') !== ''){
-                dataObj['email'] = $('.email_input').attr('data-searched-value');
-            }
-        }
-
-        if($('#department_checkbox').is(":checked")){
-            if($('#department_select').attr('data-selected-value') !== ''){
-                dataObj['department'] = $('#department_select').attr('data-selected-value');
-            }
-        }
-
-        if($('#location_checkbox').is(":checked")){
-            if($('#location_select').attr('data-selected-value') !== ''){
-                dataObj['location'] = $('#location_select').attr('data-selected-value');
-            }
-        }
-
-
-        
-        let result = await getFilterSearch(dataObj);
-
-        $('.main_wrapper').empty();
-        $('.main_wrapper_mobile').empty();
-        tableBuilder(result, selectedValue);
-    });
-
-    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-    /**************************************** MOBILE VERSION *************************************/
-    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 
     $('.apply_button_mobile').on('click', async function(){
@@ -2117,9 +1319,10 @@ $(document).ready(function () {
         
         let result = await getFilterSearch(dataObj);
 
-        $('.main_wrapper').empty();
-        $('.main_wrapper_mobile').empty();
-        tableBuilder(result, selectedValue);
+        $('.main_user_wrapper').empty();
+        $('.main_user_wrapper_mobile').empty();
+        userTableBuilder(result);
+        userTab.show();
     });
 /*===================================================================================================*/
 /*=================================== ACTIONS BOX ===================================================*/
@@ -2129,62 +1332,21 @@ $(document).ready(function () {
 /*---------------------------------------------- USERS GET USERS -------------------------------------*/
 /*--------------------------------------------------------------------------------------------------- */
 
-    $('.add_user_button').on('click', async function(){
-        let dataToSend = [];
-        //let parent = $(this).parent();
-        let parent = $('#addUserModal').parent();
-        if(parent.find('.select_add_user_department_select').length > 0 || parent.find('.select_add_user_location_select').length > 0){
-            let select_department_parent = parent.find('.select_add_user_department_select').parent();
-            let select_location_parent = parent.find('.select_add_user_location_select').parent();
-            parent.find('.select_add_user_department_select').remove();
-            parent.find('.select_add_user_location_select').remove();
-            select_department_parent.append(`<select name="addUserDepartment" class="add_user_department_select" id="add_user_department_select"></select>`);
-            select_location_parent.append(`<select name="addUserLocation" class="add_user_location_select" id="add_user_location_select"></select>`);
-        }
-
+    $('.add_user_mobile').on('click', async function(){
         $('#add_user_name_input').attr('data-value', '');
         $('#add_user_name_input').val('');
-        $('#add_user_name_input').css('box-shadow', 'none');
-        $('#add_user_name_input').css('border-color', 'black');
 
         $('#add_user_surname_input').attr('data-value', '');
         $('#add_user_surname_input').val('');
-        $('#add_user_surname_input').css('box-shadow', 'none');
-        $('#add_user_surname_input').css('border-color', 'black');
 
         $('#add_user_email_input').attr('data-value', '');
         $('#add_user_email_input').val('');
-        $('#add_user_email_input').css('box-shadow', 'none');
-        $('#add_user_email_input').css('border-color', 'black');
 
-
-        
         let departments = await getDepartments();
         populateSelect(departments, 'add_user_department_select', 'department');
-        selectChanger(true, true, 'add_user_department_select');
-
-        let dataBind = $('.add_user_department_select').find(":selected").attr('data-bind');
-        $('.add_user_department_select').attr('data-selected-bind', dataBind);
-        let dataBindArray = dataBind.split(":");
-        dataBindArray.forEach(function(v, i, a){
-            let res = v.split(" ");
-            dataToSend.push(res[1]);
-        });
-
-
-
-        let locations = await getCustomLocations({data: dataToSend, not: 0});
-        
-        populateSelect(locations, 'add_user_location_select', 'location');
-        
-        selectChanger(true, true, 'add_user_location_select');
     });
 
-    $('.add_user_mobile').on('click', function(){
-        $('.add_user_button').trigger('click');
-    });
-
-    $('.get_user_button').on('click', async function(){
+    $('.pills_users').on('show.bs.tab', async function(e){
         let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
         let selectedValue = $('.header_select').attr('data-selected-value');
         let result = await defaultGetAllEmployee(ascendingButtonValue, selectedValue);
@@ -2195,22 +1357,17 @@ $(document).ready(function () {
         $('.header_search').attr('data-searched-value', '');
         $('.header_search').val('');
 
-        $('.main_wrapper').empty();
-        $('.main_wrapper_mobile').empty();
-        tableBuilder(result,selectedValue);
+        $('.main_user_wrapper').empty();
+        $('.main_user_wrapper_mobile').empty();
+        userTableBuilder(result);
     });
 
-    $('.get_user_mobile').on('click', function(){
-        $('.get_user_button').trigger('click');
-    });
+
+
+
 
     $('#add_user_name_input').on('blur', function(){
         $(this).attr('data-value', $(this).val());
-    });
-
-    $('#add_user_name_input').on('focus', function(){
-        $('#add_user_name_input').css('box-shadow', 'none');
-        $('#add_user_name_input').css('border-color', 'black');
     });
 
 
@@ -2219,108 +1376,38 @@ $(document).ready(function () {
         $(this).attr('data-value', $(this).val());
     });
 
-    $('#add_user_surname_input').on('focus', function(){
-        $('#add_user_surname_input').css('box-shadow', 'none');
-        $('#add_user_surname_input').css('border-color', 'black');
-    });
-
 
 
     $('#add_user_email_input').on('blur', function(){
         $(this).attr('data-value', $(this).val());
     });
 
-    $('#add_user_email_input').on('focus', function(){
-        $('#add_user_email_input').css('box-shadow', 'none');
-        $('#add_user_email_input').css('border-color', 'black');
-    });
-
 
 
     $(document).on('change', '.add_user_department_select', async function(){
-        let dataToSend = [];
         $(this).attr('data-selected-value', $(this).val());
-        let select_location_parent = $('.add_user_location_select').parents('.add_user_item');
-        select_location_parent.find('.select_add_user_location_select').remove();
-        select_location_parent.append(`<select name="addUserLocation" class="add_user_location_select" id="add_user_location_select"></select>`);
-        
-        let dataBind = $(this).find(":selected").attr('data-bind');
-        $('.add_user_department_select').attr('data-selected-bind', dataBind);
-        let dataBindArray = dataBind.split(":");
-        dataBindArray.forEach(function(v, i, a){
-            let res = v.split(" ");
-            dataToSend.push(res[1]);
-        });
-
-        let locations = await getCustomLocations({data: dataToSend, not: 0});
-        
-        populateSelect(locations, 'add_user_location_select', 'location');
-        
-        selectChanger(true, true, 'add_user_location_select');
+        $(this).attr('data-selected-id', $(this).find(":selected").attr('data-id'));
     });
 
 
 
-    $(document).on('change', '.add_user_location_select', function(){
-        $(this).attr('data-selected-value', $(this).val());
-        $(this).attr('data-selected-index', $(this).find(':selected').attr('data-index'));
-    });
+    $('#addUserForm').on('submit', async function(e){
+        e.preventDefault();
+        let dataObj = {};
 
-
-
-    $('.add_user_save_button').on('click', async function(){
-        let dataObj = {}, k = 0;
-
-        if($('#add_user_name_input').attr('data-value') !== ''){
-            dataObj['firstName'] = $('#add_user_name_input').attr('data-value');
-        }else{
-            $('#add_user_name_input').css('box-shadow', '0 0 6px 1px red');
-            $('#add_user_name_input').css('border-color', 'red');
-            k++;
-        }
-
-        if($('#add_user_surname_input').attr('data-value') !== ''){
-            dataObj['lastName'] = $('#add_user_surname_input').attr('data-value');
-        }else{
-            $('#add_user_surname_input').css('box-shadow', '0 0 6px 1px red');
-            $('#add_user_surname_input').css('border-color', 'red');
-            k++;
-        }
-
-        if($('#add_user_email_input').attr('data-value') !== ''){
-            dataObj['email'] = $('#add_user_email_input').attr('data-value');
-        }else{
-            $('#add_user_email_input').css('box-shadow', '0 0 6px 1px red');
-            $('#add_user_email_input').css('border-color', 'red');
-            k++;
-        }
-
-        if(k !== 0){
-            return;
-        }
-
-        let departmentName = $('.add_user_department_select').parent().find('span').html();
-        let locationName = $('.add_user_location_select').parent().find('span').html();
-
-        let locationID = $('.add_user_location_select').attr('data-selected-index');
-        let departmentBindValue = $('.add_user_department_select').attr('data-selected-bind');//in format with : splited
-
-        let departmentBindValueSplited = departmentBindValue.split(':');
-        departmentBindValueSplited.forEach(function(v, i, a){
-            let res = v.split(" ");
-            if(res[1] === locationID){
-                dataObj['departmentID'] = res[0];
-            }
-        });
+        dataObj['firstName'] = $('#add_user_name_input').attr('data-value');
+        dataObj['lastName'] = $('#add_user_surname_input').attr('data-value');
+        dataObj['email'] = $('#add_user_email_input').attr('data-value');
+        dataObj['departmentID'] = $('#add_user_department_select').attr('data-selected-id');
 
         let result = await insertUser(dataObj);
 
         $('.btn-close').trigger('click');
 
         if(result.status.code === '200'){
-            $('.toast-body').html(`User ${dataObj['firstName']} ${dataObj['lastName']} succesfully created in ${departmentName} department with ${locationName} location.`);
+            $('.toast-body').html(`User ${dataObj['firstName']} ${dataObj['lastName']} succesfully created.`);
             $('.toast').css('background-color', '#279f13');
-            historyMessage(`User ${dataObj['firstName']} ${dataObj['lastName']} succesfully created in ${departmentName} department with ${locationName} location.`,'history_wrapper', 'green');
+            historyMessage(`User ${dataObj['firstName']} ${dataObj['lastName']} succesfully created.`,'history_wrapper', 'green');
             myToast.show();
         }else{
             $('.toast-body').html(`User ${dataObj['firstName']} ${dataObj['lastName']} failed to create.`);
@@ -2330,571 +1417,131 @@ $(document).ready(function () {
             return;
         }
 
-        $('.refresh_button').trigger('click');
+        $('.pills_users').trigger('show.bs.tab');
+
+        userTab.show();
     });
 
 /*--------------------------------------------------------------------------------------------------- */
 /*---------------------------------------------- DEPARTMENT ------------------------------------------*/
 /*--------------------------------------------------------------------------------------------------- */
 
-    $('.add_department_button').on('click', async function(){
-        myToast.hide();
-        let addExistingDataToSend = [];
-        let deleteDataToSend = [];
-        let parent = $('#addDepartmentModal').parent();
-
-        /****************************************  ADD NEW ***************************************/
-
-        if(parent.find('.select_add_new_location_select').length > 0){
-            let select_parent = $('.select_add_new_location_select').parent();
-            $('.select_add_new_location_select').remove();
-            select_parent.append('<select name="addNewLocationSelect" id="add_new_location_select" class="add_new_location_select"></select>')
-        }
-
-        /****************************************  ADD EXISTING ***************************************/
-
-        if(parent.find('.select_add_existing_department_select').length > 0){
-            let select_parent = $('.select_add_existing_department_select').parent();
-            $('.select_add_existing_department_select').remove();
-            select_parent.append('<select name="addExistingDepartmentSelect" id="add_existing_department_select" class="add_existing_department_select"></select>')
-        }
-
-        if(parent.find('.select_add_existing_location_select').length > 0){
-            let select_parent = $('.select_add_existing_location_select').parent();
-            $('.select_add_existing_location_select').remove();
-            select_parent.append('<select name="addExistingLocationSelect" id="add_existing_location_select" class="add_existing_location_select"></select>')
-        }
-
-        /****************************************  DELETE ******************************************/
-
-        if(parent.find('.select_delete_department_select').length > 0){
-            let select_parent = $('.select_delete_department_select').parent();
-            $('.select_delete_department_select').remove();
-            select_parent.append('<select name="deleteDepartmentSelect" id="delete_department_select" class="delete_department_select"></select>')
-        }
-
-        if(parent.find('.select_delete_location_select').length > 0){
-            let select_parent = $('.select_delete_location_select').parent();
-            $('.select_delete_location_select').remove();
-            select_parent.append('<select name="deleteLocationSelect" id="delete_location_select" class="delete_location_select"></select>')
-        }
-/********************************************************************************************************* */
-        /****************************************  ADD NEW ***************************************/
-
+    $('.add_department_mobile').on('click', async function(){
         let add_new_location = await getLocations();
         populateSelect(add_new_location, 'add_new_location_select', 'location');
-        selectChanger(true, true, 'add_new_location_select');
         $('.add_new_department_input').attr('data-value', '');
         $('.add_new_department_input').val('');
-        $('.add_new_department_input').css('box-shadow', 'none');
-        $('.add_new_department_input').css('border-color', 'black');
-
-        /****************************************  ADD EXISTING ***************************************/
-
-        let add_existing_departments = await getDepartments();
-        populateSelect(add_existing_departments, 'add_existing_department_select', 'department');
-        selectChanger(true, true, 'add_existing_department_select');
-
-        let addExistingDataBind = $('.add_existing_department_select').find(":selected").attr('data-bind');
-        $('.add_existing_department_select').attr('data-selected-bind', addExistingDataBind);
-        let addExistingDataBindArray = addExistingDataBind.split(":");
-        addExistingDataBindArray.forEach(function(v, i, a){
-            let res = v.split(" ");
-            addExistingDataToSend.push(res[1]);
-        });
-
-        let add_existing_location = await getCustomLocations({data: addExistingDataToSend, not: 1});
-        if(add_existing_location.status.code === '200'){
-            populateSelect(add_existing_location, 'add_existing_location_select', 'location');
-            selectChanger(true, true, 'add_existing_location_select');
-        }else{
-            $('.add_existing_location_select').append(`<option>No location to add</option>`);
-            $('.add_existing_location_select').attr('data-selected-value', '');
-            $('.add_existing_location_select').attr('data-selected-index', '');
-            selectChanger(true, true, 'add_existing_location_select');
-        }
-        
-
-        /****************************************  DELETE ***************************************/
-
-        let delete_departments = await getDepartments();
-        populateSelect(delete_departments, 'delete_department_select', 'department');
-        selectChanger(true, true, 'delete_department_select');
-
-        let deleteDataBind = $('.delete_department_select').find(":selected").attr('data-bind');
-        $('.delete_department_select').attr('data-selected-bind', deleteDataBind);
-        let deleteDataBindArray = deleteDataBind.split(":");
-        deleteDataBindArray.forEach(function(v, i, a){
-            let res = v.split(" ");
-            deleteDataToSend.push(res[1]);
-        });
-
-        let delete_location = await getCustomLocations({data: deleteDataToSend, not: 0});
-        if(delete_location.status.code === '200'){
-            populateSelect(delete_location, 'delete_location_select', 'location');
-            selectChanger(true, true, 'delete_location_select');
-        }
     });
 
-    $('.add_department_mobile').on('click', function(){
-        $('.add_department_button').trigger('click');
-    });
-
-    $('.get_department_button').on('click', async function(){
+    $('.pills_departments').on('show.bs.tab', async function(e){
         let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
         $('.sort_box_button').attr('data-source', 'get_department_button');
         $('.header_select').attr('data-source', 'get_department_button');
         let result = await getDepartments(1, ascendingButtonValue);
 
-        $('.main_wrapper').empty();
-        $('.main_wrapper_mobile').empty();
+        $('.main_departments_wrapper').empty();
+        $('.main_departments_wrapper_mobile').empty();
         departmentTableBuilder(result);
     });
-
-    $('.get_department_mobile').on('click', function(){
-        $('.get_department_button').trigger('click');
-    });
-
-/******************************************************************************************************/
-/****************************************** DEPARTMENT TAB BUTTONS ************************************ */
-/******************************************************************************************************/
-
-    $('#pills-add-new-tab').on('click', function(){
-        $('.add_department_save_button').attr('data-source', 'add_new');
-        $('.add_department_save_button').html('Save');
-    });
-
-    $('#pills-add-existing-tab').on('click', function(){
-        $('.add_department_save_button').attr('data-source', 'add_existing');
-        $('.add_department_save_button').html('Save');
-    });
-
-    $('#pills-delete-tab').on('click', function(){
-        $('.add_department_save_button').attr('data-source', 'delete');
-        $('.add_department_save_button').html('Delete');
-    });
-
-/******************************************************************************************************/
-/******************************************************************************************************/
-/******************************************************************************************************/
-
-
-/******************************************************************************************************/
-/****************************************** DEPARTMENT ADD NEW SECTION ****************************** */
-/******************************************************************************************************/
 
     $('.add_new_department_input').on('blur', function(){
         $(this).attr('data-value', $(this).val());
     });
 
-    $('.add_new_department_input').on('keyup', function(){
-        $('.add_new_department_input').css('box-shadow', 'none');
-        $('.add_new_department_input').css('border-color', 'black');
-    });
-
     $(document).on('change', '.add_new_location_select', function(){
         $(this).attr('data-selected-value', $(this).val());
-        $(this).attr('data-selected-index', $(this).find(':selected').attr('data-index'));
+        $(this).attr('data-selected-id', $(this).find(':selected').attr('data-id'));
     });
 
-/******************************************************************************************************/
-/******************************************************************************************************/
-/******************************************************************************************************/
-
-/******************************************************************************************************/
-/************************************* DEPARTMENT ADD EXISTING SECTION ****************************** */
-/******************************************************************************************************/
-
-    $(document).on('change', '.add_existing_department_select', async function(){
-        let dataToSend = [];
-        $(this).attr('data-selected-value', $(this).val());
-        let select_location_parent = $('.add_existing_location_select').parents('.add_existing_item');
-        select_location_parent.find('.select_add_existing_location_select').remove();
-        select_location_parent.append(`<select name="addExistingLocationSelect" id="add_existing_location_select" class="add_existing_location_select"></select>`);
-        
-        let dataBind = $(this).find(":selected").attr('data-bind');
-        $('.add_existing_department_select').attr('data-selected-bind', dataBind);
-        let dataBindArray = dataBind.split(":");
-        dataBindArray.forEach(function(v, i, a){
-            let res = v.split(" ");
-            dataToSend.push(res[1]);
-        });
-
-        let locations = await getCustomLocations({data: dataToSend, not: 1});
-
-        if(locations.status.code === '200'){
-           populateSelect(locations, 'add_existing_location_select', 'location');
-           selectChanger(true, true, 'add_existing_location_select');
-        }else{
-            $('.add_existing_location_select').append(`<option>No location to add</option>`);
-            $('.add_existing_location_select').attr('data-selected-value', '');
-            $('.add_existing_location_select').attr('data-selected-index', '');
-            selectChanger(true, true, 'add_existing_location_select');
-        }
-        
-        
-    });
-
-    $(document).on('change', '.add_existing_location_select', function(){
-        $(this).attr('data-selected-value', $(this).val());
-        $(this).attr('data-selected-index', $(this).find(':selected').attr('data-index'));
-    });
-
-/******************************************************************************************************/
-/******************************************************************************************************/
-/******************************************************************************************************/
-
-/******************************************************************************************************/
-/************************************* DEPARTMENT DELETE SECTION ************************************ */
-/******************************************************************************************************/
-
-    $(document).on('change', '.delete_department_select', async function(){
-        let dataToSend = [];
-        $(this).attr('data-selected-value', $(this).val());
-        let select_location_parent = $('.delete_location_select').parents('.delete_item');
-        select_location_parent.find('.select_delete_location_select').remove();
-        select_location_parent.append(`<select name="deleteLocationSelect" id="delete_location_select" class="delete_location_select"></select>`);
-        
-        let dataBind = $(this).find(":selected").attr('data-bind');
-        $('.delete_department_select').attr('data-selected-bind', dataBind);
-        let dataBindArray = dataBind.split(":");
-        dataBindArray.forEach(function(v, i, a){
-            let res = v.split(" ");
-            dataToSend.push(res[1]);
-        });
-
-        let locations = await getCustomLocations({data: dataToSend, not: 0});
-
-        if(locations.status.code === '200'){
-           populateSelect(locations, 'delete_location_select', 'location');
-           selectChanger(true, true, 'delete_location_select');
-        }
-        
-    });
-
-    $(document).on('change', '.delete_location_select', function(){
-        $(this).attr('data-selected-value', $(this).val());
-        $(this).attr('data-selected-index', $(this).find(':selected').attr('data-index'));
-    });
-
-/******************************************************************************************************/
-/******************************************************************************************************/
-/******************************************************************************************************/
 
 
-    $('.add_department_save_button').on('click', async function(){
-        
+    $('#addDepartmentForm').on('submit', async function(e){
+        e.preventDefault();
         let dataObj = {};
-        switch($(this).attr('data-source')){
-            case 'add_new':
-                if($('.add_new_department_input').attr('data-value') !== ''){
-                    dataObj['departmentName'] = $('.add_new_department_input').attr('data-value');
-                }else{
-                    $('.add_new_department_input').css('box-shadow', '0 0 6px 1px red');
-                    $('.add_new_department_input').css('border-color', 'red');
-                    break;
-                }
 
-                dataObj['locationID'] = $('.add_new_location_select').attr('data-selected-index');
-                dataObj['locationName'] = $('.add_new_location_select').attr('data-selected-value');
-                dataObj['ref'] = 'add_new';
+        dataObj['departmentName'] = $('.add_new_department_input').attr('data-value');
 
-                let result1 = await insertDepartment(dataObj);
-                $('.btn-close').trigger('click');
-                if(result1.status.code === '302'){
-                    $('.toast-body').html(result1.status.message);
-                    $('.toast').css('background-color', '#ce1a1a');
-                    historyMessage(`Failed to add new department, with message: "<span style="color: black">${result1.status.message}</span>"`,'history_wrapper');
-                }
+        dataObj['locationID'] = $('.add_new_location_select').attr('data-selected-id');
+        dataObj['locationName'] = $('.add_new_location_select').attr('data-selected-value');
 
-                if(result1.status.code === '200'){
-                    $('.toast-body').html(result1.status.message);
-                    $('.toast').css('background-color', '#279f13');
-                    historyMessage(`Department added succesfull, with message: "<span style="color: black">${result1.status.message}</span>"`,'history_wrapper', 'green');
-                }
-                
-                myToast.show();
-                break;
-            case 'add_existing':
-                
-                if($('.add_existing_location_select').attr('data-selected-index') == ''){
-                    $('.btn-close').trigger('click');
-                    $('.toast-body').html('<span>There is no location available to add for this department.</br>Go to Location section to add new location</span>');
-                    $('.toast').css('background-color', '#ce1a1a');
-                    historyMessage(`Failed to add new department, with message: "<span style="color: black">There is no location available to add for this department.</br>Go to Location section to add new location</span>"`,'history_wrapper');
-                    myToast.show();
-                    break;
-                }
-
-                dataObj['departmentName'] = $('.add_existing_department_select').attr('data-selected-value');
-                dataObj['locationName'] = $('.add_existing_location_select').attr('data-selected-value');
-                dataObj['locationID'] = $('.add_existing_location_select').attr('data-selected-index');
-                dataObj['ref'] = 'add_existing';
-
-                let result2 = await insertDepartment(dataObj);
-
-                $('.btn-close').trigger('click');
-                if(result2.status.code === '302'){
-                    $('.toast-body').html(result2.status.message);
-                    $('.toast').css('background-color', '#ce1a1a');
-                    historyMessage(`Failed to add new department, with message: "<span style="color: black">${result2.status.message}</span>"`,'history_wrapper');
-                }
-
-                if(result2.status.code === '200'){
-                    $('.toast-body').html(result2.status.message);
-                    $('.toast').css('background-color', '#279f13');
-                    historyMessage(`Department added succesfull, with message: "<span style="color: black">${result2.status.message}</span>"`,'history_wrapper', 'green');
-                }
-                
-                myToast.show();
-                break;
-            case 'delete':
-                dataObj['departmentName'] = $('.delete_department_select').attr('data-selected-value');
-                dataObj['locationName'] = $('.delete_location_select').attr('data-selected-value');
-                dataObj['locationID'] = $('.delete_location_select').attr('data-selected-index');
-                dataObj['ref'] = 'delete';
-
-
-                let locationID = $('.delete_location_select').attr('data-selected-index');
-                let departmentBindValue = $('.delete_department_select').attr('data-selected-bind');//in format with : splited
-
-                let departmentBindValueSplited = departmentBindValue.split(':');
-                departmentBindValueSplited.forEach(function(v, i, a){
-                    let res = v.split(" ");
-                    if(res[1] === locationID){
-                        dataObj['departmentID'] = res[0];
-                    }
-                });
-
-                let result3 = await deleteDepartment(dataObj);
-
-                $('.btn-close').trigger('click');
-                if(result3.status.code === '302'){
-                    $('.toast-body').html(result3.status.message);
-                    $('.toast').css('background-color', '#ce1a1a');
-                    historyMessage(`Failed to delete department, with message: "<span style="color: black">${result3.status.message}</span>"`,'history_wrapper');
-                }
-
-                if(result3.status.code === '200'){
-                    $('.toast-body').html(result3.status.message);
-                    $('.toast').css('background-color', '#279f13');
-                    historyMessage(`Department deleted succesfull, with message: "<span style="color: black">${result3.status.message}</span>"`,'history_wrapper', 'green');
-                }
-                
-                myToast.show();
-                break;
-            default:
-                console.log()
+        let result = await insertDepartment(dataObj);
+        $('.btn-close').trigger('click');
+        if(result.status.code === '302'){
+            $('.toast-body').html(result.status.message);
+            $('.toast').css('background-color', '#ce1a1a');
+            historyMessage(`Failed to add new department, with message: "<span style="color: black">${result.status.message}</span>"`,'history_wrapper');
         }
 
-        $('.get_department_button').trigger('click');
+        if(result.status.code === '200'){
+            $('.toast-body').html(result.status.message);
+            $('.toast').css('background-color', '#279f13');
+            historyMessage(`Department added succesfull, with message: "<span style="color: black">${result.status.message}</span>"`,'history_wrapper', 'green');
+        }
+        
+        myToast.show();
+
+        $('.pills_departments').trigger('show.bs.tab');
+
+        departmentTab.show();
     });
 
 /*--------------------------------------------------------------------------------------------------- */
 /*---------------------------------------------- LOCATION --------------------------------------------*/
 /*--------------------------------------------------------------------------------------------------- */
 
-    $('.add_location_button').on('click', async function(){
-
-        myToast.hide();
-        let addExistingDataToSend = [];
-        let deleteDataToSend = [];
-        let parent = $('#addLocationModal').parent();
-
-        if(parent.find('.select_location_delete_location_select').length > 0){
-            let select_parent = $('.select_location_delete_location_select').parent();
-            $('.select_location_delete_location_select').remove();
-            select_parent.append('<select name="locationDeleteLocationSelect" id="location_delete_location_select" class="location_delete_location_select"></select>')
-        }
-
-
-
-
+    $('.add_location_mobile').on('click', async function(){
         $('.location_add_new_location_input').attr('data-value', '');
         $('.location_add_new_location_input').val('');
-        $('.location_add_new_location_input').css('box-shadow', 'none');
-        $('.location_add_new_location_input').css('border-color', 'black');
-
-
-        let location_delete_location = await getLocations();
-        if(location_delete_location.status.code === '200'){
-            populateSelect(location_delete_location, 'location_delete_location_select', 'location');
-            selectChanger(true, true, 'location_delete_location_select');
-        }else{
-            $('.location_delete_location_select').append(`<option>No location to add</option>`);
-            $('.location_delete_location_select').attr('data-selected-value', '');
-            $('.location_delete_location_select').attr('data-selected-index', '');
-            selectChanger(true, true, 'location_delete_location_select');
-        }
-        
-        
     });
 
-    $('.add_location_mobile').on('click', function(){
-        $('.add_location_button').trigger('click');
-    });
-
-    $('.get_location_button').on('click', async function(){
+    $('.pills_locations').on('show.bs.tab', async function(){
         let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
         $('.sort_box_button').attr('data-source', 'get_location_button');
         $('.header_select').attr('data-source', 'get_location_button');
         let result = await getLocations(ascendingButtonValue);
 
 
-        $('.main_wrapper').empty();
-        $('.main_wrapper_mobile').empty();
+        $('.main_locations_wrapper').empty();
+        $('.main_locations_wrapper_mobile').empty();
         locationTableBuilder(result);
-    });
-
-    $('.get_location_mobile').on('click', function(){
-        $('.get_location_button').trigger('click');
     });
 
     $('.location_add_new_location_input').on('blur', function(){
         $(this).attr('data-value', $(this).val());
-    });
-
-    $('.location_add_new_location_input').on('keyup', function(){
-        $('.location_add_new_location_input').css('box-shadow', 'none');
-        $('.location_add_new_location_input').css('border-color', 'black');
-    });
-
-/******************************************************************************************************/
-/****************************************** LOCATION TAB BUTTONS ************************************ */
-/******************************************************************************************************/
-
-    $('#pills-add-new-location-tab').on('click', function(){
-        $('.add_location_save_button').attr('data-source', 'add_new');
-        $('.add_location_save_button').html('Save');
-    });
-
-    $('#pills-delete-location-tab').on('click', function(){
-        $('.add_location_save_button').attr('data-source', 'delete');
-        $('.add_location_save_button').html('Delete');
-    });
-
-/******************************************************************************************************/
-/******************************************************************************************************/
-/******************************************************************************************************/
-
-/******************************************************************************************************/
-/************************************* LOCATION DELETE SECTION ************************************** */
-/******************************************************************************************************/
-
-    $(document).on('change', '.location_delete_location_select', function(){
-        $(this).attr('data-selected-value', $(this).val());
-        $(this).attr('data-selected-index', $(this).find(':selected').attr('data-index'));
-    });
-
-/******************************************************************************************************/
-/******************************************************************************************************/
-/******************************************************************************************************/  
+    }); 
 
     
-    $('.add_location_save_button').on('click', async function(){
+    $('#addLocationForm').on('submit', async function(e){
+        e.preventDefault();
         let dataObj = {};
 
-        switch($(this).attr('data-source')){
-            case 'add_new':
-                if($('.location_add_new_location_input').attr('data-value') !== ''){
-                    dataObj['locationName'] = $('.location_add_new_location_input').attr('data-value');
-                }else{
-                    $('.location_add_new_location_input').css('box-shadow', '0 0 6px 1px red');
-                    $('.location_add_new_location_input').css('border-color', 'red');
-                    historyMessage(`Failed to add new location with message: "<span style="color: black">Missing location name in input field<span>"`,'history_wrapper');
-                    break;
-                }
+        dataObj['locationName'] = $('.location_add_new_location_input').attr('data-value');
 
-                let result1 = await insertLocation(dataObj);
+        let result = await insertLocation(dataObj);
 
-                $('.btn-close').trigger('click');
-                if(result1.status.code === '302'){
-                    $('.toast-body').html(result1.status.message);
-                    $('.toast').css('background-color', '#ce1a1a');
-                    historyMessage(`Failed to add new location with message: "<span style="color: black">${result1.status.message}<span>"`,'history_wrapper');
-                    myToast.show();
-                    break;
-                }
-
-                if(result1.status.code === '200'){
-                    $('.toast-body').html(result1.status.message);
-                    $('.toast').css('background-color', '#279f13');
-                    historyMessage(`New ${capitalize(dataObj['locationName'])} location added`,'history_wrapper', 'green');
-                }
-
-                myToast.show();
-                break;
-            case 'delete':
-                if($('.location_delete_location_select').attr('data-selected-index') == ''){
-                    $('.btn-close').trigger('click');
-                    $('.toast-body').html('<span>There is no location available to delete.');
-                    $('.toast').css('background-color', '#ce1a1a');
-                    myToast.show();
-                    historyMessage(`Failed to delete location, with message: "<span style="color: black">There is no location available to delete.</span>"`,'history_wrapper');
-                    break;
-                }
-
-                dataObj['locationID'] = $('.location_delete_location_select').attr('data-selected-index');
-                dataObj['locationName'] = $('.location_delete_location_select').attr('data-selected-value');
-
-                let result2 = await deleteLocation(dataObj);
-
-                $('.btn-close').trigger('click');
-                if(result2.status.code === '302'){
-                    $('.toast-body').html(result2.status.message);
-                    $('.toast').css('background-color', '#ce1a1a');
-                    historyMessage(`Failed to delete location, with message: "<span style="color: black">${result2.status.message}</span>"`,'history_wrapper');
-                    myToast.show();
-                    break;
-                }
-
-                if(result2.status.code === '200'){
-                    $('.toast-body').html(result2.status.message);
-                    $('.toast').css('background-color', '#279f13');
-                    historyMessage(`Location ${capitalize(dataObj['locationName'])} deleted`,'history_wrapper', 'green');
-                }
-                
-                myToast.show();
-
-                break;
-            default:
-                console.log();
+        $('.btn-close').trigger('click');
+        if(result.status.code === '302'){
+            $('.toast-body').html(result.status.message);
+            $('.toast').css('background-color', '#ce1a1a');
+            historyMessage(`Failed to add new location with message: "<span style="color: black">${result.status.message}<span>"`,'history_wrapper');
         }
 
-        $('.get_location_button').trigger('click');
+        if(result.status.code === '200'){
+            $('.toast-body').html(result.status.message);
+            $('.toast').css('background-color', '#279f13');
+            historyMessage(`New ${capitalize(dataObj['locationName'])} location added`,'history_wrapper', 'green');
+        }
+
+        myToast.show();
+
+        $('.pills_locations').trigger('show.bs.tab');
+
+        locationTab.show();
     });
 
 /*===================================================================================================*/
 /*===================================================================================================*/
 /*===================================================================================================*/
-
-
-
-
-
-
-
-
-
-
-
-/*===================================================================================================*/
-/*=================================== HISTORY BOX START =============================================*/
-/*===================================================================================================*/
-
-
-/*===================================================================================================*/
-/*===================================== HISTORY BOX END =============================================*/
-/*===================================================================================================*/
-
-
-
-
-
-
-
-
-
 
 
 /*===================================================================================================*/
@@ -2907,30 +1554,8 @@ $(document).ready(function () {
 /******************************************************************************************************/
 
     $(document).on('change', '.result_edit_user_department_select', async function(){
-        let dataToSend = [];
         $(this).attr('data-selected-value', $(this).val());
-        let select_location_parent = $('.result_edit_user_location_select').parents('.result_edit_user_item');
-        select_location_parent.find('.select_result_edit_user_location_select').remove();
-        select_location_parent.append(`<select name="resultEditUserLocation" class="result_edit_user_location_select" id="result_edit_user_location_select"></select>`);
-
-        let dataBind = $(this).find(":selected").attr('data-bind');
-        $('.result_edit_user_department_select').attr('data-selected-bind', dataBind);
-
-
-        let dataBindArray = dataBind.split(":");
-        dataBindArray.forEach(function(v, i, a){
-            let res = v.split(" ");
-            dataToSend.push(res[1]);
-        });
-
-        let location = await getCustomLocations({data: dataToSend, not: 0});
-        populateSelect(location, 'result_edit_user_location_select', 'location');
-        selectChanger(true, true, 'result_edit_user_location_select');
-    });
-
-    $(document).on('change', '.result_edit_user_location_select', async function(){
-        $(this).attr('data-selected-value', $(this).val());
-        $(this).attr('data-selected-index', $(this).find(':selected').attr('data-index'));
+        $(this).attr('data-selected-id', $(this).find(':selected').attr('data-id'));
     });
 
 
@@ -2946,213 +1571,41 @@ $(document).ready(function () {
         $(this).attr('data-value', $(this).val());
     });
 
+    $('#resultEditUserModal').on('show.bs.modal', async function(e){
+        $(this).find('input[type="hidden"]').attr('data-id', $(e.relatedTarget).attr('data-value'));
 
-
-
-    $('#result_edit_user_name_input').on('keyup', function(){
-        $(this).css('box-shadow', 'none');
-        $(this).css('border-color', 'black');
-    });
-
-    $('#result_edit_user_surname_input').on('keyup', function(){
-        $(this).css('box-shadow', 'none');
-        $(this).css('border-color', 'black');
-    });
-
-    $('#result_edit_user_email_input').on('keyup', function(){
-        $(this).css('box-shadow', 'none');
-        $(this).css('border-color', 'black');
-    });
-
-
-
-
-
-    $(document).on('click', '.result_edit, .result_edit_mobile', async function(){
-        let dataToSend = [], textHash = '';
-        $('#result_edit_user_name_input').css('box-shadow', 'none');
-        $('#result_edit_user_name_input').css('border-color', 'black');
-        $('#result_edit_user_surname_input').css('box-shadow', 'none');
-        $('#result_edit_user_surname_input').css('border-color', 'black');
-        $('#result_edit_user_email_input').css('box-shadow', 'none');
-        $('#result_edit_user_email_input').css('border-color', 'black');
-
-        if($('.result_user_edit').find('.select_result_edit_user_department_select').length > 0){
-            let select_department_parent = $('.result_user_edit').find('.select_result_edit_user_department_select').parent();
-            $('.result_user_edit').find('.select_result_edit_user_department_select').remove();
-            select_department_parent.append(`<select name="resultEditUserDepartment" class="result_edit_user_department_select" id="result_edit_user_department_select"></select>`);
-        }
-
-        if($('.result_user_edit').find('.select_result_edit_user_location_select').length > 0){
-            let select_location_parent = $('.result_user_edit').find('.select_result_edit_user_location_select').parent();
-            $('.result_user_edit').find('.select_result_edit_user_location_select').remove();
-            select_location_parent.append(`<select name="resultEditUserLocation" class="result_edit_user_location_select" id="result_edit_user_location_select"></select>`);
-        }
-
-        let userID = $(this).attr('data-value');
+        let userID = $(e.relatedTarget).attr('data-value');
         let resultEmployee = await defaultGetAllEmployee('asc', 'firstName', 1, userID);
 
-        $('#result_edit_user_name_input').val('');
+        $('#result_edit_user_name_input').val(`${resultEmployee.data[0].firstName}`);
         $('#result_edit_user_name_input').attr('data-value', resultEmployee.data[0].firstName);
-        $('#result_edit_user_name_input').attr('placeholder', resultEmployee.data[0].firstName);
-        textHash = textHash.concat(resultEmployee.data[0].firstName.toLowerCase());
-        $('#result_edit_user_surname_input').val('');
+
+        $('#result_edit_user_surname_input').val(`${resultEmployee.data[0].lastName}`);
         $('#result_edit_user_surname_input').attr('data-value', resultEmployee.data[0].lastName);
-        $('#result_edit_user_surname_input').attr('placeholder', resultEmployee.data[0].lastName);
-        textHash = textHash.concat(resultEmployee.data[0].lastName.toLowerCase());
-        $('#result_edit_user_email_input').val('');
+
+        $('#result_edit_user_email_input').val(`${resultEmployee.data[0].email}`);
         $('#result_edit_user_email_input').attr('data-value', resultEmployee.data[0].email);
-        $('#result_edit_user_email_input').attr('placeholder', resultEmployee.data[0].email);
-        textHash = textHash.concat(resultEmployee.data[0].email);
 
         let resultDepartment = await getDepartments();
         populateSelect(resultDepartment, 'result_edit_user_department_select', 'department');
-        selectChanger(true, true, 'result_edit_user_department_select');
 
-        let department_fake_option = $('.select_result_edit_user_department_select').find('.select__option');
-        department_fake_option.each(function(i, elem) {
-            if($(elem).attr('data-value') === resultEmployee.data[0].department.toLowerCase()){
-                $('.select_result_edit_user_department_select').find('span').html($(elem).html());
-
-                let originalSelect = document.querySelector('.result_edit_user_department_select');
-                originalSelect.options[$(elem).attr('data-index')].selected = true;
-
-                $('.result_edit_user_department_select').attr('data-selected-value', originalSelect.options[$(elem).attr('data-index')].value);
-                textHash = textHash.concat(originalSelect.options[$(elem).attr('data-index')].value);
-
-                let dataBindInside = $('.result_edit_user_department_select').find(":selected").attr('data-bind');
-                $('.result_edit_user_department_select').attr('data-selected-bind', dataBindInside);
+        $('.result_edit_user_department_select option').each(function(i, elem){
+            if(parseInt($(elem).attr('data-id')) === parseInt(resultEmployee.data[0].departmentID)){
+                $('.result_edit_user_department_select')[0].options[$(elem).attr('data-index')].selected = true;
+                $('.result_edit_user_department_select').trigger('change');
             }
         });
-
-        let dataBind = $('.result_edit_user_department_select').attr('data-selected-bind');
-
-        let dataBindArray = dataBind.split(":");
-        dataBindArray.forEach(function(v, i, a){
-            let res = v.split(" ");
-            dataToSend.push(res[1]);
-        });
-
-        
-
-        let location = await getCustomLocations({data: dataToSend, not: 0});
-        populateSelect(location, 'result_edit_user_location_select', 'location');
-        selectChanger(true, true, 'result_edit_user_location_select');
-
-        let location_fake_option = $('.select_result_edit_user_location_select').find('.select__option');
-        location_fake_option.each(function(i, elem) {
-            if($(elem).attr('data-value') === resultEmployee.data[0].location.toLowerCase()){
-                $('.select_result_edit_user_location_select').find('span').html($(elem).html());
-
-                let originalSelect = document.querySelector('.result_edit_user_location_select');
-                originalSelect.options[$(elem).attr('data-index')].selected = true;
-
-                $('.result_edit_user_location_select').attr('data-selected-value', originalSelect.options[$(elem).attr('data-index')].value);
-                $('.result_edit_user_location_select').attr('data-selected-index', originalSelect.options[$(elem).attr('data-index')].dataset.index);
-                textHash = textHash.concat(originalSelect.options[$(elem).attr('data-index')].dataset.index);
-            }
-        });
-
-        $('.result_edit_user_save_button').attr('data-value', $(this).attr('data-value'));
-
-
-        hashMessage(textHash).then((digestHex) => $('.result_edit_user_save_button').attr('data-hashed', digestHex));
-            
     });
 
-    $('.result_edit_user_save_button').on('click', async function(){
-        let dataObj = {}, textHash = '', checkHash;
-        let j = 0;
+    $('#editUserForm').on('submit', async function(e){
+        e.preventDefault();
+        let dataObj = {};
 
-
-        if($('#result_edit_user_name_input').attr('data-value') !== ''){
-            dataObj['firstName'] = $('#result_edit_user_name_input').attr('data-value');
-        }else{
-            $('#result_edit_user_name_input').css('box-shadow', '0 0 6px 1px red');
-            $('#result_edit_user_name_input').css('border-color', 'red');
-            j = j + 1;
-        }
-
-        if($('#result_edit_user_surname_input').attr('data-value') !== ''){
-            dataObj['lastName'] = $('#result_edit_user_surname_input').attr('data-value');
-        }else{
-            $('#result_edit_user_surname_input').css('box-shadow', '0 0 6px 1px red');
-            $('#result_edit_user_surname_input').css('border-color', 'red');
-            j = j + 2;
-        }
-
-        if($('#result_edit_user_email_input').attr('data-value') !== ''){
-            dataObj['email'] = $('#result_edit_user_email_input').attr('data-value');
-        }else{
-            $('#result_edit_user_email_input').css('box-shadow', '0 0 6px 1px red');
-            $('#result_edit_user_email_input').css('border-color', 'red');
-            j = j + 4;
-        }
-
-        if(j > 0){
-            switch(j){
-                case 1:
-                    historyMessage(`Failed to update user with message: "<span style="color: black">Missing  name in input field<span>"`,'history_wrapper');
-                    break;
-                case 2:
-                    historyMessage(`Failed to update user with message: "<span style="color: black">Missing  surname in input field<span>"`,'history_wrapper');
-                    break;
-                case 3:
-                    historyMessage(`Failed to update user with message: "<span style="color: black">Missing  name in input field<span>"`,'history_wrapper');
-                    historyMessage(`Failed to update user with message: "<span style="color: black">Missing  surname in input field<span>"`,'history_wrapper');
-                    break;
-                case 4:
-                    historyMessage(`Failed to update user with message: "<span style="color: black">Missing  email in input field<span>"`,'history_wrapper');
-                    break;
-                case 5:
-                    historyMessage(`Failed to update user with message: "<span style="color: black">Missing  name in input field<span>"`,'history_wrapper');
-                    historyMessage(`Failed to update user with message: "<span style="color: black">Missing  email in input field<span>"`,'history_wrapper');
-                    break;
-                case 6:
-                    historyMessage(`Failed to update user with message: "<span style="color: black">Missing  surname in input field<span>"`,'history_wrapper');
-                    historyMessage(`Failed to update user with message: "<span style="color: black">Missing  email in input field<span>"`,'history_wrapper');
-                    break;
-                case 7:
-                    historyMessage(`Failed to update user with message: "<span style="color: black">Missing  name in input field<span>"`,'history_wrapper');
-                    historyMessage(`Failed to update user with message: "<span style="color: black">Missing  surname in input field<span>"`,'history_wrapper');
-                    historyMessage(`Failed to update user with message: "<span style="color: black">Missing  email in input field<span>"`,'history_wrapper');
-                    break;
-                default:
-                    console.log();
-            }
-            return;
-        }
-
-        textHash = textHash.concat($('#result_edit_user_name_input').attr('data-value').toLowerCase());
-        textHash = textHash.concat($('#result_edit_user_surname_input').attr('data-value').toLowerCase());
-        textHash = textHash.concat($('#result_edit_user_email_input').attr('data-value'));
-        textHash = textHash.concat($('.result_edit_user_department_select').attr('data-selected-value'));
-        textHash = textHash.concat($('.result_edit_user_location_select').attr('data-selected-index'));
-
-        checkHash = await hashMessage(textHash).then((digestHex) => digestHex);
-
-        if($('.result_edit_user_save_button').attr('data-hashed') === checkHash){
-            $('.toast-body').html(`There is nothing to update. Data has not been changed`);
-            $('.toast').css('background-color', '#d4872b');
-            historyMessage(`There is nothing to update. Data has not been changed`,'history_wrapper', 'darksalmon');
-            $('.btn-close').trigger('click');
-            myToast.show();
-            return;
-        }
-
-        
-
-        let dataBind = $('.result_edit_user_department_select').attr('data-selected-bind');
-        let locationID = $('.result_edit_user_location_select').attr('data-selected-index');
-        let splited = dataBind.split(':');
-        splited.forEach(function(v, i, a){
-            let res = v.split(" ");
-            if(res[1] === locationID){
-                dataObj['departmentID'] = res[0];
-            }
-        });
-
-        dataObj['id'] = $(this).attr('data-value');
+        dataObj['firstName'] = $('#result_edit_user_name_input').attr('data-value');
+        dataObj['lastName'] = $('#result_edit_user_surname_input').attr('data-value');
+        dataObj['email'] = $('#result_edit_user_email_input').attr('data-value');
+        dataObj['departmentID'] = $('.result_edit_user_department_select').attr('data-selected-id');
+        dataObj['id'] = $(this).find('input[type="hidden"]').attr('data-id');
 
         let result = await updateUser(dataObj);
 
@@ -3166,9 +1619,8 @@ $(document).ready(function () {
         }
         
         myToast.show();
-        $('.refresh_button').trigger('click');
-
-
+        $('.pills_users').trigger('show.bs.tab');
+        userTab.show();
     });
 
 /******************************************************************************************************/
@@ -3179,9 +1631,9 @@ $(document).ready(function () {
 /************************************* USER DELETE SECTION **********************************************/
 /******************************************************************************************************/
 
-    $(document).on('click', '.result_delete, .result_delete_mobile', async function(){
-        $('.result_delete_user_save_button').attr('data-value', $(this).attr('data-value'));
-        let userID = $(this).attr('data-value');
+    $('#resultDeleteUserModal').on('show.bs.modal', async function(e){
+        $('.result_delete_user_save_button').attr('data-value', $(e.relatedTarget).attr('data-value'));
+        let userID = $(e.relatedTarget).attr('data-value');
 
         let user = await defaultGetAllEmployee('asc','firstName',1 ,userID);
 
@@ -3208,9 +1660,8 @@ $(document).ready(function () {
             myToast.show();
         }
 
-        $('.refresh_button').trigger('click');
-
-
+        $('.pills_users').trigger('show.bs.tab');
+        userTab.show();
     });
 
 /******************************************************************************************************/
@@ -3223,69 +1674,44 @@ $(document).ready(function () {
     $(document).on('change', '.result_edit_department_location_select', async function(){
         $(this).attr('data-selected-value', $(this).val());
         $(this).attr('data-selected-index', $(this).find(':selected').attr('data-index'));
+        $(this).attr('data-selected-id', $(this).find(':selected').attr('data-id'));
     });
 
     $('#result_edit_department_department_input').on('blur', function(){
         $(this).attr('data-value', $(this).val());
     });
 
-    $('#result_edit_department_department_input').on('keyup', function(){
-        $(this).css('box-shadow', 'none');
-        $(this).css('border-color', 'black');
-    });
+    $('#resultEditDepartmentModal').on('show.bs.modal', async function(e){
+        $(this).find('input[type="hidden"]').attr('data-id', $(e.relatedTarget).attr('data-value'));
 
-    $(document).on('click', '.result_edit_department, .result_edit_department_mobile', async function(){
-        $('#result_edit_department_department_input').css('box-shadow', 'none');
-        $('#result_edit_department_department_input').css('border-color', 'black');
-
-        if($('.result_department_edit').find('.select_result_edit_department_location_select').length > 0){
-            let select_location_parent = $('.result_department_edit').find('.select_result_edit_department_location_select').parent();
-            $('.result_department_edit').find('.select_result_edit_department_location_select').remove();
-            select_location_parent.append(`<select name="resultEditDepartmentLocation" class="result_edit_department_location_select" id="result_edit_department_location_select"></select>`);
-        }
-
-        let departmentID = $(this).attr('data-value');
+        let departmentID = $(e.relatedTarget).attr('data-value');
         let resultDepartment = await getDepartments(0, 'asc', 1, departmentID);
 
-        $('#result_edit_department_department_input').val('');
+        $('#result_edit_department_department_input').val(`${resultDepartment.data[0].departmentName}`);
         $('#result_edit_department_department_input').attr('data-value', resultDepartment.data[0].departmentName);
-        $('#result_edit_department_department_input').attr('placeholder', resultDepartment.data[0].departmentName);
 
         let locations = await getLocations();
         populateSelect(locations, 'result_edit_department_location_select', 'location');
-        selectChanger(true, true, 'result_edit_department_location_select');
 
-        let location_fake_option = $('.select_result_edit_department_location_select').find('.select__option');
-        location_fake_option.each(function(i, elem) {
-            if($(elem).attr('data-value') === resultDepartment.data[0].locationName.toLowerCase()){
-                $('.select_result_edit_department_location_select').find('span').html($(elem).html());
-
-                let originalSelect = document.querySelector('.result_edit_department_location_select');
-                originalSelect.options[$(elem).attr('data-index')].selected = true;
-
-                $('.result_edit_department_location_select').attr('data-selected-value', originalSelect.options[$(elem).attr('data-index')].value);
-                $('.result_edit_department_location_select').attr('data-selected-index', originalSelect.options[$(elem).attr('data-index')].dataset.index);
+        $('.result_edit_department_location_select option').each(function(i, elem){
+            if(parseInt($(elem).attr('data-id')) === parseInt(resultDepartment.data[0].locationID)){
+                $('.result_edit_department_location_select')[0].options[$(elem).attr('data-index')].selected = true;
+                $('.result_edit_department_location_select').trigger('change');
             }
         });
-
-        $('.result_edit_department_save_button').attr('data-value', $(this).attr('data-value'));
     });
 
-    $('.result_edit_department_save_button').on('click', async function(){
-        let dataObj = {}, textHash = '', checkHash;
+    $('#editDepartmentForm').on('submit', async function(e){
+        e.preventDefault();
+        let dataObj = {};
 
+        dataObj['departmentName'] = $('#result_edit_department_department_input').attr('data-value');
 
-        if($('#result_edit_department_department_input').attr('data-value') !== ''){
-            dataObj['departmentName'] = $('#result_edit_department_department_input').attr('data-value');
-        }else{
-            $('#result_edit_department_department_input').css('box-shadow', '0 0 6px 1px red');
-            $('#result_edit_department_department_input').css('border-color', 'red');
-        }
-
-        dataObj['locationID'] = $('.result_edit_department_location_select').attr('data-selected-index');
+        dataObj['locationID'] = $('.result_edit_department_location_select').attr('data-selected-id');
         dataObj['locationName'] = $('.result_edit_department_location_select').attr('data-selected-value');
 
-        dataObj['departmentID'] = $(this).attr('data-value');
+        dataObj['departmentID'] = $(this).find('input[type="hidden"]').attr('data-id');
+
 
         let result = await updateDepartment(dataObj);
 
@@ -3308,8 +1734,8 @@ $(document).ready(function () {
         }
         
         myToast.show();
-        $('.get_department_button').trigger('click');
-
+        $('.pills_departments').trigger('show.bs.tab');
+        departmentTab.show();
     });
 
 
@@ -3399,9 +1825,8 @@ $(document).ready(function () {
         let resultLocation = await getLocations('asc', 1, locationID);
 
 
-        $('#result_edit_location_location_input').val('');
+        $('#result_edit_location_location_input').val(`${resultLocation.data[0].name}`);
         $('#result_edit_location_location_input').attr('data-value', resultLocation.data[0].name);
-        $('#result_edit_location_location_input').attr('placeholder', resultLocation.data[0].name);
 
 
         $('.result_edit_location_save_button').attr('data-value', $(this).attr('data-value'));
@@ -3509,27 +1934,4 @@ $(document).ready(function () {
 /*===================================================================================================*/
 /*=================================== RESULT ACTION END =============================================*/
 /*===================================================================================================*/
-
-
-
-
-
-
-
-
-
-    $(".profile-section").scroll(function(){ 
-        if ($(this).scrollTop() > 100) { 
-            $('#scroll').fadeIn(); 
-        } else { 
-            $('#scroll').fadeOut(); 
-        } 
-    }); 
-
-
-    $('#scroll').click(function(){ 
-        $(".profile-section").animate({ scrollTop: 0 }, 600); 
-        return false; 
-    });
-
 });

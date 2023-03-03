@@ -34,36 +34,34 @@
         <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="addUserModalLabel">Add User</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="add_user_item">
-                        <label for="add_user_name_input">Name</label>
-                        <input type="text" id="add_user_name_input" placeholder="Fill in..." data-value="">
+                <form id="addUserForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addUserModalLabel">Add User</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="add_user_item">
-                        <label for="add_user_surname_input">Surname</label>
-                        <input type="text" id="add_user_surname_input" placeholder="Fill in..." data-value="">
+                    <div class="modal-body">
+                        <div class="add_user_item">
+                            <label for="add_user_name_input">Name</label>
+                            <input type="text" id="add_user_name_input" placeholder="Fill in..." data-value="" required>
+                        </div>
+                        <div class="add_user_item">
+                            <label for="add_user_surname_input">Surname</label>
+                            <input type="text" id="add_user_surname_input" placeholder="Fill in..." data-value="" required>
+                        </div>
+                        <div class="add_user_item">
+                            <label for="add_user_email_input">E-mail</label>
+                            <input type="email" id="add_user_email_input" placeholder="Fill in..." data-value="" required>
+                        </div>
+                        <div class="add_user_item">
+                            <label for="add_user_department_select">Department</label>
+                            <select name="addUserDepartment" class="add_user_department_select" id="add_user_department_select"></select>
+                        </div>
                     </div>
-                    <div class="add_user_item">
-                        <label for="add_user_email_input">E-mail</label>
-                        <input type="text" id="add_user_email_input" placeholder="Fill in..." data-value="">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary add_user_close_button" data-bs-target="#addButtonModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Discard</button>
+                        <button type="submit" class="btn btn-primary add_user_save_button">Save</button>
                     </div>
-                    <div class="add_user_item">
-                        <label for="add_user_department_select">Department</label>
-                        <select name="addUserDepartment" class="add_user_department_select" id="add_user_department_select"></select>
-                    </div>
-                    <div class="add_user_item">
-                        <label for="add_user_location_select">Location</label>
-                        <select name="addUserLocation" class="add_user_location_select" id="add_user_location_select"></select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary add_user_close_button" data-bs-target="#addButtonModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Discard</button>
-                  <button type="button" class="btn btn-primary add_user_save_button">Save</button>
-                </div>
+                </form>
               </div>
             </div>
         </div>
@@ -71,59 +69,26 @@
         <div class="modal fade" id="addDepartmentModal" tabindex="-1" aria-labelledby="addDepartmentModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="addDepartmentModalLabel">Add/Delete Department</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="pills-add-new-tab" data-bs-toggle="pill" data-bs-target="#pills-add-new" type="button" role="tab" aria-controls="pills-add-new" aria-selected="true">Add New</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="pills-add-existing-tab" data-bs-toggle="pill" data-bs-target="#pills-add-existing" type="button" role="tab" aria-controls="pills-add-existing" aria-selected="false">Add Existing</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="pills-delete-tab" data-bs-toggle="pill" data-bs-target="#pills-delete" type="button" role="tab" aria-controls="pills-delete" aria-selected="false">Delete</button>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-add-new" role="tabpanel" aria-labelledby="pills-add-new-tab">
-                            <div class="add_new_item">
-                                <label for="add_new_department_input">Department</label>
-                                <input type="text" id="add_new_department_input" data-value="" class="add_new_department_input" placeholder="Fill in ...">
-                            </div>
-                            <div class="add_new_item">
-                                <label for="add_new_location_select">Location</label>
-                                <select name="addNewLocationSelect" id="add_new_location_select" class="add_new_location_select"></select>
-                            </div>
+                <form id="addDepartmentForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addDepartmentModalLabel">Add Department</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="add_new_item">
+                            <label for="add_new_department_input">Department</label>
+                            <input type="text" id="add_new_department_input" data-value="" class="add_new_department_input" placeholder="Fill in ..." required>
                         </div>
-                        <div class="tab-pane fade" id="pills-add-existing" role="tabpanel" aria-labelledby="pills-add-existing-tab">
-                            <div class="add_existing_item">
-                                <label for="add_existing_department_select">Department</label>
-                                <select name="addExistingDepartmentSelect" id="add_existing_department_select" class="add_existing_department_select"></select>
-                            </div>
-                            <div class="add_existing_item">
-                                <label for="add_existing_location_select">Location</label>
-                                <select name="addExistingLocationSelect" id="add_existing_location_select" class="add_existing_location_select"></select>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="pills-delete" role="tabpanel" aria-labelledby="pills-delete-tab">
-                            <div class="delete_item">
-                                <label for="delete_department_select">Department</label>
-                                <select name="deleteDepartmentSelect" id="delete_department_select" class="delete_department_select"></select>
-                            </div>
-                            <div class="delete_item">
-                                <label for="delete_location_select">Location</label>
-                                <select name="deleteLocationSelect" id="delete_location_select" class="delete_location_select"></select>
-                            </div>
+                        <div class="add_new_item">
+                            <label for="add_new_location_select">Location</label>
+                            <select name="addNewLocationSelect" id="add_new_location_select" class="add_new_location_select"></select>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary add_department_close_button" data-bs-target="#addButtonModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Discard</button>
-                  <button type="button" class="btn btn-primary add_department_save_button" data-source="add_new">Save</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary add_department_close_button" data-bs-target="#addButtonModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Discard</button>
+                        <button type="submit" class="btn btn-primary add_department_save_button">Save</button>
+                    </div>
+                </form>
               </div>
             </div>
         </div>
@@ -131,38 +96,22 @@
         <div class="modal fade" id="addLocationModal" tabindex="-1" aria-labelledby="addLocationModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="addLocationModalLabel">Add/Delete Location</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="pills-add-new-location-tab" data-bs-toggle="pill" data-bs-target="#pills-add-new-location" type="button" role="tab" aria-controls="pills-add-new-location" aria-selected="true">Add New</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="pills-delete-location-tab" data-bs-toggle="pill" data-bs-target="#pills-delete-location" type="button" role="tab" aria-controls="pills-delete-location" aria-selected="false">Delete</button>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-add-new-location" role="tabpanel" aria-labelledby="pills-add-new-location-tab">
-                            <div class="location_add_new_location_item">
-                                <label for="location_add_new_location_input">Location</label>
-                                <input type="text" id="location_add_new_location_input" data-value="" class="location_add_new_location_input" placeholder="Fill in ...">
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="pills-delete-location" role="tabpanel" aria-labelledby="pills-delete-location-tab">
-                            <div class="location_delete_location_item">
-                                <label for="location_delete_location_select">Location</label>
-                                <select name="locationDeleteLocationSelect" id="location_delete_location_select" class="location_delete_location_select"></select>
-                            </div>
+                <form id="addLocationForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addLocationModalLabel">Add/Delete Location</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="location_add_new_location_item">
+                            <label for="location_add_new_location_input">Location</label>
+                            <input type="text" id="location_add_new_location_input" data-value="" class="location_add_new_location_input" placeholder="Fill in ..." required>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary add_location_close_button" data-bs-target="#addButtonModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Discard</button>
-                  <button type="button" class="btn btn-primary add_location_save_button" data-source="add_new">Save</button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary add_location_close_button" data-bs-target="#addButtonModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Discard</button>
+                        <button type="submit" class="btn btn-primary add_location_save_button">Save</button>
+                    </div>
+                </form>
               </div>
             </div>
         </div>
@@ -177,16 +126,13 @@
                 <div class="modal-body">
                     <div class="add_delete_button_wrapper">
                         <div class="add_delete_button_item">
-                            <button type="button" class="btn btn-primary add_user_mobile" data-bs-dismiss="modal">Add User</button>
-                            <button type="button" class="btn btn-primary get_user_mobile" data-bs-dismiss="modal">Get Users</button>
+                            <button type="button" class="btn btn-primary add_user_mobile" data-bs-dismiss="modal"  data-bs-toggle="modal" data-bs-target="#addUserModal">Add User</button>
                         </div>
                         <div class="add_delete_button_item">
-                            <button type="button" class="btn btn-primary add_department_mobile" data-bs-dismiss="modal">Add Department</button>
-                            <button type="button" class="btn btn-primary get_department_mobile" data-bs-dismiss="modal">Get Departments</button>
+                            <button type="button" class="btn btn-primary add_department_mobile" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#addDepartmentModal">Add Department</button>
                         </div>
                         <div class="add_delete_button_item">
-                            <button type="button" class="btn btn-primary add_location_mobile" data-bs-dismiss="modal">Add Location</button>
-                            <button type="button" class="btn btn-primary get_location_mobile" data-bs-dismiss="modal">Get Locations</button>
+                            <button type="button" class="btn btn-primary add_location_mobile" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#addLocationModal">Add Location</button>
                         </div>
                     </div>
                 </div>
@@ -286,36 +232,35 @@
             <div class="modal fade" id="resultEditUserModal" tabindex="-1" aria-labelledby="resultEditUserModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="resultEditUserModalLabel">Edit User</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="result_edit_user_item">
-                            <label for="result_edit_user_name_input">Name</label>
-                            <input type="text" id="result_edit_user_name_input" placeholder="Fill in..." data-value="">
+                    <form id="editUserForm">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="resultEditUserModalLabel">Edit User</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="result_edit_user_item">
-                            <label for="result_edit_user_surname_input">Surname</label>
-                            <input type="text" id="result_edit_user_surname_input" placeholder="Fill in..." data-value="">
+                        <div class="modal-body">
+                            <input type="hidden" data-id="">
+                            <div class="result_edit_user_item">
+                                <label for="result_edit_user_name_input">Name</label>
+                                <input type="text" id="result_edit_user_name_input" placeholder="Fill in..." data-value="" required>
+                            </div>
+                            <div class="result_edit_user_item">
+                                <label for="result_edit_user_surname_input">Surname</label>
+                                <input type="text" id="result_edit_user_surname_input" placeholder="Fill in..." data-value="" required>
+                            </div>
+                            <div class="result_edit_user_item">
+                                <label for="result_edit_user_email_input">E-mail</label>
+                                <input type="email" id="result_edit_user_email_input" placeholder="Fill in..." data-value="" required>
+                            </div>
+                            <div class="result_edit_user_item">
+                                <label for="result_edit_user_department_select">Department</label>
+                                <select name="resultEditUserDepartment" class="result_edit_user_department_select" id="result_edit_user_department_select"></select>
+                            </div>
                         </div>
-                        <div class="result_edit_user_item">
-                            <label for="result_edit_user_email_input">E-mail</label>
-                            <input type="text" id="result_edit_user_email_input" placeholder="Fill in..." data-value="">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary result_edit_user_close_button" data-bs-dismiss="modal">Discard</button>
+                            <button type="submit" class="btn btn-primary result_edit_user_save_button">Update</button>
                         </div>
-                        <div class="result_edit_user_item">
-                            <label for="result_edit_user_department_select">Department</label>
-                            <select name="resultEditUserDepartment" class="result_edit_user_department_select" id="result_edit_user_department_select"></select>
-                        </div>
-                        <div class="result_edit_user_item">
-                            <label for="result_edit_user_location_select">Location</label>
-                            <select name="resultEditUserLocation" class="result_edit_user_location_select" id="result_edit_user_location_select"></select>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary result_edit_user_close_button" data-bs-dismiss="modal">Discard</button>
-                      <button type="button" class="btn btn-primary result_edit_user_save_button">Update</button>
-                    </div>
+                    </form>
                   </div>
                 </div>
             </div>
@@ -335,8 +280,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary result_delete_user_close_button" data-bs-dismiss="modal">Discard</button>
-                      <button type="button" class="btn btn-primary result_delete_user_save_button">Delete</button>
+                      <button type="button" class="btn btn-secondary result_delete_user_close_button" data-bs-dismiss="modal">No</button>
+                      <button type="button" class="btn btn-primary result_delete_user_save_button">Yes</button>
                     </div>
                   </div>
                 </div>
@@ -347,24 +292,27 @@
             <div class="modal fade" id="resultEditDepartmentModal" tabindex="-1" aria-labelledby="resultEditDepartmentModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="resultEditDepartmentModalLabel">Edit Department</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="result_edit_department_item">
-                            <label for="result_edit_department_department_input">Department</label>
-                            <input type="text" id="result_edit_department_department_input" placeholder="Fill in..." data-value="">
+                    <form id="editDepartmentForm">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="resultEditDepartmentModalLabel">Edit Department</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="result_edit_department_item">
-                            <label for="result_edit_department_location_select">Location</label>
-                            <select name="resultEditDepartmentLocation" class="result_edit_department_location_select" id="result_edit_department_location_select"></select>
+                        <div class="modal-body">
+                            <input type="hidden" data-id="">
+                            <div class="result_edit_department_item">
+                                <label for="result_edit_department_department_input">Department</label>
+                                <input type="text" id="result_edit_department_department_input" placeholder="Fill in..." data-value="" required>
+                            </div>
+                            <div class="result_edit_department_item">
+                                <label for="result_edit_department_location_select">Location</label>
+                                <select name="resultEditDepartmentLocation" class="result_edit_department_location_select" id="result_edit_department_location_select"></select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary result_edit_department_close_button" data-bs-dismiss="modal">Discard</button>
-                      <button type="button" class="btn btn-primary result_edit_department_save_button">Update</button>
-                    </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary result_edit_department_close_button" data-bs-dismiss="modal">Discard</button>
+                            <button type="submit" class="btn btn-primary result_edit_department_save_button">Update</button>
+                        </div>
+                    </form>
                   </div>
                 </div>
             </div>
@@ -449,7 +397,7 @@
                         <button class="refresh_button"><i class="fa-solid fa-arrows-rotate"></i></button>
                         <button class="add_button" data-bs-toggle="modal" data-bs-target="#addButtonModalToggle"><i class="fa-solid fa-plus"></i></button>
                         <button class="filter_button" data-bs-toggle="modal" data-bs-target="#filterButtonModal"><i class="fa-solid fa-filter-list"></i></button>
-                        <button class="history_button_mobile"><i class="fa-solid fa-clock-rotate-left"></i></button>
+                        <button class="history_button_mobile" data-bs-toggle="modal" data-bs-target="#userHistoryModal"><i class="fa-solid fa-clock-rotate-left"></i></button>
                     </div>
                     <div class="col-12 col-xl-6 d-flex gap-4 justify-content-center justify-content-xl-end">
                         <div class="sort_box_label">Sort By</div>
@@ -460,97 +408,40 @@
                 </div>
             </div>
         </div>
+        <div class="control_button_wrapper">
+            <div class="container">
+                <div class="row">
+                    <ul class="nav nav-pills nav-justified gap-3" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active pills_users" id="pills-users-tab" data-bs-toggle="pill" data-bs-target="#pills-users" type="button" role="tab" aria-controls="pills-users" aria-selected="true">Get Users</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link pills_departments" id="pills-departments-tab" data-bs-toggle="pill" data-bs-target="#pills-departments" type="button" role="tab" aria-controls="pills-departments" aria-selected="false">Get Departments</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link pills_locations" id="pills-locations-tab" data-bs-toggle="pill" data-bs-target="#pills-locations" type="button" role="tab" aria-controls="pills-locations" aria-selected="false">Get Locations</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                    </div>
+                </div>
+            </div>       
+        </div>
     </header>
-    <aside>
-        <div class="aside_wrapper">
-            <div class="filters">
-                <h4 class="filters_header">Filters</h4>
-                <div class="filters_body">
-                    <div class="filters_item">
-                        <div class="check_box">
-                            <label for="name_checkbox">Name</label>
-                            <input class="name_checkbox" type="checkbox" id="name_checkbox">
-                        </div>
-                        <div class="setdata">
-                            <input class="name_input" type="search" placeholder="Fill in.." data-searched-value="">
-                            <button class="name_button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        </div>
-                    </div>
-                    <div class="filters_item">
-                        <div class="check_box">
-                            <label for="surname_checkbox">Surname</label>
-                            <input class="surname_checkbox" type="checkbox" id="surname_checkbox">
-                        </div>
-                        <div class="setdata">
-                            <input class="surname_input" type="search" placeholder="Fill in.." data-searched-value="">
-                            <button class="surname_button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        </div>
-                    </div>
-                    <div class="filters_item">
-                        <div class="check_box">
-                            <label for="email_checkbox">E-mail</label>
-                            <input class="email_checkbox" type="checkbox" id="email_checkbox">
-                        </div>
-                        <div class="setdata">
-                            <input class="email_input" type="search" placeholder="Fill in.." data-searched-value="">
-                            <button class="email_button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        </div>
-                    </div>
-                    <div class="filters_item">
-                        <div class="check_box">
-                            <label for="department_checkbox">Department</label>
-                            <input class="department_checkbox" type="checkbox" id="department_checkbox">
-                        </div>
-                        <div class="setdata">
-                            <select class="department_select" name="department" id="department_select" data-selected-value="">
-                            </select>
-                        </div>
-                    </div>
-                    <div class="filters_item">
-                        <div class="check_box">
-                            <label for="location_checkbox">Location</label>
-                            <input class="location_checkbox" type="checkbox" id="location_checkbox">
-                        </div>
-                        <div class="setdata">
-                            <select class="location_select" name="location" id="location_select" data-selected-value="">
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <button class="apply_button" disabled>Apply</button>
-            </div>
-            <div class="add">
-                <h4 class="add_header">Actions</h4>
-                <div class="add_body">
-                    <div class="add_user">
-                        <button type="button" class="add_user_button" data-bs-toggle="modal" data-bs-target="#addUserModal">User</button>
-                        <button type="button" class="get_user_button">Get Users</button>
-                    </div>
-                    <div class="add_department">
-                        <button type="button" class="add_department_button" data-bs-toggle="modal" data-bs-target="#addDepartmentModal">Department</button>
-                        <button type="button" class="get_department_button">Get Departments</button>
-                    </div>
-                    <div class="add_location">
-                        <button type="button" class="add_location_button" data-bs-toggle="modal" data-bs-target="#addLocationModal">Location</button>
-                        <button type="button" class="get_location_button">Get Locations</button>
-                    </div>
-                </div>
-            </div>
-            <div class="history">
-                <h4 class="history_header">History</h4>
-                <div class="history_body">
-                    <button class="history_button" data-bs-toggle="modal" data-bs-target="#userHistoryModal">History</button>
-                    <!--  -->
-                </div>
-            </div>
-        </div>
-    </aside>
     <main>
-        <div class="main_wrapper">
-
-        </div>
-        <div class="main_wrapper_mobile">
-
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-users" role="tabpanel" aria-labelledby="pills-users-tab">
+                <div class="main_user_wrapper"></div>
+                <div class="main_user_wrapper_mobile"></div>
+            </div>
+            <div class="tab-pane fade" id="pills-departments" role="tabpanel" aria-labelledby="pills-departments-tab">
+                <div class="main_departments_wrapper"></div>
+                <div class="main_departments_wrapper_mobile"></div>
+            </div>
+            <div class="tab-pane fade" id="pills-locations" role="tabpanel" aria-labelledby="pills-locations-tab">
+                <div class="main_locations_wrapper"></div>
+                <div class="main_locations_wrapper_mobile"></div>
+            </div>
         </div>
     </main>
     <script src="./libs/js/jquery-3.6.1.min.js"></script>
