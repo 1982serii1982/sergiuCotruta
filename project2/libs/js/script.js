@@ -34,179 +34,6 @@ function isset(data){
     return false
 }
 
-function selectChanger(keepClicked = true, selective = false, className = ''){
-
-    let selects;
-
-    if(selective){
-        selects = document.querySelectorAll(`.${className}`);
-    }else{
-        selects = document.getElementsByTagName('select');
-    }
-
-    
-    if (selects.length > 0) {
-        selects_init();
-    }
-
-
-    function selects_init() {
-        for (let index = 0; index < selects.length; index++) {
-            const select = selects[index];
-            select_init(select);
-        }
-        document.addEventListener('click', function (e) {
-            selects_close(e);
-        });
-        document.addEventListener('keydown', function (e) {
-            if (e.which == 27) {
-                selects_close(e);
-            }
-        });
-    }
-
-
-    function selects_close(e) {
-        const selects = document.querySelectorAll('.select');
-        if (!e.target.closest('.select')) {
-            for (let index = 0; index < selects.length; index++) {
-                const select = selects[index];
-                const select_body_options = select.querySelector('.select__options');
-                select.classList.remove('_active');
-                _slideUp(select_body_options, 0);
-            }
-        }
-    }
-
-
-    function select_init(select) {
-        const select_parent = select.parentElement;
-        const select_modifikator = select.getAttribute('class');
-        select.style.display = 'none';
-
-        select_parent.insertAdjacentHTML('beforeend', `<div class="select select_${select_modifikator}"></div>`);
-
-        let new_select = select.parentElement.querySelector('.select');
-        new_select.appendChild(select);
-        select_item(select);
-    }
-
-    function select_item(select) {
-        const select_parent = select.parentElement;
-        const select_options = select.querySelectorAll('option');
-        
-        const select_selected_option = select.querySelector('option:checked');
-        const select_selected_text = select_selected_option.text;
-
-        let template = `
-            <div class="select__item">
-                <div class="select__title">
-                    <div class="select__value">
-                        <span>${select_selected_text}</span>
-                    </div>
-                </div>
-                <div class="select__options" tabindex=0>
-                        ${select_get_options(select_options)}
-                </div>
-            </div>
-        `;
-
-        select_parent.insertAdjacentHTML('beforeend', template);
-
-        select_actions(select, select_parent);
-    }
-
-    function select_get_options(select_options) {
-        if (select_options) {
-            let select_options_content = '';
-            for (let index = 0; index < select_options.length; index++) {
-                const select_option = select_options[index];
-                const select_option_value = select_option.value;
-                if (select_option_value != '') {
-                    const select_option_text = select_option.text;
-                    select_options_content += `<div data-index="${index}" data-value="${select_option_value}" class="select__option">${select_option_text}</div>`;
-                }
-            }
-            return select_options_content;
-        }
-    }
-
-    function select_actions(original, select) {
-        const select_item = select.querySelector('.select__item');
-        const select_body_options = select.querySelector('.select__options');
-        const select_options = select.querySelectorAll('.select__option');
-
-        
-
-        select_item.addEventListener('click', function () {
-            let selects = document.querySelectorAll('.select');
-            for (let index = 0; index < selects.length; index++) {
-                const select = selects[index];
-                const select_body_options = select.querySelector('.select__options');
-                if (select != select_item.closest('.select')) {
-                    select.classList.remove('_active');
-                    _slideUp(select_body_options);
-                }
-            }
-            _slideToggle(select_body_options);
-            select.classList.toggle('_active');
-        });
-
-        for (let index = 0; index < select_options.length; index++) {
-            const select_option = select_options[index];
-            
-            select_option.addEventListener('click', function(e) {
-                e.stopPropagation();
-
-                if(!keepClicked){
-                    let selectOptions = select.querySelectorAll('.select__option');
-
-                    for (let id = 0; id < selectOptions.length; id++) {
-                        const el = selectOptions[id];
-                        if(el.dataset.value === 'default'){
-                            el.remove();
-                            continue;
-                        }
-                        el.style.display = 'block';
-                    }
-                    this.style.display = 'none';
-                }
-
-                select.querySelector('.select__value').innerHTML = '<span>' + this.innerHTML + '</span>';
-                
-
-                _slideToggle(select_body_options);
-                select.classList.toggle('_active');
-
-                original.options[this.dataset.index].selected = true;
-                $(original).trigger('change');
-            });
-        }
-    }
-
-    let _slideUp = (target) => {
-        target.style.display = 'none';
-    }
-
-
-    let _slideDown = (target) => {
-        let display = window.getComputedStyle(target).display;
-        if(display === 'none'){
-            display = 'block';
-        }
-        target.style.display = display;
-    }
-
-
-    let _slideToggle = (target) => {
-        if (window.getComputedStyle(target).display === 'none') {
-            _slideDown(target);
-        } else {
-            _slideUp(target);
-        }
-    }
-}
-
 function populateSelect(inputData, className = '', category){
     switch(category){
         case 'department':
@@ -386,7 +213,7 @@ function departmentTableBuilder(inputData){
                 <div class="result_location">${currentVal.locationName}</div>
                 <div class="result_action">
                     <button class="result_edit_department" data-value="${currentVal.departmentID}" data-bs-toggle="modal" data-bs-target="#resultEditDepartmentModal"><i class="fa-solid fa-pencil"></i></button>
-                    <button class="result_delete_department" data-value="${currentVal.departmentID}" data-bs-toggle="modal" data-bs-target="#resultDeleteDepartmentModal"><i class="fa-solid fa-trash-can"></i></button>
+                    <button class="result_delete_department" data-value="${currentVal.departmentID}" data-name="${currentVal.departmentName}" data-bs-toggle="modal" data-bs-target="#resultDeleteDepartmentModal"><i class="fa-solid fa-trash-can"></i></button>
                 </div>
             </div>
         `;
@@ -406,7 +233,7 @@ function departmentTableBuilder(inputData){
                     </div>
                     <div class="result_action_mobile">
                         <button class="result_edit_department_mobile" data-value="${currentVal.departmentID}" data-bs-toggle="modal" data-bs-target="#resultEditDepartmentModal"><i class="fa-solid fa-pencil"></i></button>
-                        <button class="result_delete_department_mobile" data-value="${currentVal.departmentID}" data-bs-toggle="modal" data-bs-target="#resultDeleteDepartmentModal"><i class="fa-solid fa-trash-can"></i></button>
+                        <button class="result_delete_department_mobile" data-value="${currentVal.departmentID}" data-name="${currentVal.departmentName}" data-bs-toggle="modal" data-bs-target="#resultDeleteDepartmentModal"><i class="fa-solid fa-trash-can"></i></button>
                     </div>
                 </div>
             </div>
@@ -462,8 +289,8 @@ function locationTableBuilder(inputData, orderBy = 'name'){
             <div class="result_row_wrapper_location">
                 <div class="result_location">${currentVal.name}</div>
                 <div class="result_action">
-                    <button class="result_edit_location" data-value="${currentVal.id}" data-bs-toggle="modal" data-bs-target="#resultEditLocationModal"><i class="fa-solid fa-pencil"></i></button>
-                    <button class="result_delete_location" data-value="${currentVal.id}" data-bs-toggle="modal" data-bs-target="#resultDeleteLocationModal"><i class="fa-solid fa-trash-can"></i></button>
+                    <button class="result_edit_location" data-lname="${currentVal.name}" data-value="${currentVal.id}" data-bs-toggle="modal" data-bs-target="#resultEditLocationModal"><i class="fa-solid fa-pencil"></i></button>
+                    <button class="result_delete_location" data-lname="${currentVal.name}" data-value="${currentVal.id}" data-bs-toggle="modal" data-bs-target="#resultDeleteLocationModal"><i class="fa-solid fa-trash-can"></i></button>
                 </div>
             </div>
         `;
@@ -478,8 +305,8 @@ function locationTableBuilder(inputData, orderBy = 'name'){
                         <div class="result_location_mobile">${currentVal.name}</div>
                     </div>
                     <div class="result_action_mobile">
-                        <button class="result_edit_location_mobile" data-value="${currentVal.id}" data-bs-toggle="modal" data-bs-target="#resultEditLocationModal"><i class="fa-solid fa-pencil"></i></button>
-                        <button class="result_delete_location_mobile" data-value="${currentVal.id}" data-bs-toggle="modal" data-bs-target="#resultDeleteLocationModal"><i class="fa-solid fa-trash-can"></i></button>
+                        <button class="result_edit_location_mobile" data-lname="${currentVal.name}" data-value="${currentVal.id}" data-bs-toggle="modal" data-bs-target="#resultEditLocationModal"><i class="fa-solid fa-pencil"></i></button>
+                        <button class="result_delete_location_mobile" data-lname="${currentVal.name}" data-value="${currentVal.id}" data-bs-toggle="modal" data-bs-target="#resultDeleteLocationModal"><i class="fa-solid fa-trash-can"></i></button>
                     </div>
                 </div>
             </div>
@@ -964,19 +791,33 @@ $(document).ready(function () {
 
         if($(this)[0].checked === true){
             $(this).parents('.filters_item_mobile').find('.setdata_mobile').css('display', 'block');
+            $(this).parents('.filters_item_mobile').find('input[type="text"]').prop('required',true);
+            $(this).parents('.filters_item_mobile').find('input[type="email"]').prop('required',true);
         }else{
             $(this).parents('.filters_item_mobile').find('.setdata_mobile').css('display', 'none');
+            $(this).parents('.filters_item_mobile').find('input[type="text"]').prop('required',false);
+            $(this).parents('.filters_item_mobile').find('input[type="email"]').prop('required',false);
         }
+    });
+
+    $('.clear_button_mobile').on('click', function(){
+        $.makeArray($('.filters_body_mobile :checkbox')).forEach(function(v, i, a){
+            if(v.checked === true){
+                $(v).trigger('click');
+            }
+        });
     });
 
 
     /*************************************** NAME ROW *****************************************/
 
-
-    $('.name_input_mobile').on('keypress', function(e){
-        if(e.key === 'Enter'){
+    
+    $('.name_input_mobile').on('keyup', async function(e){
+        if(e.keyCode === 13){
             e.preventDefault();
-            $('.name_button_mobile').trigger('click');
+            $(this).attr('data-searched-value', $(this).val());
+            $('.apply_button_mobile').trigger('click');
+            //$('#filterMobileModal .btn-close').trigger('click');
         }
     });
 
@@ -990,57 +831,15 @@ $(document).ready(function () {
     });
 
     $('.name_button_mobile').on('click', async function(e){
-        let dataObj = {};
-        let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
-        let selectedValue = $('.header_select').attr('data-selected-value');
-        let searchString = $('.name_input_mobile').val();
-        $('.name_input_mobile').attr('data-searched-value', searchString);
-
-        $('.sort_box_button').attr('data-source', 'filter_search_mobile');
-        $('.header_select').attr('data-source', 'filter_search_mobile');
-
-        dataObj['firstName'] = searchString;
-        dataObj['order'] = ascendingButtonValue;
-        dataObj['orderBy'] = selectedValue;
-
-        if($('#surname_checkbox_mobile').is(":checked")){
-            if($('.surname_input_mobile').attr('data-searched-value') !== ''){
-                dataObj['lastName'] = $('.surname_input_mobile').attr('data-searched-value');
-            }
-        }
-
-        if($('#email_checkbox_mobile').is(":checked")){
-            if($('.email_input_mobile').attr('data-searched-value') !== ''){
-                dataObj['email'] = $('.email_input_mobile').attr('data-searched-value');
-            }
-        }
-
-        if($('#department_checkbox_mobile').is(":checked")){
-            if($('#department_select_mobile').attr('data-selected-value') !== ''){
-                dataObj['department'] = $('#department_select_mobile').attr('data-selected-value');
-            }
-        }
-
-        if($('#location_checkbox_mobile').is(":checked")){
-            if($('#location_select_mobile').attr('data-selected-value') !== ''){
-                dataObj['location'] = $('#location_select_mobile').attr('data-selected-value');
-            }
-        }
-
-        
-        let result = await getFilterSearch(dataObj);
-
-        $('.main_user_wrapper').empty();
-        $('.main_user_wrapper_mobile').empty();
-        userTableBuilder(result);
-        userTab.show();
+        $('.apply_button_mobile').trigger('click');
     });
     /*************************************** SURNAME ROW *****************************************/
 
     $('.surname_input_mobile').on('keypress', function(e){
-        if(e.key === 'Enter'){
+        if(e.keyCode === 13){
             e.preventDefault();
-            $('.surname_button_mobile').trigger('click');
+            $(this).attr('data-searched-value', $(this).val());
+            $('.apply_button_mobile').trigger('click');
         }
     });
 
@@ -1054,59 +853,16 @@ $(document).ready(function () {
     });
 
     $('.surname_button_mobile').on('click', async function(e){
-        let dataObj = {};
-        let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
-        let selectedValue = $('.header_select').attr('data-selected-value');
-        let searchString = $('.surname_input_mobile').val();
-        $('.surname_input_mobile').attr('data-searched-value', searchString);
-
-        $('.sort_box_button').attr('data-source', 'filter_search_mobile');
-        $('.header_select').attr('data-source', 'filter_search_mobile');
-
-        dataObj['lastName'] = searchString;
-        dataObj['order'] = ascendingButtonValue;
-        dataObj['orderBy'] = selectedValue;
-
-        if($('#name_checkbox_mobile').is(":checked")){
-            if($('.name_input_mobile').attr('data-searched-value') !== ''){
-                dataObj['firstName'] = $('.name_input_mobile').attr('data-searched-value');
-            } 
-        }
-
-        if($('#email_checkbox_mobile').is(":checked")){
-            if($('.email_input_mobile').attr('data-searched-value') !== ''){
-                dataObj['email'] = $('.email_input_mobile').attr('data-searched-value');
-            }
-        }
-
-        if($('#department_checkbox_mobile').is(":checked")){
-            if($('#department_select_mobile').attr('data-selected-value') !== ''){
-                dataObj['department'] = $('#department_select_mobile').attr('data-selected-value');
-            }
-        }
-
-        if($('#location_checkbox_mobile').is(":checked")){
-            if($('#location_select_mobile').attr('data-selected-value') !== ''){
-                dataObj['location'] = $('#location_select_mobile').attr('data-selected-value');
-            }
-        }
-
-
-        
-        let result = await getFilterSearch(dataObj);
-
-        $('.main_user_wrapper').empty();
-        $('.main_user_wrapper_mobile').empty();
-        userTableBuilder(result);
-        userTab.show();
+        $('.apply_button_mobile').trigger('click');
     });
 
     /*************************************** EMAIL ROW *****************************************/
 
     $('.email_input_mobile').on('keypress', function(e){
-        if(e.key === 'Enter'){
+        if(e.keyCode === 13){
             e.preventDefault();
-            $('.email_button_mobile').trigger('click');
+            $(this).attr('data-searched-value', $(this).val());
+            $('.apply_button_mobile').trigger('click');
         }
     });
 
@@ -1120,159 +876,33 @@ $(document).ready(function () {
     });
 
     $('.email_button_mobile').on('click', async function(e){
-        let dataObj = {};
-        let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
-        let selectedValue = $('.header_select').attr('data-selected-value');
-        let searchString = $('.email_input_mobile').val();
-        $('.email_input_mobile').attr('data-searched-value', searchString);
-
-        $('.sort_box_button').attr('data-source', 'filter_search_mobile');
-        $('.header_select').attr('data-source', 'filter_search_mobile');
-
-        dataObj['email'] = searchString;
-        dataObj['order'] = ascendingButtonValue;
-        dataObj['orderBy'] = selectedValue;
-
-        if($('#name_checkbox_mobile').is(":checked")){
-            if($('.name_input_mobile').attr('data-searched-value') !== ''){
-                dataObj['firstName'] = $('.name_input_mobile').attr('data-searched-value');
-            } 
-        }
-
-        if($('#surname_checkbox_mobile').is(":checked")){
-            if($('.surname_input_mobile').attr('data-searched-value') !== ''){
-                dataObj['lastName'] = $('.surname_input_mobile').attr('data-searched-value');
-            }
-        }
-
-        if($('#department_checkbox_mobile').is(":checked")){
-            if($('#department_select_mobile').attr('data-selected-value') !== ''){
-                dataObj['department'] = $('#department_select_mobile').attr('data-selected-value');
-            }
-        }
-
-        if($('#location_checkbox_mobile').is(":checked")){
-            if($('#location_select_mobile').attr('data-selected-value') !== ''){
-                dataObj['location'] = $('#location_select_mobile').attr('data-selected-value');
-            }
-        }
-
-
-        
-        let result = await getFilterSearch(dataObj);
-
-        $('.main_user_wrapper').empty();
-        $('.main_user_wrapper_mobile').empty();
-        userTableBuilder(result);
-        userTab.show();
+        $('.apply_button_mobile').trigger('click');
     });
 
 
     /*************************************** DEPARTMENT ROW *****************************************/
 
     $('#department_select_mobile').on('change', async function(e){
-        let dataObj = {};
-        let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
-        let selectedValue = $('.header_select').attr('data-selected-value');
         let departmentValue = $(this).children("option:selected").val();
         $(this).attr('data-selected-value', departmentValue);
 
-        $('.sort_box_button').attr('data-source', 'filter_search_mobile');
-        $('.header_select').attr('data-source', 'filter_search_mobile');
-
-        dataObj['department'] = departmentValue;
-        dataObj['order'] = ascendingButtonValue;
-        dataObj['orderBy'] = selectedValue;
-
-
-        if($('#name_checkbox_mobile').is(":checked")){
-            if($('.name_input_mobile').attr('data-searched-value') !== ''){
-                dataObj['firstName'] = $('.name_input_mobile').attr('data-searched-value');
-            } 
-        }
-
-        if($('#surname_checkbox_mobile').is(":checked")){
-            if($('.surname_input_mobile').attr('data-searched-value') !== ''){
-                dataObj['lastName'] = $('.surname_input_mobile').attr('data-searched-value');
-            }
-        }
-
-        if($('#email_checkbox_mobile').is(":checked")){
-            if($('.email_input_mobile').attr('data-searched-value') !== ''){
-                dataObj['email'] = $('.email_input_mobile').attr('data-searched-value');
-            }
-        }
-
-        if($('#location_checkbox_mobile').is(":checked")){
-            if($('#location_select_mobile').attr('data-selected-value') !== ''){
-                dataObj['location'] = $('#location_select_mobile').attr('data-selected-value');
-            }
-        }
-
-        
-        let result = await getFilterSearch(dataObj);
-
-        $('.main_user_wrapper').empty();
-        $('.main_user_wrapper_mobile').empty();
-        userTableBuilder(result);
-        userTab.show();
+        $('.apply_button_mobile').trigger('click');
     });
 
     /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ LOCATION ROW @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 
     $('#location_select_mobile').on('change', async function(e){
-        let dataObj = {};
-        let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
-        let selectedValue = $('.header_select').attr('data-selected-value');
         let locationValue = $(this).children("option:selected").val();
         $(this).attr('data-selected-value', locationValue);
 
-        $('.sort_box_button').attr('data-source', 'filter_search_mobile');
-        $('.header_select').attr('data-source', 'filter_search_mobile');
-
-        dataObj['location'] = locationValue;
-        dataObj['order'] = ascendingButtonValue;
-        dataObj['orderBy'] = selectedValue;
-
-
-        if($('#name_checkbox_mobile').is(":checked")){
-            if($('.name_input_mobile').attr('data-searched-value') !== ''){
-                dataObj['firstName'] = $('.name_input_mobile').attr('data-searched-value');
-            } 
-        }
-
-        if($('#surname_checkbox_mobile').is(":checked")){
-            if($('.surname_input_mobile').attr('data-searched-value') !== ''){
-                dataObj['lastName'] = $('.surname_input_mobile').attr('data-searched-value');
-            }
-        }
-
-        if($('#email_checkbox_mobile').is(":checked")){
-            if($('.email_input_mobile').attr('data-searched-value') !== ''){
-                dataObj['email'] = $('.email_input_mobile').attr('data-searched-value');
-            }
-        }
-
-        if($('#department_checkbox_mobile').is(":checked")){
-            if($('#department_select_mobile').attr('data-selected-value') !== ''){
-                dataObj['department'] = $('#department_select_mobile').attr('data-selected-value');
-            }
-        }
-
-
-        
-        let result = await getFilterSearch(dataObj);
-
-        $('.main_user_wrapper').empty();
-        $('.main_user_wrapper_mobile').empty();
-        userTableBuilder(result);
-        userTab.show();
+        $('.apply_button_mobile').trigger('click');
     });
 
     /*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ APPLY BUTTON @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*/
 
 
-    $('.apply_button_mobile').on('click', async function(){
+    $('#filterMobileModal').on('submit', async function(e){
+        e.preventDefault();
         let dataObj = {};
         let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
         let selectedValue = $('.header_select').attr('data-selected-value');
@@ -1314,7 +944,6 @@ $(document).ready(function () {
                 dataObj['location'] = $('#location_select_mobile').attr('data-selected-value');
             }
         }
-
 
         
         let result = await getFilterSearch(dataObj);
@@ -1346,7 +975,7 @@ $(document).ready(function () {
         populateSelect(departments, 'add_user_department_select', 'department');
     });
 
-    $('.pills_users').on('show.bs.tab', async function(e){
+    $('.pills_users').on('click', async function(e){
         let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
         let selectedValue = $('.header_select').attr('data-selected-value');
         let result = await defaultGetAllEmployee(ascendingButtonValue, selectedValue);
@@ -1417,7 +1046,7 @@ $(document).ready(function () {
             return;
         }
 
-        $('.pills_users').trigger('show.bs.tab');
+        $('.pills_users').trigger('click');//show.bs.tab
 
         userTab.show();
     });
@@ -1433,7 +1062,7 @@ $(document).ready(function () {
         $('.add_new_department_input').val('');
     });
 
-    $('.pills_departments').on('show.bs.tab', async function(e){
+    $('.pills_departments').on('click', async function(e){
         let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
         $('.sort_box_button').attr('data-source', 'get_department_button');
         $('.header_select').attr('data-source', 'get_department_button');
@@ -1480,7 +1109,7 @@ $(document).ready(function () {
         
         myToast.show();
 
-        $('.pills_departments').trigger('show.bs.tab');
+        $('.pills_departments').trigger('click');//show.bs.tab
 
         departmentTab.show();
     });
@@ -1494,7 +1123,7 @@ $(document).ready(function () {
         $('.location_add_new_location_input').val('');
     });
 
-    $('.pills_locations').on('show.bs.tab', async function(){
+    $('.pills_locations').on('click', async function(){
         let ascendingButtonValue = $('.sort_box_button').attr('data-selected-value');
         $('.sort_box_button').attr('data-source', 'get_location_button');
         $('.header_select').attr('data-source', 'get_location_button');
@@ -1534,7 +1163,7 @@ $(document).ready(function () {
 
         myToast.show();
 
-        $('.pills_locations').trigger('show.bs.tab');
+        $('.pills_locations').trigger('click');//show.bs.tab
 
         locationTab.show();
     });
@@ -1619,7 +1248,7 @@ $(document).ready(function () {
         }
         
         myToast.show();
-        $('.pills_users').trigger('show.bs.tab');
+        $('.pills_users').trigger('click');
         userTab.show();
     });
 
@@ -1660,7 +1289,7 @@ $(document).ready(function () {
             myToast.show();
         }
 
-        $('.pills_users').trigger('show.bs.tab');
+        $('.pills_users').trigger('click');
         userTab.show();
     });
 
@@ -1671,12 +1300,7 @@ $(document).ready(function () {
 /******************************************************************************************************/
 /************************************* DEPARTMENT EDIT SECTION ****************************************/
 /******************************************************************************************************/
-    $(document).on('change', '.result_edit_department_location_select', async function(){
-        $(this).attr('data-selected-value', $(this).val());
-        $(this).attr('data-selected-index', $(this).find(':selected').attr('data-index'));
-        $(this).attr('data-selected-id', $(this).find(':selected').attr('data-id'));
-    });
-
+    
     $('#result_edit_department_department_input').on('blur', function(){
         $(this).attr('data-value', $(this).val());
     });
@@ -1689,16 +1313,6 @@ $(document).ready(function () {
 
         $('#result_edit_department_department_input').val(`${resultDepartment.data[0].departmentName}`);
         $('#result_edit_department_department_input').attr('data-value', resultDepartment.data[0].departmentName);
-
-        let locations = await getLocations();
-        populateSelect(locations, 'result_edit_department_location_select', 'location');
-
-        $('.result_edit_department_location_select option').each(function(i, elem){
-            if(parseInt($(elem).attr('data-id')) === parseInt(resultDepartment.data[0].locationID)){
-                $('.result_edit_department_location_select')[0].options[$(elem).attr('data-index')].selected = true;
-                $('.result_edit_department_location_select').trigger('change');
-            }
-        });
     });
 
     $('#editDepartmentForm').on('submit', async function(e){
@@ -1706,9 +1320,6 @@ $(document).ready(function () {
         let dataObj = {};
 
         dataObj['departmentName'] = $('#result_edit_department_department_input').attr('data-value');
-
-        dataObj['locationID'] = $('.result_edit_department_location_select').attr('data-selected-id');
-        dataObj['locationName'] = $('.result_edit_department_location_select').attr('data-selected-value');
 
         dataObj['departmentID'] = $(this).find('input[type="hidden"]').attr('data-id');
 
@@ -1734,7 +1345,7 @@ $(document).ready(function () {
         }
         
         myToast.show();
-        $('.pills_departments').trigger('show.bs.tab');
+        $('.pills_departments').trigger('click');
         departmentTab.show();
     });
 
@@ -1748,53 +1359,51 @@ $(document).ready(function () {
 /************************************* DEPARTMENT DELETE SECTION **************************************/
 /******************************************************************************************************/
 
-    $(document).on('click', '.result_delete_department, .result_delete_department_mobile', async function(){
-        $('.result_delete_department_save_button').attr('data-value', $(this).attr('data-value'));
-        let departmentID = $(this).attr('data-value');
+    $('#resultDeleteDepartmentModal').on('show.bs.modal', async function(e){
+        let dataObj = {};
+        $(this).find('input[type="hidden"]').attr('data-id', $(e.relatedTarget).attr('data-value'));
+        $(this).find('input[type="hidden"]').attr('data-name', $(e.relatedTarget).attr('data-name'));
+        let departmentID = $(e.relatedTarget).attr('data-value');
+        let departmentName = $(e.relatedTarget).attr('data-name');
+        dataObj['count'] = 1;
+        dataObj['departmentID'] = departmentID;
 
-        let department = await getDepartments(0, 'asc', 1, departmentID);
+        let result = await deleteDepartment(dataObj);
 
-        $('.result_delete_department_item').empty();
-        $('.result_delete_department_item').append(`You are about to delete department `);
-        $('.result_delete_department_item').append(`${department.data[0].departmentName} from ${department.data[0].locationName} location</br>`);
-        $('.result_delete_department_item').append(`Operation is not reversible!`);
-
-        
-
-        $('.result_delete_department_save_button').attr('data-departmentName', department.data[0].departmentName);
-        $('.result_delete_department_save_button').attr('data-locationName', department.data[0].locationName);
+        if(result.status.code === '302'){
+            $('.result_delete_department_item').empty();
+            $('.result_delete_department_item').append(`You cannot remove the entry for <b>${departmentName}</b> because it has <b>${result.status.count}</b> employees assigned to it.`);
+            $('#deleteDepartmentForm .modal-footer').empty();
+            $('#deleteDepartmentForm .modal-footer').append(`<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>`);
+        }else{
+            $('.result_delete_department_item').empty();
+            $('.result_delete_department_item').append(`Are you sure that you want to remove the entry for <b>${departmentName}</b>?`);
+            $('#deleteDepartmentForm .modal-footer').empty();
+            $('#deleteDepartmentForm .modal-footer').append(`<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>`);
+            $('#deleteDepartmentForm .modal-footer').append(`<button type="submit" class="btn btn-primary">Yes</button>`);
+        }
     });
 
-    $('.result_delete_department_save_button').on('click', async function(){
+    $('#deleteDepartmentForm').on('submit', async function(e){
+        e.preventDefault();
         let dataObj = {};
-        dataObj['departmentID'] = $('.result_delete_department_save_button').attr('data-value');
-        dataObj['departmentName'] = $('.result_delete_department_save_button').attr('data-departmentName');
-        dataObj['locationName'] = $('.result_delete_department_save_button').attr('data-locationName');
+        dataObj['count'] = 0;
+        dataObj['departmentID'] = $(this).find('input[type="hidden"]').attr('data-id');
+        dataObj['departmentName'] = $(this).find('input[type="hidden"]').attr('data-name');
         let result = await deleteDepartment(dataObj);
 
         $('.btn-close').trigger('click');
 
 
-
-        if(result.status.code === '302'){
-            $('.toast-body').html(`Department ${$(this).attr('data-departmentName')} from  ${$(this).attr('data-locationName')} location can not be deleted, there is a reference to it in main table`);
-            $('.toast').css('background-color', '#ce1a1a');
-            historyMessage(`Failed to delete department ${$(this).attr('data-departmentName')} with message: "<span style="color: black">${result.status.message}</span>"`,'history_wrapper');
-            myToast.show();
-            return;
-        }
-
-
         if(result.status.code === '200'){
-            $('.toast-body').html(`Department ${$(this).attr('data-departmentName')} from ${$(this).attr('data-locationName')} succesfully deleted`);
+            $('.toast-body').html(`Department ${dataObj['departmentName']} succesfully deleted`);
             $('.toast').css('background-color', '#279f13');
             historyMessage(`Delete operation succeed, with message: "<span style="color: black">${result.status.message}</span>"`,'history_wrapper', 'green');
             myToast.show();
         }
 
-        $('.get_department_button').trigger('click');
-
-
+        $('.pills_departments').trigger('click');
+        departmentTab.show();
     });
 
 
@@ -1811,40 +1420,24 @@ $(document).ready(function () {
         $(this).attr('data-value', $(this).val());
     });
 
-    $('#result_edit_location_location_input').on('keyup', function(){
-        $(this).css('box-shadow', 'none');
-        $(this).css('border-color', 'black');
-    });
+    $('#resultEditLocationModal').on('show.bs.modal', async function(e){
+        $(this).find('input[type="hidden"]').attr('data-id', $(e.relatedTarget).attr('data-value'));
+        $(this).find('input[type="hidden"]').attr('data-lname', $(e.relatedTarget).attr('data-lname'));
 
-    $(document).on('click', '.result_edit_location, .result_edit_location_mobile', async function(){
-        $('#result_edit_location_location_input').css('box-shadow', 'none');
-        $('#result_edit_location_location_input').css('border-color', 'black');
-
-
-        let locationID = $(this).attr('data-value');
+        let locationID = $(e.relatedTarget).attr('data-value');
         let resultLocation = await getLocations('asc', 1, locationID);
 
 
         $('#result_edit_location_location_input').val(`${resultLocation.data[0].name}`);
         $('#result_edit_location_location_input').attr('data-value', resultLocation.data[0].name);
-
-
-        $('.result_edit_location_save_button').attr('data-value', $(this).attr('data-value'));
     });
 
-    $('.result_edit_location_save_button').on('click', async function(){
-        let dataObj = {}, textHash = '', checkHash;
+    $('#editLocationForm').on('submit', async function(e){
+        e.preventDefault();
+        let dataObj = {};
 
-
-        if($('#result_edit_location_location_input').attr('data-value') !== ''){
-            dataObj['locationName'] = $('#result_edit_location_location_input').attr('data-value');
-        }else{
-            $('#result_edit_location_location_input').css('box-shadow', '0 0 6px 1px red');
-            $('#result_edit_location_location_input').css('border-color', 'red');
-        }
-
-
-        dataObj['locationID'] = $(this).attr('data-value');
+        dataObj['locationName'] = $('#result_edit_location_location_input').attr('data-value');
+        dataObj['locationID'] = $(this).find('input[type="hidden"]').attr('data-id');;
 
         let result = await updateLocation(dataObj);
 
@@ -1858,8 +1451,6 @@ $(document).ready(function () {
             return;
         }
         
-        
-
         if(result.status.code === '200'){
             $('.toast-body').html(result.status.message);
             $('.toast').css('background-color', '#279f13');
@@ -1867,8 +1458,8 @@ $(document).ready(function () {
         }
         
         myToast.show();
-        $('.get_location_button').trigger('click');
-
+        $('.pills_locations').trigger('click');
+        locationTab.show();
     });
 
 /******************************************************************************************************/
@@ -1879,51 +1470,52 @@ $(document).ready(function () {
 /************************************* LOCATION DELETE SECTION ****************************************/
 /******************************************************************************************************/
 
-    $(document).on('click', '.result_delete_location, .result_delete_location_mobile', async function(){
-        $('.result_delete_location_save_button').attr('data-value', $(this).attr('data-value'));
-        let locationID = $(this).attr('data-value');
+    $('#resultDeleteLocationModal').on('show.bs.modal', async function(e){
+        let dataObj = {};
+        $(this).find('input[type="hidden"]').attr('data-id', $(e.relatedTarget).attr('data-value'));
+        $(this).find('input[type="hidden"]').attr('data-lname', $(e.relatedTarget).attr('data-lname'));
+        let locationID = $(e.relatedTarget).attr('data-value');
+        let locationName = $(e.relatedTarget).attr('data-lname');
+        dataObj['count'] = 1;
+        dataObj['locationID'] = locationID;
 
-        let location = await getLocations('asc', 1, locationID);
+        let result = await deleteLocation(dataObj);
 
-
-        $('.result_delete_location_item').empty();
-        $('.result_delete_location_item').append(`You are about to delete location `);
-        $('.result_delete_location_item').append(`${location.data[0].name}</br>`);
-        $('.result_delete_location_item').append(`Operation is not reversible!`);
-
-        $('.result_delete_location_save_button').attr('data-locationName', location.data[0].name);
+        if(result.status.code === '302'){
+            $('.result_delete_location_item').empty();
+            $('.result_delete_location_item').append(`You cannot remove the entry for <b>${locationName}</b> because it has <b>${result.status.count}</b> departments assigned to it.`);
+            $('#deleteLocationForm .modal-footer').empty();
+            $('#deleteLocationForm .modal-footer').append(`<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>`);
+        }else{
+            $('.result_delete_location_item').empty();
+            $('.result_delete_location_item').append(`Are you sure that you want to remove the entry for <b>${locationName}</b>?`);
+            $('#deleteLocationForm .modal-footer').empty();
+            $('#deleteLocationForm .modal-footer').append(`<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>`);
+            $('#deleteLocationForm .modal-footer').append(`<button type="submit" class="btn btn-primary">Yes</button>`);
+        }
     });
 
-    $('.result_delete_location_save_button').on('click', async function(){
+    $('#deleteLocationForm').on('submit', async function(e){
+        e.preventDefault();
         let dataObj = {};
-        dataObj['locationID'] = $('.result_delete_location_save_button').attr('data-value');
-        dataObj['locationName'] = $('.result_delete_location_save_button').attr('data-locationName');
+        dataObj['count'] = 0;
+        dataObj['locationID'] = $(this).find('input[type="hidden"]').attr('data-id');
+        dataObj['locationName'] = $(this).find('input[type="hidden"]').attr('data-lname');
 
         let result = await deleteLocation(dataObj);
 
         $('.btn-close').trigger('click');
 
 
-
-        if(result.status.code === '302'){
-            $('.toast-body').html(`Location ${$(this).attr('data-locationName')} can not be deleted, there is a reference to it in main table`);
-            $('.toast').css('background-color', '#ce1a1a');
-            historyMessage(`Failed to delete location ${$(this).attr('data-locationName')} with message: "<span style="color: black">${result.status.message}</span>"`,'history_wrapper');
-            myToast.show();
-            return;
-        }
-
-
         if(result.status.code === '200'){
-            $('.toast-body').html(`Location ${$(this).attr('data-locationName')} succesfully deleted`);
+            $('.toast-body').html(`Location ${dataObj['locationName']} succesfully deleted`);
             $('.toast').css('background-color', '#279f13');
             historyMessage(`Delete operation succeed, with message: "<span style="color: black">${result.status.message}</span>"`,'history_wrapper', 'green');
             myToast.show();
         }
 
-        $('.get_location_button').trigger('click');
-
-
+        $('.pills_locations').trigger('click');
+        locationTab.show();
     });
 
 

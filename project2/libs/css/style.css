@@ -7,7 +7,7 @@ body{
     display: grid;
     height: 100vh;
     grid-template-columns: 2fr 2fr 2fr;
-    grid-template-rows: 17% 5fr;
+    grid-template-rows: 14% 5fr;
     grid-template-areas: 
         "header header header"
         "main main main";
@@ -48,10 +48,10 @@ main{
 
 .result_total{
     background-color: #ffb669;
-    padding: 8px 0;
+    /* padding: 8px 0; */
     text-align: center;
     font-size: 20px;
-    color: red;
+    color: rgb(0, 0, 0);
 }
 
 .main_user_wrapper_mobile,
@@ -185,6 +185,11 @@ main{
     opacity: 0;
 }
 
+.nav-link{
+    padding: 5px;
+    line-height: 1.2;
+}
+
 /******************************  FILTERS SECTION  *********************************************/
 
 #filterButtonModal .modal-body{
@@ -296,6 +301,7 @@ header{
 .header_wrapper{
     display: flex;
     align-items: center;
+    margin: 10px 0;
 }
 
 /*************************** SEARCH BOX  *******************************************************/
@@ -845,6 +851,16 @@ header{
 
 /*X-Large devices (large desktops, 1200px and up)*/
 @media screen and  (min-width: 1200px) {
+    body{
+        display: grid;
+        height: 100vh;
+        grid-template-columns: 2fr 2fr 2fr;
+        grid-template-rows: 12% 5fr;
+        grid-template-areas: 
+            "header header header"
+            "main main main";
+    }
+
     .select_header_select{
         width: 45%;
     } 
