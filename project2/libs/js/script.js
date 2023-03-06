@@ -71,6 +71,9 @@ function populateSelect(inputData, className = '', category){
                     case 'firstName':
                         $('.header_select').append(`<option value="${v}" selected>Name</option>`);
                         break;
+                    case 'jobTitle':
+                        $('.header_select').append(`<option value="${v}">Job title</option>`);
+                        break;
                     case 'email':
                         $('.header_select').append(`<option value="${v}">E-mail</option>`);
                         break;
@@ -116,6 +119,7 @@ function userTableBuilder(inputData){
             <div class="result_row_wrapper">
                 <div class="result_name">${currentVal.firstName}</div>
                 <div class="result_surname">${currentVal.lastName}</div>
+                <div class="result_jobTitle">${currentVal.jobTitle}</div>
                 <div class="result_email">${currentVal.email}</div>
                 <div class="result_department">${currentVal.department}</div>
                 <div class="result_location">${currentVal.location}</div>
@@ -138,6 +142,10 @@ function userTableBuilder(inputData){
                     <div class="result_surname_mobile_wrapper">
                         <div class="header_surname_mobile">Surname</div>
                         <div class="result_surname_mobile">${currentVal.lastName}</div>
+                    </div>
+                    <div class="result_jobtitle_mobile_wrapper">
+                        <div class="header_jobtitle_mobile">Job title</div>
+                        <div class="result_jobtitle_mobile">${currentVal.jobTitle}</div>
                     </div>
                     <div class="result_email_mobile_wrapper">
                         <div class="header_email_mobile">E-mail</div>
@@ -171,6 +179,7 @@ function userTableBuilder(inputData){
                     <div class="result_header_wrapper">
                         <div class="header_name">Name</div>
                         <div class="header_surname">Surname</div>
+                        <div class="header_jobtitle">Job title</div>
                         <div class="header_email">E-mail</div>
                         <div class="header_department">Department</div>
                         <div class="header_location">Location</div>
@@ -856,6 +865,29 @@ $(document).ready(function () {
         $('.apply_button_mobile').trigger('click');
     });
 
+    /*************************************** JOB TITLE ROW *****************************************/
+
+    $('.jobtitle_input_mobile').on('keypress', function(e){
+        if(e.keyCode === 13){
+            e.preventDefault();
+            $(this).attr('data-searched-value', $(this).val());
+            $('.apply_button_mobile').trigger('click');
+        }
+    });
+
+    $('.jobtitle_input_mobile').on('blur', function(e){
+        $('.jobtitle_input_mobile').attr('data-searched-value', $('.jobtitle_input_mobile').val());
+    });
+
+    $('#jobtitle_checkbox_mobile').on('change', function(){
+        $('.jobtitle_input_mobile').attr('data-searched-value', '');
+        $('.jobtitle_input_mobile').val('');
+    });
+
+    $('.jobtitle_button_mobile').on('click', async function(e){
+        $('.apply_button_mobile').trigger('click');
+    });
+
     /*************************************** EMAIL ROW *****************************************/
 
     $('.email_input_mobile').on('keypress', function(e){
@@ -927,6 +959,12 @@ $(document).ready(function () {
             }
         }
 
+        if($('#jobtitle_checkbox_mobile').is(":checked")){
+            if($('.jobtitle_input_mobile').attr('data-searched-value') !== ''){
+                dataObj['jobTitle'] = $('.jobtitle_input_mobile').attr('data-searched-value');
+            }
+        }
+
         if($('#email_checkbox_mobile').is(":checked")){
             if($('.email_input_mobile').attr('data-searched-value') !== ''){
                 dataObj['email'] = $('.email_input_mobile').attr('data-searched-value');
@@ -968,6 +1006,9 @@ $(document).ready(function () {
         $('#add_user_surname_input').attr('data-value', '');
         $('#add_user_surname_input').val('');
 
+        $('#add_user_jobtitle_input').attr('data-value', '');
+        $('#add_user_jobtitle_input').val('');
+
         $('#add_user_email_input').attr('data-value', '');
         $('#add_user_email_input').val('');
 
@@ -999,13 +1040,13 @@ $(document).ready(function () {
         $(this).attr('data-value', $(this).val());
     });
 
-
-
     $('#add_user_surname_input').on('blur', function(){
         $(this).attr('data-value', $(this).val());
     });
 
-
+    $('#add_user_jobtitle_input').on('blur', function(){
+        $(this).attr('data-value', $(this).val());
+    });
 
     $('#add_user_email_input').on('blur', function(){
         $(this).attr('data-value', $(this).val());
@@ -1026,6 +1067,7 @@ $(document).ready(function () {
 
         dataObj['firstName'] = $('#add_user_name_input').attr('data-value');
         dataObj['lastName'] = $('#add_user_surname_input').attr('data-value');
+        dataObj['jobTitle'] = $('#add_user_jobtitle_input').attr('data-value');
         dataObj['email'] = $('#add_user_email_input').attr('data-value');
         dataObj['departmentID'] = $('#add_user_department_select').attr('data-selected-id');
 
@@ -1109,7 +1151,7 @@ $(document).ready(function () {
         
         myToast.show();
 
-        $('.pills_departments').trigger('click');//show.bs.tab
+        $('.pills_departments').trigger('click');
 
         departmentTab.show();
     });
@@ -1196,6 +1238,10 @@ $(document).ready(function () {
         $(this).attr('data-value', $(this).val());
     });
 
+    $('#result_edit_user_jobtitle_input').on('blur', function(){
+        $(this).attr('data-value', $(this).val());
+    });
+
     $('#result_edit_user_email_input').on('blur', function(){
         $(this).attr('data-value', $(this).val());
     });
@@ -1211,6 +1257,9 @@ $(document).ready(function () {
 
         $('#result_edit_user_surname_input').val(`${resultEmployee.data[0].lastName}`);
         $('#result_edit_user_surname_input').attr('data-value', resultEmployee.data[0].lastName);
+
+        $('#result_edit_user_jobtitle_input').val(`${resultEmployee.data[0].jobTitle}`);
+        $('#result_edit_user_jobtitle_input').attr('data-value', resultEmployee.data[0].jobTitle);
 
         $('#result_edit_user_email_input').val(`${resultEmployee.data[0].email}`);
         $('#result_edit_user_email_input').attr('data-value', resultEmployee.data[0].email);
@@ -1232,6 +1281,7 @@ $(document).ready(function () {
 
         dataObj['firstName'] = $('#result_edit_user_name_input').attr('data-value');
         dataObj['lastName'] = $('#result_edit_user_surname_input').attr('data-value');
+        dataObj['jobTitle'] = $('#result_edit_user_jobtitle_input').attr('data-value');
         dataObj['email'] = $('#result_edit_user_email_input').attr('data-value');
         dataObj['departmentID'] = $('.result_edit_user_department_select').attr('data-selected-id');
         dataObj['id'] = $(this).find('input[type="hidden"]').attr('data-id');
@@ -1305,6 +1355,11 @@ $(document).ready(function () {
         $(this).attr('data-value', $(this).val());
     });
 
+    $(document).on('change', '.result_edit_department_location_select', function(){
+        $(this).attr('data-selected-value', $(this).val());
+        $(this).attr('data-selected-id', $(this).find(':selected').attr('data-id'));
+    });
+
     $('#resultEditDepartmentModal').on('show.bs.modal', async function(e){
         $(this).find('input[type="hidden"]').attr('data-id', $(e.relatedTarget).attr('data-value'));
 
@@ -1313,6 +1368,16 @@ $(document).ready(function () {
 
         $('#result_edit_department_department_input').val(`${resultDepartment.data[0].departmentName}`);
         $('#result_edit_department_department_input').attr('data-value', resultDepartment.data[0].departmentName);
+
+        let add_new_location = await getLocations();
+        populateSelect(add_new_location, 'result_edit_department_location_select', 'location');
+
+        $('.result_edit_department_location_select option').each(function(i, elem){
+            if(parseInt($(elem).attr('data-id')) === parseInt(resultDepartment.data[0].locationID)){
+                $('.result_edit_department_location_select')[0].options[$(elem).attr('data-index')].selected = true;
+                $('.result_edit_department_location_select').trigger('change');
+            }
+        });
     });
 
     $('#editDepartmentForm').on('submit', async function(e){
@@ -1320,6 +1385,7 @@ $(document).ready(function () {
         let dataObj = {};
 
         dataObj['departmentName'] = $('#result_edit_department_department_input').attr('data-value');
+        dataObj['locationID'] = $('#result_edit_department_location_select').attr('data-selected-id');
 
         dataObj['departmentID'] = $(this).find('input[type="hidden"]').attr('data-id');
 

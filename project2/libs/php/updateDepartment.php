@@ -5,10 +5,11 @@
 
     header('Content-Type: application/json; charset=UTF-8');
 
-    $sql = "SELECT COUNT(id) AS totalID FROM department WHERE name = :name";
+    $sql = "SELECT COUNT(id) AS totalID FROM department WHERE name = :name AND locationID = :locationID";
 
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':name', strtolower($_POST['departmentName']), PDO::PARAM_STR);
+    $stmt->bindValue(':locationID', intval($_POST['locationID']), PDO::PARAM_INT);
     $error = $stmt->execute();
 
     if($error === false){
@@ -40,7 +41,7 @@
 
 
     $sql = "UPDATE department
-            SET name = :name
+            SET name = :name, locationID = :locationID
             WHERE id = :id";
 
     
@@ -49,6 +50,7 @@
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':name', formatData($_POST['departmentName']), PDO::PARAM_STR);
     $stmt->bindValue(':id', intval($_POST['departmentID']), PDO::PARAM_INT);
+    $stmt->bindValue(':locationID', intval($_POST['locationID']), PDO::PARAM_INT);
     $error = $stmt->execute();
 
     if($error === false){

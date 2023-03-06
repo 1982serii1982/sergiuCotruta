@@ -49,6 +49,14 @@
                 }
                 $inputArray['lastName'] = $_POST[$value];
                 break;
+            case 'jobTitle':
+                if($key === 0){
+                    $sql .= "WHERE p.jobTitle LIKE CONCAT( '%', :jobTitle, '%')";
+                }else{
+                    $sql .= " AND p.jobTitle LIKE CONCAT( '%', :jobTitle, '%')";
+                }
+                $inputArray['jobTitle'] = $_POST[$value];
+                break;
             case 'email':
                 if($key === 0){
                     $sql .= "WHERE p.email LIKE CONCAT( '%', :email, '%')";

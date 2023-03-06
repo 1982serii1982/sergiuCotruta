@@ -6,8 +6,8 @@
 
    
 
-    $sql = "INSERT INTO personnel (firstName, lastName, email, departmentID) 
-            VALUES (:firstName, :lastName, :email, :departmentID)";
+    $sql = "INSERT INTO personnel (firstName, lastName, jobTitle, email, departmentID) 
+            VALUES (:firstName, :lastName, :jobTitle, :email, :departmentID)";
 
     
     
@@ -15,6 +15,7 @@
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':firstName', ucfirst(strtolower($_POST['firstName'])), PDO::PARAM_STR);
     $stmt->bindValue(':lastName', ucfirst(strtolower($_POST['lastName'])), PDO::PARAM_STR);
+    $stmt->bindValue(':jobTitle', ucfirst(strtolower($_POST['jobTitle'])), PDO::PARAM_STR);
     $stmt->bindValue(':email', $_POST['email'], PDO::PARAM_STR);
     $stmt->bindValue(':departmentID', intval($_POST['departmentID']), PDO::PARAM_INT);
     $error = $stmt->execute();

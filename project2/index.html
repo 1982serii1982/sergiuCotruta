@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="./libs/css/style.css">
 </head>
 <body>
+    <div id="turn">
+        Please turn your device
+    </div>
     <div class="preloader">
         <div class="preloader_message"></div>
         <div class="loader">Loading</div>
@@ -47,6 +50,10 @@
                         <div class="add_user_item">
                             <label for="add_user_surname_input">Surname</label>
                             <input type="text" id="add_user_surname_input" placeholder="Fill in..." data-value="" required>
+                        </div>
+                        <div class="add_user_item">
+                            <label for="add_user_jobtitle_input">Job title</label>
+                            <input type="text" id="add_user_jobtitle_input" placeholder="Fill in..." data-value="">
                         </div>
                         <div class="add_user_item">
                             <label for="add_user_email_input">E-mail</label>
@@ -175,6 +182,16 @@
                             </div>
                             <div class="filters_item_mobile">
                                 <div class="check_box_mobile">
+                                    <label for="jobtitle_checkbox_mobile">Job title</label>
+                                    <input class="jobtitle_checkbox_mobile" type="checkbox" id="jobtitle_checkbox_mobile">
+                                </div>
+                                <div class="setdata_mobile">
+                                    <input class="jobtitle_input_mobile" type="text" placeholder="Fill in.." data-searched-value="">
+                                    <button class="jobtitle_button_mobile"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                </div>
+                            </div>
+                            <div class="filters_item_mobile">
+                                <div class="check_box_mobile">
                                     <label for="email_checkbox_mobile">E-mail</label>
                                     <input class="email_checkbox_mobile" type="checkbox" id="email_checkbox_mobile">
                                 </div>
@@ -250,6 +267,10 @@
                                 <input type="text" id="result_edit_user_surname_input" placeholder="Fill in..." data-value="" required>
                             </div>
                             <div class="result_edit_user_item">
+                                <label for="result_edit_user_jobtitle_input">Job title</label>
+                                <input type="text" id="result_edit_user_jobtitle_input" placeholder="Fill in..." data-value="">
+                            </div>
+                            <div class="result_edit_user_item">
                                 <label for="result_edit_user_email_input">E-mail</label>
                                 <input type="email" id="result_edit_user_email_input" placeholder="Fill in..." data-value="" required>
                             </div>
@@ -304,6 +325,10 @@
                             <div class="result_edit_department_item">
                                 <label for="result_edit_department_department_input">Department</label>
                                 <input type="text" id="result_edit_department_department_input" placeholder="Fill in..." data-value="" required>
+                            </div>
+                            <div class="result_edit_department_item">
+                                <label for="result_edit_department_location_select">Location</label>
+                                <select name="resultEditDepartmentLocation" class="result_edit_department_location_select" id="result_edit_department_location_select"></select>
                             </div>
                         </div>
                         <div class="modal-footer">

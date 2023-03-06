@@ -10,6 +10,7 @@
     $orderBy = $_POST['orderBy'];
     $inputArray['firstName'] = $_POST['searchString'];
     $inputArray['department'] = $_POST['searchString'];
+    $inputArray['jobTitle'] = $_POST['searchString'];
     $inputArray['lastName'] = $_POST['searchString'];
     $inputArray['email'] = $_POST['searchString'];
     $inputArray['location'] = $_POST['searchString'];
@@ -23,6 +24,7 @@
             LEFT JOIN location l ON (l.id = d.locationID) 
             WHERE p.firstName LIKE CONCAT('%', :firstName, '%')
             OR d.name LIKE CONCAT('%', :department, '%')
+            OR p.jobTitle LIKE CONCAT('%', :jobTitle, '%')
             OR p.lastName LIKE CONCAT('%', :lastName, '%')
             OR p.email LIKE CONCAT('%', :email, '%')
             OR l.name LIKE CONCAT('%', :location, '%')
