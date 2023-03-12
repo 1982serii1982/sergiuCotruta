@@ -817,6 +817,14 @@ $(document).ready(function () {
         });
     });
 
+    $('#filterButtonModal').on('show.bs.modal', async function(e){
+        let departments = await getDepartments();
+        let locations = await getLocations();
+
+        populateSelect(departments, 'department_select_mobile', 'department');
+        populateSelect(locations, 'location_select_mobile', 'location');
+    });
+
 
     /*************************************** NAME ROW *****************************************/
 
